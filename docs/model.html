@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>データ分析入門ノート - 1&nbsp; 重要なコンセプト</title>
+<title>データ分析入門ノート - 1&nbsp; 重要コンセプト</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./model.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">重要なコンセプト</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./model.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">重要コンセプト</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -144,7 +144,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./model.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">重要なコンセプト</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">重要コンセプト</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -181,18 +181,20 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#状況設定" id="toc-状況設定" class="nav-link active" data-scroll-target="#状況設定"><span class="header-section-number">1.1</span> 状況設定</a></li>
-  <li><a href="#分析例-個別事例分析" id="toc-分析例-個別事例分析" class="nav-link" data-scroll-target="#分析例-個別事例分析"><span class="header-section-number">1.2</span> 分析例: 個別事例分析</a></li>
-  <li><a href="#分析例-モデル化" id="toc-分析例-モデル化" class="nav-link" data-scroll-target="#分析例-モデル化"><span class="header-section-number">1.3</span> 分析例: モデル化</a>
+  <li><a href="#データ" id="toc-データ" class="nav-link active" data-scroll-target="#データ"><span class="header-section-number">1.1</span> データ</a></li>
+  <li><a href="#観察できない変数" id="toc-観察できない変数" class="nav-link" data-scroll-target="#観察できない変数"><span class="header-section-number">1.2</span> 観察できない変数</a></li>
+  <li><a href="#要約" id="toc-要約" class="nav-link" data-scroll-target="#要約"><span class="header-section-number">1.3</span> 要約</a></li>
+  <li><a href="#観察できない事例" id="toc-観察できない事例" class="nav-link" data-scroll-target="#観察できない事例"><span class="header-section-number">1.4</span> 観察できない事例</a></li>
+  <li><a href="#母分布とサンプリング" id="toc-母分布とサンプリング" class="nav-link" data-scroll-target="#母分布とサンプリング"><span class="header-section-number">1.5</span> 母分布とサンプリング</a>
   <ul class="collapse">
-  <li><a href="#丸暗記" id="toc-丸暗記" class="nav-link" data-scroll-target="#丸暗記"><span class="header-section-number">1.3.1</span> 丸暗記</a></li>
-  <li><a href="#サブグループ平均" id="toc-サブグループ平均" class="nav-link" data-scroll-target="#サブグループ平均"><span class="header-section-number">1.3.2</span> サブグループ平均</a></li>
-  <li><a href="#決定木" id="toc-決定木" class="nav-link" data-scroll-target="#決定木"><span class="header-section-number">1.3.3</span> 決定木</a></li>
-  <li><a href="#決定木-1" id="toc-決定木-1" class="nav-link" data-scroll-target="#決定木-1"><span class="header-section-number">1.3.4</span> 決定木</a></li>
+  <li><a href="#数値例" id="toc-数値例" class="nav-link" data-scroll-target="#数値例"><span class="header-section-number">1.5.1</span> 数値例</a></li>
   </ul></li>
-  <li><a href="#機械学習" id="toc-機械学習" class="nav-link" data-scroll-target="#機械学習"><span class="header-section-number">1.4</span> 機械学習</a></li>
-  <li><a href="#推定法" id="toc-推定法" class="nav-link" data-scroll-target="#推定法"><span class="header-section-number">1.5</span> 推定法</a></li>
-  <li><a href="#機械学習-1" id="toc-機械学習-1" class="nav-link" data-scroll-target="#機械学習-1"><span class="header-section-number">1.6</span> 機械学習</a></li>
+  <li><a href="#モデル化" id="toc-モデル化" class="nav-link" data-scroll-target="#モデル化"><span class="header-section-number">1.6</span> モデル化</a>
+  <ul class="collapse">
+  <li><a href="#サブグループ平均" id="toc-サブグループ平均" class="nav-link" data-scroll-target="#サブグループ平均"><span class="header-section-number">1.6.1</span> サブグループ平均</a></li>
+  <li><a href="#data-adaptive-なサブグループ平均" id="toc-data-adaptive-なサブグループ平均" class="nav-link" data-scroll-target="#data-adaptive-なサブグループ平均"><span class="header-section-number">1.6.2</span> Data-adaptive なサブグループ平均</a></li>
+  <li><a href="#よりdata-adaptiveな決定木" id="toc-よりdata-adaptiveな決定木" class="nav-link" data-scroll-target="#よりdata-adaptiveな決定木"><span class="header-section-number">1.6.3</span> よりData-adaptiveな決定木</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -201,7 +203,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-Model" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">重要なコンセプト</span></span></h1>
+<h1 class="title"><span id="sec-Model" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">重要コンセプト</span></span></h1>
 </div>
 
 
@@ -218,33 +220,28 @@ window.Quarto = {
 </header>
 
 
-<ol type="1">
-<li><p>観察できない要因</p></li>
-<li><p>要約</p></li>
-<li><p>Data adaptive model</p></li>
-</ol>
-<section id="状況設定" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="状況設定"><span class="header-section-number">1.1</span> 状況設定</h2>
-<p>本ノートにおいてデータ分析法は、「事例から学ぶ方法」として位置付けます。 事例とは、過去の経験や出来事、歴史などであり、その蓄積をデータと呼びます。 例えば不動産取引調査から、以下のような不動産取引事例をダウンロードできます。</p>
+<section id="データ" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="データ"><span class="header-section-number">1.1</span> データ</h2>
+<p>本ノートにおいてデータ分析法は、「事例から学ぶ方法」として位置付けます。 事例とは、過去の経験や出来事、歴史などであり、その蓄積をデータと呼びます。 例えば以下は、2021年と2022年の第二四半期の東京23区における中古マンション取引事例<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>をデータ化しています。</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="mucvfbmlyj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mucvfbmlyj table {
+<div id="igsrsfqanw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#igsrsfqanw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mucvfbmlyj thead, #mucvfbmlyj tbody, #mucvfbmlyj tfoot, #mucvfbmlyj tr, #mucvfbmlyj td, #mucvfbmlyj th {
+#igsrsfqanw thead, #igsrsfqanw tbody, #igsrsfqanw tfoot, #igsrsfqanw tr, #igsrsfqanw td, #igsrsfqanw th {
   border-style: none;
 }
 
-#mucvfbmlyj p {
+#igsrsfqanw p {
   margin: 0;
   padding: 0;
 }
 
-#mucvfbmlyj .gt_table {
+#igsrsfqanw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -270,12 +267,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#mucvfbmlyj .gt_caption {
+#igsrsfqanw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mucvfbmlyj .gt_title {
+#igsrsfqanw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -287,7 +284,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#mucvfbmlyj .gt_subtitle {
+#igsrsfqanw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -299,7 +296,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#mucvfbmlyj .gt_heading {
+#igsrsfqanw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -311,13 +308,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mucvfbmlyj .gt_bottom_border {
+#igsrsfqanw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mucvfbmlyj .gt_col_headings {
+#igsrsfqanw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -332,7 +329,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mucvfbmlyj .gt_col_heading {
+#igsrsfqanw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -352,7 +349,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#mucvfbmlyj .gt_column_spanner_outer {
+#igsrsfqanw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -364,15 +361,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#mucvfbmlyj .gt_column_spanner_outer:first-child {
+#igsrsfqanw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mucvfbmlyj .gt_column_spanner_outer:last-child {
+#igsrsfqanw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mucvfbmlyj .gt_column_spanner {
+#igsrsfqanw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -384,11 +381,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#mucvfbmlyj .gt_spanner_row {
+#igsrsfqanw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mucvfbmlyj .gt_group_heading {
+#igsrsfqanw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -414,7 +411,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#mucvfbmlyj .gt_empty_group_heading {
+#igsrsfqanw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -429,15 +426,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#mucvfbmlyj .gt_from_md > :first-child {
+#igsrsfqanw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mucvfbmlyj .gt_from_md > :last-child {
+#igsrsfqanw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mucvfbmlyj .gt_row {
+#igsrsfqanw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -456,7 +453,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#mucvfbmlyj .gt_stub {
+#igsrsfqanw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -469,7 +466,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mucvfbmlyj .gt_stub_row_group {
+#igsrsfqanw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -483,15 +480,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#mucvfbmlyj .gt_row_group_first td {
+#igsrsfqanw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mucvfbmlyj .gt_row_group_first th {
+#igsrsfqanw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mucvfbmlyj .gt_summary_row {
+#igsrsfqanw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -501,16 +498,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mucvfbmlyj .gt_first_summary_row {
+#igsrsfqanw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mucvfbmlyj .gt_first_summary_row.thick {
+#igsrsfqanw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mucvfbmlyj .gt_last_summary_row {
+#igsrsfqanw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -520,7 +517,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mucvfbmlyj .gt_grand_summary_row {
+#igsrsfqanw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -530,7 +527,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mucvfbmlyj .gt_first_grand_summary_row {
+#igsrsfqanw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -540,7 +537,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#mucvfbmlyj .gt_last_grand_summary_row_top {
+#igsrsfqanw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -550,11 +547,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mucvfbmlyj .gt_striped {
+#igsrsfqanw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mucvfbmlyj .gt_table_body {
+#igsrsfqanw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -563,7 +560,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mucvfbmlyj .gt_footnotes {
+#igsrsfqanw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -577,7 +574,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mucvfbmlyj .gt_footnote {
+#igsrsfqanw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -586,7 +583,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mucvfbmlyj .gt_sourcenotes {
+#igsrsfqanw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -600,7 +597,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mucvfbmlyj .gt_sourcenote {
+#igsrsfqanw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -608,72 +605,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mucvfbmlyj .gt_left {
+#igsrsfqanw .gt_left {
   text-align: left;
 }
 
-#mucvfbmlyj .gt_center {
+#igsrsfqanw .gt_center {
   text-align: center;
 }
 
-#mucvfbmlyj .gt_right {
+#igsrsfqanw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mucvfbmlyj .gt_font_normal {
+#igsrsfqanw .gt_font_normal {
   font-weight: normal;
 }
 
-#mucvfbmlyj .gt_font_bold {
+#igsrsfqanw .gt_font_bold {
   font-weight: bold;
 }
 
-#mucvfbmlyj .gt_font_italic {
+#igsrsfqanw .gt_font_italic {
   font-style: italic;
 }
 
-#mucvfbmlyj .gt_super {
+#igsrsfqanw .gt_super {
   font-size: 65%;
 }
 
-#mucvfbmlyj .gt_footnote_marks {
+#igsrsfqanw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mucvfbmlyj .gt_asterisk {
+#igsrsfqanw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mucvfbmlyj .gt_indent_1 {
+#igsrsfqanw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mucvfbmlyj .gt_indent_2 {
+#igsrsfqanw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mucvfbmlyj .gt_indent_3 {
+#igsrsfqanw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mucvfbmlyj .gt_indent_4 {
+#igsrsfqanw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mucvfbmlyj .gt_indent_5 {
+#igsrsfqanw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mucvfbmlyj .katex-display {
+#igsrsfqanw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mucvfbmlyj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#igsrsfqanw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -766,28 +763,29 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="分析例-個別事例分析" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="分析例-個別事例分析"><span class="header-section-number">1.2</span> 分析例: 個別事例分析</h2>
-<p>典型的な事例分析法として、個別の事例を丹念に調べていく方法があります。 例えば、以下の5800万円で取引されている物件が、データの中に含まれていました。</p>
+<section id="観察できない変数" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="観察できない変数"><span class="header-section-number">1.2</span> 観察できない変数</h2>
+<p>データから観察できない(研究者が知覚出来ない)変数の存在は、あらゆる事例分析の最も深刻な問題の一つです。 このような変数への対処について、膨大な議論が蓄積されています。</p>
+<p>観察できない変数がもたらす問題は、個別事例分析において、顕著に顕在化します。 今、取引価格 <span class="math inline">\(=Y\)</span> と物件の特徴 <span class="math inline">\(=X\)</span> の関係性を把握するために、個別事例を丹念に見ていきます。 例えば、以下の5800万円で取引されている物件が、データの中に含まれていました。</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="hwvnwcngpg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hwvnwcngpg table {
+<div id="hzqkbhnext" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hzqkbhnext table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hwvnwcngpg thead, #hwvnwcngpg tbody, #hwvnwcngpg tfoot, #hwvnwcngpg tr, #hwvnwcngpg td, #hwvnwcngpg th {
+#hzqkbhnext thead, #hzqkbhnext tbody, #hzqkbhnext tfoot, #hzqkbhnext tr, #hzqkbhnext td, #hzqkbhnext th {
   border-style: none;
 }
 
-#hwvnwcngpg p {
+#hzqkbhnext p {
   margin: 0;
   padding: 0;
 }
 
-#hwvnwcngpg .gt_table {
+#hzqkbhnext .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -813,12 +811,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#hwvnwcngpg .gt_caption {
+#hzqkbhnext .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hwvnwcngpg .gt_title {
+#hzqkbhnext .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -830,7 +828,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#hwvnwcngpg .gt_subtitle {
+#hzqkbhnext .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -842,7 +840,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#hwvnwcngpg .gt_heading {
+#hzqkbhnext .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -854,13 +852,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#hwvnwcngpg .gt_bottom_border {
+#hzqkbhnext .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hwvnwcngpg .gt_col_headings {
+#hzqkbhnext .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -875,7 +873,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#hwvnwcngpg .gt_col_heading {
+#hzqkbhnext .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -895,7 +893,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#hwvnwcngpg .gt_column_spanner_outer {
+#hzqkbhnext .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -907,15 +905,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#hwvnwcngpg .gt_column_spanner_outer:first-child {
+#hzqkbhnext .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hwvnwcngpg .gt_column_spanner_outer:last-child {
+#hzqkbhnext .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hwvnwcngpg .gt_column_spanner {
+#hzqkbhnext .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -927,11 +925,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#hwvnwcngpg .gt_spanner_row {
+#hzqkbhnext .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hwvnwcngpg .gt_group_heading {
+#hzqkbhnext .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -957,7 +955,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#hwvnwcngpg .gt_empty_group_heading {
+#hzqkbhnext .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -972,15 +970,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#hwvnwcngpg .gt_from_md > :first-child {
+#hzqkbhnext .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hwvnwcngpg .gt_from_md > :last-child {
+#hzqkbhnext .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hwvnwcngpg .gt_row {
+#hzqkbhnext .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -999,7 +997,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#hwvnwcngpg .gt_stub {
+#hzqkbhnext .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1012,7 +1010,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#hwvnwcngpg .gt_stub_row_group {
+#hzqkbhnext .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1026,15 +1024,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#hwvnwcngpg .gt_row_group_first td {
+#hzqkbhnext .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hwvnwcngpg .gt_row_group_first th {
+#hzqkbhnext .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hwvnwcngpg .gt_summary_row {
+#hzqkbhnext .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1044,16 +1042,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#hwvnwcngpg .gt_first_summary_row {
+#hzqkbhnext .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hwvnwcngpg .gt_first_summary_row.thick {
+#hzqkbhnext .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hwvnwcngpg .gt_last_summary_row {
+#hzqkbhnext .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1063,7 +1061,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#hwvnwcngpg .gt_grand_summary_row {
+#hzqkbhnext .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1073,7 +1071,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#hwvnwcngpg .gt_first_grand_summary_row {
+#hzqkbhnext .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1083,7 +1081,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#hwvnwcngpg .gt_last_grand_summary_row_top {
+#hzqkbhnext .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1093,11 +1091,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#hwvnwcngpg .gt_striped {
+#hzqkbhnext .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hwvnwcngpg .gt_table_body {
+#hzqkbhnext .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1106,7 +1104,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#hwvnwcngpg .gt_footnotes {
+#hzqkbhnext .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1120,7 +1118,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#hwvnwcngpg .gt_footnote {
+#hzqkbhnext .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1129,7 +1127,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#hwvnwcngpg .gt_sourcenotes {
+#hzqkbhnext .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1143,7 +1141,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#hwvnwcngpg .gt_sourcenote {
+#hzqkbhnext .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1151,72 +1149,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#hwvnwcngpg .gt_left {
+#hzqkbhnext .gt_left {
   text-align: left;
 }
 
-#hwvnwcngpg .gt_center {
+#hzqkbhnext .gt_center {
   text-align: center;
 }
 
-#hwvnwcngpg .gt_right {
+#hzqkbhnext .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hwvnwcngpg .gt_font_normal {
+#hzqkbhnext .gt_font_normal {
   font-weight: normal;
 }
 
-#hwvnwcngpg .gt_font_bold {
+#hzqkbhnext .gt_font_bold {
   font-weight: bold;
 }
 
-#hwvnwcngpg .gt_font_italic {
+#hzqkbhnext .gt_font_italic {
   font-style: italic;
 }
 
-#hwvnwcngpg .gt_super {
+#hzqkbhnext .gt_super {
   font-size: 65%;
 }
 
-#hwvnwcngpg .gt_footnote_marks {
+#hzqkbhnext .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hwvnwcngpg .gt_asterisk {
+#hzqkbhnext .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hwvnwcngpg .gt_indent_1 {
+#hzqkbhnext .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hwvnwcngpg .gt_indent_2 {
+#hzqkbhnext .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hwvnwcngpg .gt_indent_3 {
+#hzqkbhnext .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hwvnwcngpg .gt_indent_4 {
+#hzqkbhnext .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hwvnwcngpg .gt_indent_5 {
+#hzqkbhnext .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hwvnwcngpg .katex-display {
+#hzqkbhnext .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hwvnwcngpg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#hzqkbhnext div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1243,26 +1241,26 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>この事例から、同様の特徴を持つ物件は2億円で取引される傾向があったと結論づけても良いでしょうか？ ほとんどの応用でこのような推測は、不適切です。 実際に同じデータの中に、取引価格以外全く同じ特徴を持つ物件の取引事例が3件ありました。 これらの事例と比較すると、2億円はかなり低い価格での取引だったことがわかります。</p>
+<p>この事例から、部屋の広さが105平米で中心6区(港、中央、千代田、新宿、渋谷、文教)に立地する物件は、2億円で取引される傾向があったと結論づけても良いでしょうか？ ほとんどの応用でこのような推測は、不適切です。 実際に同じデータの中に、取引価格以外全く同じ特徴を持つ物件の取引事例が、以下の3件ありました。 これらの事例と比較すると、2億円はかなり低い価格での取引だったことがわかります。</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="mvvlxepkig" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mvvlxepkig table {
+<div id="yuproutzsj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yuproutzsj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mvvlxepkig thead, #mvvlxepkig tbody, #mvvlxepkig tfoot, #mvvlxepkig tr, #mvvlxepkig td, #mvvlxepkig th {
+#yuproutzsj thead, #yuproutzsj tbody, #yuproutzsj tfoot, #yuproutzsj tr, #yuproutzsj td, #yuproutzsj th {
   border-style: none;
 }
 
-#mvvlxepkig p {
+#yuproutzsj p {
   margin: 0;
   padding: 0;
 }
 
-#mvvlxepkig .gt_table {
+#yuproutzsj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1288,12 +1286,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#mvvlxepkig .gt_caption {
+#yuproutzsj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mvvlxepkig .gt_title {
+#yuproutzsj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1305,7 +1303,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#mvvlxepkig .gt_subtitle {
+#yuproutzsj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1317,7 +1315,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#mvvlxepkig .gt_heading {
+#yuproutzsj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1329,13 +1327,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mvvlxepkig .gt_bottom_border {
+#yuproutzsj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mvvlxepkig .gt_col_headings {
+#yuproutzsj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1350,7 +1348,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mvvlxepkig .gt_col_heading {
+#yuproutzsj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1370,7 +1368,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#mvvlxepkig .gt_column_spanner_outer {
+#yuproutzsj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1382,15 +1380,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#mvvlxepkig .gt_column_spanner_outer:first-child {
+#yuproutzsj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mvvlxepkig .gt_column_spanner_outer:last-child {
+#yuproutzsj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mvvlxepkig .gt_column_spanner {
+#yuproutzsj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1402,11 +1400,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#mvvlxepkig .gt_spanner_row {
+#yuproutzsj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mvvlxepkig .gt_group_heading {
+#yuproutzsj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1432,7 +1430,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#mvvlxepkig .gt_empty_group_heading {
+#yuproutzsj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1447,15 +1445,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#mvvlxepkig .gt_from_md > :first-child {
+#yuproutzsj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mvvlxepkig .gt_from_md > :last-child {
+#yuproutzsj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mvvlxepkig .gt_row {
+#yuproutzsj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1474,7 +1472,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#mvvlxepkig .gt_stub {
+#yuproutzsj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1487,7 +1485,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mvvlxepkig .gt_stub_row_group {
+#yuproutzsj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1501,15 +1499,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#mvvlxepkig .gt_row_group_first td {
+#yuproutzsj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mvvlxepkig .gt_row_group_first th {
+#yuproutzsj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mvvlxepkig .gt_summary_row {
+#yuproutzsj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1519,16 +1517,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mvvlxepkig .gt_first_summary_row {
+#yuproutzsj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mvvlxepkig .gt_first_summary_row.thick {
+#yuproutzsj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mvvlxepkig .gt_last_summary_row {
+#yuproutzsj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1538,7 +1536,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mvvlxepkig .gt_grand_summary_row {
+#yuproutzsj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1548,7 +1546,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mvvlxepkig .gt_first_grand_summary_row {
+#yuproutzsj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1558,7 +1556,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#mvvlxepkig .gt_last_grand_summary_row_top {
+#yuproutzsj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1568,11 +1566,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mvvlxepkig .gt_striped {
+#yuproutzsj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mvvlxepkig .gt_table_body {
+#yuproutzsj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1581,7 +1579,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mvvlxepkig .gt_footnotes {
+#yuproutzsj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1595,7 +1593,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mvvlxepkig .gt_footnote {
+#yuproutzsj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1604,7 +1602,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mvvlxepkig .gt_sourcenotes {
+#yuproutzsj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1618,7 +1616,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mvvlxepkig .gt_sourcenote {
+#yuproutzsj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1626,72 +1624,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mvvlxepkig .gt_left {
+#yuproutzsj .gt_left {
   text-align: left;
 }
 
-#mvvlxepkig .gt_center {
+#yuproutzsj .gt_center {
   text-align: center;
 }
 
-#mvvlxepkig .gt_right {
+#yuproutzsj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mvvlxepkig .gt_font_normal {
+#yuproutzsj .gt_font_normal {
   font-weight: normal;
 }
 
-#mvvlxepkig .gt_font_bold {
+#yuproutzsj .gt_font_bold {
   font-weight: bold;
 }
 
-#mvvlxepkig .gt_font_italic {
+#yuproutzsj .gt_font_italic {
   font-style: italic;
 }
 
-#mvvlxepkig .gt_super {
+#yuproutzsj .gt_super {
   font-size: 65%;
 }
 
-#mvvlxepkig .gt_footnote_marks {
+#yuproutzsj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mvvlxepkig .gt_asterisk {
+#yuproutzsj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mvvlxepkig .gt_indent_1 {
+#yuproutzsj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mvvlxepkig .gt_indent_2 {
+#yuproutzsj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mvvlxepkig .gt_indent_3 {
+#yuproutzsj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mvvlxepkig .gt_indent_4 {
+#yuproutzsj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mvvlxepkig .gt_indent_5 {
+#yuproutzsj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mvvlxepkig .katex-display {
+#yuproutzsj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mvvlxepkig div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#yuproutzsj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1736,11 +1734,13 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>なぜこのような取引価格のブレが生じるのでしょうか？ データのご入力など潜在的な理由は多岐に渡りますが、有力なのは、このデータに<strong>含まれない重要な情報</strong> が存在することです。 例えば、最寄駅や公園の近くにあるか否かなどのより詳細な立地情報が考えられます。 このような詳細な立地も、取引価格に影響を与え、結果として事例の下振れ/上振れが生じます。</p>
+<p>なぜこのような取引価格のブレが生じるのでしょうか？ データのご入力など潜在的な理由は多岐に渡りますが、有力なのは、このデータに<strong>含まれない重要な情報</strong> が存在することです。 例えば、最寄駅や公園の近くにあるか否かなどのより詳細な立地情報が考えられます。 あるいは売り手や買い手の”交渉力”を反映している可能性もあります。 このような多様な要因が、取引価格に影響を与え、結果として事例の下振れ/上振れが生じます。</p>
+<p>観察できない変数は不動産のみならず、労働者や家計、企業、あるいは国レベルの分析でも同様の問題を引き起こします。 観察できる変数 <span class="math inline">\(X\)</span> が一致した事例であったとしても、観察できない変数は事例間で大きく偏っている可能性が高く、結果 <span class="math inline">\(Y\)</span> の値に大きな差が生まれます。</p>
 </section>
-<section id="分析例-モデル化" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="分析例-モデル化"><span class="header-section-number">1.3</span> 分析例: モデル化</h2>
-<p>現代の分析で用いられるデータは、一般に多くの事例を含んでいます。</p>
+<section id="要約" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="要約"><span class="header-section-number">1.3</span> 要約</h2>
+<p>先の個別事例分析では、観察できない変数 <span class="math inline">\(X\)</span> の偏りを確認する方法として、同じ<span class="math inline">\(X\)</span>を持つ事例と比較しました。 このようなアプローチの発展として、同じ<span class="math inline">\(X\)</span>を持つ事例集団における <span class="math inline">\(Y\)</span> の代表的な値を算出する方法があります。 最もよく用いられる代表値は、平均値です。</p>
+<p>以下では、価格 (Price) と広さ (Size)、立地 (中心6区/その他)、取引年 (2021/2022)について、データに含まれる事例の分布をHeat mapで図示しています。</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1750,10 +1750,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>上記の散布図は、社会分析に用いるデータの持つ典型的な特徴を表しています。 乱雑であり、同じ<span class="math inline">\(X\)</span> でも <span class="math inline">\(Y\)</span> が異なる事例が多い</p>
-<section id="丸暗記" class="level3" data-number="1.3.1">
-<h3 data-number="1.3.1" class="anchored" data-anchor-id="丸暗記"><span class="header-section-number">1.3.1</span> 丸暗記</h3>
-<p>個別事例分析の平均値を使う。 全ての<span class="math inline">\(X\)</span>に適用</p>
+<p>上記の散布図は、社会分析に用いるデータの持つ典型的な特徴を表しています。 極めて乱雑であり、同じ<span class="math inline">\(X\)</span> でも <span class="math inline">\(Y\)</span> が異なる事例が多くなっています。 これは、観察できない変数の偏りが深刻である可能性を示唆しています。</p>
+<p>以下の図は、各<span class="math inline">\(X\)</span>の組み合わせごとに計算された平均値を図示しています。</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1763,26 +1761,97 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>決定係数は、0.676 でした。</p>
+<p>同図からは、<span class="math inline">\(Y\)</span> と <span class="math inline">\(X\)</span> のデータ上の関係性について、いくつか示唆を与えてます。 部屋が広くなると取引価格は高くなる傾向があり、この傾向は中心6区で特に顕著となります。 しかしながら同時に、平均値を算出するために使用される事例数が、特に100平米を超える物件について少なくなっていることにも注意が必要です。 仮に平均値を計算するとしても、事例数が少ないと、各事例の観察できない変数の偏りの影響を強く受ける可能性があります。</p>
 </section>
-<section id="サブグループ平均" class="level3" data-number="1.3.2">
-<h3 data-number="1.3.2" class="anchored" data-anchor-id="サブグループ平均"><span class="header-section-number">1.3.2</span> サブグループ平均</h3>
+<section id="観察できない事例" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="観察できない事例"><span class="header-section-number">1.4</span> 観察できない事例</h2>
+<p>少数事例の集計が引き起こす問題を理解するために、頻度論と呼ばれる枠組みを導入します。 具体的なイメージを持つために、「自分と同じ課題に取り組む、他の研究者達」を想像してください。 この研究者は、あなたと同じ社会を対象に同じ手法を用いて分析しています。 ただしデータは、独立して収集しているとします。 このような研究者達は、あなたと同じ分析結果に到達するでしょうか？</p>
+<p>一般に独立した研究者は、同じ結論に到達しえません。 なぜならば、分析に用いる事例が異なるためです。 ほとんどの応用で、独立して収集したデータが、完全に一致する可能性は無視できるほど小さくなるでしょう。 すなわちある研究者が観察した事例を、別の研究者は観察できない可能性が高いのです。</p>
+<p>分析結果の不一致の典型例としては、報道機関による世論調査が挙げられます。 複数の調査結果が、毎月公開されていますが、その結果は各社で異なっています。 理由は複数考えられますが、最も単純なものは、調査対象となる回答者が異なるためです。 典型的な世論調査では、各社が独立して電話番号をランダムに発生させるなどの方法で、1000-2000名ほどの回答者を極力ランダムに選んでいます。 このため、異なる調査に同じ人が回答する確率は低くなります。 さらに回答者全員が全く同じになる確率は、無視できるほど小さいものになります。</p>
+<p>観察できない事例の存在は、観察できない変数の偏りをもたらします。 ある研究者には、偶然、公園に近い物件の取引事例ばかり集まってくるかもしれません。 このような研究者のデータで計算された取引価格の平均値は、他の研究者と比べて、上振れる可能性が高いです。 すなわち要約した値であったとしても、研究者間で同じ値に合意できなくなります。</p>
+</section>
+<section id="母分布とサンプリング" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="母分布とサンプリング"><span class="header-section-number">1.5</span> 母分布とサンプリング</h2>
+<p>観察できない事例の問題と、それに伴う分析結果の不一致の問題を整理するために、母分布という分析概念を導入します。 「私たちが手にしているデータは、母集団という無数の事例の集団から、選ばれた事例から構成されている」と <strong>想定</strong> します。 さらに本ノートでは、事例は完全ランダムに選ばれていると仮定します。 このような仮定をランダムサンプリングと呼びます。</p>
+<p>母集団とサンプリングの例として、労働力調査が挙げられます。 労働力調査は毎月総務省により実施されている世帯を対象とした調査です。 回答対象となる世帯は、日本の世帯全体からランダムに選ばれています。 このため労働力調査の母集団は、日本の世帯全体と見做せます。</p>
+<p>母集団として、仮想的な集団を想定することもできます。 例えば、あるコンビニのレジデータに、ある日の全ての来客者について、購入金額が全て記録されているとします。 この場合、現実の来客者全てが記録されているため、母集団は存在しないと考えることも可能です。 一方で、その日にコンビニを訪れた顧客は、潜在的な顧客の一部であると想定することもできます。 皆さんも、よく利用するコンビニであったとしても、毎日利用しないのではないでしょうか？ この場合の母集団は、潜在的な顧客となります。</p>
+<p>母集団を想定すると、母集団における変数の分布も定義できます。 例えば、「取引物件の母集団において、中心6区に立地する物件の割合は2割」、といった感じです。 また母分布を定義できれば、そこから母集団における平均値(母平均)も定義できます。 例えば、「中心6区に立地する50平米の中古マンションの2022年における平均取引価格は5000万円」、といった感じです。</p>
+<p>厳重に注意が必要なのは、「我々には母分布や母平均を正確に知ることは不可能である」ことがデータ分析法の前提である点です。 知ることができない母分布や母平均を、手元にある限られたデータから、以下に推測するのかが、データ分析の中心的な挑戦となります。 データが母集団の一部であり、観察できていない事例が存在する以上、データ上の平均値と母平均は一致しません。 またデータはランダムに選ばれているので、独立した研究者間で、平均値について厳密な合意はできません。</p>
+<section id="数値例" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="数値例"><span class="header-section-number">1.5.1</span> 数値例</h3>
+<p>以上の概念を明確にするために、簡単な数値実験を行います。 今、4名の研究者が独立して20事例を集めたとします。 各事例について、取引価格 <span class="math inline">\(Y\)</span> と 立地する区 <span class="math inline">\(X\in\{板橋,文京,中央\}\)</span> がデータから観察できるとします</p>
+<p>母分布は以下のように設定しています。</p>
+<ul>
+<li><p>取引物件は、板橋,文京,中央区に、同じ割合で立地</p></li>
+<li><p>板橋区と文京区において、取引価格は7から13の範囲に同じ割合で分布</p></li>
+<li><p>中央区において、取引価格は8から14の範囲に同じ割合で分布</p></li>
+</ul>
+<p>このため母平均は、板橋区と文京区については10、中央区においては11となります。</p>
+<p>以下の図は、4名の研究者が手にするデータと平均値を図示しています。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="model_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>平均値について、研究者間で大きな違いが見られます。 例えば研究者1-3について、板橋区の平均取引価格は文京区よりも低いのに対して、研究者４は高くなっています。 これは研究者1-3は板橋区の物件について、観察できない変数が不利な事例が多く集まったのに対して、研究４については有利な物件が多かったと解釈できます。 また板橋区の平均取引価格は、他の区と比べて、より研究者間でのばらつきが大きくなっています。 これは事例数が少ない傾向にあるため、観察できない変数のばらつきが、平均値により強く影響を与えているためです。</p>
+<p>この図に母平均を上書きすると以下のようになります。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="model_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>重要な点として以下を確認してください。</p>
+<ul>
+<li><p>母平均は全員共通だが、データ上の平均値は異なる</p></li>
+<li><p>母平均とデータ上の平均は乖離している</p></li>
+<li><p>事例数が少ない板橋区において、特に乖離幅が大きい傾向にある</p></li>
+</ul>
+</section>
+</section>
+<section id="モデル化" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="モデル化"><span class="header-section-number">1.6</span> モデル化</h2>
+<section id="サブグループ平均" class="level3" data-number="1.6.1">
+<h3 data-number="1.6.1" class="anchored" data-anchor-id="サブグループ平均"><span class="header-section-number">1.6.1</span> サブグループ平均</h3>
+<p>このような事例数の少なさに対応する方法として、<strong>分析者</strong>が事例をいくつかのサブグループへ<strong>事前</strong>に分類し、サブグループごとに平均値を計算する方法があります。 具体的には以下の分析工程を実行します。</p>
 <ol type="1">
 <li><strong>分析者</strong>が、サブグループ (モデル) を定義する</li>
 </ol>
 <ul>
-<li>例: 練馬区かどうか <span class="math inline">\(\times\)</span> 部屋の広さが20以下</li>
+<li>例: 中心6区かどうか <span class="math inline">\(\times\)</span> 部屋の広さが75以下か否か</li>
 </ul>
 <ol start="2" type="1">
 <li>サブグループの平均値を計算</li>
 </ol>
-<ul>
-<li><p>集計により事例固有の観察できない要因の影響を軽減する</p></li>
-<li><p>モデルの定義を変えると、推定結果が大きく変化する</p></li>
-</ul>
+<p>このように推定された要約モデルは、以下のように図示できる。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="model_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="model_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="決定木" class="level3" data-number="1.3.3">
-<h3 data-number="1.3.3" class="anchored" data-anchor-id="決定木"><span class="header-section-number">1.3.3</span> 決定木</h3>
+<section id="data-adaptive-なサブグループ平均" class="level3" data-number="1.6.2">
+<h3 data-number="1.6.2" class="anchored" data-anchor-id="data-adaptive-なサブグループ平均"><span class="header-section-number">1.6.2</span> Data-adaptive なサブグループ平均</h3>
 <ul>
 <li><p>決定木アルゴリズム: <strong>データ</strong>に最も適合するように、サブグループを定義する</p>
 <ul>
@@ -1797,71 +1866,46 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="model_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="model_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="model_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="model_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="決定木-1" class="level3" data-number="1.3.4">
-<h3 data-number="1.3.4" class="anchored" data-anchor-id="決定木-1"><span class="header-section-number">1.3.4</span> 決定木</h3>
+<section id="よりdata-adaptiveな決定木" class="level3" data-number="1.6.3">
+<h3 data-number="1.6.3" class="anchored" data-anchor-id="よりdata-adaptiveな決定木"><span class="header-section-number">1.6.3</span> よりData-adaptiveな決定木</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="model_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="model_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="model_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="model_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="機械学習" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="機械学習"><span class="header-section-number">1.4</span> 機械学習</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="model_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="推定法" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="推定法"><span class="header-section-number">1.5</span> 推定法</h2>
-<ul>
-<li><p>要約の方法として、大きく<strong>統計学</strong>と<strong>機械学習/AI</strong>がキーワードとして流布している</p>
-<ul>
-<li><p>伝統的な計量経済学は、統計学と密接</p></li>
-<li><p>機械学習は、統計学とは異なるルーツ(AIの開発)を持つ</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="機械学習-1" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="機械学習-1"><span class="header-section-number">1.6</span> 機械学習</h2>
-<ul>
-<li><p>新しい推定のアイディアを、データ分析が持ち込まれている</p>
-<ul>
-<li>伝統的な方法と比べて、よりデータ主導のモデル化を行う傾向がある</li>
-</ul></li>
-</ul>
 
 
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>国土交通省のレポジトリ (https://www.reinfolib.mlit.go.jp/) からダウンロードできます。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
