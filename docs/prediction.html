@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>データ分析入門ノート - 3&nbsp; 予測モデルの推定</title>
+<title>データ分析入門ノート - 4&nbsp; 予測モデルの推定</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./simplecomparison.html" rel="next">
-<link href="./decision.html" rel="prev">
+<link href="./model.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -110,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prediction.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prediction.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -143,8 +143,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">重要コンセプト</span></span></a>
+  <a href="./stracture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">分析工程</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -155,20 +155,26 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">要約の基本コンセプト</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./prediction.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simplecomparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">単純な比較分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">単純な比較分析</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./complexcomparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">複雑な比較分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">複雑な比較分析</span></span></a>
   </div>
 </li>
     </ul>
@@ -181,53 +187,58 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#現実" id="toc-現実" class="nav-link active" data-scroll-target="#現実"><span class="header-section-number">3.1</span> 現実</a></li>
-  <li><a href="#ml" id="toc-ml" class="nav-link" data-scroll-target="#ml"><span class="header-section-number">3.2</span> ML</a></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span class="header-section-number">3.3</span> Getting Started</a></li>
-  <li><a href="#予測問題" id="toc-予測問題" class="nav-link" data-scroll-target="#予測問題"><span class="header-section-number">3.4</span> 予測問題</a></li>
-  <li><a href="#アイディア" id="toc-アイディア" class="nav-link" data-scroll-target="#アイディア"><span class="header-section-number">3.5</span> アイディア</a></li>
-  <li><a href="#データ分割による評価" id="toc-データ分割による評価" class="nav-link" data-scroll-target="#データ分割による評価"><span class="header-section-number">3.6</span> データ分割による評価</a></li>
-  <li><a href="#イメージ" id="toc-イメージ" class="nav-link" data-scroll-target="#イメージ"><span class="header-section-number">3.7</span> イメージ</a></li>
-  <li><a href="#典型的誤解" id="toc-典型的誤解" class="nav-link" data-scroll-target="#典型的誤解"><span class="header-section-number">3.8</span> 典型的誤解</a></li>
-  <li><a href="#母集団を用いた整理" id="toc-母集団を用いた整理" class="nav-link" data-scroll-target="#母集団を用いた整理"><span class="header-section-number">3.9</span> 母集団を用いた整理</a></li>
-  <li><a href="#母集団" id="toc-母集団" class="nav-link" data-scroll-target="#母集団"><span class="header-section-number">3.10</span> 母集団</a></li>
-  <li><a href="#例" id="toc-例" class="nav-link" data-scroll-target="#例"><span class="header-section-number">3.11</span> 例</a></li>
-  <li><a href="#イメージ-1" id="toc-イメージ-1" class="nav-link" data-scroll-target="#イメージ-1"><span class="header-section-number">3.12</span> イメージ</a></li>
-  <li><a href="#数値例-データ" id="toc-数値例-データ" class="nav-link" data-scroll-target="#数値例-データ"><span class="header-section-number">3.13</span> 数値例: データ</a></li>
-  <li><a href="#数値例-予測モデル" id="toc-数値例-予測モデル" class="nav-link" data-scroll-target="#数値例-予測モデル"><span class="header-section-number">3.14</span> 数値例: 予測モデル</a></li>
-  <li><a href="#数値例-予測モデル-1" id="toc-数値例-予測モデル-1" class="nav-link" data-scroll-target="#数値例-予測モデル-1"><span class="header-section-number">3.15</span> 数値例: 予測モデル</a></li>
-  <li><a href="#数値例-予測モデルと母平均" id="toc-数値例-予測モデルと母平均" class="nav-link" data-scroll-target="#数値例-予測モデルと母平均"><span class="header-section-number">3.16</span> 数値例: 予測モデルと母平均</a></li>
-  <li><a href="#不透明性-uncertainly" id="toc-不透明性-uncertainly" class="nav-link" data-scroll-target="#不透明性-uncertainly"><span class="header-section-number">3.17</span> 不透明性 (Uncertainly)</a></li>
-  <li><a href="#sampling-model-uncertainly" id="toc-sampling-model-uncertainly" class="nav-link" data-scroll-target="#sampling-model-uncertainly"><span class="header-section-number">3.18</span> Sampling / Model Uncertainly</a></li>
-  <li><a href="#sampling-uncertainlyの軽減" id="toc-sampling-uncertainlyの軽減" class="nav-link" data-scroll-target="#sampling-uncertainlyの軽減"><span class="header-section-number">3.19</span> Sampling Uncertainlyの軽減</a></li>
-  <li><a href="#機械学習の利点" id="toc-機械学習の利点" class="nav-link" data-scroll-target="#機械学習の利点"><span class="header-section-number">3.20</span> 機械学習の利点</a></li>
-  <li><a href="#機械学習の問題点" id="toc-機械学習の問題点" class="nav-link" data-scroll-target="#機械学習の問題点"><span class="header-section-number">3.21</span> 機械学習の問題点</a></li>
-  <li><a href="#数値例-決定木" id="toc-数値例-決定木" class="nav-link" data-scroll-target="#数値例-決定木"><span class="header-section-number">3.22</span> 数値例: 決定木</a></li>
-  <li><a href="#数値例-size-40-で分割" id="toc-数値例-size-40-で分割" class="nav-link" data-scroll-target="#数値例-size-40-で分割"><span class="header-section-number">3.23</span> 数値例: Size <span class="math inline">\(= 40\)</span> で分割</a></li>
-  <li><a href="#モデルの評価" id="toc-モデルの評価" class="nav-link" data-scroll-target="#モデルの評価"><span class="header-section-number">3.24</span> モデルの評価</a></li>
-  <li><a href="#予測モデルの評価-理想編" id="toc-予測モデルの評価-理想編" class="nav-link" data-scroll-target="#予測モデルの評価-理想編"><span class="header-section-number">3.25</span> 予測モデルの評価: 理想編</a></li>
-  <li><a href="#予測モデルの評価-現実編" id="toc-予測モデルの評価-現実編" class="nav-link" data-scroll-target="#予測モデルの評価-現実編"><span class="header-section-number">3.26</span> 予測モデルの評価: 現実編</a></li>
-  <li><a href="#イメージ-2" id="toc-イメージ-2" class="nav-link" data-scroll-target="#イメージ-2"><span class="header-section-number">3.27</span> イメージ</a></li>
-  <li><a href="#補論-モデルを使い続けられるか" id="toc-補論-モデルを使い続けられるか" class="nav-link" data-scroll-target="#補論-モデルを使い続けられるか"><span class="header-section-number">3.28</span> 補論: モデルを使い続けられるか?</a></li>
-  <li><a href="#極端なモデルの推定" id="toc-極端なモデルの推定" class="nav-link" data-scroll-target="#極端なモデルの推定"><span class="header-section-number">3.29</span> 極端なモデルの推定</a></li>
-  <li><a href="#理想の予測モデル" id="toc-理想の予測モデル" class="nav-link" data-scroll-target="#理想の予測モデル"><span class="header-section-number">3.30</span> 理想の予測モデル</a></li>
-  <li><a href="#完璧な予測は可能か" id="toc-完璧な予測は可能か" class="nav-link" data-scroll-target="#完璧な予測は可能か"><span class="header-section-number">3.31</span> 完璧な予測は可能か?</a></li>
-  <li><a href="#予測モデルの推定-現実" id="toc-予測モデルの推定-現実" class="nav-link" data-scroll-target="#予測モデルの推定-現実"><span class="header-section-number">3.32</span> 予測モデルの推定: 現実</a></li>
-  <li><a href="#現実的な方法-単純平均法" id="toc-現実的な方法-単純平均法" class="nav-link" data-scroll-target="#現実的な方法-単純平均法"><span class="header-section-number">3.33</span> 現実的な方法: 単純平均法</a></li>
-  <li><a href="#現実的な方法-丸暗記法" id="toc-現実的な方法-丸暗記法" class="nav-link" data-scroll-target="#現実的な方法-丸暗記法"><span class="header-section-number">3.34</span> 現実的な方法: 丸暗記法</a></li>
-  <li><a href="#複雑なモデルは望ましいのか" id="toc-複雑なモデルは望ましいのか" class="nav-link" data-scroll-target="#複雑なモデルは望ましいのか"><span class="header-section-number">3.35</span> 複雑なモデルは望ましいのか?</a></li>
-  <li><a href="#補論-丸暗記が有効な場合" id="toc-補論-丸暗記が有効な場合" class="nav-link" data-scroll-target="#補論-丸暗記が有効な場合"><span class="header-section-number">3.36</span> 補論: 丸暗記が有効な場合</a></li>
-  <li><a href="#中庸なモデルの推定" id="toc-中庸なモデルの推定" class="nav-link" data-scroll-target="#中庸なモデルの推定"><span class="header-section-number">3.37</span> 中庸なモデルの推定</a></li>
-  <li><a href="#モデル選択集計" id="toc-モデル選択集計" class="nav-link" data-scroll-target="#モデル選択集計"><span class="header-section-number">3.38</span> モデル選択/集計</a></li>
-  <li><a href="#概要" id="toc-概要" class="nav-link" data-scroll-target="#概要"><span class="header-section-number">3.39</span> 概要</a></li>
-  <li><a href="#イメージ-bagging" id="toc-イメージ-bagging" class="nav-link" data-scroll-target="#イメージ-bagging"><span class="header-section-number">3.40</span> イメージ: Bagging</a></li>
-  <li><a href="#randomforest-の利点" id="toc-randomforest-の利点" class="nav-link" data-scroll-target="#randomforest-の利点"><span class="header-section-number">3.41</span> RandomForest の利点</a></li>
-  <li><a href="#数値例-random-forest" id="toc-数値例-random-forest" class="nav-link" data-scroll-target="#数値例-random-forest"><span class="header-section-number">3.42</span> 数値例: Random Forest</a></li>
-  <li><a href="#big-dataは優れた予測モデルを保証するか" id="toc-big-dataは優れた予測モデルを保証するか" class="nav-link" data-scroll-target="#big-dataは優れた予測モデルを保証するか"><span class="header-section-number">3.43</span> Big dataは優れた予測モデルを保証するか?</a></li>
-  <li><a href="#数値例-伝統的アプローチ5000事例" id="toc-数値例-伝統的アプローチ5000事例" class="nav-link" data-scroll-target="#数値例-伝統的アプローチ5000事例"><span class="header-section-number">3.44</span> 数値例: 伝統的アプローチ(5000事例)</a></li>
-  <li><a href="#数値例-random-forest-with-large-sample-5000事例" id="toc-数値例-random-forest-with-large-sample-5000事例" class="nav-link" data-scroll-target="#数値例-random-forest-with-large-sample-5000事例"><span class="header-section-number">3.45</span> 数値例: Random Forest with large sample (5000事例)</a></li>
-  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">3.46</span> まとめ</a></li>
-  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">3.47</span> Reference</a></li>
+  <li><a href="#モデル化" id="toc-モデル化" class="nav-link active" data-scroll-target="#モデル化"><span class="header-section-number">4.1</span> モデル化</a>
+  <ul class="collapse">
+  <li><a href="#サブグループ平均" id="toc-サブグループ平均" class="nav-link" data-scroll-target="#サブグループ平均"><span class="header-section-number">4.1.1</span> サブグループ平均</a></li>
+  <li><a href="#data-adaptive-なサブグループ平均" id="toc-data-adaptive-なサブグループ平均" class="nav-link" data-scroll-target="#data-adaptive-なサブグループ平均"><span class="header-section-number">4.1.2</span> Data-adaptive なサブグループ平均</a></li>
+  <li><a href="#よりdata-adaptiveな決定木" id="toc-よりdata-adaptiveな決定木" class="nav-link" data-scroll-target="#よりdata-adaptiveな決定木"><span class="header-section-number">4.1.3</span> よりData-adaptiveな決定木</a></li>
+  </ul></li>
+  <li><a href="#現実" id="toc-現実" class="nav-link" data-scroll-target="#現実"><span class="header-section-number">4.2</span> 現実</a></li>
+  <li><a href="#ml" id="toc-ml" class="nav-link" data-scroll-target="#ml"><span class="header-section-number">4.3</span> ML</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span class="header-section-number">4.4</span> Getting Started</a></li>
+  <li><a href="#アイディア" id="toc-アイディア" class="nav-link" data-scroll-target="#アイディア"><span class="header-section-number">4.5</span> アイディア</a></li>
+  <li><a href="#データ分割による評価" id="toc-データ分割による評価" class="nav-link" data-scroll-target="#データ分割による評価"><span class="header-section-number">4.6</span> データ分割による評価</a></li>
+  <li><a href="#イメージ" id="toc-イメージ" class="nav-link" data-scroll-target="#イメージ"><span class="header-section-number">4.7</span> イメージ</a></li>
+  <li><a href="#典型的誤解" id="toc-典型的誤解" class="nav-link" data-scroll-target="#典型的誤解"><span class="header-section-number">4.8</span> 典型的誤解</a></li>
+  <li><a href="#母集団を用いた整理" id="toc-母集団を用いた整理" class="nav-link" data-scroll-target="#母集団を用いた整理"><span class="header-section-number">4.9</span> 母集団を用いた整理</a></li>
+  <li><a href="#母集団" id="toc-母集団" class="nav-link" data-scroll-target="#母集団"><span class="header-section-number">4.10</span> 母集団</a></li>
+  <li><a href="#例" id="toc-例" class="nav-link" data-scroll-target="#例"><span class="header-section-number">4.11</span> 例</a></li>
+  <li><a href="#イメージ-1" id="toc-イメージ-1" class="nav-link" data-scroll-target="#イメージ-1"><span class="header-section-number">4.12</span> イメージ</a></li>
+  <li><a href="#数値例-データ" id="toc-数値例-データ" class="nav-link" data-scroll-target="#数値例-データ"><span class="header-section-number">4.13</span> 数値例: データ</a></li>
+  <li><a href="#数値例-予測モデル" id="toc-数値例-予測モデル" class="nav-link" data-scroll-target="#数値例-予測モデル"><span class="header-section-number">4.14</span> 数値例: 予測モデル</a></li>
+  <li><a href="#数値例-予測モデル-1" id="toc-数値例-予測モデル-1" class="nav-link" data-scroll-target="#数値例-予測モデル-1"><span class="header-section-number">4.15</span> 数値例: 予測モデル</a></li>
+  <li><a href="#数値例-予測モデルと母平均" id="toc-数値例-予測モデルと母平均" class="nav-link" data-scroll-target="#数値例-予測モデルと母平均"><span class="header-section-number">4.16</span> 数値例: 予測モデルと母平均</a></li>
+  <li><a href="#不透明性-uncertainly" id="toc-不透明性-uncertainly" class="nav-link" data-scroll-target="#不透明性-uncertainly"><span class="header-section-number">4.17</span> 不透明性 (Uncertainly)</a></li>
+  <li><a href="#sampling-model-uncertainly" id="toc-sampling-model-uncertainly" class="nav-link" data-scroll-target="#sampling-model-uncertainly"><span class="header-section-number">4.18</span> Sampling / Model Uncertainly</a></li>
+  <li><a href="#sampling-uncertainlyの軽減" id="toc-sampling-uncertainlyの軽減" class="nav-link" data-scroll-target="#sampling-uncertainlyの軽減"><span class="header-section-number">4.19</span> Sampling Uncertainlyの軽減</a></li>
+  <li><a href="#機械学習の利点" id="toc-機械学習の利点" class="nav-link" data-scroll-target="#機械学習の利点"><span class="header-section-number">4.20</span> 機械学習の利点</a></li>
+  <li><a href="#機械学習の問題点" id="toc-機械学習の問題点" class="nav-link" data-scroll-target="#機械学習の問題点"><span class="header-section-number">4.21</span> 機械学習の問題点</a></li>
+  <li><a href="#数値例-決定木" id="toc-数値例-決定木" class="nav-link" data-scroll-target="#数値例-決定木"><span class="header-section-number">4.22</span> 数値例: 決定木</a></li>
+  <li><a href="#数値例-size-40-で分割" id="toc-数値例-size-40-で分割" class="nav-link" data-scroll-target="#数値例-size-40-で分割"><span class="header-section-number">4.23</span> 数値例: Size <span class="math inline">\(= 40\)</span> で分割</a></li>
+  <li><a href="#モデルの評価" id="toc-モデルの評価" class="nav-link" data-scroll-target="#モデルの評価"><span class="header-section-number">4.24</span> モデルの評価</a></li>
+  <li><a href="#予測モデルの評価-理想編" id="toc-予測モデルの評価-理想編" class="nav-link" data-scroll-target="#予測モデルの評価-理想編"><span class="header-section-number">4.25</span> 予測モデルの評価: 理想編</a></li>
+  <li><a href="#予測モデルの評価-現実編" id="toc-予測モデルの評価-現実編" class="nav-link" data-scroll-target="#予測モデルの評価-現実編"><span class="header-section-number">4.26</span> 予測モデルの評価: 現実編</a></li>
+  <li><a href="#イメージ-2" id="toc-イメージ-2" class="nav-link" data-scroll-target="#イメージ-2"><span class="header-section-number">4.27</span> イメージ</a></li>
+  <li><a href="#補論-モデルを使い続けられるか" id="toc-補論-モデルを使い続けられるか" class="nav-link" data-scroll-target="#補論-モデルを使い続けられるか"><span class="header-section-number">4.28</span> 補論: モデルを使い続けられるか?</a></li>
+  <li><a href="#極端なモデルの推定" id="toc-極端なモデルの推定" class="nav-link" data-scroll-target="#極端なモデルの推定"><span class="header-section-number">4.29</span> 極端なモデルの推定</a></li>
+  <li><a href="#理想の予測モデル" id="toc-理想の予測モデル" class="nav-link" data-scroll-target="#理想の予測モデル"><span class="header-section-number">4.30</span> 理想の予測モデル</a></li>
+  <li><a href="#完璧な予測は可能か" id="toc-完璧な予測は可能か" class="nav-link" data-scroll-target="#完璧な予測は可能か"><span class="header-section-number">4.31</span> 完璧な予測は可能か?</a></li>
+  <li><a href="#予測モデルの推定-現実" id="toc-予測モデルの推定-現実" class="nav-link" data-scroll-target="#予測モデルの推定-現実"><span class="header-section-number">4.32</span> 予測モデルの推定: 現実</a></li>
+  <li><a href="#現実的な方法-単純平均法" id="toc-現実的な方法-単純平均法" class="nav-link" data-scroll-target="#現実的な方法-単純平均法"><span class="header-section-number">4.33</span> 現実的な方法: 単純平均法</a></li>
+  <li><a href="#現実的な方法-丸暗記法" id="toc-現実的な方法-丸暗記法" class="nav-link" data-scroll-target="#現実的な方法-丸暗記法"><span class="header-section-number">4.34</span> 現実的な方法: 丸暗記法</a></li>
+  <li><a href="#複雑なモデルは望ましいのか" id="toc-複雑なモデルは望ましいのか" class="nav-link" data-scroll-target="#複雑なモデルは望ましいのか"><span class="header-section-number">4.35</span> 複雑なモデルは望ましいのか?</a></li>
+  <li><a href="#補論-丸暗記が有効な場合" id="toc-補論-丸暗記が有効な場合" class="nav-link" data-scroll-target="#補論-丸暗記が有効な場合"><span class="header-section-number">4.36</span> 補論: 丸暗記が有効な場合</a></li>
+  <li><a href="#中庸なモデルの推定" id="toc-中庸なモデルの推定" class="nav-link" data-scroll-target="#中庸なモデルの推定"><span class="header-section-number">4.37</span> 中庸なモデルの推定</a></li>
+  <li><a href="#モデル選択集計" id="toc-モデル選択集計" class="nav-link" data-scroll-target="#モデル選択集計"><span class="header-section-number">4.38</span> モデル選択/集計</a></li>
+  <li><a href="#概要" id="toc-概要" class="nav-link" data-scroll-target="#概要"><span class="header-section-number">4.39</span> 概要</a></li>
+  <li><a href="#イメージ-bagging" id="toc-イメージ-bagging" class="nav-link" data-scroll-target="#イメージ-bagging"><span class="header-section-number">4.40</span> イメージ: Bagging</a></li>
+  <li><a href="#randomforest-の利点" id="toc-randomforest-の利点" class="nav-link" data-scroll-target="#randomforest-の利点"><span class="header-section-number">4.41</span> RandomForest の利点</a></li>
+  <li><a href="#数値例-random-forest" id="toc-数値例-random-forest" class="nav-link" data-scroll-target="#数値例-random-forest"><span class="header-section-number">4.42</span> 数値例: Random Forest</a></li>
+  <li><a href="#big-dataは優れた予測モデルを保証するか" id="toc-big-dataは優れた予測モデルを保証するか" class="nav-link" data-scroll-target="#big-dataは優れた予測モデルを保証するか"><span class="header-section-number">4.43</span> Big dataは優れた予測モデルを保証するか?</a></li>
+  <li><a href="#数値例-伝統的アプローチ5000事例" id="toc-数値例-伝統的アプローチ5000事例" class="nav-link" data-scroll-target="#数値例-伝統的アプローチ5000事例"><span class="header-section-number">4.44</span> 数値例: 伝統的アプローチ(5000事例)</a></li>
+  <li><a href="#数値例-random-forest-with-large-sample-5000事例" id="toc-数値例-random-forest-with-large-sample-5000事例" class="nav-link" data-scroll-target="#数値例-random-forest-with-large-sample-5000事例"><span class="header-section-number">4.45</span> 数値例: Random Forest with large sample (5000事例)</a></li>
+  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">4.46</span> まとめ</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">4.47</span> Reference</a></li>
   </ul>
 </nav>
     </div>
@@ -236,7 +247,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-Prediction" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span></h1>
+<h1 class="title"><span id="sec-Prediction" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span></h1>
 </div>
 
 
@@ -253,8 +264,98 @@ window.Quarto = {
 </header>
 
 
-<section id="現実" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="現実"><span class="header-section-number">3.1</span> 現実</h2>
+<p>予測モデルの推定では、意思決定に必要だが欠損している情報 <span class="math inline">\(Y\)</span> を予測するモデルの推定を目指します。 観察できる変数 <span class="math inline">\(X\)</span> から予測するモデル <span class="math inline">\(g(X)\)</span> を構築することを目的とします。 以下のような例があげられます。</p>
+<ul>
+<li><p>視聴履歴やいいね数 <span class="math inline">\((X) \underbrace{\rightarrow}_{g(X)}\)</span> 好む未視聴動画 <span class="math inline">\((Y)\)</span></p></li>
+<li><p>メールの文名や件名 <span class="math inline">\((X) \underbrace{\rightarrow}_{g(X)}\)</span> 迷惑メール <span class="math inline">\((Y)\)</span></p></li>
+<li><p>事業の内容や財務状況 <span class="math inline">\((X) \underbrace{\rightarrow}_{g(X)}\)</span> デフォルトリスク <span class="math inline">\((Y)\)</span></p></li>
+</ul>
+<p>もし<span class="math inline">\(Y,X\)</span> が共に観察できるデータを活用できれば、推定方法がある程度確立されています。 ここでは機械学習の一分野である、教師付き学習を紹介します。</p>
+<section id="モデル化" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="モデル化"><span class="header-section-number">4.1</span> モデル化</h2>
+<section id="サブグループ平均" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="サブグループ平均"><span class="header-section-number">4.1.1</span> サブグループ平均</h3>
+<p>このような事例数の少なさに対応する方法として、<strong>分析者</strong>が事例をいくつかのサブグループへ<strong>事前</strong>に分類し、サブグループごとに平均値を計算する方法があります。 具体的には以下の分析工程を実行します。</p>
+<ol type="1">
+<li><strong>分析者</strong>が、サブグループ (モデル) を定義する</li>
+</ol>
+<ul>
+<li>例: 中心6区かどうか <span class="math inline">\(\times\)</span> 部屋の広さが75以下か否か</li>
+</ul>
+<ol start="2" type="1">
+<li>サブグループの平均値を計算</li>
+</ol>
+<p>このように推定された要約モデルは、以下のように図示できる。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="prediction_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="prediction_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="data-adaptive-なサブグループ平均" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="data-adaptive-なサブグループ平均"><span class="header-section-number">4.1.2</span> Data-adaptive なサブグループ平均</h3>
+<ul>
+<li><p>決定木アルゴリズム: <strong>データ</strong>に最も適合するように、サブグループを定義する</p>
+<ul>
+<li>明確な基準(“データへの適合”)のもとで、要約方法を決定</li>
+</ul></li>
+<li><p>例. 最大４グループに分けることは前提に、平均二乗誤差 <span class="math display">\[(Y - モデルの予測値)^2のデータ上での平均値\]</span> を可能な限り削減するようにグループ分けを行う</p>
+<ul>
+<li>近似的に削減する (Greedy-algorithm)</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="prediction_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="prediction_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="よりdata-adaptiveな決定木" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="よりdata-adaptiveな決定木"><span class="header-section-number">4.1.3</span> よりData-adaptiveな決定木</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="prediction_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="prediction_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="現実" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="現実"><span class="header-section-number">4.2</span> 現実</h2>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -298,8 +399,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="ml" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="ml"><span class="header-section-number">3.2</span> ML</h2>
+<section id="ml" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="ml"><span class="header-section-number">4.3</span> ML</h2>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -378,23 +479,11 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="getting-started" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">3.3</span> Getting Started</h2>
+<section id="getting-started" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">4.4</span> Getting Started</h2>
 </section>
-<section id="予測問題" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="予測問題"><span class="header-section-number">3.4</span> 予測問題</h2>
-<ul>
-<li><p>定義: 欠損情報 <span class="math inline">\(Y\)</span> を、観察できる変数 <span class="math inline">\(X\)</span> から予測するモデル <span class="math inline">\(g(X)\)</span> を構築する</p>
-<ul>
-<li><p>視聴履歴やいいね数 <span class="math inline">\((X) \rightarrow\)</span> 好む未視聴動画 <span class="math inline">\((Y)\)</span></p></li>
-<li><p>メールの文名や件名 <span class="math inline">\((X) \rightarrow\)</span> 迷惑メール <span class="math inline">\((Y)\)</span></p></li>
-<li><p>事業の内容や財務状況 <span class="math inline">\((X) \rightarrow\)</span> デフォルトリスク <span class="math inline">\((Y)\)</span></p></li>
-</ul></li>
-<li><p><span class="math inline">\(Y,X\)</span> が共に観察できるデータを活用できれば、推定方法がある程度確立されている (教師付き学習)</p></li>
-</ul>
-</section>
-<section id="アイディア" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="アイディア"><span class="header-section-number">3.5</span> アイディア</h2>
+<section id="アイディア" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="アイディア"><span class="header-section-number">4.5</span> アイディア</h2>
 <ul>
 <li><p>過去の <span class="math inline">\(Y-X\)</span> の間の定量的なパターンを、データから抽出し、予測に利用する</p>
 <ul>
@@ -406,8 +495,8 @@ window.Quarto = {
 <li><p>予測の対象となる新しい事例と過去の事例(データ)との間に、一貫性が必要</p></li>
 </ul>
 </section>
-<section id="データ分割による評価" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="データ分割による評価"><span class="header-section-number">3.6</span> データ分割による評価</h2>
+<section id="データ分割による評価" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="データ分割による評価"><span class="header-section-number">4.6</span> データ分割による評価</h2>
 <ul>
 <li><p>予測モデルの性能をどのように評価するか</p>
 <ul>
@@ -420,8 +509,8 @@ window.Quarto = {
 <li><p>典型的には、Testデータについて、平均二乗誤差 <span class="math display">\[(Y - 予測値)^2の平均値\]</span></p></li>
 </ul>
 </section>
-<section id="イメージ" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="イメージ"><span class="header-section-number">3.7</span> イメージ</h2>
+<section id="イメージ" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="イメージ"><span class="header-section-number">4.7</span> イメージ</h2>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -502,8 +591,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="典型的誤解" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="典型的誤解"><span class="header-section-number">3.8</span> 典型的誤解</h2>
+<section id="典型的誤解" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="典型的誤解"><span class="header-section-number">4.8</span> 典型的誤解</h2>
 <ul>
 <li><p>機械学習を用いて推定すれば、予測性能が高いモデルが獲得できる</p></li>
 <li><p>複雑な現象を予測するためには、複雑なモデルの方が望ましい</p></li>
@@ -511,14 +600,14 @@ window.Quarto = {
 <li><p>予測性能が悪いモデルは、役に立たない</p></li>
 </ul>
 </section>
-<section id="母集団を用いた整理" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="母集団を用いた整理"><span class="header-section-number">3.9</span> 母集団を用いた整理</h2>
+<section id="母集団を用いた整理" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="母集団を用いた整理"><span class="header-section-number">4.9</span> 母集団を用いた整理</h2>
 <ul>
 <li>母集団: 論点整理を目的とした<strong>概念</strong></li>
 </ul>
 </section>
-<section id="母集団" class="level2" data-number="3.10">
-<h2 data-number="3.10" class="anchored" data-anchor-id="母集団"><span class="header-section-number">3.10</span> 母集団</h2>
+<section id="母集団" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="母集団"><span class="header-section-number">4.10</span> 母集団</h2>
 <ul>
 <li><p>手元のデータに含まれる事例は、母分布(集団)から抽出されたと想定する</p>
 <ul>
@@ -531,8 +620,8 @@ window.Quarto = {
 <li><p>一般にデータと母分布は、完全一致しない</p></li>
 </ul>
 </section>
-<section id="例" class="level2" data-number="3.11">
-<h2 data-number="3.11" class="anchored" data-anchor-id="例"><span class="header-section-number">3.11</span> 例</h2>
+<section id="例" class="level2" data-number="4.11">
+<h2 data-number="4.11" class="anchored" data-anchor-id="例"><span class="header-section-number">4.11</span> 例</h2>
 <ul>
 <li><p>ユーザーの需要調査(どのようなサービスを望むか)</p>
 <ul>
@@ -552,8 +641,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="イメージ-1" class="level2" data-number="3.12">
-<h2 data-number="3.12" class="anchored" data-anchor-id="イメージ-1"><span class="header-section-number">3.12</span> イメージ</h2>
+<section id="イメージ-1" class="level2" data-number="4.12">
+<h2 data-number="4.12" class="anchored" data-anchor-id="イメージ-1"><span class="header-section-number">4.12</span> イメージ</h2>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -626,44 +715,44 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="数値例-データ" class="level2" data-number="3.13">
-<h2 data-number="3.13" class="anchored" data-anchor-id="数値例-データ"><span class="header-section-number">3.13</span> 数値例: データ</h2>
+<section id="数値例-データ" class="level2" data-number="4.13">
+<h2 data-number="4.13" class="anchored" data-anchor-id="数値例-データ"><span class="header-section-number">4.13</span> 数値例: データ</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="prediction_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="数値例-予測モデル" class="level2" data-number="3.14">
-<h2 data-number="3.14" class="anchored" data-anchor-id="数値例-予測モデル"><span class="header-section-number">3.14</span> 数値例: 予測モデル</h2>
+<section id="数値例-予測モデル" class="level2" data-number="4.14">
+<h2 data-number="4.14" class="anchored" data-anchor-id="数値例-予測モデル"><span class="header-section-number">4.14</span> 数値例: 予測モデル</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="prediction_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="数値例-予測モデル-1" class="level2" data-number="3.15">
-<h2 data-number="3.15" class="anchored" data-anchor-id="数値例-予測モデル-1"><span class="header-section-number">3.15</span> 数値例: 予測モデル</h2>
+<section id="数値例-予測モデル-1" class="level2" data-number="4.15">
+<h2 data-number="4.15" class="anchored" data-anchor-id="数値例-予測モデル-1"><span class="header-section-number">4.15</span> 数値例: 予測モデル</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="prediction_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="数値例-予測モデルと母平均" class="level2" data-number="3.16">
-<h2 data-number="3.16" class="anchored" data-anchor-id="数値例-予測モデルと母平均"><span class="header-section-number">3.16</span> 数値例: 予測モデルと母平均</h2>
+<section id="数値例-予測モデルと母平均" class="level2" data-number="4.16">
+<h2 data-number="4.16" class="anchored" data-anchor-id="数値例-予測モデルと母平均"><span class="header-section-number">4.16</span> 数値例: 予測モデルと母平均</h2>
 <ul>
 <li>ここから想像の世界</li>
 </ul>
@@ -671,14 +760,14 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="prediction_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="不透明性-uncertainly" class="level2" data-number="3.17">
-<h2 data-number="3.17" class="anchored" data-anchor-id="不透明性-uncertainly"><span class="header-section-number">3.17</span> 不透明性 (Uncertainly)</h2>
+<section id="不透明性-uncertainly" class="level2" data-number="4.17">
+<h2 data-number="4.17" class="anchored" data-anchor-id="不透明性-uncertainly"><span class="header-section-number">4.17</span> 不透明性 (Uncertainly)</h2>
 <ul>
 <li><p>データ分析を含む事例分析の一般的課題</p>
 <ul>
@@ -689,8 +778,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="sampling-model-uncertainly" class="level2" data-number="3.18">
-<h2 data-number="3.18" class="anchored" data-anchor-id="sampling-model-uncertainly"><span class="header-section-number">3.18</span> Sampling / Model Uncertainly</h2>
+<section id="sampling-model-uncertainly" class="level2" data-number="4.18">
+<h2 data-number="4.18" class="anchored" data-anchor-id="sampling-model-uncertainly"><span class="header-section-number">4.18</span> Sampling / Model Uncertainly</h2>
 <ul>
 <li><p>観察する事例が人によって異なる (<strong>Sampling uncertainly</strong>)</p>
 <ul>
@@ -705,8 +794,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="sampling-uncertainlyの軽減" class="level2" data-number="3.19">
-<h2 data-number="3.19" class="anchored" data-anchor-id="sampling-uncertainlyの軽減"><span class="header-section-number">3.19</span> Sampling Uncertainlyの軽減</h2>
+<section id="sampling-uncertainlyの軽減" class="level2" data-number="4.19">
+<h2 data-number="4.19" class="anchored" data-anchor-id="sampling-uncertainlyの軽減"><span class="header-section-number">4.19</span> Sampling Uncertainlyの軽減</h2>
 <ul>
 <li><p>問題: データから観察できない価格決定要因の”偏り”が、データ固有の特徴を生み出す</p></li>
 <li><p>対策: 多くの事例を集計(モデル化)し、傾向把握を行う</p>
@@ -715,8 +804,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="機械学習の利点" class="level2" data-number="3.20">
-<h2 data-number="3.20" class="anchored" data-anchor-id="機械学習の利点"><span class="header-section-number">3.20</span> 機械学習の利点</h2>
+<section id="機械学習の利点" class="level2" data-number="4.20">
+<h2 data-number="4.20" class="anchored" data-anchor-id="機械学習の利点"><span class="header-section-number">4.20</span> 機械学習の利点</h2>
 <ul>
 <li><p>決定木を含む機械学習の手法は、明確な記述に基づくデータ主導のモデル化を行う</p>
 <ul>
@@ -724,8 +813,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="機械学習の問題点" class="level2" data-number="3.21">
-<h2 data-number="3.21" class="anchored" data-anchor-id="機械学習の問題点"><span class="header-section-number">3.21</span> 機械学習の問題点</h2>
+<section id="機械学習の問題点" class="level2" data-number="4.21">
+<h2 data-number="4.21" class="anchored" data-anchor-id="機械学習の問題点"><span class="header-section-number">4.21</span> 機械学習の問題点</h2>
 <ul>
 <li><p>データ主導のモデル生成は、Sampling uncertainlyを”複雑化”する</p>
 <ul>
@@ -738,8 +827,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="数値例-決定木" class="level2" data-number="3.22">
-<h2 data-number="3.22" class="anchored" data-anchor-id="数値例-決定木"><span class="header-section-number">3.22</span> 数値例: 決定木</h2>
+<section id="数値例-決定木" class="level2" data-number="4.22">
+<h2 data-number="4.22" class="anchored" data-anchor-id="数値例-決定木"><span class="header-section-number">4.22</span> 数値例: 決定木</h2>
 <ul>
 <li>4名の分析者(ID 1-4) が独立してデータを収集し、決定木でモデルを推定したとすると、</li>
 </ul>
@@ -747,19 +836,19 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="prediction_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="数値例-size-40-で分割" class="level2" data-number="3.23">
-<h2 data-number="3.23" class="anchored" data-anchor-id="数値例-size-40-で分割"><span class="header-section-number">3.23</span> 数値例: Size <span class="math inline">\(= 40\)</span> で分割</h2>
+<section id="数値例-size-40-で分割" class="level2" data-number="4.23">
+<h2 data-number="4.23" class="anchored" data-anchor-id="数値例-size-40-で分割"><span class="header-section-number">4.23</span> 数値例: Size <span class="math inline">\(= 40\)</span> で分割</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="prediction_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -768,11 +857,11 @@ window.Quarto = {
 <li>データとは無関係に、size = 40 で予測値が”誤って”変化する</li>
 </ul>
 </section>
-<section id="モデルの評価" class="level2" data-number="3.24">
-<h2 data-number="3.24" class="anchored" data-anchor-id="モデルの評価"><span class="header-section-number">3.24</span> モデルの評価</h2>
+<section id="モデルの評価" class="level2" data-number="4.24">
+<h2 data-number="4.24" class="anchored" data-anchor-id="モデルの評価"><span class="header-section-number">4.24</span> モデルの評価</h2>
 </section>
-<section id="予測モデルの評価-理想編" class="level2" data-number="3.25">
-<h2 data-number="3.25" class="anchored" data-anchor-id="予測モデルの評価-理想編"><span class="header-section-number">3.25</span> 予測モデルの評価: 理想編</h2>
+<section id="予測モデルの評価-理想編" class="level2" data-number="4.25">
+<h2 data-number="4.25" class="anchored" data-anchor-id="予測モデルの評価-理想編"><span class="header-section-number">4.25</span> 予測モデルの評価: 理想編</h2>
 <ul>
 <li><p>どんな予測もまぐれあたりしうる</p>
 <ul>
@@ -781,8 +870,8 @@ window.Quarto = {
 <li><p>予測モデルを母分布に適用して評価する: 典型的には二乗誤差の母平均値を用いる <span class="math inline">\(E[(Y - g(X))^2]\)</span></p></li>
 </ul>
 </section>
-<section id="予測モデルの評価-現実編" class="level2" data-number="3.26">
-<h2 data-number="3.26" class="anchored" data-anchor-id="予測モデルの評価-現実編"><span class="header-section-number">3.26</span> 予測モデルの評価: 現実編</h2>
+<section id="予測モデルの評価-現実編" class="level2" data-number="4.26">
+<h2 data-number="4.26" class="anchored" data-anchor-id="予測モデルの評価-現実編"><span class="header-section-number">4.26</span> 予測モデルの評価: 現実編</h2>
 <ul>
 <li><p>母分布は観察できないので、母分布に適用した際の予測性能は”推定する必要”がある</p>
 <ul>
@@ -791,8 +880,8 @@ window.Quarto = {
 <li><p>最も典型的な評価法は、データ分割: データをランダムに2分割 (訓練/テストデータ)し、訓練データのみでモデルを推定し、テストデータで評価</p></li>
 </ul>
 </section>
-<section id="イメージ-2" class="level2" data-number="3.27">
-<h2 data-number="3.27" class="anchored" data-anchor-id="イメージ-2"><span class="header-section-number">3.27</span> イメージ</h2>
+<section id="イメージ-2" class="level2" data-number="4.27">
+<h2 data-number="4.27" class="anchored" data-anchor-id="イメージ-2"><span class="header-section-number">4.27</span> イメージ</h2>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -884,8 +973,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="補論-モデルを使い続けられるか" class="level2" data-number="3.28">
-<h2 data-number="3.28" class="anchored" data-anchor-id="補論-モデルを使い続けられるか"><span class="header-section-number">3.28</span> 補論: モデルを使い続けられるか?</h2>
+<section id="補論-モデルを使い続けられるか" class="level2" data-number="4.28">
+<h2 data-number="4.28" class="anchored" data-anchor-id="補論-モデルを使い続けられるか"><span class="header-section-number">4.28</span> 補論: モデルを使い続けられるか?</h2>
 <ul>
 <li><p>モデル推定に用いるデータの母分布と、予測対象の母分布が異なれば、予測性能は悪化する</p>
 <ul>
@@ -900,14 +989,14 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="極端なモデルの推定" class="level2" data-number="3.29">
-<h2 data-number="3.29" class="anchored" data-anchor-id="極端なモデルの推定"><span class="header-section-number">3.29</span> 極端なモデルの推定</h2>
+<section id="極端なモデルの推定" class="level2" data-number="4.29">
+<h2 data-number="4.29" class="anchored" data-anchor-id="極端なモデルの推定"><span class="header-section-number">4.29</span> 極端なモデルの推定</h2>
 <ul>
 <li>予測モデルの推定の原理を理解するために、極端な推定方法で何が生じるのか理解する</li>
 </ul>
 </section>
-<section id="理想の予測モデル" class="level2" data-number="3.30">
-<h2 data-number="3.30" class="anchored" data-anchor-id="理想の予測モデル"><span class="header-section-number">3.30</span> 理想の予測モデル</h2>
+<section id="理想の予測モデル" class="level2" data-number="4.30">
+<h2 data-number="4.30" class="anchored" data-anchor-id="理想の予測モデル"><span class="header-section-number">4.30</span> 理想の予測モデル</h2>
 <ul>
 <li><p>もし<strong>母集団</strong>をすべて活用して、モデル推定できるのであれば、理想の予測モデルは母平均 <span class="math inline">\(E[Y|X]\)</span></p>
 <ul>
@@ -916,8 +1005,8 @@ window.Quarto = {
 <li><p>「各グループ内での平均的傾向」よりも優れた予測は<strong>あり得ない</strong></p></li>
 </ul>
 </section>
-<section id="完璧な予測は可能か" class="level2" data-number="3.31">
-<h2 data-number="3.31" class="anchored" data-anchor-id="完璧な予測は可能か"><span class="header-section-number">3.31</span> 完璧な予測は可能か?</h2>
+<section id="完璧な予測は可能か" class="level2" data-number="4.31">
+<h2 data-number="4.31" class="anchored" data-anchor-id="完璧な予測は可能か"><span class="header-section-number">4.31</span> 完璧な予測は可能か?</h2>
 <ul>
 <li><p>予測不可能な部分 <span class="math inline">\(Y - E[Y|X]\)</span> が発生</p>
 <ul>
@@ -932,8 +1021,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="予測モデルの推定-現実" class="level2" data-number="3.32">
-<h2 data-number="3.32" class="anchored" data-anchor-id="予測モデルの推定-現実"><span class="header-section-number">3.32</span> 予測モデルの推定: 現実</h2>
+<section id="予測モデルの推定-現実" class="level2" data-number="4.32">
+<h2 data-number="4.32" class="anchored" data-anchor-id="予測モデルの推定-現実"><span class="header-section-number">4.32</span> 予測モデルの推定: 現実</h2>
 <ul>
 <li><p>母集団は観察できないので、データで置き換える必要がある</p>
 <ul>
@@ -942,8 +1031,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="現実的な方法-単純平均法" class="level2" data-number="3.33">
-<h2 data-number="3.33" class="anchored" data-anchor-id="現実的な方法-単純平均法"><span class="header-section-number">3.33</span> 現実的な方法: 単純平均法</h2>
+<section id="現実的な方法-単純平均法" class="level2" data-number="4.33">
+<h2 data-number="4.33" class="anchored" data-anchor-id="現実的な方法-単純平均法"><span class="header-section-number">4.33</span> 現実的な方法: 単純平均法</h2>
 <ul>
 <li>単純な平均取引価格を予測値とする</li>
 </ul>
@@ -951,14 +1040,14 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="prediction_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="現実的な方法-丸暗記法" class="level2" data-number="3.34">
-<h2 data-number="3.34" class="anchored" data-anchor-id="現実的な方法-丸暗記法"><span class="header-section-number">3.34</span> 現実的な方法: 丸暗記法</h2>
+<section id="現実的な方法-丸暗記法" class="level2" data-number="4.34">
+<h2 data-number="4.34" class="anchored" data-anchor-id="現実的な方法-丸暗記法"><span class="header-section-number">4.34</span> 現実的な方法: 丸暗記法</h2>
 <ul>
 <li>各<span class="math inline">\(X\)</span> について、データ上の平均値を予測値とする</li>
 </ul>
@@ -966,14 +1055,14 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="prediction_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="複雑なモデルは望ましいのか" class="level2" data-number="3.35">
-<h2 data-number="3.35" class="anchored" data-anchor-id="複雑なモデルは望ましいのか"><span class="header-section-number">3.35</span> 複雑なモデルは望ましいのか?</h2>
+<section id="複雑なモデルは望ましいのか" class="level2" data-number="4.35">
+<h2 data-number="4.35" class="anchored" data-anchor-id="複雑なモデルは望ましいのか"><span class="header-section-number">4.35</span> 複雑なモデルは望ましいのか?</h2>
 <ul>
 <li><p>丸暗記モデルは非常に複雑なモデルを生み出し、望ましいように思える</p>
 <ul>
@@ -989,8 +1078,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="補論-丸暗記が有効な場合" class="level2" data-number="3.36">
-<h2 data-number="3.36" class="anchored" data-anchor-id="補論-丸暗記が有効な場合"><span class="header-section-number">3.36</span> 補論: 丸暗記が有効な場合</h2>
+<section id="補論-丸暗記が有効な場合" class="level2" data-number="4.36">
+<h2 data-number="4.36" class="anchored" data-anchor-id="補論-丸暗記が有効な場合"><span class="header-section-number">4.36</span> 補論: 丸暗記が有効な場合</h2>
 <ul>
 <li><p><span class="math inline">\(X\)</span> 以外に <span class="math inline">\(Y\)</span> の決定要因がなければ、丸暗記は有効</p>
 <ul>
@@ -1003,15 +1092,15 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="中庸なモデルの推定" class="level2" data-number="3.37">
-<h2 data-number="3.37" class="anchored" data-anchor-id="中庸なモデルの推定"><span class="header-section-number">3.37</span> 中庸なモデルの推定</h2>
+<section id="中庸なモデルの推定" class="level2" data-number="4.37">
+<h2 data-number="4.37" class="anchored" data-anchor-id="中庸なモデルの推定"><span class="header-section-number">4.37</span> 中庸なモデルの推定</h2>
 <ul>
 <li><p>多くの応用で平均値は単純すぎ、丸暗記は複雑すぎる</p></li>
 <li><p>決定木については、最大分割回数などを変更することで、単純平均と丸暗記法の間を移行できる</p></li>
 </ul>
 </section>
-<section id="モデル選択集計" class="level2" data-number="3.38">
-<h2 data-number="3.38" class="anchored" data-anchor-id="モデル選択集計"><span class="header-section-number">3.38</span> モデル選択/集計</h2>
+<section id="モデル選択集計" class="level2" data-number="4.38">
+<h2 data-number="4.38" class="anchored" data-anchor-id="モデル選択集計"><span class="header-section-number">4.38</span> モデル選択/集計</h2>
 <ul>
 <li><p>決定木の深さが異なれば、予測モデルは異なる</p></li>
 <li><p>複数のモデルを”試作”し、予測性能を測定、最も性能が良いモデルを選ぶのは一つの方法</p></li>
@@ -1021,8 +1110,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="概要" class="level2" data-number="3.39">
-<h2 data-number="3.39" class="anchored" data-anchor-id="概要"><span class="header-section-number">3.39</span> 概要</h2>
+<section id="概要" class="level2" data-number="4.39">
+<h2 data-number="4.39" class="anchored" data-anchor-id="概要"><span class="header-section-number">4.39</span> 概要</h2>
 <ul>
 <li><p>複雑なモデルを推定すると、母平均から大きく乖離した事例(ハズレ値)の影響を強く受ける</p>
 <ul>
@@ -1031,8 +1120,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="イメージ-bagging" class="level2" data-number="3.40">
-<h2 data-number="3.40" class="anchored" data-anchor-id="イメージ-bagging"><span class="header-section-number">3.40</span> イメージ: Bagging</h2>
+<section id="イメージ-bagging" class="level2" data-number="4.40">
+<h2 data-number="4.40" class="anchored" data-anchor-id="イメージ-bagging"><span class="header-section-number">4.40</span> イメージ: Bagging</h2>
 <ul>
 <li>Bootstrap法を用いて、予測モデルを大量に作る (500-5000個程度)</li>
 </ul>
@@ -1164,8 +1253,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="randomforest-の利点" class="level2" data-number="3.41">
-<h2 data-number="3.41" class="anchored" data-anchor-id="randomforest-の利点"><span class="header-section-number">3.41</span> RandomForest の利点</h2>
+<section id="randomforest-の利点" class="level2" data-number="4.41">
+<h2 data-number="4.41" class="anchored" data-anchor-id="randomforest-の利点"><span class="header-section-number">4.41</span> RandomForest の利点</h2>
 <ul>
 <li><p>Bootstrapは、“ハズレ値”を含まないデータとそれを用いたモデルも生成される</p>
 <ul>
@@ -1178,20 +1267,20 @@ window.Quarto = {
 <li><p>注: 実際にはモデル単位ではなく、サンプル分割ごとに、(元々の変数数のsquare root個)ランダムに使用禁止する</p></li>
 </ul>
 </section>
-<section id="数値例-random-forest" class="level2" data-number="3.42">
-<h2 data-number="3.42" class="anchored" data-anchor-id="数値例-random-forest"><span class="header-section-number">3.42</span> 数値例: Random Forest</h2>
+<section id="数値例-random-forest" class="level2" data-number="4.42">
+<h2 data-number="4.42" class="anchored" data-anchor-id="数値例-random-forest"><span class="header-section-number">4.42</span> 数値例: Random Forest</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="prediction_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="big-dataは優れた予測モデルを保証するか" class="level2" data-number="3.43">
-<h2 data-number="3.43" class="anchored" data-anchor-id="big-dataは優れた予測モデルを保証するか"><span class="header-section-number">3.43</span> Big dataは優れた予測モデルを保証するか?</h2>
+<section id="big-dataは優れた予測モデルを保証するか" class="level2" data-number="4.43">
+<h2 data-number="4.43" class="anchored" data-anchor-id="big-dataは優れた予測モデルを保証するか"><span class="header-section-number">4.43</span> Big dataは優れた予測モデルを保証するか?</h2>
 <ul>
 <li><p>「Big data <span class="math inline">\(=\)</span> サンプルサイズが多い」、のであれば、完璧な予測モデル <span class="math inline">\(g(X) = Y\)</span> を保証しない</p>
 <ul>
@@ -1204,8 +1293,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="数値例-伝統的アプローチ5000事例" class="level2" data-number="3.44">
-<h2 data-number="3.44" class="anchored" data-anchor-id="数値例-伝統的アプローチ5000事例"><span class="header-section-number">3.44</span> 数値例: 伝統的アプローチ(5000事例)</h2>
+<section id="数値例-伝統的アプローチ5000事例" class="level2" data-number="4.44">
+<h2 data-number="4.44" class="anchored" data-anchor-id="数値例-伝統的アプローチ5000事例"><span class="header-section-number">4.44</span> 数値例: 伝統的アプローチ(5000事例)</h2>
 <ul>
 <li><p>研究者が、「Size <span class="math inline">\(= 40\)</span> で分割する」と決定</p>
 <ul>
@@ -1216,26 +1305,26 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="prediction_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="数値例-random-forest-with-large-sample-5000事例" class="level2" data-number="3.45">
-<h2 data-number="3.45" class="anchored" data-anchor-id="数値例-random-forest-with-large-sample-5000事例"><span class="header-section-number">3.45</span> 数値例: Random Forest with large sample (5000事例)</h2>
+<section id="数値例-random-forest-with-large-sample-5000事例" class="level2" data-number="4.45">
+<h2 data-number="4.45" class="anchored" data-anchor-id="数値例-random-forest-with-large-sample-5000事例"><span class="header-section-number">4.45</span> 数値例: Random Forest with large sample (5000事例)</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="prediction_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="まとめ" class="level2" data-number="3.46">
-<h2 data-number="3.46" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">3.46</span> まとめ</h2>
+<section id="まとめ" class="level2" data-number="4.46">
+<h2 data-number="4.46" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">4.46</span> まとめ</h2>
 <ul>
 <li><p>実際/理想/完璧な予測モデルの区別が重要</p></li>
 <li><p>理想の予測モデル: <span class="math inline">\(g(X)=E[Y|X]\)</span></p>
@@ -1249,8 +1338,8 @@ window.Quarto = {
 <li><p>予測に使う前に、テストデータを用いた性能調査が必須</p></li>
 </ul>
 </section>
-<section id="reference" class="level2" data-number="3.47">
-<h2 data-number="3.47" class="anchored" data-anchor-id="reference"><span class="header-section-number">3.47</span> Reference</h2>
+<section id="reference" class="level2" data-number="4.47">
+<h2 data-number="4.47" class="anchored" data-anchor-id="reference"><span class="header-section-number">4.47</span> Reference</h2>
 
 
 </section>
@@ -1335,6 +1424,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1369,7 +1476,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1645,13 +1756,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./decision.html" class="pagination-link  aria-label=" &lt;span="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">意思決定問題</span></span>
+      <a href="./model.html" class="pagination-link" aria-label="要約の基本コンセプト">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">要約の基本コンセプト</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./simplecomparison.html" class="pagination-link" aria-label="<span class='chapter-number'>4</span>&nbsp; <span class='chapter-title'>単純な比較分析</span>">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">単純な比較分析</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./simplecomparison.html" class="pagination-link" aria-label="単純な比較分析">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">単純な比較分析</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

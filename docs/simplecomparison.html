@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>データ分析入門ノート - 4&nbsp; 単純な比較分析</title>
+<title>データ分析入門ノート - 5&nbsp; 単純な比較分析</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simplecomparison.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">単純な比較分析</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./simplecomparison.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">単純な比較分析</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -143,8 +143,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">重要コンセプト</span></span></a>
+  <a href="./stracture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">分析工程</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -155,20 +155,26 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">要約の基本コンセプト</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./prediction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simplecomparison.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">単純な比較分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">単純な比較分析</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./complexcomparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">複雑な比較分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">複雑な比較分析</span></span></a>
   </div>
 </li>
     </ul>
@@ -181,17 +187,17 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#実例" id="toc-実例" class="nav-link active" data-scroll-target="#実例"><span class="header-section-number">4.1</span> 実例</a>
+  <li><a href="#実例" id="toc-実例" class="nav-link active" data-scroll-target="#実例"><span class="header-section-number">5.1</span> 実例</a>
   <ul class="collapse">
-  <li><a href="#ols" id="toc-ols" class="nav-link" data-scroll-target="#ols"><span class="header-section-number">4.1.1</span> OLS</a></li>
+  <li><a href="#ols" id="toc-ols" class="nav-link" data-scroll-target="#ols"><span class="header-section-number">5.1.1</span> OLS</a></li>
   </ul></li>
-  <li><a href="#平均の比較" id="toc-平均の比較" class="nav-link" data-scroll-target="#平均の比較"><span class="header-section-number">4.2</span> 平均の比較</a></li>
-  <li><a href="#信頼区間" id="toc-信頼区間" class="nav-link" data-scroll-target="#信頼区間"><span class="header-section-number">4.3</span> 信頼区間</a>
+  <li><a href="#平均の比較" id="toc-平均の比較" class="nav-link" data-scroll-target="#平均の比較"><span class="header-section-number">5.2</span> 平均の比較</a></li>
+  <li><a href="#信頼区間" id="toc-信頼区間" class="nav-link" data-scroll-target="#信頼区間"><span class="header-section-number">5.3</span> 信頼区間</a>
   <ul class="collapse">
-  <li><a href="#信頼区間の重要性" id="toc-信頼区間の重要性" class="nav-link" data-scroll-target="#信頼区間の重要性"><span class="header-section-number">4.3.1</span> 信頼区間の重要性</a></li>
+  <li><a href="#信頼区間の重要性" id="toc-信頼区間の重要性" class="nav-link" data-scroll-target="#信頼区間の重要性"><span class="header-section-number">5.3.1</span> 信頼区間の重要性</a></li>
   </ul></li>
-  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">4.4</span> まとめ</a></li>
-  <li><a href="#補論-統計モデルの推定" id="toc-補論-統計モデルの推定" class="nav-link" data-scroll-target="#補論-統計モデルの推定"><span class="header-section-number">4.5</span> 補論: 統計モデルの推定</a></li>
+  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">5.4</span> まとめ</a></li>
+  <li><a href="#補論-統計モデルの推定" id="toc-補論-統計モデルの推定" class="nav-link" data-scroll-target="#補論-統計モデルの推定"><span class="header-section-number">5.5</span> 補論: 統計モデルの推定</a></li>
   </ul>
 </nav>
     </div>
@@ -200,7 +206,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-SimpleComparison" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">単純な比較分析</span></span></h1>
+<h1 class="title"><span id="sec-SimpleComparison" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">単純な比較分析</span></span></h1>
 </div>
 
 
@@ -218,14 +224,14 @@ window.Quarto = {
 
 
 <p>本章では、変数 <span class="math inline">\(Y\)</span> と 別のある変数 <span class="math inline">\(D\)</span> の間の関係性を把握をゴールとする手法を紹介します。 このようなゴールにおいては、平均差の推定やOLSなど、経済学で伝統的に用いられてきた手法が有効であることを強調します。</p>
-<section id="実例" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="実例"><span class="header-section-number">4.1</span> 実例</h2>
+<section id="実例" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="実例"><span class="header-section-number">5.1</span> 実例</h2>
 <ul>
 <li><p>１年前と比べた労働市場/社会の状況変化</p></li>
 <li><p>雇用形態間の所得格差</p></li>
 </ul>
-<section id="ols" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="ols"><span class="header-section-number">4.1.1</span> OLS</h3>
+<section id="ols" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="ols"><span class="header-section-number">5.1.1</span> OLS</h3>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -305,8 +311,8 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="平均の比較" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="平均の比較"><span class="header-section-number">4.2</span> 平均の比較</h2>
+<section id="平均の比較" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="平均の比較"><span class="header-section-number">5.2</span> 平均の比較</h2>
 <ul>
 <li><p>２種類の方法が考えられる</p>
 <ul>
@@ -323,8 +329,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="信頼区間" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="信頼区間"><span class="header-section-number">4.3</span> 信頼区間</h2>
+<section id="信頼区間" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="信頼区間"><span class="header-section-number">5.3</span> 信頼区間</h2>
 <ul>
 <li><p>データ上の(単純)平均値であったとしても、データの偶然の偏り(Sampling Uncertainly)の影響を受ける</p>
 <ul>
@@ -336,8 +342,8 @@ window.Quarto = {
 <li><p><span class="math inline">\(Y\)</span> の予測値の平均値を用いる場合、計算方法が確立されていない</p></li>
 </ul></li>
 </ul>
-<section id="信頼区間の重要性" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="信頼区間の重要性"><span class="header-section-number">4.3.1</span> 信頼区間の重要性</h3>
+<section id="信頼区間の重要性" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="信頼区間の重要性"><span class="header-section-number">5.3.1</span> 信頼区間の重要性</h3>
 <ul>
 <li><p>マクロな意思決定は、取り返しがつかない/幅広い層に影響を与えるものが多い</p></li>
 <li><p>判断材料となる情報にも、高い信頼性/透明性が求められる</p>
@@ -351,8 +357,8 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="まとめ" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">4.4</span> まとめ</h2>
+<section id="まとめ" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">5.4</span> まとめ</h2>
 <ul>
 <li><p>ある程度の事例数を活用し、シンプルな平均値やその差を推定したのであれば、計量経済学の入門書で紹介される「平均値の推定」法が実用的</p>
 <ul>
@@ -360,8 +366,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="補論-統計モデルの推定" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="補論-統計モデルの推定"><span class="header-section-number">4.5</span> 補論: 統計モデルの推定</h2>
+<section id="補論-統計モデルの推定" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="補論-統計モデルの推定"><span class="header-section-number">5.5</span> 補論: 統計モデルの推定</h2>
 <ul>
 <li><p>平均差による母平均の差の推定結果は、以下の母平均のモデルをOLSで推定した結果と一致する <span class="math display">\[Y=\beta_0 + \underbrace{\beta_1}_{=E[Y|D=1] - E[Y|D=0]}D + \underbrace{u}_{E[u|D=1]=E[u|D=0]=0}\]</span></p>
 <ul>
@@ -456,6 +462,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -490,7 +514,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -766,13 +794,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./prediction.html" class="pagination-link  aria-label=" &lt;span="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span>
+      <a href="./prediction.html" class="pagination-link" aria-label="予測モデルの推定">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./complexcomparison.html" class="pagination-link" aria-label="<span class='chapter-number'>5</span>&nbsp; <span class='chapter-title'>複雑な比較分析</span>">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">複雑な比較分析</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./complexcomparison.html" class="pagination-link" aria-label="複雑な比較分析">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">複雑な比較分析</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

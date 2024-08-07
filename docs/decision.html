@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./prediction.html" rel="next">
-<link href="./model.html" rel="prev">
+<link href="./model.html" rel="next">
+<link href="./stracture.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -114,8 +114,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">重要コンセプト</span></span></a>
+  <a href="./stracture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">分析工程</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -126,20 +126,26 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">要約の基本コンセプト</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./prediction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simplecomparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">単純な比較分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">単純な比較分析</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./complexcomparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">複雑な比較分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">複雑な比較分析</span></span></a>
   </div>
 </li>
     </ul>
@@ -172,9 +178,16 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>データ分析を始めるための最初のステップは、分析結果をどのように活用するのか、明確なイメージを持つことです。 活用方法に応じて、適した分析のゴール、ひいては分析方法も異なってきます。</p>
+<p>本ノートでは、何らかの意思決定問題の改善への活用を目指して行うデータ分析を想定します。 一般に意思決定において、多くの情報が必要となります。 そしてそのような情報の多くは、直接観察することはできず、過去の経験や事例から類推するしかありません。 具体例として、二つの意思決定問題を考え、これらの意思決定を支援するために、@<span class="citation" data-cites="のデータの活用を目指すとします">(<a href="#ref-のデータの活用を目指すとします" role="doc-biblioref"><strong>のデータの活用を目指すとします?</strong></a>)</span>。 便宜上、一番目の意思決定をミクロな意思決定、二番目をマクロな意思決定と呼びます。</p>
 <ul>
-<li>定量的な比較、（反実仮想）因果推定、予測分析をRによって行う方法を紹介</li>
+<li><p><strong>(ミクロな意思決定)</strong> 中古マンションの買取: 不動産業者が、ある中古マンションを適正価格で買取を行おうとしている。この際にこの物件の市場価格を参照したいが、分からない。</p></li>
+<li><p><strong>(マクロな意思決定)</strong> 支店網の見直し: 大規模な不動産会社が、都内の支店網の見直し計画を策定しようとしている。この際に、足元の不動産市場の状況を参照したいが、分からない。</p></li>
 </ul>
+<p>ミクロな意思決定については、予測値 @@ は有益なものになるかもしれません。 予測性能が良ければ、買取査定において重要となる現状での市場価格を<strong>物件(事例)ごと</strong> に算出できます。</p>
+<p>対してマクロな意思決定については、予測値そのものの持つ意義は限定的です。 大量の予測値を一度に見せられても、人間が処理しきれず、判断に活用できないためです。 <strong>大量の取引物件(事例)の特徴</strong> を、人間が把握するためには、より情報を要約する必要があり、@<span class="citation" data-cites="のような把握を目的とした結果が比較優位を有するかもしれません">(<a href="#ref-のような把握を目的とした結果が比較優位を有するかもしれません" role="doc-biblioref"><strong>のような把握を目的とした結果が比較優位を有するかもしれません?</strong></a>)</span>。</p>
+<p>本ノートにおいて、ミクロな意思決定は限られた数の事例についてのみ影響を与えるような意思決定を指します。 例えば、ある物件の買取が、他の物件に与える直接的な影響は限定的かもしれません。 一般に機械学習を用いた予測モデルの優れた実践例は、ミクロな意思決定の支援、あるいは自動化が多いです。 例えば、迷惑メールの自動分類が古典的な例となります。 このように影響を与える事例数が限られており、事例に合わせた意思決定が要求される場合、事例ごとに予測値を算出することには、大きな意義があります。</p>
+<p>マクロな意思決定は、多くの事例に一度に影響を与えるような意思決定を指します。 政府による政策決定や企業の戦略決定、あるいは有権者による投票行動などが含まれます。 影響を与える事例数が膨大なものとなる場合、個々の事例把握は困難であり、事例群全体の特徴を把握する方が現実的です。 このような場合は、伝統的な推定方法、あるいは機械学習とのハイブリット的な方法が比較優位を持つと考えられます。</p>
 
 
 
@@ -258,6 +271,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -292,7 +323,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -568,13 +603,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./model.html" class="pagination-link  aria-label=" &lt;span="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">重要コンセプト</span></span>
+      <a href="./stracture.html" class="pagination-link" aria-label="分析工程">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">分析工程</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./prediction.html" class="pagination-link" aria-label="<span class='chapter-number'>3</span>&nbsp; <span class='chapter-title'>予測モデルの推定</span>">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./model.html" class="pagination-link" aria-label="要約の基本コンセプト">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">要約の基本コンセプト</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>データ分析入門ノート - 3&nbsp; 要約の基本コンセプト</title>
+<title>データ分析入門ノート - 1&nbsp; 分析工程</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./prediction.html" rel="next">
-<link href="./decision.html" rel="prev">
+<link href="./decision.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -110,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./model.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">要約の基本コンセプト</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./stracture.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">分析工程</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -143,7 +143,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./stracture.html" class="sidebar-item-text sidebar-link">
+  <a href="./stracture.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">分析工程</span></span></a>
   </div>
 </li>
@@ -155,7 +155,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./model.html" class="sidebar-item-text sidebar-link active">
+  <a href="./model.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">要約の基本コンセプト</span></span></a>
   </div>
 </li>
@@ -187,16 +187,13 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#観察できない変数が引き起こす問題" id="toc-観察できない変数が引き起こす問題" class="nav-link active" data-scroll-target="#観察できない変数が引き起こす問題"><span class="header-section-number">3.1</span> 観察できない変数が引き起こす問題</a>
+  <li><a href="#分析例" id="toc-分析例" class="nav-link active" data-scroll-target="#分析例"><span class="header-section-number">1.1</span> 分析例</a>
   <ul class="collapse">
-  <li><a href="#集計" id="toc-集計" class="nav-link" data-scroll-target="#集計"><span class="header-section-number">3.1.1</span> 集計</a></li>
+  <li><a href="#データ" id="toc-データ" class="nav-link" data-scroll-target="#データ"><span class="header-section-number">1.1.1</span> データ</a></li>
+  <li><a href="#中古マンション取引価格の予測" id="toc-中古マンション取引価格の予測" class="nav-link" data-scroll-target="#中古マンション取引価格の予測"><span class="header-section-number">1.1.2</span> 中古マンション取引価格の予測</a></li>
+  <li><a href="#中古マンション市場の動向" id="toc-中古マンション市場の動向" class="nav-link" data-scroll-target="#中古マンション市場の動向"><span class="header-section-number">1.1.3</span> 中古マンション市場の動向</a></li>
   </ul></li>
-  <li><a href="#観察できない事例が引き起こす問題" id="toc-観察できない事例が引き起こす問題" class="nav-link" data-scroll-target="#観察できない事例が引き起こす問題"><span class="header-section-number">3.2</span> 観察できない事例が引き起こす問題</a>
-  <ul class="collapse">
-  <li><a href="#母分布とサンプリング" id="toc-母分布とサンプリング" class="nav-link" data-scroll-target="#母分布とサンプリング"><span class="header-section-number">3.2.1</span> 母分布とサンプリング</a></li>
-  </ul></li>
-  <li><a href="#数値例" id="toc-数値例" class="nav-link" data-scroll-target="#数値例"><span class="header-section-number">3.3</span> 数値例</a></li>
-  <li><a href="#母平均のモデル" id="toc-母平均のモデル" class="nav-link" data-scroll-target="#母平均のモデル"><span class="header-section-number">3.4</span> 母平均のモデル</a></li>
+  <li><a href="#詳細な工程" id="toc-詳細な工程" class="nav-link" data-scroll-target="#詳細な工程"><span class="header-section-number">1.2</span> 詳細な工程</a></li>
   </ul>
 </nav>
     </div>
@@ -205,7 +202,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-Model" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">要約の基本コンセプト</span></span></h1>
+<h1 class="title"><span id="sec-Structure" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">分析工程</span></span></h1>
 </div>
 
 
@@ -222,39 +219,30 @@ window.Quarto = {
 </header>
 
 
-<ul>
-<li><p>直面する意思決定問題1: ある物件の買取価格の決定</p>
-<ul>
-<li>必要な情報: その物件の市場価格</li>
-</ul></li>
-<li><p>直面する意思決定問題2: 営業や支店網構築の重点地域決定</p>
-<ul>
-<li>必要な情報: どのような地域で取引価格が伸びているのか把握</li>
-</ul></li>
-</ul>
-<section id="観察できない変数が引き起こす問題" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="観察できない変数が引き起こす問題"><span class="header-section-number">3.1</span> 観察できない変数が引き起こす問題</h2>
-<p>データから観察できない(研究者が知覚出来ない)変数の存在は、あらゆる事例分析の最も深刻な問題の一つです。 このような変数への対処について、膨大な議論が蓄積されています。</p>
-<p>観察できない変数がもたらす問題は、個別事例分析において、顕著です。 今、取引価格 <span class="math inline">\(=Y\)</span> と物件の特徴 <span class="math inline">\(=X\)</span> の関係性を把握するために、個別事例を丹念に見ていきます。 例えば、以下の2億円で取引されている物件が、データの中に含まれていました。</p>
+<section id="分析例" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="分析例"><span class="header-section-number">1.1</span> 分析例</h2>
+<section id="データ" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="データ"><span class="header-section-number">1.1.1</span> データ</h3>
+<p>本ノートにおいてデータ分析法は、「事例から学ぶ方法」として位置付けます。 事例とは、過去の経験や出来事、歴史などであり、その蓄積をデータと呼びます。 例えば以下は、2021年と2022年の第二四半期の東京23区における中古マンション取引事例<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>をデータ化しています。</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="aqvqhxmiuk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#aqvqhxmiuk table {
+<div id="qmjdohnzyx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qmjdohnzyx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#aqvqhxmiuk thead, #aqvqhxmiuk tbody, #aqvqhxmiuk tfoot, #aqvqhxmiuk tr, #aqvqhxmiuk td, #aqvqhxmiuk th {
+#qmjdohnzyx thead, #qmjdohnzyx tbody, #qmjdohnzyx tfoot, #qmjdohnzyx tr, #qmjdohnzyx td, #qmjdohnzyx th {
   border-style: none;
 }
 
-#aqvqhxmiuk p {
+#qmjdohnzyx p {
   margin: 0;
   padding: 0;
 }
 
-#aqvqhxmiuk .gt_table {
+#qmjdohnzyx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -280,12 +268,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#aqvqhxmiuk .gt_caption {
+#qmjdohnzyx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aqvqhxmiuk .gt_title {
+#qmjdohnzyx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -297,7 +285,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#aqvqhxmiuk .gt_subtitle {
+#qmjdohnzyx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -309,7 +297,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#aqvqhxmiuk .gt_heading {
+#qmjdohnzyx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -321,13 +309,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#aqvqhxmiuk .gt_bottom_border {
+#qmjdohnzyx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#aqvqhxmiuk .gt_col_headings {
+#qmjdohnzyx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -342,7 +330,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#aqvqhxmiuk .gt_col_heading {
+#qmjdohnzyx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -362,7 +350,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#aqvqhxmiuk .gt_column_spanner_outer {
+#qmjdohnzyx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -374,15 +362,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#aqvqhxmiuk .gt_column_spanner_outer:first-child {
+#qmjdohnzyx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aqvqhxmiuk .gt_column_spanner_outer:last-child {
+#qmjdohnzyx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aqvqhxmiuk .gt_column_spanner {
+#qmjdohnzyx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -394,11 +382,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#aqvqhxmiuk .gt_spanner_row {
+#qmjdohnzyx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#aqvqhxmiuk .gt_group_heading {
+#qmjdohnzyx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -424,7 +412,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#aqvqhxmiuk .gt_empty_group_heading {
+#qmjdohnzyx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -439,15 +427,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#aqvqhxmiuk .gt_from_md > :first-child {
+#qmjdohnzyx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aqvqhxmiuk .gt_from_md > :last-child {
+#qmjdohnzyx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aqvqhxmiuk .gt_row {
+#qmjdohnzyx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -466,7 +454,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#aqvqhxmiuk .gt_stub {
+#qmjdohnzyx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -479,7 +467,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#aqvqhxmiuk .gt_stub_row_group {
+#qmjdohnzyx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -493,15 +481,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#aqvqhxmiuk .gt_row_group_first td {
+#qmjdohnzyx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aqvqhxmiuk .gt_row_group_first th {
+#qmjdohnzyx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#aqvqhxmiuk .gt_summary_row {
+#qmjdohnzyx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -511,16 +499,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#aqvqhxmiuk .gt_first_summary_row {
+#qmjdohnzyx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#aqvqhxmiuk .gt_first_summary_row.thick {
+#qmjdohnzyx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aqvqhxmiuk .gt_last_summary_row {
+#qmjdohnzyx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -530,7 +518,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#aqvqhxmiuk .gt_grand_summary_row {
+#qmjdohnzyx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -540,7 +528,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#aqvqhxmiuk .gt_first_grand_summary_row {
+#qmjdohnzyx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -550,7 +538,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#aqvqhxmiuk .gt_last_grand_summary_row_top {
+#qmjdohnzyx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -560,11 +548,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#aqvqhxmiuk .gt_striped {
+#qmjdohnzyx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#aqvqhxmiuk .gt_table_body {
+#qmjdohnzyx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -573,7 +561,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#aqvqhxmiuk .gt_footnotes {
+#qmjdohnzyx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -587,7 +575,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#aqvqhxmiuk .gt_footnote {
+#qmjdohnzyx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -596,7 +584,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#aqvqhxmiuk .gt_sourcenotes {
+#qmjdohnzyx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -610,7 +598,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#aqvqhxmiuk .gt_sourcenote {
+#qmjdohnzyx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -618,72 +606,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#aqvqhxmiuk .gt_left {
+#qmjdohnzyx .gt_left {
   text-align: left;
 }
 
-#aqvqhxmiuk .gt_center {
+#qmjdohnzyx .gt_center {
   text-align: center;
 }
 
-#aqvqhxmiuk .gt_right {
+#qmjdohnzyx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aqvqhxmiuk .gt_font_normal {
+#qmjdohnzyx .gt_font_normal {
   font-weight: normal;
 }
 
-#aqvqhxmiuk .gt_font_bold {
+#qmjdohnzyx .gt_font_bold {
   font-weight: bold;
 }
 
-#aqvqhxmiuk .gt_font_italic {
+#qmjdohnzyx .gt_font_italic {
   font-style: italic;
 }
 
-#aqvqhxmiuk .gt_super {
+#qmjdohnzyx .gt_super {
   font-size: 65%;
 }
 
-#aqvqhxmiuk .gt_footnote_marks {
+#qmjdohnzyx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#aqvqhxmiuk .gt_asterisk {
+#qmjdohnzyx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aqvqhxmiuk .gt_indent_1 {
+#qmjdohnzyx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aqvqhxmiuk .gt_indent_2 {
+#qmjdohnzyx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aqvqhxmiuk .gt_indent_3 {
+#qmjdohnzyx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aqvqhxmiuk .gt_indent_4 {
+#qmjdohnzyx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aqvqhxmiuk .gt_indent_5 {
+#qmjdohnzyx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#aqvqhxmiuk .katex-display {
+#qmjdohnzyx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#aqvqhxmiuk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qmjdohnzyx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -694,15 +682,91 @@ window.Quarto = {
 <th id="Price" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Price</th>
 <th id="Size" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Size</th>
 <th id="TradeYear" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">TradeYear</th>
+<th id="StationDistance" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">StationDistance</th>
+<th id="District" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">District</th>
 <th id="LargeDistrict" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">LargeDistrict</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_right" headers="Price">200</td>
-<td class="gt_row gt_right" headers="Size">105</td>
+<td class="gt_row gt_right" headers="Price">24</td>
+<td class="gt_row gt_right" headers="Size">45</td>
 <td class="gt_row gt_right" headers="TradeYear">2022</td>
+<td class="gt_row gt_right" headers="StationDistance">9</td>
+<td class="gt_row gt_left" headers="District">葛飾区</td>
+<td class="gt_row gt_left" headers="LargeDistrict">その他</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Price">61</td>
+<td class="gt_row gt_right" headers="Size">45</td>
+<td class="gt_row gt_right" headers="TradeYear">2021</td>
+<td class="gt_row gt_right" headers="StationDistance">8</td>
+<td class="gt_row gt_left" headers="District">新宿区</td>
 <td class="gt_row gt_left" headers="LargeDistrict">中心6区</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Price">46</td>
+<td class="gt_row gt_right" headers="Size">50</td>
+<td class="gt_row gt_right" headers="TradeYear">2021</td>
+<td class="gt_row gt_right" headers="StationDistance">4</td>
+<td class="gt_row gt_left" headers="District">中央区</td>
+<td class="gt_row gt_left" headers="LargeDistrict">中心6区</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Price">80</td>
+<td class="gt_row gt_right" headers="Size">55</td>
+<td class="gt_row gt_right" headers="TradeYear">2022</td>
+<td class="gt_row gt_right" headers="StationDistance">8</td>
+<td class="gt_row gt_left" headers="District">目黒区</td>
+<td class="gt_row gt_left" headers="LargeDistrict">その他</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Price">60</td>
+<td class="gt_row gt_right" headers="Size">55</td>
+<td class="gt_row gt_right" headers="TradeYear">2021</td>
+<td class="gt_row gt_right" headers="StationDistance">11</td>
+<td class="gt_row gt_left" headers="District">港区</td>
+<td class="gt_row gt_left" headers="LargeDistrict">中心6区</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Price">36</td>
+<td class="gt_row gt_right" headers="Size">30</td>
+<td class="gt_row gt_right" headers="TradeYear">2021</td>
+<td class="gt_row gt_right" headers="StationDistance">11</td>
+<td class="gt_row gt_left" headers="District">江東区</td>
+<td class="gt_row gt_left" headers="LargeDistrict">その他</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Price">40</td>
+<td class="gt_row gt_right" headers="Size">60</td>
+<td class="gt_row gt_right" headers="TradeYear">2021</td>
+<td class="gt_row gt_right" headers="StationDistance">15</td>
+<td class="gt_row gt_left" headers="District">世田谷区</td>
+<td class="gt_row gt_left" headers="LargeDistrict">その他</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Price">68</td>
+<td class="gt_row gt_right" headers="Size">80</td>
+<td class="gt_row gt_right" headers="TradeYear">2021</td>
+<td class="gt_row gt_right" headers="StationDistance">8</td>
+<td class="gt_row gt_left" headers="District">葛飾区</td>
+<td class="gt_row gt_left" headers="LargeDistrict">その他</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Price">48</td>
+<td class="gt_row gt_right" headers="Size">65</td>
+<td class="gt_row gt_right" headers="TradeYear">2021</td>
+<td class="gt_row gt_right" headers="StationDistance">5</td>
+<td class="gt_row gt_left" headers="District">世田谷区</td>
+<td class="gt_row gt_left" headers="LargeDistrict">その他</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Price">20</td>
+<td class="gt_row gt_right" headers="Size">20</td>
+<td class="gt_row gt_right" headers="TradeYear">2022</td>
+<td class="gt_row gt_right" headers="StationDistance">11</td>
+<td class="gt_row gt_left" headers="District">足立区</td>
+<td class="gt_row gt_left" headers="LargeDistrict">その他</td>
 </tr>
 </tbody>
 </table>
@@ -710,26 +774,30 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>この事例から、部屋の広さが105平米で中心6区(港、中央、千代田、新宿、渋谷、文教)に立地する物件は、2億円で取引される傾向があったと結論づけても良いでしょうか？ ほとんどの応用でこのような推測は、不適切です。 実際に同じデータの中に、取引価格以外全く同じ特徴を持つ物件の取引事例が、以下の3件ありました。 これらの事例と比較すると、2億円はかなり高い価格での取引だったことがわかります。</p>
+<p>以上のような取引事例が 6378 個収録されています。 このようなデータを用いて、以下のような意思決定問題に役立つ情報提供のあり方を、ラフに論じます。</p>
+</section>
+<section id="中古マンション取引価格の予測" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="中古マンション取引価格の予測"><span class="header-section-number">1.1.2</span> 中古マンション取引価格の予測</h3>
+<p>東京２３区内の中古マンションの取引価格を、<span class="math inline">\(\{\)</span>取引された物件の築年数 (Tenure)、 部屋の広さ (Size)、駅からの距離 (Distance to Station)、立地 (District) <span class="math inline">\(\}\)</span> から予測するモデルを推定し、予測値を算出しました。</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="juljagnlsc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#juljagnlsc table {
+<div id="tdfytdfeue" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tdfytdfeue table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#juljagnlsc thead, #juljagnlsc tbody, #juljagnlsc tfoot, #juljagnlsc tr, #juljagnlsc td, #juljagnlsc th {
+#tdfytdfeue thead, #tdfytdfeue tbody, #tdfytdfeue tfoot, #tdfytdfeue tr, #tdfytdfeue td, #tdfytdfeue th {
   border-style: none;
 }
 
-#juljagnlsc p {
+#tdfytdfeue p {
   margin: 0;
   padding: 0;
 }
 
-#juljagnlsc .gt_table {
+#tdfytdfeue .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -755,12 +823,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#juljagnlsc .gt_caption {
+#tdfytdfeue .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#juljagnlsc .gt_title {
+#tdfytdfeue .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -772,7 +840,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#juljagnlsc .gt_subtitle {
+#tdfytdfeue .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -784,7 +852,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#juljagnlsc .gt_heading {
+#tdfytdfeue .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -796,13 +864,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#juljagnlsc .gt_bottom_border {
+#tdfytdfeue .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#juljagnlsc .gt_col_headings {
+#tdfytdfeue .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -817,7 +885,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#juljagnlsc .gt_col_heading {
+#tdfytdfeue .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -837,7 +905,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#juljagnlsc .gt_column_spanner_outer {
+#tdfytdfeue .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -849,15 +917,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#juljagnlsc .gt_column_spanner_outer:first-child {
+#tdfytdfeue .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#juljagnlsc .gt_column_spanner_outer:last-child {
+#tdfytdfeue .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#juljagnlsc .gt_column_spanner {
+#tdfytdfeue .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -869,11 +937,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#juljagnlsc .gt_spanner_row {
+#tdfytdfeue .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#juljagnlsc .gt_group_heading {
+#tdfytdfeue .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -899,7 +967,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#juljagnlsc .gt_empty_group_heading {
+#tdfytdfeue .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -914,15 +982,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#juljagnlsc .gt_from_md > :first-child {
+#tdfytdfeue .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#juljagnlsc .gt_from_md > :last-child {
+#tdfytdfeue .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#juljagnlsc .gt_row {
+#tdfytdfeue .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -941,7 +1009,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#juljagnlsc .gt_stub {
+#tdfytdfeue .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -954,7 +1022,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#juljagnlsc .gt_stub_row_group {
+#tdfytdfeue .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -968,15 +1036,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#juljagnlsc .gt_row_group_first td {
+#tdfytdfeue .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#juljagnlsc .gt_row_group_first th {
+#tdfytdfeue .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#juljagnlsc .gt_summary_row {
+#tdfytdfeue .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -986,16 +1054,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#juljagnlsc .gt_first_summary_row {
+#tdfytdfeue .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#juljagnlsc .gt_first_summary_row.thick {
+#tdfytdfeue .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#juljagnlsc .gt_last_summary_row {
+#tdfytdfeue .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1005,7 +1073,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#juljagnlsc .gt_grand_summary_row {
+#tdfytdfeue .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1015,7 +1083,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#juljagnlsc .gt_first_grand_summary_row {
+#tdfytdfeue .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1025,7 +1093,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#juljagnlsc .gt_last_grand_summary_row_top {
+#tdfytdfeue .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1035,11 +1103,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#juljagnlsc .gt_striped {
+#tdfytdfeue .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#juljagnlsc .gt_table_body {
+#tdfytdfeue .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1048,7 +1116,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#juljagnlsc .gt_footnotes {
+#tdfytdfeue .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1062,7 +1130,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#juljagnlsc .gt_footnote {
+#tdfytdfeue .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1071,7 +1139,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#juljagnlsc .gt_sourcenotes {
+#tdfytdfeue .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1085,7 +1153,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#juljagnlsc .gt_sourcenote {
+#tdfytdfeue .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1093,72 +1161,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#juljagnlsc .gt_left {
+#tdfytdfeue .gt_left {
   text-align: left;
 }
 
-#juljagnlsc .gt_center {
+#tdfytdfeue .gt_center {
   text-align: center;
 }
 
-#juljagnlsc .gt_right {
+#tdfytdfeue .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#juljagnlsc .gt_font_normal {
+#tdfytdfeue .gt_font_normal {
   font-weight: normal;
 }
 
-#juljagnlsc .gt_font_bold {
+#tdfytdfeue .gt_font_bold {
   font-weight: bold;
 }
 
-#juljagnlsc .gt_font_italic {
+#tdfytdfeue .gt_font_italic {
   font-style: italic;
 }
 
-#juljagnlsc .gt_super {
+#tdfytdfeue .gt_super {
   font-size: 65%;
 }
 
-#juljagnlsc .gt_footnote_marks {
+#tdfytdfeue .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#juljagnlsc .gt_asterisk {
+#tdfytdfeue .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#juljagnlsc .gt_indent_1 {
+#tdfytdfeue .gt_indent_1 {
   text-indent: 5px;
 }
 
-#juljagnlsc .gt_indent_2 {
+#tdfytdfeue .gt_indent_2 {
   text-indent: 10px;
 }
 
-#juljagnlsc .gt_indent_3 {
+#tdfytdfeue .gt_indent_3 {
   text-indent: 15px;
 }
 
-#juljagnlsc .gt_indent_4 {
+#tdfytdfeue .gt_indent_4 {
   text-indent: 20px;
 }
 
-#juljagnlsc .gt_indent_5 {
+#tdfytdfeue .gt_indent_5 {
   text-indent: 25px;
 }
 
-#juljagnlsc .katex-display {
+#tdfytdfeue .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#juljagnlsc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tdfytdfeue div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1166,36 +1234,90 @@ window.Quarto = {
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_col_headings">
-<th id="Price" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Price</th>
+<th id="Prediction" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Prediction</th>
 <th id="Size" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Size</th>
-<th id="TradeYear" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">TradeYear</th>
-<th id="LargeDistrict" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">LargeDistrict</th>
+<th id="StationDistance" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">StationDistance</th>
+<th id="Tenure" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Tenure</th>
+<th id="District" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">District</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_right" headers="Price">200</td>
-<td class="gt_row gt_right" headers="Size">105</td>
-<td class="gt_row gt_right" headers="TradeYear">2022</td>
-<td class="gt_row gt_left" headers="LargeDistrict">中心6区</td>
+<td class="gt_row gt_right" headers="Prediction">21.56</td>
+<td class="gt_row gt_right" headers="Size">50</td>
+<td class="gt_row gt_right" headers="StationDistance">4</td>
+<td class="gt_row gt_right" headers="Tenure">33</td>
+<td class="gt_row gt_left" headers="District">葛飾区</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_right" headers="Price">150</td>
-<td class="gt_row gt_right" headers="Size">105</td>
-<td class="gt_row gt_right" headers="TradeYear">2022</td>
-<td class="gt_row gt_left" headers="LargeDistrict">中心6区</td>
+<td class="gt_row gt_right" headers="Prediction">35.17</td>
+<td class="gt_row gt_right" headers="Size">45</td>
+<td class="gt_row gt_right" headers="StationDistance">9</td>
+<td class="gt_row gt_right" headers="Tenure">36</td>
+<td class="gt_row gt_left" headers="District">世田谷区</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_right" headers="Price">92</td>
-<td class="gt_row gt_right" headers="Size">105</td>
-<td class="gt_row gt_right" headers="TradeYear">2022</td>
-<td class="gt_row gt_left" headers="LargeDistrict">中心6区</td>
+<td class="gt_row gt_right" headers="Prediction">73.68</td>
+<td class="gt_row gt_right" headers="Size">55</td>
+<td class="gt_row gt_right" headers="StationDistance">6</td>
+<td class="gt_row gt_right" headers="Tenure">9</td>
+<td class="gt_row gt_left" headers="District">新宿区</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_right" headers="Price">110</td>
-<td class="gt_row gt_right" headers="Size">105</td>
-<td class="gt_row gt_right" headers="TradeYear">2022</td>
-<td class="gt_row gt_left" headers="LargeDistrict">中心6区</td>
+<td class="gt_row gt_right" headers="Prediction">46.80</td>
+<td class="gt_row gt_right" headers="Size">70</td>
+<td class="gt_row gt_right" headers="StationDistance">13</td>
+<td class="gt_row gt_right" headers="Tenure">21</td>
+<td class="gt_row gt_left" headers="District">墨田区</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Prediction">20.27</td>
+<td class="gt_row gt_right" headers="Size">20</td>
+<td class="gt_row gt_right" headers="StationDistance">6</td>
+<td class="gt_row gt_right" headers="Tenure">14</td>
+<td class="gt_row gt_left" headers="District">墨田区</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Prediction">25.53</td>
+<td class="gt_row gt_right" headers="Size">20</td>
+<td class="gt_row gt_right" headers="StationDistance">8</td>
+<td class="gt_row gt_right" headers="Tenure">6</td>
+<td class="gt_row gt_left" headers="District">豊島区</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Prediction">60.13</td>
+<td class="gt_row gt_right" headers="Size">75</td>
+<td class="gt_row gt_right" headers="StationDistance">5</td>
+<td class="gt_row gt_right" headers="Tenure">17</td>
+<td class="gt_row gt_left" headers="District">大田区</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Prediction">31.48</td>
+<td class="gt_row gt_right" headers="Size">35</td>
+<td class="gt_row gt_right" headers="StationDistance">3</td>
+<td class="gt_row gt_right" headers="Tenure">51</td>
+<td class="gt_row gt_left" headers="District">港区</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Prediction">10.39</td>
+<td class="gt_row gt_right" headers="Size">30</td>
+<td class="gt_row gt_right" headers="StationDistance">6</td>
+<td class="gt_row gt_right" headers="Tenure">48</td>
+<td class="gt_row gt_left" headers="District">板橋区</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Prediction">29.35</td>
+<td class="gt_row gt_right" headers="Size">40</td>
+<td class="gt_row gt_right" headers="StationDistance">6</td>
+<td class="gt_row gt_right" headers="Tenure">19</td>
+<td class="gt_row gt_left" headers="District">板橋区</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Prediction">251.91</td>
+<td class="gt_row gt_right" headers="Size">115</td>
+<td class="gt_row gt_right" headers="StationDistance">5</td>
+<td class="gt_row gt_right" headers="Tenure">6</td>
+<td class="gt_row gt_left" headers="District">港区</td>
 </tr>
 </tbody>
 </table>
@@ -1203,125 +1325,140 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>なぜこのような取引価格のブレが生じるのでしょうか？ データの誤入力など潜在的な理由は複数ありますが、有力なのは<strong>このデータに含まれない重要な変数</strong> が存在することです。 例えば、最寄駅や公園の近くにあるか否かなどのより詳細な立地情報が考えられます。 あるいは売り手や買い手の”交渉力”を反映している可能性もあります。 このような多様な要因が、取引価格に影響を与え、結果として事例の下振れ/上振れが生じます。</p>
-<p>観察できない変数は不動産のみならず、労働者や家計、企業、あるいは国レベルの分析でも同様の問題を引き起こします。 観察できる変数 <span class="math inline">\(X\)</span> が一致した事例内でも、観察できない変数は事例間で大きく異なっている可能性が高く、結果 <span class="math inline">\(Y\)</span> の値に大きな差が生まれます。</p>
-<section id="集計" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="集計"><span class="header-section-number">3.1.1</span> 集計</h3>
-<p>先の個別事例分析では、観察できない変数 <span class="math inline">\(X\)</span> の偏りを確認する方法として、同じ<span class="math inline">\(X\)</span>を持つ事例と比較しました。 このようなアプローチの発展として、同じ<span class="math inline">\(X\)</span>を持つ事例集団における <span class="math inline">\(Y\)</span> の代表的な値を算出する方法があります。 代表的な値の候補としては、中央値や最頻値など多くの候補があります。 中でもよく用いられるのは、平均値です。</p>
-<p>以下では、価格 (Price) と広さ (Size)、立地 (中心6区/その他)、取引年 (2021/2022)について、データに含まれる事例の分布をHeat mapで図示しています。</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="model_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>上記の散布図は、社会分析に用いるデータの持つ典型的な特徴を表しています。 極めて乱雑であり、同じ<span class="math inline">\(X\)</span> でも <span class="math inline">\(Y\)</span> が異なる事例が多くなっています。 これは、観察できない変数の偏りが深刻である可能性を示唆しています。 また <span class="math inline">\(X\)</span> の値に応じた事例数の偏りも顕著であり、特に100平米を超えるような物件の取引事例は少なくなっています。</p>
-<p>以下の図は、各<span class="math inline">\(X\)</span>の組み合わせごとに計算された平均値を図示しています。</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="model_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>同図からは、<span class="math inline">\(Y\)</span> と <span class="math inline">\(X\)</span> のデータ上の関係性について、いくつか示唆を与えてます。 部屋が広くなると取引価格は高くなる傾向があり、この傾向は中心6区で特に顕著となります。</p>
-<p>多くの応用でこのような<span class="math inline">\(X\)</span>ごとに集計するだけでは、不十分です。 例えば平均値を算出するために使用される事例数が、特に100平米を超える物件について少なくなっていることに注目してください。 仮に平均値を計算するとしても、事例数が少ないと、各事例の観察できない変数の偏りの影響を強く受ける可能性があります。</p>
 </section>
-</section>
-<section id="観察できない事例が引き起こす問題" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="観察できない事例が引き起こす問題"><span class="header-section-number">3.2</span> 観察できない事例が引き起こす問題</h2>
-<p>少数事例の集計が引き起こす問題を理解するために、頻度論と呼ばれる枠組みを導入します。 具体的なイメージを持つために、「自分と同じ課題に取り組む、他の研究者達」を想像してください。 この研究者は、あなたと同じ社会を対象に同じ手法を用いて分析しています。 ただしデータは、独立して収集しているとします。 このような研究者達は、あなたと同じ分析結果に到達するでしょうか？</p>
-<p>一般に独立した研究者は、同じ結論に到達しえません。 なぜならば、分析に用いる事例が異なるためです。 ほとんどの応用で、独立して収集したデータが、完全に一致する可能性は無視できるほど小さくなるでしょう。 すなわちある研究者が観察した事例を、別の研究者は観察できない可能性が高いのです。</p>
-<p>分析結果の不一致の典型例としては、報道機関による世論調査が挙げられます。 複数の調査結果が、毎月公開されていますが、その結果は各社で異なっています。 理由は複数考えられますが、最も単純なものは、調査対象となる回答者が異なるためです。 典型的な世論調査では、各社が独立して電話番号をランダムに発生させるなどの方法で、1000-2000名ほどの回答者を極力ランダムに選んでいます。 このため、異なる調査に同じ人が回答する確率は低くなります。 さらに回答者全員が全く同じになる確率は、無視できるほど小さいものになります。</p>
-<p>観察できない事例の存在は、観察できない変数の偏りをもたらします。 ある研究者には、偶然、公園に近い物件の取引事例ばかり集まってくるかもしれません。 このような研究者のデータで計算された取引価格の平均値は、他の研究者と比べて、上振れる可能性が高いです。 すなわち要約した値であったとしても、研究者間で同じ値に合意できなくなります。</p>
-<p>事例研究において、人々が同じ結果を観察できない、という問題は深刻です。 なぜならば、「独立した個人や組織が同じ結果を観察できる」、ので推定結果を事実(ファクト)として認定する、というシンプルかつ強力な枠組みが活用できません。</p>
-<p>ことは再現可能性と呼ばれ、結果を事実（ファクト）として認定する基本的な要求になっています。 この問題に対処するためには、何らかの概念的な枠組みが必要となります。</p>
-<section id="母分布とサンプリング" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="母分布とサンプリング"><span class="header-section-number">3.2.1</span> 母分布とサンプリング</h3>
-<p>観察できない事例の問題と、それに伴う分析結果の不一致の問題に対処するために、母分布という分析概念を導入します。 母集団を導入することで、共通の<strong>正答</strong>と各々のデータから得られる<strong>回答</strong>が、分離して定義できます。</p>
-<p>「私たちが手にしているデータは、母集団という無数の事例の集団から、選ばれた事例から構成されている」と <strong>想定</strong> します。 さらに本ノートでは、事例は完全ランダムに選ばれていると仮定します。 このような仮定をランダムサンプリングと呼びます。 私たちが得られる<strong>回答</strong>は、このランダムに選ばれた一部の事例のみから得たものであり、<strong>正答</strong>とは一致しません。</p>
-<p>母集団とサンプリングの例として、労働力調査が挙げられます。 労働力調査は毎月総務省により実施されている世帯を対象とした調査です。 回答対象となる世帯は、日本の世帯全体からランダムに選ばれています。 このため労働力調査の母集団は、日本の世帯全体と見做せます。</p>
-<p>母集団として、仮想的な集団を想定することもできます。 例えば、あるコンビニのレジデータに、ある日の全ての来客者について、購入金額が全て記録されているとします。 この場合、現実の来客者全てが記録されているため、母集団は存在しないと考えることも可能です。 一方で、その日にコンビニを訪れた顧客は、潜在的な顧客の一部であると想定することもできます。 皆さんも、よく利用するコンビニであったとしても、毎日利用しないのではないでしょうか？ この場合の母集団は、潜在的な顧客となります。</p>
-<p>母集団を想定すると、母集団における変数の分布も定義できます。 例えば、「取引物件の母集団において、中心6区に立地する物件の割合は2割」、といった感じです。 また母分布を定義できれば、そこから母集団における平均値(母平均)も定義できます。 平均値の推定を目指す研究であれば、この母平均が<strong>正答</strong>となります。 例えば、「中心6区に立地する50平米の中古マンションの2022年における平均取引価格は5000万円」、といった感じです。</p>
-<p>何を正答するかは、推定対象、ひいては活用したい意思決定問題に応じて、人間が適切に設定する必要があります。 本ノートは、多くの予測/社会の把握を目的とした分析において、母平均は<strong>正答</strong>となることを論じます。 同時に、データから<strong>回答</strong>を得る方法は、目的に応じて大きく異なることも強調します。</p>
-<p>厳重に注意が必要なのは、「我々には母分布や母平均を正確に知ることは不可能である」ことがデータ分析法の前提である点です。 知ることができない母分布や母平均を、手元にある限られたデータから、以下に推測するのかが、データ分析の中心的な挑戦となります。 データが母集団の一部であり、観察できていない事例が存在する以上、データ上の平均値と母平均は一致しません。 またデータはランダムに選ばれているので、独立した研究者間で、平均値について厳密な合意はできません。</p>
-<p>母集団は、研究課題と研究対象となる社会が定まれば、唯一の正答を定義します。 そしてサンプリングを通じて、異なる回答が生じることも記述します。 例えば、「真実は人の数だけある」という立場もその一つです。 もし同じ結果に合意できないのであれば、データ分析は何を人によって答えが異なることを認めて良いのか？？</p>
-</section>
-</section>
-<section id="数値例" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="数値例"><span class="header-section-number">3.3</span> 数値例</h2>
-<p>以上の概念を明確にするために、簡単な数値実験を行います。 今、4名の研究者が独立して20事例を集めたとします。 各事例について、取引価格 <span class="math inline">\(Y\)</span> と 部屋の広さ <span class="math inline">\(X\in\{40,50,60,70\}\)</span> がデータから観察できるとします</p>
-<p>母分布は以下のように設定しています。</p>
+<section id="中古マンション市場の動向" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="中古マンション市場の動向"><span class="header-section-number">1.1.3</span> 中古マンション市場の動向</h3>
+<p>2022年と2021年の東京23区内の中古マンション市場を比較しました。</p>
 <ul>
-<li><p>部屋の広さは、<span class="math inline">\(X=40\)</span> は <span class="math inline">\(10\%\)</span>、 残りは <span class="math inline">\(30\%\)</span></p></li>
-<li><p>取引価格は、</p>
-<ul>
-<li><p><span class="math inline">\(X=70\)</span> であれば、7から13の範囲に同じ割合で分布</p></li>
-<li><p><span class="math inline">\(X=\{40,50,60\}\)</span> であれば、8から14の範囲に同じ割合で分布</p></li>
-</ul></li>
-</ul>
-<p>以下の図は、4名の研究者が手にするデータと平均値を図示しています。</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="model_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>平均値について、研究者間で大きな違いが見られます。 例えば研究者1について、取引価格は部屋の広さに応じて、常に増加してます。 対して、研究者4については、一貫した傾向は見られません。 研究者3については、他と比べて、部屋の広さが40の平均取引価格が、他と比べて顕著に低くなっています。 これは事例数が少ない傾向にあるため、観察できない変数のばらつきが、平均値により強く影響を与えているためです。</p>
-<p>この図に母平均を上書きすると以下のようになります。 ただし図を簡略化するために、各事例の値は排除します。</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="model_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>重要な点として以下を確認してください。</p>
-<ul>
-<li><p>母平均は全員共通だが、データ上の平均値は異なる</p></li>
-<li><p>母平均とデータ上の平均は乖離している</p></li>
-<li><p>事例数が少ない<span class="math inline">\(X=40\)</span>において、特に乖離幅が大きい傾向にある</p></li>
-</ul>
-</section>
-<section id="母平均のモデル" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="母平均のモデル"><span class="header-section-number">3.4</span> 母平均のモデル</h2>
-<p>観察できない変数と事例の問題は、母平均の推定を困難にします。 データ上の平均値は、事例数が減ると、母平均と大きく乖離する可能性が高くなります。 このため<span class="math inline">\(X\)</span> の数が増えると、母平均の推定は非常に困難です。</p>
-<p>本ノートでは、この問題への対処として、母平均の”近似モデル”を推定するアプローチを紹介していきます。 例えば、先の数値例において、以下の手順化で近似モデル(グループ別平均モデル)を推定します。</p>
-<ul>
-<li><p>部屋の広さ が 50平米以下かどうかでサブグループを分けする</p></li>
-<li><p>各サブグループについて、平均値を計算し、 <span class="math inline">\(Y\)</span> の近似モデル</p></li>
+<li><p>2022-2021年比較: <span class="math inline">\(\{\)</span> Tenure, Size, Distance to Station <span class="math inline">\(\}\)</span>の差を95<span class="math inline">\(\%\)</span> 信頼区間 (Bonferoni法による修正済み)を表示</p></li>
+<li><p>バランス前-後平均取引価格上昇率: 取引価格の対数値について、2022年と2021年の単純平均差 (Difference-in-means) および、「<span class="math inline">\(\{\)</span>取引された物件の築年数 (Tenure)、 部屋の広さ (Size)、駅からの距離 (Distance to Station) <span class="math inline">\(\}\)</span> の分布が変化しなかった」という仮想シナリオのもとでの取引価格の平均差 (What if 分析) を信頼区間とともに表示</p></li>
+<li><p>5区 (中心6区: <span class="math inline">\(\{\)</span>中央/千代田/港/新宿/渋谷/本郷<span class="math inline">\(\}\)</span>、 北部: <span class="math inline">\(\{\)</span>北/板橋/豊島<span class="math inline">\(\}\)</span> 、南部: <span class="math inline">\(\{\)</span>品川/目黒/大田 <span class="math inline">\(\}\)</span> 、西部: <span class="math inline">\(\{\)</span>世田谷/中野/杉並/練馬 <span class="math inline">\(\}\)</span> 、 東部: <span class="math inline">\(\{\)</span> 台東/墨田/江東/葛飾/江戸川 <span class="math inline">\(\}\)</span>)、 別の平均取引価格の上昇率 (物件の特徴はバランス済み)</p></li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="model_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="stracture_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>数値例は、グループ別平均モデルの利点と潜在的な欠点を示しています。 大きな利点は、研究者間で推定結果のバラツキが削減される点です。 特に研究者3が直面していた、部屋の広さが40のグループにおける推定値の母平均からの大きな乖離の問題が解消されています。 これは部屋の広さが40と50の事例を集計し、平均値を計算しているので、観察できない変数の偏りの影響を削減できるためです。</p>
-<p>潜在的な欠点は、部屋の広さが60の事例について、顕著に表れています。 <span class="math inline">\(X=60\)</span> において、グループ別平均値は、母平均から乖離しています。 さらにこの乖離は、平均と比べて、大きくなる傾向が見られます。 これはモデルの設定に起因しています。 母平均において、平均取引価格は70平米とそれ以外で異なっています。 対して、この数値例で設定したモデルでは、60平米以上か以下で異なることしか<strong>許容していません</strong>。 このためこのモデルを用いる限り、どれだけ事例数が増えたとしても、母平均を正確に近似することは不可能です。</p>
-<p>本ノートを読む上で、注意が必要なのは、上記の欠点はあくまで潜在的なものである点です。 もし<span class="math inline">\(Y\)</span>の予測を問題にするのであれば、人間による設定に起因する母平均とモデルの乖離は深刻な問題です。 この問題を解決するために、人間による設定の必要性を減らし、よりデータ主導でモデルを推定する方法が提案されています。 特に機械学習は、Random ForestやLASSO, Deep learningなどの多くの優れた方法を提案しており、予測を目的とする研究で幅広く用いられています。</p>
-<p>対して不動産市場の把握を目的とする研究では、問題にならないケースがあります。 例えば、二人暮らし向けの中古マンションと三人暮らし向けの中古マンションの特徴の違いを把握したいとします。 国土交通省が提示する<a href="https://www.mlit.go.jp/hakusyo/mlit/h24/hakusho/h25/html/nss00000.html">誘導居住面積水準</a>によると、二人暮らしにおいて望まれる部屋の広さの水準は55平米です。 これに照らし合わせて、50平米以下か以上にグループ分けを行い、その平均値を比較することは、極めて有効なデータ分析です。</p>
-<p>分析課題や何らかの外部基準に基づいて、データ分析を始める前にグループ分けを事前決定する方法には、大きな利点があります。 ある程度の事例数を含むランダムサンプリングデータであれば、データ上のグループ別平均値と母平均との間に、関係性が生じます<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>。 この関係性を利用することで、分析事例が、母平均の一部に過ぎないという問題に対して、推定の精度を定量的に示すという改善策を用いることができます。</p>
+</section>
+</section>
+<section id="詳細な工程" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="詳細な工程"><span class="header-section-number">1.2</span> 詳細な工程</h2>
+<p>想定する具体的なデータ分析の工程は以下です。</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 272.00 260.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 256)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-256 268,-256 268,4 -4,4"></polygon>
+<!-- Q -->
+<g id="node1" class="node">
+<title>Q</title>
+<text text-anchor="middle" x="140" y="-231.6" font-family="Times,serif" font-size="8.00">直面する意思決定問題</text>
+</g>
+<!-- Understand -->
+<g id="node2" class="node">
+<title>Understand</title>
+<text text-anchor="middle" x="93" y="-159.6" font-family="Times,serif" font-size="8.00">把握を目的とする要約</text>
+</g>
+<!-- Q&#45;&gt;Understand -->
+<g id="edge1" class="edge">
+<title>Q-&gt;Understand</title>
+<path fill="none" stroke="black" d="M128.38,-215.7C121.32,-205.19 112.33,-191.78 105.17,-181.13"></path>
+<polygon fill="black" stroke="black" points="105.33,-180.74 104.48,-180.1 104.75,-181.13 105.33,-180.74"></polygon>
+</g>
+<!-- Prediction -->
+<g id="node3" class="node">
+<title>Prediction</title>
+<text text-anchor="middle" x="187" y="-159.6" font-family="Times,serif" font-size="8.00">予測を目的とする要約</text>
+</g>
+<!-- Q&#45;&gt;Prediction -->
+<g id="edge2" class="edge">
+<title>Q-&gt;Prediction</title>
+<path fill="none" stroke="black" d="M151.62,-215.7C158.68,-205.19 167.67,-191.78 174.83,-181.13"></path>
+<polygon fill="black" stroke="black" points="175.25,-181.13 175.52,-180.1 174.67,-180.74 175.25,-181.13"></polygon>
+</g>
+<!-- Stat -->
+<g id="node5" class="node">
+<title>Stat</title>
+<text text-anchor="middle" x="93" y="-87.6" font-family="Times,serif" font-size="8.00">伝統的な手法</text>
+</g>
+<!-- Understand&#45;&gt;Stat -->
+<g id="edge5" class="edge">
+<title>Understand-&gt;Stat</title>
+<path fill="none" stroke="black" d="M93,-143.7C93,-133.19 93,-119.78 93,-109.13"></path>
+<polygon fill="black" stroke="black" points="93.35,-109.1 93,-108.1 92.65,-109.1 93.35,-109.1"></polygon>
+</g>
+<!-- ML -->
+<g id="node6" class="node">
+<title>ML</title>
+<text text-anchor="middle" x="187" y="-87.6" font-family="Times,serif" font-size="8.00">教師付き学習</text>
+</g>
+<!-- Prediction&#45;&gt;ML -->
+<g id="edge3" class="edge">
+<title>Prediction-&gt;ML</title>
+<path fill="none" stroke="black" d="M187,-143.7C187,-133.19 187,-119.78 187,-109.13"></path>
+<polygon fill="black" stroke="black" points="187.35,-109.1 187,-108.1 186.65,-109.1 187.35,-109.1"></polygon>
+</g>
+<!-- PredModel -->
+<g id="node4" class="node">
+<title>PredModel</title>
+<text text-anchor="middle" x="237" y="-15.6" font-family="Times,serif" font-size="8.00" fill="red">予測モデル</text>
+</g>
+<!-- Estimand -->
+<g id="node7" class="node">
+<title>Estimand</title>
+<text text-anchor="middle" x="35" y="-15.6" font-family="Times,serif" font-size="8.00" fill="red">シンプルな特徴把握</text>
+</g>
+<!-- Stat&#45;&gt;Estimand -->
+<g id="edge6" class="edge">
+<title>Stat-&gt;Estimand</title>
+<path fill="none" stroke="black" d="M78.66,-71.7C69.95,-61.19 58.85,-47.78 50.02,-37.13"></path>
+<polygon fill="black" stroke="black" points="50.08,-36.65 49.17,-36.1 49.54,-37.1 50.08,-36.65"></polygon>
+</g>
+<!-- DML -->
+<g id="node8" class="node">
+<title>DML</title>
+<text text-anchor="middle" x="140" y="-15.6" font-family="Times,serif" font-size="8.00" fill="red">複雑な特徴把握 (What if 分析)</text>
+</g>
+<!-- Stat&#45;&gt;DML -->
+<g id="edge7" class="edge">
+<title>Stat-&gt;DML</title>
+<path fill="none" stroke="black" d="M104.62,-71.7C111.68,-61.19 120.67,-47.78 127.83,-37.13"></path>
+<polygon fill="black" stroke="black" points="128.25,-37.13 128.52,-36.1 127.67,-36.74 128.25,-37.13"></polygon>
+</g>
+<!-- ML&#45;&gt;PredModel -->
+<g id="edge4" class="edge">
+<title>ML-&gt;PredModel</title>
+<path fill="none" stroke="black" d="M199.36,-71.7C206.87,-61.19 216.44,-47.78 224.05,-37.13"></path>
+<polygon fill="black" stroke="black" points="224.49,-37.12 224.78,-36.1 223.92,-36.71 224.49,-37.12"></polygon>
+</g>
+<!-- DML&#45;&gt;ML -->
+<g id="edge8" class="edge">
+<title>DML-&gt;ML</title>
+<path fill="none" stroke="black" d="M152.17,-37.13C159.33,-47.78 168.32,-61.19 175.38,-71.7"></path>
+<polygon fill="black" stroke="black" points="152.33,-36.74 151.48,-36.1 151.75,-37.13 152.33,-36.74"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>まず現在必要とされている意思決定問題を明確化します。 次にその意思決定問題に有益な情報を明確にすることで、分析のゴールを設定します。 ここでは大きく予測を目的とする研究と集団の特徴把握を目標とする研究に大別し論じます。 次にそれぞれのゴールに適した手法を用いた推定を行い、分析結果を得ます。 ここでは予測を目標とする研究であれば教師付き学習の手法、把握を目標とするのであれば伝統的な手法、より複雑な特徴を把握したいのであればそのハイブリット的な方法に比較優位があることを論じます。</p>
 
 
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>中心極限定理<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>国土交通省のレポジトリ (https://www.reinfolib.mlit.go.jp/) からダウンロードできます。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -1737,13 +1874,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./decision.html" class="pagination-link" aria-label="意思決定問題">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">意思決定問題</span></span>
+      <a href="./index.html" class="pagination-link" aria-label="Preface">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./prediction.html" class="pagination-link" aria-label="予測モデルの推定">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./decision.html" class="pagination-link" aria-label="意思決定問題">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">意思決定問題</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

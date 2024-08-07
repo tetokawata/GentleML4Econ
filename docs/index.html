@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -52,7 +52,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./model.html" rel="next">
+<link href="./stracture.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -164,8 +164,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">重要コンセプト</span></span></a>
+  <a href="./stracture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">分析工程</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -176,20 +176,26 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">要約の基本コンセプト</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./prediction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simplecomparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">単純な比較分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">単純な比較分析</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./complexcomparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">複雑な比較分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">複雑な比較分析</span></span></a>
   </div>
 </li>
     </ul>
@@ -205,7 +211,6 @@ window.Quarto = {
   <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
   <ul class="collapse">
   <li><a href="#本ノートの狙い" id="toc-本ノートの狙い" class="nav-link" data-scroll-target="#本ノートの狙い">本ノートの狙い</a></li>
-  <li><a href="#分析工程" id="toc-分析工程" class="nav-link" data-scroll-target="#分析工程">分析工程</a></li>
   <li><a href="#ノートの背景" id="toc-ノートの背景" class="nav-link" data-scroll-target="#ノートの背景">ノートの背景</a></li>
   <li><a href="#章立て" id="toc-章立て" class="nav-link" data-scroll-target="#章立て">章立て</a></li>
   <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
@@ -259,114 +264,6 @@ window.Quarto = {
 <li><p>予測と把握という分析のゴールの使い分け方を、具体的な意思決定を想定しながら整理します。 データ分析の目的を、意思決定に役立つ情報提供にあると位置付け、意思決定の種類に応じた分析のゴールを論じます。特に限られた事例にのみ影響を与える意思決定 (ミクロな意思決定)と大量の事例に影響を与える意思決定 (マクロな意思決定)を区別します。 教師付き学習がもたらす事例ごとの予測は、ミクロな意思決定においては非常に有効であったとしても、マクロな意思決定においては<strong>そのまま</strong>では活用が難しいことを強調します。これは大量の事例について提供される大量の予測値を、意思決定者が活用することが難しいためです。 マクロな意思決定においては、大量の事例群の特徴を把握が必要になり、このためには伝統的な手法が比較優位を持ちます。 ただし複雑な特徴を把握する上では、伝統的な手法と教師付き学習のハイブリット的な手法が有効になることを強調します。</p></li>
 </ul>
 </section>
-<section id="分析工程" class="level2">
-<h2 class="anchored" data-anchor-id="分析工程">分析工程</h2>
-<p>想定する具体的なデータ分析の工程は以下です。</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<svg width="672" height="480" viewbox="0.00 0.00 226.00 260.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 256)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-256 222,-256 222,4 -4,4"></polygon>
-<!-- Q -->
-<g id="node1" class="node">
-<title>Q</title>
-<text text-anchor="middle" x="113" y="-231.6" font-family="Times,serif" font-size="8.00">直面する意思決定問題</text>
-</g>
-<!-- Understand -->
-<g id="node2" class="node">
-<title>Understand</title>
-<text text-anchor="middle" x="66" y="-159.6" font-family="Times,serif" font-size="8.00">把握を目的とする研究</text>
-</g>
-<!-- Q&#45;&gt;Understand -->
-<g id="edge1" class="edge">
-<title>Q-&gt;Understand</title>
-<path fill="none" stroke="black" d="M101.38,-215.7C94.32,-205.19 85.33,-191.78 78.17,-181.13"></path>
-<polygon fill="black" stroke="black" points="78.33,-180.74 77.48,-180.1 77.75,-181.13 78.33,-180.74"></polygon>
-</g>
-<!-- Prediction -->
-<g id="node3" class="node">
-<title>Prediction</title>
-<text text-anchor="middle" x="160" y="-159.6" font-family="Times,serif" font-size="8.00">予測を目的とする研究</text>
-</g>
-<!-- Q&#45;&gt;Prediction -->
-<g id="edge2" class="edge">
-<title>Q-&gt;Prediction</title>
-<path fill="none" stroke="black" d="M124.62,-215.7C131.68,-205.19 140.67,-191.78 147.83,-181.13"></path>
-<polygon fill="black" stroke="black" points="148.25,-181.13 148.52,-180.1 147.67,-180.74 148.25,-181.13"></polygon>
-</g>
-<!-- Stat -->
-<g id="node5" class="node">
-<title>Stat</title>
-<text text-anchor="middle" x="66" y="-87.6" font-family="Times,serif" font-size="8.00">伝統的な手法</text>
-</g>
-<!-- Understand&#45;&gt;Stat -->
-<g id="edge5" class="edge">
-<title>Understand-&gt;Stat</title>
-<path fill="none" stroke="black" d="M66,-143.7C66,-133.19 66,-119.78 66,-109.13"></path>
-<polygon fill="black" stroke="black" points="66.35,-109.1 66,-108.1 65.65,-109.1 66.35,-109.1"></polygon>
-</g>
-<!-- ML -->
-<g id="node6" class="node">
-<title>ML</title>
-<text text-anchor="middle" x="160" y="-87.6" font-family="Times,serif" font-size="8.00">教師付き学習</text>
-</g>
-<!-- Prediction&#45;&gt;ML -->
-<g id="edge3" class="edge">
-<title>Prediction-&gt;ML</title>
-<path fill="none" stroke="black" d="M160,-143.7C160,-133.19 160,-119.78 160,-109.13"></path>
-<polygon fill="black" stroke="black" points="160.35,-109.1 160,-108.1 159.65,-109.1 160.35,-109.1"></polygon>
-</g>
-<!-- PredModel -->
-<g id="node4" class="node">
-<title>PredModel</title>
-<text text-anchor="middle" x="191" y="-15.6" font-family="Times,serif" font-size="8.00" fill="red">予測モデル</text>
-</g>
-<!-- Estimand -->
-<g id="node7" class="node">
-<title>Estimand</title>
-<text text-anchor="middle" x="35" y="-15.6" font-family="Times,serif" font-size="8.00" fill="red">シンプルな特徴把握</text>
-</g>
-<!-- Stat&#45;&gt;Estimand -->
-<g id="edge6" class="edge">
-<title>Stat-&gt;Estimand</title>
-<path fill="none" stroke="black" d="M58.34,-71.7C53.68,-61.19 47.75,-47.78 43.03,-37.13"></path>
-<polygon fill="black" stroke="black" points="43.3,-36.88 42.57,-36.1 42.66,-37.16 43.3,-36.88"></polygon>
-</g>
-<!-- DML -->
-<g id="node8" class="node">
-<title>DML</title>
-<text text-anchor="middle" x="117" y="-15.6" font-family="Times,serif" font-size="8.00" fill="red">複雑な特徴把握</text>
-</g>
-<!-- Stat&#45;&gt;DML -->
-<g id="edge7" class="edge">
-<title>Stat-&gt;DML</title>
-<path fill="none" stroke="black" d="M78.61,-71.7C86.26,-61.19 96.03,-47.78 103.79,-37.13"></path>
-<polygon fill="black" stroke="black" points="104.23,-37.12 104.54,-36.1 103.67,-36.71 104.23,-37.12"></polygon>
-</g>
-<!-- ML&#45;&gt;PredModel -->
-<g id="edge4" class="edge">
-<title>ML-&gt;PredModel</title>
-<path fill="none" stroke="black" d="M167.66,-71.7C172.32,-61.19 178.25,-47.78 182.97,-37.13"></path>
-<polygon fill="black" stroke="black" points="183.34,-37.16 183.43,-36.1 182.7,-36.88 183.34,-37.16"></polygon>
-</g>
-<!-- DML&#45;&gt;ML -->
-<g id="edge8" class="edge">
-<title>DML-&gt;ML</title>
-<path fill="none" stroke="black" d="M128.14,-37.13C134.68,-47.78 142.91,-61.19 149.37,-71.7"></path>
-<polygon fill="black" stroke="black" points="128.33,-36.77 127.51,-36.1 127.73,-37.14 128.33,-36.77"></polygon>
-</g>
-</g>
-</svg>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<p>まず現在必要とされている意思決定問題を明確化します。 次にその意思決定問題に有益な情報を明確にすることで、分析のゴールを設定します。 ここでは大きく予測を目的とする研究と集団の特徴把握を目標とする研究に大別し論じます。 次にそれぞれのゴールに適した手法を用いた推定を行い、分析結果を得ます。 ここでは予測を目標とする研究であれば教師付き学習の手法、把握を目標とするのであれば伝統的な手法、より複雑な特徴を把握したいのであればそのハイブリット的な方法に比較優位があることを論じます。</p>
-</section>
 <section id="ノートの背景" class="level2">
 <h2 class="anchored" data-anchor-id="ノートの背景">ノートの背景</h2>
 <p>本ノート作成の背景には、データ分析法の多様化とそれに伴う混乱があります。 データを用いた社会分析は、長い伝統を持ちます。 例えば経済学においては、古くからデータ分析が活用され、計量経済学と呼ばれる方法論開発を行う研究分野には多くの研究者が参入し、活発な議論が行われてきました。 また実際にデータを用いて行う実証研究も数多く行われ、伝統的にはOLSなどのモーメント法や最尤法などを用いたデータ分析が行われてきました。</p>
@@ -377,11 +274,12 @@ window.Quarto = {
 <section id="章立て" class="level2">
 <h2 class="anchored" data-anchor-id="章立て">章立て</h2>
 <ul>
-<li><p><a href="model.html" class="quarto-xref">Section&nbsp;<span>1&nbsp; 重要コンセプト</span></a></p></li>
+<li><p><a href="stracture.html" class="quarto-xref">Section&nbsp;<span>1&nbsp; 分析工程</span></a></p></li>
 <li><p><a href="decision.html" class="quarto-xref">Section&nbsp;<span>2&nbsp; 意思決定問題</span></a></p></li>
-<li><p><a href="prediction.html" class="quarto-xref">Section&nbsp;<span>3&nbsp; 予測モデルの推定</span></a></p></li>
-<li><p><a href="simplecomparison.html" class="quarto-xref">Section&nbsp;<span>4&nbsp; 単純な比較分析</span></a></p></li>
-<li><p><a href="complexcomparison.html" class="quarto-xref">Section&nbsp;<span>5&nbsp; 複雑な比較分析</span></a></p></li>
+<li><p><a href="model.html" class="quarto-xref">Section&nbsp;<span>3&nbsp; 要約の基本コンセプト</span></a></p></li>
+<li><p><a href="prediction.html" class="quarto-xref">Section&nbsp;<span>4&nbsp; 予測モデルの推定</span></a></p></li>
+<li><p><a href="simplecomparison.html" class="quarto-xref">Section&nbsp;<span>5&nbsp; 単純な比較分析</span></a></p></li>
+<li><p><a href="complexcomparison.html" class="quarto-xref">Section&nbsp;<span>6&nbsp; 複雑な比較分析</span></a></p></li>
 </ul>
 </section>
 <section id="reference" class="level2">
@@ -497,6 +395,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -531,7 +447,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -809,8 +729,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./model.html" class="pagination-link" aria-label="<span class='chapter-number'>1</span>&nbsp; <span class='chapter-title'>重要コンセプト</span>">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">重要コンセプト</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./stracture.html" class="pagination-link" aria-label="分析工程">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">分析工程</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
