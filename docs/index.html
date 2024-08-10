@@ -183,7 +183,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./prediction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測を目的とする要約</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -266,9 +266,9 @@ window.Quarto = {
 </section>
 <section id="ノートの背景" class="level2">
 <h2 class="anchored" data-anchor-id="ノートの背景">ノートの背景</h2>
-<p>本ノート作成の背景には、データ分析法の多様化とそれに伴う混乱があります。 データを用いた社会分析は、長い伝統を持ちます。 例えば経済学においては、古くからデータ分析が活用され、計量経済学と呼ばれる方法論開発を行う研究分野には多くの研究者が参入し、活発な議論が行われてきました。 また実際にデータを用いて行う実証研究も数多く行われ、伝統的にはOLSなどのモーメント法や最尤法などを用いたデータ分析が行われてきました。</p>
+<p>本ノート作成の背景には、データ分析法の多様化とそれに伴う混乱があります。 データを用いた社会分析は、長い伝統を持ちます。 例えば経済学においては、古くからデータ分析が活用され、計量経済学と呼ばれる方法論開発を行う研究分野には多くの研究者が参入し、活発な議論が行われてきました。 また実際にデータを用いて行う実証研究も数多く行われ、伝統的にはOLSなどのモーメント法や最尤法などを用いたデータ分析が行われてきました。 さらに機械学習と類似する議論 (Nonparametric推定) やハイブリット的な手法の基礎となる議論 (Semi-parametric推定)も発展してきました。 しかしながらこのような発展的な議論は、入門書ではあまり紹介されてきませんでした。</p>
 <p>近年、コンピュータの計算能力増大などを背景に、伝統的な分析手法のみならず、機械学習と総称される分析手法の活用が急速に進んでいます。 特に教師付き学習と呼ばれる分野は、経済学における伝統的な推定手法と近い手法や問題意識を有しつつ、データの柔軟な活用方法を提供しています。 例えば、教師付き学習の教科書では、ほぼ例外なくLogitやOLSは紹介され、母分布を用いた論点整理がなされています。 他方で計量経済学の入門書ではあまり紹介されてこなかった、Data adaptive modellingの手法が数多く提案されています。 伝統的な推定手法が、「<strong>人間によって</strong>シンプルな 推定モデルの設定を行い、その限られたパラメタをデータにより推定する」という手続きを踏むのに対して、決定木やLASSOは、「大量のパラメタを、データによる適切に推定する」方法です。</p>
-<p>このような分析方法の多様化は、同時に応用研究における混乱ももたらしえます。例えば <span class="citation" data-cites="breiman2001statistical">Breiman (<a href="#ref-breiman2001statistical" role="doc-biblioref">2001</a>)</span> は、伝統的な統計学の95 <span class="math inline">\(\%\)</span> と機械学習では、異なる”文化”を持っていると主張し、多くの議論を想起しました。 このような議論 <span class="citation" data-cites="shmueli2010explain efron2020prediction hofman2021integrating">(<a href="#ref-shmueli2010explain" role="doc-biblioref">Shmueli 2010</a>; <a href="#ref-efron2020prediction" role="doc-biblioref">Efron 2020</a>; <a href="#ref-hofman2021integrating" role="doc-biblioref">Hofman et al. 2021</a>)</span>の中で、分析のゴールをしっかり意識することの重要性が指摘され、ゴールによっては伝統的な手法と機械学習のハイブリット的な方法の有効性が指摘されています<span class="citation" data-cites="van2011targeted che2018double chernozhukov2022locally">(<a href="#ref-van2011targeted" role="doc-biblioref">Van der Laan, Rose, et al. 2011</a>; <a href="#ref-che2018double" role="doc-biblioref">Chernozhukov et al. 2018</a>, <a href="#ref-chernozhukov2022locally" role="doc-biblioref">2022</a>)</span>。</p>
+<p>このような分析方法の多様化は、同時に応用研究における混乱ももたらしえます。例えば <span class="citation" data-cites="breiman2001statistical">Breiman (<a href="#ref-breiman2001statistical" role="doc-biblioref">2001</a>)</span> は、「機械学習は、伝統的な統計学の <span class="math inline">\(95 \%\)</span> と異なる”文化”を持っている」と主張し、多くの議論 <span class="citation" data-cites="shmueli2010explain efron2020prediction hofman2021integrating">(<a href="#ref-shmueli2010explain" role="doc-biblioref">Shmueli 2010</a>; <a href="#ref-efron2020prediction" role="doc-biblioref">Efron 2020</a>; <a href="#ref-hofman2021integrating" role="doc-biblioref">Hofman et al. 2021</a>)</span> を想起しました。 このような議論の中で、分析のゴールをしっかり意識することの重要性が指摘され、ゴールによっては伝統的な手法と機械学習のハイブリット的な方法の有効性が指摘されています<span class="citation" data-cites="van2011targeted che2018double chernozhukov2022locally">(<a href="#ref-van2011targeted" role="doc-biblioref">Van der Laan, Rose, et al. 2011</a>; <a href="#ref-che2018double" role="doc-biblioref">Chernozhukov et al. 2018</a>, <a href="#ref-chernozhukov2022locally" role="doc-biblioref">2022</a>)</span>。</p>
 <p>このような研究の成果は、上級レベルの計量経済学のテキストでは紹介され、また<a href="https://causalml-book.org/"><span class="citation" data-cites="chernozhukov2024applied">Chernozhukov et al. (<span>2024</span>)</span></a>などで集中的にまとめられています。 しかしながら、現状入門的な日本語の教材は見当たりません。 本ノートは、この空白を埋めることを目的としています。</p>
 </section>
 <section id="章立て" class="level2">
@@ -277,7 +277,7 @@ window.Quarto = {
 <li><p><a href="stracture.html" class="quarto-xref">Section&nbsp;<span>1&nbsp; 分析工程</span></a></p></li>
 <li><p><a href="decision.html" class="quarto-xref">Section&nbsp;<span>2&nbsp; 意思決定問題</span></a></p></li>
 <li><p><a href="model.html" class="quarto-xref">Section&nbsp;<span>3&nbsp; 要約の基本コンセプト</span></a></p></li>
-<li><p><a href="prediction.html" class="quarto-xref">Section&nbsp;<span>4&nbsp; 予測モデルの推定</span></a></p></li>
+<li><p><a href="prediction.html" class="quarto-xref">Section&nbsp;<span>4&nbsp; 予測を目的とする要約</span></a></p></li>
 <li><p><a href="simplecomparison.html" class="quarto-xref">Section&nbsp;<span>5&nbsp; 単純な比較分析</span></a></p></li>
 <li><p><a href="complexcomparison.html" class="quarto-xref">Section&nbsp;<span>6&nbsp; 複雑な比較分析</span></a></p></li>
 </ul>

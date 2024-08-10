@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>データ分析入門ノート - 4&nbsp; 予測モデルの推定</title>
+<title>データ分析入門ノート - 4&nbsp; 予測を目的とする要約</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prediction.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prediction.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測を目的とする要約</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -162,7 +162,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./prediction.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測を目的とする要約</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -187,58 +187,21 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#モデル化" id="toc-モデル化" class="nav-link active" data-scroll-target="#モデル化"><span class="header-section-number">4.1</span> モデル化</a>
+  <li><a href="#推定目標" id="toc-推定目標" class="nav-link active" data-scroll-target="#推定目標"><span class="header-section-number">4.1</span> 推定目標</a>
   <ul class="collapse">
-  <li><a href="#サブグループ平均" id="toc-サブグループ平均" class="nav-link" data-scroll-target="#サブグループ平均"><span class="header-section-number">4.1.1</span> サブグループ平均</a></li>
-  <li><a href="#data-adaptive-なサブグループ平均" id="toc-data-adaptive-なサブグループ平均" class="nav-link" data-scroll-target="#data-adaptive-なサブグループ平均"><span class="header-section-number">4.1.2</span> Data-adaptive なサブグループ平均</a></li>
-  <li><a href="#よりdata-adaptiveな決定木" id="toc-よりdata-adaptiveな決定木" class="nav-link" data-scroll-target="#よりdata-adaptiveな決定木"><span class="header-section-number">4.1.3</span> よりData-adaptiveな決定木</a></li>
+  <li><a href="#完璧な予測モデル" id="toc-完璧な予測モデル" class="nav-link" data-scroll-target="#完璧な予測モデル"><span class="header-section-number">4.1.1</span> 完璧な予測モデル</a></li>
+  <li><a href="#理想の予測モデル" id="toc-理想の予測モデル" class="nav-link" data-scroll-target="#理想の予測モデル"><span class="header-section-number">4.1.2</span> 理想の予測モデル</a></li>
   </ul></li>
-  <li><a href="#現実" id="toc-現実" class="nav-link" data-scroll-target="#現実"><span class="header-section-number">4.2</span> 現実</a></li>
-  <li><a href="#ml" id="toc-ml" class="nav-link" data-scroll-target="#ml"><span class="header-section-number">4.3</span> ML</a></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span class="header-section-number">4.4</span> Getting Started</a></li>
-  <li><a href="#アイディア" id="toc-アイディア" class="nav-link" data-scroll-target="#アイディア"><span class="header-section-number">4.5</span> アイディア</a></li>
-  <li><a href="#データ分割による評価" id="toc-データ分割による評価" class="nav-link" data-scroll-target="#データ分割による評価"><span class="header-section-number">4.6</span> データ分割による評価</a></li>
-  <li><a href="#イメージ" id="toc-イメージ" class="nav-link" data-scroll-target="#イメージ"><span class="header-section-number">4.7</span> イメージ</a></li>
-  <li><a href="#典型的誤解" id="toc-典型的誤解" class="nav-link" data-scroll-target="#典型的誤解"><span class="header-section-number">4.8</span> 典型的誤解</a></li>
-  <li><a href="#母集団を用いた整理" id="toc-母集団を用いた整理" class="nav-link" data-scroll-target="#母集団を用いた整理"><span class="header-section-number">4.9</span> 母集団を用いた整理</a></li>
-  <li><a href="#母集団" id="toc-母集団" class="nav-link" data-scroll-target="#母集団"><span class="header-section-number">4.10</span> 母集団</a></li>
-  <li><a href="#例" id="toc-例" class="nav-link" data-scroll-target="#例"><span class="header-section-number">4.11</span> 例</a></li>
-  <li><a href="#イメージ-1" id="toc-イメージ-1" class="nav-link" data-scroll-target="#イメージ-1"><span class="header-section-number">4.12</span> イメージ</a></li>
-  <li><a href="#数値例-データ" id="toc-数値例-データ" class="nav-link" data-scroll-target="#数値例-データ"><span class="header-section-number">4.13</span> 数値例: データ</a></li>
-  <li><a href="#数値例-予測モデル" id="toc-数値例-予測モデル" class="nav-link" data-scroll-target="#数値例-予測モデル"><span class="header-section-number">4.14</span> 数値例: 予測モデル</a></li>
-  <li><a href="#数値例-予測モデル-1" id="toc-数値例-予測モデル-1" class="nav-link" data-scroll-target="#数値例-予測モデル-1"><span class="header-section-number">4.15</span> 数値例: 予測モデル</a></li>
-  <li><a href="#数値例-予測モデルと母平均" id="toc-数値例-予測モデルと母平均" class="nav-link" data-scroll-target="#数値例-予測モデルと母平均"><span class="header-section-number">4.16</span> 数値例: 予測モデルと母平均</a></li>
-  <li><a href="#不透明性-uncertainly" id="toc-不透明性-uncertainly" class="nav-link" data-scroll-target="#不透明性-uncertainly"><span class="header-section-number">4.17</span> 不透明性 (Uncertainly)</a></li>
-  <li><a href="#sampling-model-uncertainly" id="toc-sampling-model-uncertainly" class="nav-link" data-scroll-target="#sampling-model-uncertainly"><span class="header-section-number">4.18</span> Sampling / Model Uncertainly</a></li>
-  <li><a href="#sampling-uncertainlyの軽減" id="toc-sampling-uncertainlyの軽減" class="nav-link" data-scroll-target="#sampling-uncertainlyの軽減"><span class="header-section-number">4.19</span> Sampling Uncertainlyの軽減</a></li>
-  <li><a href="#機械学習の利点" id="toc-機械学習の利点" class="nav-link" data-scroll-target="#機械学習の利点"><span class="header-section-number">4.20</span> 機械学習の利点</a></li>
-  <li><a href="#機械学習の問題点" id="toc-機械学習の問題点" class="nav-link" data-scroll-target="#機械学習の問題点"><span class="header-section-number">4.21</span> 機械学習の問題点</a></li>
-  <li><a href="#数値例-決定木" id="toc-数値例-決定木" class="nav-link" data-scroll-target="#数値例-決定木"><span class="header-section-number">4.22</span> 数値例: 決定木</a></li>
-  <li><a href="#数値例-size-40-で分割" id="toc-数値例-size-40-で分割" class="nav-link" data-scroll-target="#数値例-size-40-で分割"><span class="header-section-number">4.23</span> 数値例: Size <span class="math inline">\(= 40\)</span> で分割</a></li>
-  <li><a href="#モデルの評価" id="toc-モデルの評価" class="nav-link" data-scroll-target="#モデルの評価"><span class="header-section-number">4.24</span> モデルの評価</a></li>
-  <li><a href="#予測モデルの評価-理想編" id="toc-予測モデルの評価-理想編" class="nav-link" data-scroll-target="#予測モデルの評価-理想編"><span class="header-section-number">4.25</span> 予測モデルの評価: 理想編</a></li>
-  <li><a href="#予測モデルの評価-現実編" id="toc-予測モデルの評価-現実編" class="nav-link" data-scroll-target="#予測モデルの評価-現実編"><span class="header-section-number">4.26</span> 予測モデルの評価: 現実編</a></li>
-  <li><a href="#イメージ-2" id="toc-イメージ-2" class="nav-link" data-scroll-target="#イメージ-2"><span class="header-section-number">4.27</span> イメージ</a></li>
-  <li><a href="#補論-モデルを使い続けられるか" id="toc-補論-モデルを使い続けられるか" class="nav-link" data-scroll-target="#補論-モデルを使い続けられるか"><span class="header-section-number">4.28</span> 補論: モデルを使い続けられるか?</a></li>
-  <li><a href="#極端なモデルの推定" id="toc-極端なモデルの推定" class="nav-link" data-scroll-target="#極端なモデルの推定"><span class="header-section-number">4.29</span> 極端なモデルの推定</a></li>
-  <li><a href="#理想の予測モデル" id="toc-理想の予測モデル" class="nav-link" data-scroll-target="#理想の予測モデル"><span class="header-section-number">4.30</span> 理想の予測モデル</a></li>
-  <li><a href="#完璧な予測は可能か" id="toc-完璧な予測は可能か" class="nav-link" data-scroll-target="#完璧な予測は可能か"><span class="header-section-number">4.31</span> 完璧な予測は可能か?</a></li>
-  <li><a href="#予測モデルの推定-現実" id="toc-予測モデルの推定-現実" class="nav-link" data-scroll-target="#予測モデルの推定-現実"><span class="header-section-number">4.32</span> 予測モデルの推定: 現実</a></li>
-  <li><a href="#現実的な方法-単純平均法" id="toc-現実的な方法-単純平均法" class="nav-link" data-scroll-target="#現実的な方法-単純平均法"><span class="header-section-number">4.33</span> 現実的な方法: 単純平均法</a></li>
-  <li><a href="#現実的な方法-丸暗記法" id="toc-現実的な方法-丸暗記法" class="nav-link" data-scroll-target="#現実的な方法-丸暗記法"><span class="header-section-number">4.34</span> 現実的な方法: 丸暗記法</a></li>
-  <li><a href="#複雑なモデルは望ましいのか" id="toc-複雑なモデルは望ましいのか" class="nav-link" data-scroll-target="#複雑なモデルは望ましいのか"><span class="header-section-number">4.35</span> 複雑なモデルは望ましいのか?</a></li>
-  <li><a href="#補論-丸暗記が有効な場合" id="toc-補論-丸暗記が有効な場合" class="nav-link" data-scroll-target="#補論-丸暗記が有効な場合"><span class="header-section-number">4.36</span> 補論: 丸暗記が有効な場合</a></li>
-  <li><a href="#中庸なモデルの推定" id="toc-中庸なモデルの推定" class="nav-link" data-scroll-target="#中庸なモデルの推定"><span class="header-section-number">4.37</span> 中庸なモデルの推定</a></li>
-  <li><a href="#モデル選択集計" id="toc-モデル選択集計" class="nav-link" data-scroll-target="#モデル選択集計"><span class="header-section-number">4.38</span> モデル選択/集計</a></li>
-  <li><a href="#概要" id="toc-概要" class="nav-link" data-scroll-target="#概要"><span class="header-section-number">4.39</span> 概要</a></li>
-  <li><a href="#イメージ-bagging" id="toc-イメージ-bagging" class="nav-link" data-scroll-target="#イメージ-bagging"><span class="header-section-number">4.40</span> イメージ: Bagging</a></li>
-  <li><a href="#randomforest-の利点" id="toc-randomforest-の利点" class="nav-link" data-scroll-target="#randomforest-の利点"><span class="header-section-number">4.41</span> RandomForest の利点</a></li>
-  <li><a href="#数値例-random-forest" id="toc-数値例-random-forest" class="nav-link" data-scroll-target="#数値例-random-forest"><span class="header-section-number">4.42</span> 数値例: Random Forest</a></li>
-  <li><a href="#big-dataは優れた予測モデルを保証するか" id="toc-big-dataは優れた予測モデルを保証するか" class="nav-link" data-scroll-target="#big-dataは優れた予測モデルを保証するか"><span class="header-section-number">4.43</span> Big dataは優れた予測モデルを保証するか?</a></li>
-  <li><a href="#数値例-伝統的アプローチ5000事例" id="toc-数値例-伝統的アプローチ5000事例" class="nav-link" data-scroll-target="#数値例-伝統的アプローチ5000事例"><span class="header-section-number">4.44</span> 数値例: 伝統的アプローチ(5000事例)</a></li>
-  <li><a href="#数値例-random-forest-with-large-sample-5000事例" id="toc-数値例-random-forest-with-large-sample-5000事例" class="nav-link" data-scroll-target="#数値例-random-forest-with-large-sample-5000事例"><span class="header-section-number">4.45</span> 数値例: Random Forest with large sample (5000事例)</a></li>
-  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">4.46</span> まとめ</a></li>
-  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">4.47</span> Reference</a></li>
+  <li><a href="#推定方法" id="toc-推定方法" class="nav-link" data-scroll-target="#推定方法"><span class="header-section-number">4.2</span> 推定方法</a>
+  <ul class="collapse">
+  <li><a href="#learning-by-memorization-丸暗記法" id="toc-learning-by-memorization-丸暗記法" class="nav-link" data-scroll-target="#learning-by-memorization-丸暗記法"><span class="header-section-number">4.2.1</span> learning by memorization (丸暗記法)</a></li>
+  <li><a href="#単純平均" id="toc-単純平均" class="nav-link" data-scroll-target="#単純平均"><span class="header-section-number">4.2.2</span> 単純平均</a></li>
+  <li><a href="#ols" id="toc-ols" class="nav-link" data-scroll-target="#ols"><span class="header-section-number">4.2.3</span> OLS</a></li>
+  <li><a href="#lasso" id="toc-lasso" class="nav-link" data-scroll-target="#lasso"><span class="header-section-number">4.2.4</span> LASSO</a></li>
+  </ul></li>
+  <li><a href="#事例数の拡大" id="toc-事例数の拡大" class="nav-link" data-scroll-target="#事例数の拡大"><span class="header-section-number">4.3</span> 事例数の拡大</a></li>
+  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">4.4</span> まとめ</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">4.5</span> Reference</a></li>
   </ul>
 </nav>
     </div>
@@ -247,7 +210,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-Prediction" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span></h1>
+<h1 class="title"><span id="sec-Prediction" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測を目的とする要約</span></span></h1>
 </div>
 
 
@@ -264,28 +227,33 @@ window.Quarto = {
 </header>
 
 
-<p>予測モデルの推定では、意思決定に必要だが欠損している情報 <span class="math inline">\(Y\)</span> を予測するモデルの推定を目指します。 観察できる変数 <span class="math inline">\(X\)</span> から予測するモデル <span class="math inline">\(g(X)\)</span> を構築することを目的とします。 以下のような例があげられます。</p>
+<p>予測を目的とするでは、意思決定に必要だが欠損している情報 <span class="math inline">\(Y\)</span> を予測するモデル（予測モデル）の推定を目指します。 観察できる変数 <span class="math inline">\(X\)</span> から予測するモデルを構築することを目的とします。 以下のような例があげられます。</p>
 <ul>
-<li><p>視聴履歴やいいね数 <span class="math inline">\((X) \underbrace{\rightarrow}_{g(X)}\)</span> 好む未視聴動画 <span class="math inline">\((Y)\)</span></p></li>
-<li><p>メールの文名や件名 <span class="math inline">\((X) \underbrace{\rightarrow}_{g(X)}\)</span> 迷惑メール <span class="math inline">\((Y)\)</span></p></li>
-<li><p>事業の内容や財務状況 <span class="math inline">\((X) \underbrace{\rightarrow}_{g(X)}\)</span> デフォルトリスク <span class="math inline">\((Y)\)</span></p></li>
+<li><p>視聴履歴やいいね数 <span class="math inline">\((X) \underbrace{\rightarrow}_{予測モデル}\)</span> 好む未視聴動画 <span class="math inline">\((Y)\)</span></p></li>
+<li><p>メールの文名や件名 <span class="math inline">\((X) \underbrace{\rightarrow}_{予測モデル}\)</span> 迷惑メール <span class="math inline">\((Y)\)</span></p></li>
+<li><p>事業の内容や財務状況 <span class="math inline">\((X) \underbrace{\rightarrow}_{予測モデル}\)</span> デフォルトリスク <span class="math inline">\((Y)\)</span></p></li>
 </ul>
 <p>もし<span class="math inline">\(Y,X\)</span> が共に観察できるデータを活用できれば、推定方法がある程度確立されています。 ここでは機械学習の一分野である、教師付き学習を紹介します。</p>
-<section id="モデル化" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="モデル化"><span class="header-section-number">4.1</span> モデル化</h2>
-<section id="サブグループ平均" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="サブグループ平均"><span class="header-section-number">4.1.1</span> サブグループ平均</h3>
-<p>このような事例数の少なさに対応する方法として、<strong>分析者</strong>が事例をいくつかのサブグループへ<strong>事前</strong>に分類し、サブグループごとに平均値を計算する方法があります。 具体的には以下の分析工程を実行します。</p>
-<ol type="1">
-<li><strong>分析者</strong>が、サブグループ (モデル) を定義する</li>
-</ol>
-<ul>
-<li>例: 中心6区かどうか <span class="math inline">\(\times\)</span> 部屋の広さが75以下か否か</li>
-</ul>
-<ol start="2" type="1">
-<li>サブグループの平均値を計算</li>
-</ol>
-<p>このように推定された要約モデルは、以下のように図示できる。</p>
+<section id="推定目標" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="推定目標"><span class="header-section-number">4.1</span> 推定目標</h2>
+<p>本ノートでは、データと同じ母集団から<strong>新たに</strong>抽出された事例を、予測するモデルの推定を目指します。 予測能力は、平均事情誤差で測定します <span class="math display">\[母集団における平均二乗誤差 = (Y - 予測値)^2 の母集団における平均\]</span>。 注意が必要なのは、母集団における平均二乗誤差は、母集団上の値であり、直接観察することは不可能です。 ただし以下では、推定することは可能であることを論じます。</p>
+<section id="完璧な予測モデル" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="完璧な予測モデル"><span class="header-section-number">4.1.1</span> 完璧な予測モデル</h3>
+<p>予測研究において、究極的な目標の一つは、 <span class="math inline">\(Y\)</span> を完璧に予測するモデルの推定でしょう。 しかしながら多くの応用で、この目標には到達することができません。 予測モデルは、ある<span class="math inline">\(X\)</span>の組み合わせについて、一つの予測値のみを出力します。 このため<strong>母集団</strong>において、同じ<span class="math inline">\(X\)</span> 内で<span class="math inline">\(Y\)</span> の値にばらつきがあれば、予測が外れる事例は必ず存在します。 この問題を解決するためには、<span class="math inline">\(Y\)</span>の全ての決定要因を<span class="math inline">\(X\)</span>として観察し、<span class="math inline">\(X\)</span>内での個人差をなくす必要があります。 特に人間行動や社会的な事象などについては、無数の<span class="math inline">\(X\)</span>が存在し、その多くは観察が難しいと考えられます。 結果、完璧な予測は不可能と言っていいと思います。</p>
+</section>
+<section id="理想の予測モデル" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="理想の予測モデル"><span class="header-section-number">4.1.2</span> 理想の予測モデル</h3>
+<p>最も高い予測性能 (母集団における平均二乗誤差が最小化)を達成する予測モデルは、母平均であることが証明できます <span class="math display">\[理想の予測モデル = X内でのYの母平均\]</span>。</p>
+<p>予測研究においては、データから推定した予測モデルを理想の予想モデルである母平均に極力近づけることが、実質的な目標となります。 具体的には以下の推定誤差を極力削減することを目指します <span class="math display">\[(\underbrace{X内でのYの母平均}_{理想の予測モデル}-予測モデル)^2の母平均\]</span></p>
+</section>
+</section>
+<section id="推定方法" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="推定方法"><span class="header-section-number">4.2</span> 推定方法</h2>
+<p>手元のデータから、母平均を推定するため方法として、二つの極端な方法を紹介し、その中間的な方法として線型モデルを最小二乗法(OLS)で紹介するアプローチ、およびその発展として罰則付き回帰 (ここではLASSO)を紹介します。</p>
+<section id="learning-by-memorization-丸暗記法" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="learning-by-memorization-丸暗記法"><span class="header-section-number">4.2.1</span> learning by memorization (丸暗記法)</h3>
+<p>データ上の<span class="math inline">\(Y\)</span>の平均値も、予測モデルを推定する方法であり、learning by memorizationとも呼ばれます。 この方法は、<span class="math inline">\(X\)</span> の各組み合わせについて、十分な事例数があれば、実用的な方法です。 しかしながらほとんどの応用で、事例数の少ない <span class="math inline">\(X\)</span> の組み合わせが存在します。 このようなデータについては、母平均からかけ離れた予測値が推定されてしまいます。</p>
+<p>数値例は以下となります。</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -295,6 +263,12 @@ window.Quarto = {
 </div>
 </div>
 </div>
+<p>点線が母平均、実線が丸暗記法が生み出した予測値となります。 母平均と予測値が、大きく乖離するグループが散見されます。 このような乖離は、データが母平均よりも上振れ/下振れしたケースにおいて、見られることも確認できます。</p>
+</section>
+<section id="単純平均" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="単純平均"><span class="header-section-number">4.2.2</span> 単純平均</h3>
+<p>少数事例の要約を避けるためには、より”荒い”要約が必要となります。 最も極端な方法は、<span class="math inline">\(Y\)</span> のデータ全体での単純平均を予測値とする方法です。</p>
+<p>数値例は以下です。</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -304,19 +278,16 @@ window.Quarto = {
 </div>
 </div>
 </div>
+<p>丸暗記法に比べて、予測モデルが単純化されています。 多くの事例が集計できているため、研究者間での予測値のばらつきが大きく減少しています。 ただし<span class="math inline">\(X\)</span> と <span class="math inline">\(Y\)</span> の母平均との間での関係性を一切無視した集計になっており、母平均との乖離が生じています。</p>
 </section>
-<section id="data-adaptive-なサブグループ平均" class="level3" data-number="4.1.2">
-<h3 data-number="4.1.2" class="anchored" data-anchor-id="data-adaptive-なサブグループ平均"><span class="header-section-number">4.1.2</span> Data-adaptive なサブグループ平均</h3>
-<ul>
-<li><p>決定木アルゴリズム: <strong>データ</strong>に最も適合するように、サブグループを定義する</p>
-<ul>
-<li>明確な基準(“データへの適合”)のもとで、要約方法を決定</li>
-</ul></li>
-<li><p>例. 最大４グループに分けることは前提に、平均二乗誤差 <span class="math display">\[(Y - モデルの予測値)^2のデータ上での平均値\]</span> を可能な限り削減するようにグループ分けを行う</p>
-<ul>
-<li>近似的に削減する (Greedy-algorithm)</li>
-</ul></li>
-</ul>
+<section id="ols" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="ols"><span class="header-section-number">4.2.3</span> OLS</h3>
+<p>丸暗記法は、複雑なモデルの推定を試みており、母平均から乖離した事例の影響を受けやすくなっています。 単純平均法は、単純すぎるモデルの推定を行なっており、母平均の特徴の多くを無視しています。 このため、多くの応用で、丸暗記法と単純平均の中間的なモデルの推定が試みられます<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>。</p>
+<p>単純平均と丸暗記ほうの中間的なモデルを推定する代表的な方法は、線型モデルを最小二乗法 (OLS) で推定する方法です。</p>
+<section id="ysim-size" class="level4" data-number="4.2.3.1">
+<h4 data-number="4.2.3.1" class="anchored" data-anchor-id="ysim-size"><span class="header-section-number">4.2.3.1</span> <span class="math inline">\(Y\sim Size\)</span></h4>
+<p>最もシンプルな線型モデルとして、例えば以下を推定してみます。 <span class="math display">\[予測値 = \beta_0 + \beta_1\times Size\]</span> <span class="math inline">\(\beta_0,\beta_1\)</span> は、以下のデータ上の平均二乗誤差を最小化するように推定します。<span class="math display">\[(Y - 予測値)^2 のデータ上の平均\]</span></p>
+<p>推定結果を図示すると、以下となります。</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -325,17 +296,14 @@ window.Quarto = {
 </figure>
 </div>
 </div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-</div>
+<p>単純平均とは異なり、Sizeが大きいと、平均取引価格が高くなる傾向を捉えるモデルが推定されています。 丸暗記法と比べると、分析者間での予測値のばらつきが減少しています。 これは、丸暗記法と比べて、事例の要約が機能していることを表しています。</p>
+<p>しかしながら、予測モデルは母平均よりも以前単純すぎます。 特にDistrictに応じて、平均価格が異なるという性質を捉えきれていません。</p>
 </section>
-<section id="よりdata-adaptiveな決定木" class="level3" data-number="4.1.3">
-<h3 data-number="4.1.3" class="anchored" data-anchor-id="よりdata-adaptiveな決定木"><span class="header-section-number">4.1.3</span> よりData-adaptiveな決定木</h3>
+<section id="ysim-size-district" class="level4" data-number="4.2.3.2">
+<h4 data-number="4.2.3.2" class="anchored" data-anchor-id="ysim-size-district"><span class="header-section-number">4.2.3.2</span> <span class="math inline">\(Y\sim Size + District\)</span></h4>
+<p>Districtと平均取引価格の関係性を捉えるために、以下のモデルの推定を試みます。 <span class="math display">\[予測値 = \beta_0 + \beta_1\times Size + \beta_2\times District\]</span> <span class="math inline">\(District\)</span> は、中心６区に立地していれば1、それ以外では0を取ります。 <span class="math inline">\(\beta_0,..,\beta_2\)</span> は引き続き、データへの適合度を最大化するように推定できます。</p>
+<p>推定結果を図示すると、以下となります。</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -344,987 +312,51 @@ window.Quarto = {
 </figure>
 </div>
 </div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-</div>
+<p>全ての分析者について、中心6区の方が平均取引価格が高いという性質を上手く捉えています。 しかしながら、Sizeが70平米を超えると、取引価格が一段上昇するという性質は捉えきれていません。</p>
 </section>
-</section>
-<section id="現実" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="現実"><span class="header-section-number">4.2</span> 現実</h2>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<svg width="672" height="480" viewbox="0.00 0.00 228.00 44.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 40)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-40 224,-40 224,4 -4,4"></polygon>
-<!-- X -->
-<g id="node1" class="node">
-<title>X</title>
-<text text-anchor="middle" x="27" y="-15.6" font-family="Times,serif" font-size="8.00">X</text>
-</g>
-<!-- f_Y -->
-<g id="node3" class="node">
-<title>f_Y</title>
-<text text-anchor="middle" x="110" y="-15.6" font-family="Times,serif" font-size="8.00">「未知の」メカニズム</text>
-</g>
-<!-- X&#45;&gt;f_Y -->
-<g id="edge1" class="edge">
-<title>X-&gt;f_Y</title>
-<path fill="none" stroke="black" d="M54.23,-18C59.68,-18 65.13,-18 70.57,-18"></path>
-<polygon fill="black" stroke="black" points="70.66,-18.35 71.66,-18 70.66,-17.65 70.66,-18.35"></polygon>
-</g>
-<!-- Y -->
-<g id="node2" class="node">
-<title>Y</title>
-<text text-anchor="middle" x="193" y="-15.6" font-family="Times,serif" font-size="8.00">Y</text>
-</g>
-<!-- f_Y&#45;&gt;Y -->
-<g id="edge2" class="edge">
-<title>f_Y-&gt;Y</title>
-<path fill="none" stroke="black" d="M148.26,-18C153.72,-18 159.18,-18 164.64,-18"></path>
-<polygon fill="black" stroke="black" points="164.74,-18.35 165.74,-18 164.74,-17.65 164.74,-18.35"></polygon>
-</g>
-</g>
-</svg>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="ml" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="ml"><span class="header-section-number">4.3</span> ML</h2>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<svg width="672" height="480" viewbox="0.00 0.00 264.00 198.60" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 194.6)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-194.6 260,-194.6 260,4 -4,4"></polygon>
-<!-- X -->
-<g id="node1" class="node">
-<title>X</title>
-<text text-anchor="middle" x="27" y="-170.2" font-family="Times,serif" font-size="8.00">X</text>
-</g>
-<!-- f_Y -->
-<g id="node3" class="node">
-<title>f_Y</title>
-<text text-anchor="middle" x="128" y="-170.2" font-family="Times,serif" font-size="8.00">「未知の」メカニズム</text>
-</g>
-<!-- X&#45;&gt;f_Y -->
-<g id="edge1" class="edge">
-<title>X-&gt;f_Y</title>
-<path fill="none" stroke="black" d="M54.22,-172.6C65.76,-172.6 77.3,-172.6 88.84,-172.6"></path>
-<polygon fill="black" stroke="black" points="88.96,-172.95 89.96,-172.6 88.96,-172.25 88.96,-172.95"></polygon>
-</g>
-<!-- g_Y -->
-<g id="node4" class="node">
-<title>g_Y</title>
-<text text-anchor="middle" x="128" y="-88.6" font-family="Times,serif" font-size="8.00">複雑なモデル</text>
-</g>
-<!-- X&#45;&gt;g_Y -->
-<g id="edge3" class="edge">
-<title>X-&gt;g_Y</title>
-<path fill="none" stroke="black" d="M48.92,-154.33C65.59,-141.19 88.47,-123.16 105.33,-109.87"></path>
-<polygon fill="black" stroke="black" points="105.56,-110.13 106.13,-109.24 105.13,-109.58 105.56,-110.13"></polygon>
-</g>
-<!-- Y -->
-<g id="node2" class="node">
-<title>Y</title>
-<text text-anchor="middle" x="229" y="-170.2" font-family="Times,serif" font-size="8.00">Y</text>
-</g>
-<!-- f_Y&#45;&gt;Y -->
-<g id="edge2" class="edge">
-<title>f_Y-&gt;Y</title>
-<path fill="none" stroke="black" d="M166.27,-172.6C177.66,-172.6 189.06,-172.6 200.45,-172.6"></path>
-<polygon fill="black" stroke="black" points="200.56,-172.95 201.56,-172.6 200.56,-172.25 200.56,-172.95"></polygon>
-</g>
-<!-- f_Y&#45;&gt;g_Y -->
-<g id="edge5" class="edge">
-<title>f_Y-&gt;g_Y</title>
-<path fill="none" stroke="black" d="M128,-154.33C128,-141.39 128,-123.73 128,-110.5"></path>
-<polygon fill="black" stroke="black" points="128.35,-110.24 128,-109.24 127.65,-110.24 128.35,-110.24"></polygon>
-<text text-anchor="middle" x="134" y="-129.4" font-family="Times,serif" font-size="8.00">近似</text>
-</g>
-<!-- g_Y&#45;&gt;Y -->
-<g id="edge4" class="edge">
-<title>g_Y-&gt;Y</title>
-<path fill="none" stroke="black" d="M149.87,-109.24C166.54,-122.37 189.42,-140.4 206.29,-153.7"></path>
-<polygon fill="black" stroke="black" points="206.08,-153.98 207.08,-154.33 206.52,-153.43 206.08,-153.98"></polygon>
-</g>
-<!-- Est -->
-<g id="node5" class="node">
-<title>Est</title>
-<text text-anchor="middle" x="128" y="-15.6" font-family="Times,serif" font-size="8.00">推定</text>
-</g>
-<!-- g_Y&#45;&gt;Est -->
-<g id="edge6" class="edge">
-<title>g_Y-&gt;Est</title>
-<path fill="none" stroke="black" d="M128,-71.76C128,-60.75 128,-46.81 128,-36.03"></path>
-<polygon fill="black" stroke="black" points="127.65,-71.81 128,-72.81 128.35,-71.81 127.65,-71.81"></polygon>
-</g>
-</g>
-</svg>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="getting-started" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">4.4</span> Getting Started</h2>
-</section>
-<section id="アイディア" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="アイディア"><span class="header-section-number">4.5</span> アイディア</h2>
-<ul>
-<li><p>過去の <span class="math inline">\(Y-X\)</span> の間の定量的なパターンを、データから抽出し、予測に利用する</p>
-<ul>
-<li><p>「1平米広い部屋は100万円高い価格で取引されがち」など</p>
-<ul>
-<li>そのデータ上にのみ偶然現れたパターンに注意する</li>
-</ul></li>
-</ul></li>
-<li><p>予測の対象となる新しい事例と過去の事例(データ)との間に、一貫性が必要</p></li>
-</ul>
-</section>
-<section id="データ分割による評価" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="データ分割による評価"><span class="header-section-number">4.6</span> データ分割による評価</h2>
-<ul>
-<li><p>予測モデルの性能をどのように評価するか</p>
-<ul>
-<li><p>実際に実装し、運用すれば、そのうち性能がわかるが…</p>
-<ul>
-<li>遅すぎる場合も多い</li>
-</ul></li>
-</ul></li>
-<li><p>データをランダム２分割(Training/Test)に分割し、Trainingデータのみでモデルを作り、Testで評価する</p></li>
-<li><p>典型的には、Testデータについて、平均二乗誤差 <span class="math display">\[(Y - 予測値)^2の平均値\]</span></p></li>
-</ul>
-</section>
-<section id="イメージ" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="イメージ"><span class="header-section-number">4.7</span> イメージ</h2>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<svg width="672" height="480" viewbox="0.00 0.00 198.29 216.80" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 212.8)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-212.8 194.29,-212.8 194.29,4 -4,4"></polygon>
-<!-- Original -->
-<g id="node1" class="node">
-<title>Original</title>
-<text text-anchor="middle" x="93.27" y="-187.8" font-family="Times,serif" font-size="10.00">データ</text>
-</g>
-<!-- Data -->
-<g id="node2" class="node">
-<title>Data</title>
-<text text-anchor="middle" x="41.27" y="-103.8" font-family="Times,serif" font-size="10.00">訓練データ {Y,X}</text>
-</g>
-<!-- Original&#45;&gt;Data -->
-<g id="edge1" class="edge">
-<title>Original-&gt;Data</title>
-<path fill="none" stroke="black" d="M82.24,-172.41C73.91,-159.28 62.48,-141.24 53.8,-127.56"></path>
-<polygon fill="black" stroke="black" points="54.6,-126.86 52.11,-124.88 52.83,-127.98 54.6,-126.86"></polygon>
-<text text-anchor="middle" x="93.77" y="-145.8" font-family="Times,serif" font-size="10.00">ランダム分割</text>
-</g>
-<!-- New -->
-<g id="node3" class="node">
-<title>New</title>
-<text text-anchor="middle" x="145.27" y="-103.8" font-family="Times,serif" font-size="10.00">テストデータ {Y,X}</text>
-</g>
-<!-- Original&#45;&gt;New -->
-<g id="edge2" class="edge">
-<title>Original-&gt;New</title>
-<path fill="none" stroke="black" d="M107.33,-172.77C111.68,-167.19 116.36,-160.86 120.27,-154.8 125.72,-146.36 131.04,-136.62 135.37,-128.2"></path>
-<polygon fill="black" stroke="black" points="136.49,-128.31 136.92,-125.16 134.62,-127.36 136.49,-128.31"></polygon>
-</g>
-<!-- Model -->
-<g id="node4" class="node">
-<title>Model</title>
-<text text-anchor="middle" x="43.27" y="-15" font-family="Times,serif" font-size="10.00">予測モデル g(X)</text>
-</g>
-<!-- Data&#45;&gt;Model -->
-<g id="edge3" class="edge">
-<title>Data-&gt;Model</title>
-<path fill="none" stroke="black" d="M41.67,-88.65C41.99,-74.5 42.46,-54.4 42.8,-39.42"></path>
-<polygon fill="black" stroke="black" points="43.86,-39.14 42.88,-36.11 41.76,-39.09 43.86,-39.14"></polygon>
-<text text-anchor="middle" x="53.77" y="-58.2" font-family="Times,serif" font-size="14.00">推定</text>
-</g>
-<!-- New&#45;&gt;Model -->
-<g id="edge4" class="edge">
-<title>New-&gt;Model</title>
-<path fill="none" stroke="black" d="M125.12,-88.65C108.08,-74.15 83.67,-53.38 65.95,-38.3"></path>
-<polygon fill="black" stroke="black" points="66.35,-37.26 63.38,-36.11 64.99,-38.86 66.35,-37.26"></polygon>
-</g>
-<!-- Predict -->
-<g id="node5" class="node">
-<title>Predict</title>
-<text text-anchor="middle" x="145.27" y="-15" font-family="Times,serif" font-size="10.00">予測値 Y^*</text>
-</g>
-<!-- Model&#45;&gt;Predict -->
-<g id="edge5" class="edge">
-<title>Model-&gt;Predict</title>
-<path fill="none" stroke="black" d="M80.72,-18C91.56,-18 102.39,-18 113.22,-18"></path>
-<polygon fill="black" stroke="black" points="113.28,-19.05 116.28,-18 113.28,-16.95 113.28,-19.05"></polygon>
-</g>
-<!-- Predict&#45;&gt;New -->
-<g id="edge6" class="edge">
-<title>Predict-&gt;New</title>
-<path fill="none" stroke="black" d="M145.27,-36.11C145.27,-50.25 145.27,-70.36 145.27,-85.34"></path>
-<polygon fill="black" stroke="black" points="144.22,-85.65 145.27,-88.65 146.32,-85.65 144.22,-85.65"></polygon>
-<text text-anchor="middle" x="156.52" y="-59.4" font-family="Times,serif" font-size="10.00">テスト</text>
-</g>
-</g>
-</svg>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="典型的誤解" class="level2" data-number="4.8">
-<h2 data-number="4.8" class="anchored" data-anchor-id="典型的誤解"><span class="header-section-number">4.8</span> 典型的誤解</h2>
-<ul>
-<li><p>機械学習を用いて推定すれば、予測性能が高いモデルが獲得できる</p></li>
-<li><p>複雑な現象を予測するためには、複雑なモデルの方が望ましい</p></li>
-<li><p>Big dataを用いれば、理想的な予測モデルを推定できる</p></li>
-<li><p>予測性能が悪いモデルは、役に立たない</p></li>
-</ul>
-</section>
-<section id="母集団を用いた整理" class="level2" data-number="4.9">
-<h2 data-number="4.9" class="anchored" data-anchor-id="母集団を用いた整理"><span class="header-section-number">4.9</span> 母集団を用いた整理</h2>
-<ul>
-<li>母集団: 論点整理を目的とした<strong>概念</strong></li>
-</ul>
-</section>
-<section id="母集団" class="level2" data-number="4.10">
-<h2 data-number="4.10" class="anchored" data-anchor-id="母集団"><span class="header-section-number">4.10</span> 母集団</h2>
-<ul>
-<li><p>手元のデータに含まれる事例は、母分布(集団)から抽出されたと想定する</p>
-<ul>
-<li><p>本講義では、ランダムに選ばれるケースに集中する</p>
-<ul>
-<li>Random Sampling</li>
-</ul></li>
-<li><p>予測対象も、母分布からランダムに選ばれるとする</p></li>
-</ul></li>
-<li><p>一般にデータと母分布は、完全一致しない</p></li>
-</ul>
-</section>
-<section id="例" class="level2" data-number="4.11">
-<h2 data-number="4.11" class="anchored" data-anchor-id="例"><span class="header-section-number">4.11</span> 例</h2>
-<ul>
-<li><p>ユーザーの需要調査(どのようなサービスを望むか)</p>
-<ul>
-<li><p>データ: サービス利用者の中からランダムに選ばれた200名 (例: 20代が2割)</p>
-<ul>
-<li><p>母集団: 全サービス利用者 (例: 20代が2.2割)</p></li>
-<li><p>予測対象: <span class="math inline">\(X\)</span> (年齢など)のみ判明している利用者</p></li>
-</ul></li>
-</ul></li>
-<li><p>不動産取引価格の予測モデル</p>
-<ul>
-<li><p>データ: 2022年第二四半期のすべての取引事例</p>
-<ul>
-<li><p>母集団: 潜在的な全取引</p></li>
-<li><p>予測対象: まだ取引されていない物件</p></li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-<section id="イメージ-1" class="level2" data-number="4.12">
-<h2 data-number="4.12" class="anchored" data-anchor-id="イメージ-1"><span class="header-section-number">4.12</span> イメージ</h2>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<svg width="672" height="480" viewbox="0.00 0.00 217.73 198.60" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 194.6)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-194.6 213.73,-194.6 213.73,4 -4,4"></polygon>
-<!-- Population -->
-<g id="node1" class="node">
-<title>Population</title>
-<text text-anchor="middle" x="78.77" y="-169.6" font-family="Times,serif" font-size="10.00">母集団: 無数の事例 {Y,X}</text>
-</g>
-<!-- Data -->
-<g id="node2" class="node">
-<title>Data</title>
-<text text-anchor="middle" x="33.77" y="-88" font-family="Times,serif" font-size="10.00">データ {Y,X}</text>
-</g>
-<!-- Population&#45;&gt;Data -->
-<g id="edge1" class="edge">
-<title>Population-&gt;Data</title>
-<path fill="none" stroke="black" d="M69.01,-154.33C61.99,-141.92 52.51,-125.14 45.15,-112.12"></path>
-<polygon fill="black" stroke="black" points="45.91,-111.33 43.52,-109.24 44.08,-112.37 45.91,-111.33"></polygon>
-<text text-anchor="middle" x="77.77" y="-129.4" font-family="Times,serif" font-size="8.00">ランダム抽出</text>
-</g>
-<!-- New -->
-<g id="node3" class="node">
-<title>New</title>
-<text text-anchor="middle" x="125.77" y="-88" font-family="Times,serif" font-size="10.00">新しい事例 {?,X}</text>
-</g>
-<!-- Population&#45;&gt;New -->
-<g id="edge3" class="edge">
-<title>Population-&gt;New</title>
-<path fill="none" stroke="red" d="M89.07,-154.54C92.49,-148.84 96.31,-142.46 99.77,-136.6 104.49,-128.63 109.63,-119.83 114.09,-112.17"></path>
-<polygon fill="red" stroke="red" points="115.1,-112.52 115.7,-109.4 113.28,-111.46 115.1,-112.52"></polygon>
-</g>
-<!-- Model -->
-<g id="node4" class="node">
-<title>Model</title>
-<text text-anchor="middle" x="78.77" y="-15" font-family="Times,serif" font-size="10.00">予測モデル g(X)</text>
-</g>
-<!-- Data&#45;&gt;Model -->
-<g id="edge2" class="edge">
-<title>Data-&gt;Model</title>
-<path fill="none" stroke="black" d="M44.66,-72.81C51.19,-62.52 59.5,-49.4 66.29,-38.7"></path>
-<polygon fill="black" stroke="black" points="67.26,-39.12 67.98,-36.03 65.49,-38 67.26,-39.12"></polygon>
-</g>
-<!-- New&#45;&gt;Model -->
-<g id="edge4" class="edge">
-<title>New-&gt;Model</title>
-<path fill="none" stroke="red" d="M114.39,-72.81C107.58,-62.52 98.9,-49.4 91.81,-38.7"></path>
-<polygon fill="red" stroke="red" points="92.58,-37.95 90.04,-36.03 90.82,-39.11 92.58,-37.95"></polygon>
-</g>
-<!-- Predict -->
-<g id="node5" class="node">
-<title>Predict</title>
-<text text-anchor="middle" x="180.77" y="-15" font-family="Times,serif" font-size="10.00">予測値 Y^*</text>
-</g>
-<!-- Model&#45;&gt;Predict -->
-<g id="edge5" class="edge">
-<title>Model-&gt;Predict</title>
-<path fill="none" stroke="red" d="M116.22,-18C127.06,-18 137.89,-18 148.72,-18"></path>
-<polygon fill="red" stroke="red" points="148.78,-19.05 151.78,-18 148.78,-16.95 148.78,-19.05"></polygon>
-</g>
-</g>
-</svg>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="数値例-データ" class="level2" data-number="4.13">
-<h2 data-number="4.13" class="anchored" data-anchor-id="数値例-データ"><span class="header-section-number">4.13</span> 数値例: データ</h2>
+<section id="ysim-size-size2-..-size6-district" class="level4" data-number="4.2.3.3">
+<h4 data-number="4.2.3.3" class="anchored" data-anchor-id="ysim-size-size2-..-size6-district"><span class="header-section-number">4.2.3.3</span> <span class="math inline">\(Y\sim (Size + Size^2 + .. + Size^6) * District\)</span></h4>
+<p>母平均が持つ複雑な性質を捉えるために、さらに複雑なモデルを推定してみます。 <span class="math display">\[予測値 = \beta_0 + \beta_1 Size +..+\beta_6Size^6+\beta_7District\]</span> <span class="math display">\[+\beta_8 Size\times District +..+\beta_{14}Size^6\times District\]</span> このような複雑なモデルであったとしても、データへの適合度を最大化するように推定できます。 ただし、複雑すぎると母平均から乖離してしまいます。</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="prediction_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>複雑なモデルを最小二乗法で推定すると、よりデータへの適合度を改善し、データ上の平均値に近づけることができます。 このことは、必ずしも望ましいとはいえません。 なぜならば、丸暗記法により推定されたモデルに近づくからです。 すなわち少数の事例しかない<span class="math inline">\(X\)</span>の組み合わせについては、丸暗記法と同様に母平均から乖離し、予測性能が悪化します。</p>
 </section>
-<section id="数値例-予測モデル" class="level2" data-number="4.14">
-<h2 data-number="4.14" class="anchored" data-anchor-id="数値例-予測モデル"><span class="header-section-number">4.14</span> 数値例: 予測モデル</h2>
+</section>
+<section id="lasso" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="lasso"><span class="header-section-number">4.2.4</span> LASSO</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="prediction_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="数値例-予測モデル-1" class="level2" data-number="4.15">
-<h2 data-number="4.15" class="anchored" data-anchor-id="数値例-予測モデル-1"><span class="header-section-number">4.15</span> 数値例: 予測モデル</h2>
+</section>
+<section id="事例数の拡大" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="事例数の拡大"><span class="header-section-number">4.3</span> 事例数の拡大</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="prediction_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="数値例-予測モデルと母平均" class="level2" data-number="4.16">
-<h2 data-number="4.16" class="anchored" data-anchor-id="数値例-予測モデルと母平均"><span class="header-section-number">4.16</span> 数値例: 予測モデルと母平均</h2>
-<ul>
-<li>ここから想像の世界</li>
-</ul>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="不透明性-uncertainly" class="level2" data-number="4.17">
-<h2 data-number="4.17" class="anchored" data-anchor-id="不透明性-uncertainly"><span class="header-section-number">4.17</span> 不透明性 (Uncertainly)</h2>
-<ul>
-<li><p>データ分析を含む事例分析の一般的課題</p>
-<ul>
-<li><p>独立した分析チームに<strong>同じ市場/社会</strong>の分析を依頼したとしても、同じ結論に到達し得ない</p>
-<ul>
-<li>誰がやっても、「水は100度で沸騰する」という結論を再現できる理科の実験とは対照的</li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-<section id="sampling-model-uncertainly" class="level2" data-number="4.18">
-<h2 data-number="4.18" class="anchored" data-anchor-id="sampling-model-uncertainly"><span class="header-section-number">4.18</span> Sampling / Model Uncertainly</h2>
-<ul>
-<li><p>観察する事例が人によって異なる (<strong>Sampling uncertainly</strong>)</p>
-<ul>
-<li>伝統的なデータ分析における主たる関心</li>
-</ul></li>
-<li><p>事例の要約方法(モデル化)が属人的で、不透明 (<strong>Model uncertainly</strong>)</p>
-<ul>
-<li><p>多くの教科書で直接的な言及を避けてきた問題</p>
-<ul>
-<li>「理論や背景をしっかり踏まえて、適切なモデル化を行うべし」以上の提案が難しい</li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-<section id="sampling-uncertainlyの軽減" class="level2" data-number="4.19">
-<h2 data-number="4.19" class="anchored" data-anchor-id="sampling-uncertainlyの軽減"><span class="header-section-number">4.19</span> Sampling Uncertainlyの軽減</h2>
-<ul>
-<li><p>問題: データから観察できない価格決定要因の”偏り”が、データ固有の特徴を生み出す</p></li>
-<li><p>対策: 多くの事例を集計(モデル化)し、傾向把握を行う</p>
-<ul>
-<li>初歩的な方法: よく似た労働者も高賃金を得ているか確認する</li>
-</ul></li>
-</ul>
-</section>
-<section id="機械学習の利点" class="level2" data-number="4.20">
-<h2 data-number="4.20" class="anchored" data-anchor-id="機械学習の利点"><span class="header-section-number">4.20</span> 機械学習の利点</h2>
-<ul>
-<li><p>決定木を含む機械学習の手法は、明確な記述に基づくデータ主導のモデル化を行う</p>
-<ul>
-<li>Model Uncertainlyが軽減される</li>
-</ul></li>
-</ul>
-</section>
-<section id="機械学習の問題点" class="level2" data-number="4.21">
-<h2 data-number="4.21" class="anchored" data-anchor-id="機械学習の問題点"><span class="header-section-number">4.21</span> 機械学習の問題点</h2>
-<ul>
-<li><p>データ主導のモデル生成は、Sampling uncertainlyを”複雑化”する</p>
-<ul>
-<li>データに応じてモデルが大きく変化しうるため</li>
-</ul></li>
-<li><p>伝統的な理論的性質(中心極限定理など)が適用できず、信頼区間などが近似計算できない</p>
-<ul>
-<li><p><span class="math inline">\(Y\)</span> に近い値を得ることが目標である予測問題では、通常大きな問題にならない</p></li>
-<li><p>むしろモデル全体の予測性能を評価することが重要</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="数値例-決定木" class="level2" data-number="4.22">
-<h2 data-number="4.22" class="anchored" data-anchor-id="数値例-決定木"><span class="header-section-number">4.22</span> 数値例: 決定木</h2>
-<ul>
-<li>4名の分析者(ID 1-4) が独立してデータを収集し、決定木でモデルを推定したとすると、</li>
-</ul>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="数値例-size-40-で分割" class="level2" data-number="4.23">
-<h2 data-number="4.23" class="anchored" data-anchor-id="数値例-size-40-で分割"><span class="header-section-number">4.23</span> 数値例: Size <span class="math inline">\(= 40\)</span> で分割</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<ul>
-<li>データとは無関係に、size = 40 で予測値が”誤って”変化する</li>
-</ul>
-</section>
-<section id="モデルの評価" class="level2" data-number="4.24">
-<h2 data-number="4.24" class="anchored" data-anchor-id="モデルの評価"><span class="header-section-number">4.24</span> モデルの評価</h2>
-</section>
-<section id="予測モデルの評価-理想編" class="level2" data-number="4.25">
-<h2 data-number="4.25" class="anchored" data-anchor-id="予測モデルの評価-理想編"><span class="header-section-number">4.25</span> 予測モデルの評価: 理想編</h2>
-<ul>
-<li><p>どんな予測もまぐれあたりしうる</p>
-<ul>
-<li>平均的にうまく行くモデルを採用したい</li>
-</ul></li>
-<li><p>予測モデルを母分布に適用して評価する: 典型的には二乗誤差の母平均値を用いる <span class="math inline">\(E[(Y - g(X))^2]\)</span></p></li>
-</ul>
-</section>
-<section id="予測モデルの評価-現実編" class="level2" data-number="4.26">
-<h2 data-number="4.26" class="anchored" data-anchor-id="予測モデルの評価-現実編"><span class="header-section-number">4.26</span> 予測モデルの評価: 現実編</h2>
-<ul>
-<li><p>母分布は観察できないので、母分布に適用した際の予測性能は”推定する必要”がある</p>
-<ul>
-<li>母分布からランダムに選ばれた事例でテストしたい</li>
-</ul></li>
-<li><p>最も典型的な評価法は、データ分割: データをランダムに2分割 (訓練/テストデータ)し、訓練データのみでモデルを推定し、テストデータで評価</p></li>
-</ul>
-</section>
-<section id="イメージ-2" class="level2" data-number="4.27">
-<h2 data-number="4.27" class="anchored" data-anchor-id="イメージ-2"><span class="header-section-number">4.27</span> イメージ</h2>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<svg width="672" height="480" viewbox="0.00 0.00 300.18 212.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 208)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-208 296.18,-208 296.18,4 -4,4"></polygon>
-<!-- Population -->
-<g id="node1" class="node">
-<title>Population</title>
-<text text-anchor="middle" x="55.16" y="-183" font-family="Times,serif" font-size="10.00">母集団: 無数の事例 {Y,X}</text>
-</g>
-<!-- Original -->
-<g id="node2" class="node">
-<title>Original</title>
-<text text-anchor="middle" x="200.16" y="-183" font-family="Times,serif" font-size="10.00">データ</text>
-</g>
-<!-- Population&#45;&gt;Original -->
-<g id="edge1" class="edge">
-<title>Population-&gt;Original</title>
-<path fill="none" stroke="black" d="M110.39,-186C130.5,-186 152.49,-186 169.67,-186"></path>
-<polygon fill="black" stroke="black" points="170.04,-187.05 173.04,-186 170.04,-184.95 170.04,-187.05"></polygon>
-<text text-anchor="middle" x="141.74" y="-192" font-family="Times,serif" font-size="10.00">ランダム抽出</text>
-</g>
-<!-- Data -->
-<g id="node3" class="node">
-<title>Data</title>
-<text text-anchor="middle" x="143.16" y="-99" font-family="Times,serif" font-size="10.00">訓練データ {Y,X}</text>
-</g>
-<!-- Original&#45;&gt;Data -->
-<g id="edge2" class="edge">
-<title>Original-&gt;Data</title>
-<path fill="none" stroke="black" d="M185.78,-167.87C181.27,-162.29 176.37,-155.98 172.16,-150 166.05,-141.33 159.81,-131.39 154.69,-122.88"></path>
-<polygon fill="black" stroke="black" points="155.58,-122.33 153.14,-120.29 153.78,-123.4 155.58,-122.33"></polygon>
-<text text-anchor="middle" x="194.66" y="-141" font-family="Times,serif" font-size="10.00">ランダム分割</text>
-</g>
-<!-- New -->
-<g id="node4" class="node">
-<title>New</title>
-<text text-anchor="middle" x="247.16" y="-99" font-family="Times,serif" font-size="10.00">テストデータ {Y,X}</text>
-</g>
-<!-- Original&#45;&gt;New -->
-<g id="edge3" class="edge">
-<title>Original-&gt;New</title>
-<path fill="none" stroke="black" d="M210.13,-167.61C217.66,-154.48 227.99,-136.44 235.84,-122.76"></path>
-<polygon fill="black" stroke="black" points="236.79,-123.21 237.37,-120.08 234.97,-122.16 236.79,-123.21"></polygon>
-</g>
-<!-- Model -->
-<g id="node5" class="node">
-<title>Model</title>
-<text text-anchor="middle" x="145.16" y="-15" font-family="Times,serif" font-size="10.00">予測モデル g(X)</text>
-</g>
-<!-- Data&#45;&gt;Model -->
-<g id="edge4" class="edge">
-<title>Data-&gt;Model</title>
-<path fill="none" stroke="black" d="M143.58,-83.61C143.9,-70.59 144.34,-52.74 144.67,-39.1"></path>
-<polygon fill="black" stroke="black" points="145.72,-39.11 144.74,-36.08 143.62,-39.06 145.72,-39.11"></polygon>
-</g>
-<!-- New&#45;&gt;Model -->
-<g id="edge5" class="edge">
-<title>New-&gt;Model</title>
-<path fill="none" stroke="red" d="M225.53,-83.61C208.92,-70.26 186,-51.84 168.89,-38.08"></path>
-<polygon fill="red" stroke="red" points="169.41,-37.15 166.41,-36.08 168.09,-38.78 169.41,-37.15"></polygon>
-</g>
-<!-- Predict -->
-<g id="node6" class="node">
-<title>Predict</title>
-<text text-anchor="middle" x="247.16" y="-15" font-family="Times,serif" font-size="10.00">予測値 Y^*</text>
-</g>
-<!-- Model&#45;&gt;Predict -->
-<g id="edge6" class="edge">
-<title>Model-&gt;Predict</title>
-<path fill="none" stroke="red" d="M182.61,-18C193.45,-18 204.28,-18 215.11,-18"></path>
-<polygon fill="red" stroke="red" points="215.17,-19.05 218.16,-18 215.16,-16.95 215.17,-19.05"></polygon>
-</g>
-<!-- Predict&#45;&gt;New -->
-<g id="edge7" class="edge">
-<title>Predict-&gt;New</title>
-<path fill="none" stroke="red" d="M247.16,-36.08C247.16,-49.03 247.16,-66.87 247.16,-80.58"></path>
-<polygon fill="red" stroke="red" points="246.11,-80.61 247.16,-83.61 248.21,-80.61 246.11,-80.61"></polygon>
-<text text-anchor="middle" x="258.41" y="-57" font-family="Times,serif" font-size="10.00">テスト</text>
-</g>
-</g>
-</svg>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="補論-モデルを使い続けられるか" class="level2" data-number="4.28">
-<h2 data-number="4.28" class="anchored" data-anchor-id="補論-モデルを使い続けられるか"><span class="header-section-number">4.28</span> 補論: モデルを使い続けられるか?</h2>
-<ul>
-<li><p>モデル推定に用いるデータの母分布と、予測対象の母分布が異なれば、予測性能は悪化する</p>
-<ul>
-<li><p>高性能モデルでも、時代の変化/大きな社会的ショックの発生等の結果、性能が悪化しうる</p>
-<ul>
-<li>通常の設備と同様に、経年劣化/破壊されうる</li>
-</ul></li>
-</ul></li>
-<li><p>定期的に予測性能を計り直し、再推定する必要がある</p>
-<ul>
-<li>Concept-Driftと呼ばれる</li>
-</ul></li>
-</ul>
-</section>
-<section id="極端なモデルの推定" class="level2" data-number="4.29">
-<h2 data-number="4.29" class="anchored" data-anchor-id="極端なモデルの推定"><span class="header-section-number">4.29</span> 極端なモデルの推定</h2>
-<ul>
-<li>予測モデルの推定の原理を理解するために、極端な推定方法で何が生じるのか理解する</li>
-</ul>
-</section>
-<section id="理想の予測モデル" class="level2" data-number="4.30">
-<h2 data-number="4.30" class="anchored" data-anchor-id="理想の予測モデル"><span class="header-section-number">4.30</span> 理想の予測モデル</h2>
-<ul>
-<li><p>もし<strong>母集団</strong>をすべて活用して、モデル推定できるのであれば、理想の予測モデルは母平均 <span class="math inline">\(E[Y|X]\)</span></p>
-<ul>
-<li>予測誤差を平均二乗誤差で測定するのが前提</li>
-</ul></li>
-<li><p>「各グループ内での平均的傾向」よりも優れた予測は<strong>あり得ない</strong></p></li>
-</ul>
-</section>
-<section id="完璧な予測は可能か" class="level2" data-number="4.31">
-<h2 data-number="4.31" class="anchored" data-anchor-id="完璧な予測は可能か"><span class="header-section-number">4.31</span> 完璧な予測は可能か?</h2>
-<ul>
-<li><p>予測不可能な部分 <span class="math inline">\(Y - E[Y|X]\)</span> が発生</p>
-<ul>
-<li>削減不可能な誤差</li>
-</ul></li>
-<li><p>予測対象となる母集団(社会)、<span class="math inline">\(Y/X\)</span> が決まった時点で自動的に定まる</p>
-<ul>
-<li><p><span class="math inline">\(X\)</span> 内で個人差がある現象の予測は難しい</p>
-<ul>
-<li>人間行動やその相互作用で決まる現象 (例: 消費、貯蓄、出生、就業、賃金、等)は大きい傾向</li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-<section id="予測モデルの推定-現実" class="level2" data-number="4.32">
-<h2 data-number="4.32" class="anchored" data-anchor-id="予測モデルの推定-現実"><span class="header-section-number">4.32</span> 予測モデルの推定: 現実</h2>
-<ul>
-<li><p>母集団は観察できないので、データで置き換える必要がある</p>
-<ul>
-<li><p>単純なモデルを推定すると、母平均の複雑さを捉えられない</p></li>
-<li><p>複雑なモデルを推定すると、データが偶然持った特徴を母平均の特徴と混同してしまう</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="現実的な方法-単純平均法" class="level2" data-number="4.33">
-<h2 data-number="4.33" class="anchored" data-anchor-id="現実的な方法-単純平均法"><span class="header-section-number">4.33</span> 現実的な方法: 単純平均法</h2>
-<ul>
-<li>単純な平均取引価格を予測値とする</li>
-</ul>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="現実的な方法-丸暗記法" class="level2" data-number="4.34">
-<h2 data-number="4.34" class="anchored" data-anchor-id="現実的な方法-丸暗記法"><span class="header-section-number">4.34</span> 現実的な方法: 丸暗記法</h2>
-<ul>
-<li>各<span class="math inline">\(X\)</span> について、データ上の平均値を予測値とする</li>
-</ul>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="複雑なモデルは望ましいのか" class="level2" data-number="4.35">
-<h2 data-number="4.35" class="anchored" data-anchor-id="複雑なモデルは望ましいのか"><span class="header-section-number">4.35</span> 複雑なモデルは望ましいのか?</h2>
-<ul>
-<li><p>丸暗記モデルは非常に複雑なモデルを生み出し、望ましいように思える</p>
-<ul>
-<li><p>現実は複雑</p></li>
-<li><p><strong>推定に用いた</strong>データとの矛盾はない</p>
-<ul>
-<li>予測値とデータ上の平均値は、必ず一致する</li>
-</ul></li>
-</ul></li>
-<li><p><strong>一般に予測性能は極めて悪い</strong></p>
-<ul>
-<li>少数の事例のみで計算れた平均値は、<span class="math inline">\(X\)</span> 以外の決定要因の偏りを反映してしまう</li>
-</ul></li>
-</ul>
-</section>
-<section id="補論-丸暗記が有効な場合" class="level2" data-number="4.36">
-<h2 data-number="4.36" class="anchored" data-anchor-id="補論-丸暗記が有効な場合"><span class="header-section-number">4.36</span> 補論: 丸暗記が有効な場合</h2>
-<ul>
-<li><p><span class="math inline">\(X\)</span> 以外に <span class="math inline">\(Y\)</span> の決定要因がなければ、丸暗記は有効</p>
-<ul>
-<li>例: 判例予測、コンピュータの動作予測</li>
-</ul></li>
-<li><p>人間行動については、<span class="math inline">\(X\)</span> 以外の無数の決定要因が存在</p>
-<ul>
-<li><p>例: “双子”でも違う人生を歩む</p></li>
-<li><p>丸暗記に向いていない</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="中庸なモデルの推定" class="level2" data-number="4.37">
-<h2 data-number="4.37" class="anchored" data-anchor-id="中庸なモデルの推定"><span class="header-section-number">4.37</span> 中庸なモデルの推定</h2>
-<ul>
-<li><p>多くの応用で平均値は単純すぎ、丸暗記は複雑すぎる</p></li>
-<li><p>決定木については、最大分割回数などを変更することで、単純平均と丸暗記法の間を移行できる</p></li>
-</ul>
-</section>
-<section id="モデル選択集計" class="level2" data-number="4.38">
-<h2 data-number="4.38" class="anchored" data-anchor-id="モデル選択集計"><span class="header-section-number">4.38</span> モデル選択/集計</h2>
-<ul>
-<li><p>決定木の深さが異なれば、予測モデルは異なる</p></li>
-<li><p>複数のモデルを”試作”し、予測性能を測定、最も性能が良いモデルを選ぶのは一つの方法</p></li>
-<li><p>決定木については、複数のモデルを試作し、その予測結果を集計することがより有効な場合が多い</p>
-<ul>
-<li>モデル集計/アンサンブル法などと呼ばれる</li>
-</ul></li>
-</ul>
-</section>
-<section id="概要" class="level2" data-number="4.39">
-<h2 data-number="4.39" class="anchored" data-anchor-id="概要"><span class="header-section-number">4.39</span> 概要</h2>
-<ul>
-<li><p>複雑なモデルを推定すると、母平均から大きく乖離した事例(ハズレ値)の影響を強く受ける</p>
-<ul>
-<li><p>予測結果を安定されるために、大量の予測モデルを作り、その平均値を最終予測とすることが有効 (Bagging)</p></li>
-<li><p>一部の変数の使用を確率的に禁止することも併用できる (RandomForest)</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="イメージ-bagging" class="level2" data-number="4.40">
-<h2 data-number="4.40" class="anchored" data-anchor-id="イメージ-bagging"><span class="header-section-number">4.40</span> イメージ: Bagging</h2>
-<ul>
-<li>Bootstrap法を用いて、予測モデルを大量に作る (500-5000個程度)</li>
-</ul>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<svg width="672" height="480" viewbox="0.00 0.00 390.08 332.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 328)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-328 386.08,-328 386.08,4 -4,4"></polygon>
-<!-- Data -->
-<g id="node1" class="node">
-<title>Data</title>
-<text text-anchor="middle" x="186.04" y="-309" font-family="Times,serif" font-size="10.00">訓練データ</text>
-<text text-anchor="middle" x="186.04" y="-297" font-family="Times,serif" font-size="10.00">[Y={10,2,4},X={5,7,1}]</text>
-</g>
-<!-- Boot1 -->
-<g id="node2" class="node">
-<title>Boot1</title>
-<text text-anchor="middle" x="55.04" y="-237" font-family="Times,serif" font-size="10.00">複製データ1</text>
-<text text-anchor="middle" x="55.04" y="-225" font-family="Times,serif" font-size="10.00">[Y={2,2,4},X={7,7,1}]</text>
-</g>
-<!-- Data&#45;&gt;Boot1 -->
-<g id="edge1" class="edge">
-<title>Data-&gt;Boot1</title>
-<path fill="none" stroke="black" d="M153.99,-287.88C136.55,-278.55 114.78,-266.92 96.1,-256.94"></path>
-<polygon fill="black" stroke="black" points="97.68,-253.82 87.21,-252.19 94.38,-259.99 97.68,-253.82"></polygon>
-</g>
-<!-- Boot2 -->
-<g id="node3" class="node">
-<title>Boot2</title>
-<text text-anchor="middle" x="186.04" y="-237" font-family="Times,serif" font-size="10.00">複製データ2</text>
-<text text-anchor="middle" x="186.04" y="-225" font-family="Times,serif" font-size="10.00">[Y={10,2,2},X={5,7,7}]</text>
-</g>
-<!-- Data&#45;&gt;Boot2 -->
-<g id="edge3" class="edge">
-<title>Data-&gt;Boot2</title>
-<path fill="none" stroke="black" d="M186.04,-287.7C186.04,-279.98 186.04,-270.71 186.04,-262.11"></path>
-<polygon fill="black" stroke="black" points="189.54,-262.1 186.04,-252.1 182.54,-262.1 189.54,-262.1"></polygon>
-</g>
-<!-- Boot3 -->
-<g id="node4" class="node">
-<title>Boot3</title>
-<text text-anchor="middle" x="322.04" y="-237" font-family="Times,serif" font-size="10.00">複製データ3</text>
-<text text-anchor="middle" x="322.04" y="-225" font-family="Times,serif" font-size="10.00">[Y={10,10,4},X={5,5,1}]</text>
-</g>
-<!-- Data&#45;&gt;Boot3 -->
-<g id="edge5" class="edge">
-<title>Data-&gt;Boot3</title>
-<path fill="none" stroke="black" d="M219.31,-287.88C237.5,-278.51 260.23,-266.81 279.68,-256.8"></path>
-<polygon fill="black" stroke="black" points="281.35,-259.88 288.64,-252.19 278.15,-253.65 281.35,-259.88"></polygon>
-</g>
-<!-- Model1 -->
-<g id="node5" class="node">
-<title>Model1</title>
-<text text-anchor="middle" x="81.04" y="-165" font-family="Times,serif" font-size="10.00">予測モデル1 </text>
-<text text-anchor="middle" x="81.04" y="-153" font-family="Times,serif" font-size="10.00">g1(X)</text>
-</g>
-<!-- Boot1&#45;&gt;Model1 -->
-<g id="edge2" class="edge">
-<title>Boot1-&gt;Model1</title>
-<path fill="none" stroke="black" d="M61.47,-215.7C64.4,-207.81 67.93,-198.3 71.18,-189.55"></path>
-<polygon fill="black" stroke="black" points="74.49,-190.7 74.69,-180.1 67.93,-188.26 74.49,-190.7"></polygon>
-</g>
-<!-- Model2 -->
-<g id="node6" class="node">
-<title>Model2</title>
-<text text-anchor="middle" x="186.04" y="-165" font-family="Times,serif" font-size="10.00">予測モデル2 </text>
-<text text-anchor="middle" x="186.04" y="-153" font-family="Times,serif" font-size="10.00">g2(X)</text>
-</g>
-<!-- Boot2&#45;&gt;Model2 -->
-<g id="edge4" class="edge">
-<title>Boot2-&gt;Model2</title>
-<path fill="none" stroke="black" d="M186.04,-215.7C186.04,-207.98 186.04,-198.71 186.04,-190.11"></path>
-<polygon fill="black" stroke="black" points="189.54,-190.1 186.04,-180.1 182.54,-190.1 189.54,-190.1"></polygon>
-</g>
-<!-- Model3 -->
-<g id="node7" class="node">
-<title>Model3</title>
-<text text-anchor="middle" x="293.04" y="-165" font-family="Times,serif" font-size="10.00">予測モデル3 </text>
-<text text-anchor="middle" x="293.04" y="-153" font-family="Times,serif" font-size="10.00">g3(X)</text>
-</g>
-<!-- Boot3&#45;&gt;Model3 -->
-<g id="edge6" class="edge">
-<title>Boot3-&gt;Model3</title>
-<path fill="none" stroke="black" d="M314.87,-215.7C311.61,-207.81 307.67,-198.3 304.04,-189.55"></path>
-<polygon fill="black" stroke="black" points="307.19,-188 300.13,-180.1 300.72,-190.68 307.19,-188"></polygon>
-</g>
-<!-- Summary -->
-<g id="node8" class="node">
-<title>Summary</title>
-<text text-anchor="middle" x="186.04" y="-87" font-family="Times,serif" font-size="10.00">平均</text>
-</g>
-<!-- Model1&#45;&gt;Summary -->
-<g id="edge7" class="edge">
-<title>Model1-&gt;Summary</title>
-<path fill="none" stroke="black" d="M106.73,-143.88C120.33,-134.81 137.21,-123.55 151.9,-113.76"></path>
-<polygon fill="black" stroke="black" points="153.88,-116.65 160.26,-108.19 149.99,-110.82 153.88,-116.65"></polygon>
-</g>
-<!-- Model2&#45;&gt;Summary -->
-<g id="edge8" class="edge">
-<title>Model2-&gt;Summary</title>
-<path fill="none" stroke="black" d="M186.04,-143.7C186.04,-135.98 186.04,-126.71 186.04,-118.11"></path>
-<polygon fill="black" stroke="black" points="189.54,-118.1 186.04,-108.1 182.54,-118.1 189.54,-118.1"></polygon>
-</g>
-<!-- Model3&#45;&gt;Summary -->
-<g id="edge9" class="edge">
-<title>Model3-&gt;Summary</title>
-<path fill="none" stroke="black" d="M266.87,-143.88C253.01,-134.81 235.8,-123.55 220.83,-113.76"></path>
-<polygon fill="black" stroke="black" points="222.6,-110.74 212.32,-108.19 218.77,-116.59 222.6,-110.74"></polygon>
-</g>
-<!-- Prediction -->
-<g id="node9" class="node">
-<title>Prediction</title>
-<text text-anchor="middle" x="186.04" y="-15" font-family="Times,serif" font-size="10.00">最終予測</text>
-</g>
-<!-- Summary&#45;&gt;Prediction -->
-<g id="edge10" class="edge">
-<title>Summary-&gt;Prediction</title>
-<path fill="none" stroke="black" d="M186.04,-71.7C186.04,-63.98 186.04,-54.71 186.04,-46.11"></path>
-<polygon fill="black" stroke="black" points="189.54,-46.1 186.04,-36.1 182.54,-46.1 189.54,-46.1"></polygon>
-</g>
-</g>
-</svg>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="randomforest-の利点" class="level2" data-number="4.41">
-<h2 data-number="4.41" class="anchored" data-anchor-id="randomforest-の利点"><span class="header-section-number">4.41</span> RandomForest の利点</h2>
-<ul>
-<li><p>Bootstrapは、“ハズレ値”を含まないデータとそれを用いたモデルも生成される</p>
-<ul>
-<li>ハズレ値の影響を軽減できる</li>
-</ul></li>
-<li><p>変数の一部を確率的に使用できなくすることで、モデル間で用いる変数の多様性が促進される</p>
-<ul>
-<li>より多くの変数の情報が活用できる</li>
-</ul></li>
-<li><p>注: 実際にはモデル単位ではなく、サンプル分割ごとに、(元々の変数数のsquare root個)ランダムに使用禁止する</p></li>
-</ul>
-</section>
-<section id="数値例-random-forest" class="level2" data-number="4.42">
-<h2 data-number="4.42" class="anchored" data-anchor-id="数値例-random-forest"><span class="header-section-number">4.42</span> 数値例: Random Forest</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="big-dataは優れた予測モデルを保証するか" class="level2" data-number="4.43">
-<h2 data-number="4.43" class="anchored" data-anchor-id="big-dataは優れた予測モデルを保証するか"><span class="header-section-number">4.43</span> Big dataは優れた予測モデルを保証するか?</h2>
-<ul>
-<li><p>「Big data <span class="math inline">\(=\)</span> サンプルサイズが多い」、のであれば、完璧な予測モデル <span class="math inline">\(g(X) = Y\)</span> を保証しない</p>
-<ul>
-<li>削減不可能な誤差 <span class="math inline">\(Y - E[Y|X]\)</span> が存在するため</li>
-</ul></li>
-<li><p>理想的な予測モデル <span class="math inline">\(g(X) = E[Y|X]\)</span> は保証できるか?</p>
-<ul>
-<li><p>伝統的な方法 <span class="math inline">\(=\)</span> 極めて強い仮定のもとでのみ可能</p></li>
-<li><p>多くの機械学習 <span class="math inline">\(=\)</span> 緩やかな仮定で可能</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="数値例-伝統的アプローチ5000事例" class="level2" data-number="4.44">
-<h2 data-number="4.44" class="anchored" data-anchor-id="数値例-伝統的アプローチ5000事例"><span class="header-section-number">4.44</span> 数値例: 伝統的アプローチ(5000事例)</h2>
-<ul>
-<li><p>研究者が、「Size <span class="math inline">\(= 40\)</span> で分割する」と決定</p>
-<ul>
-<li>推定されうるモデルを限定する</li>
-</ul></li>
-</ul>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="数値例-random-forest-with-large-sample-5000事例" class="level2" data-number="4.45">
-<h2 data-number="4.45" class="anchored" data-anchor-id="数値例-random-forest-with-large-sample-5000事例"><span class="header-section-number">4.45</span> 数値例: Random Forest with large sample (5000事例)</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="prediction_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="まとめ" class="level2" data-number="4.46">
-<h2 data-number="4.46" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">4.46</span> まとめ</h2>
+<section id="まとめ" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">4.4</span> まとめ</h2>
 <ul>
 <li><p>実際/理想/完璧な予測モデルの区別が重要</p></li>
 <li><p>理想の予測モデル: <span class="math inline">\(g(X)=E[Y|X]\)</span></p>
@@ -1338,10 +370,16 @@ window.Quarto = {
 <li><p>予測に使う前に、テストデータを用いた性能調査が必須</p></li>
 </ul>
 </section>
-<section id="reference" class="level2" data-number="4.47">
-<h2 data-number="4.47" class="anchored" data-anchor-id="reference"><span class="header-section-number">4.47</span> Reference</h2>
+<section id="reference" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="reference"><span class="header-section-number">4.5</span> Reference</h2>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p><span class="citation" data-cites="spiess2024double">(<a href="#ref-spiess2024double" role="doc-biblioref"><strong>spiess2024double?</strong></a>)</span><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

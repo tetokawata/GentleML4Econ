@@ -162,7 +162,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./prediction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測を目的とする要約</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -187,14 +187,16 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#実例" id="toc-実例" class="nav-link active" data-scroll-target="#実例"><span class="header-section-number">5.1</span> 実例</a>
+  <li><a href="#推定対象" id="toc-推定対象" class="nav-link active" data-scroll-target="#推定対象"><span class="header-section-number">5.1</span> 推定対象</a></li>
+  <li><a href="#推定方法-平均差" id="toc-推定方法-平均差" class="nav-link" data-scroll-target="#推定方法-平均差"><span class="header-section-number">5.2</span> 推定方法: 平均差</a>
   <ul class="collapse">
-  <li><a href="#ols" id="toc-ols" class="nav-link" data-scroll-target="#ols"><span class="header-section-number">5.1.1</span> OLS</a></li>
+  <li><a href="#推定方法-予測値の平均差" id="toc-推定方法-予測値の平均差" class="nav-link" data-scroll-target="#推定方法-予測値の平均差"><span class="header-section-number">5.2.1</span> 推定方法: 予測値の平均差</a></li>
+  <li><a href="#ols" id="toc-ols" class="nav-link" data-scroll-target="#ols"><span class="header-section-number">5.2.2</span> OLS</a></li>
   </ul></li>
-  <li><a href="#平均の比較" id="toc-平均の比較" class="nav-link" data-scroll-target="#平均の比較"><span class="header-section-number">5.2</span> 平均の比較</a></li>
-  <li><a href="#信頼区間" id="toc-信頼区間" class="nav-link" data-scroll-target="#信頼区間"><span class="header-section-number">5.3</span> 信頼区間</a>
+  <li><a href="#平均の比較" id="toc-平均の比較" class="nav-link" data-scroll-target="#平均の比較"><span class="header-section-number">5.3</span> 平均の比較</a>
   <ul class="collapse">
-  <li><a href="#信頼区間の重要性" id="toc-信頼区間の重要性" class="nav-link" data-scroll-target="#信頼区間の重要性"><span class="header-section-number">5.3.1</span> 信頼区間の重要性</a></li>
+  <li><a href="#信頼区間" id="toc-信頼区間" class="nav-link" data-scroll-target="#信頼区間"><span class="header-section-number">5.3.1</span> 信頼区間</a></li>
+  <li><a href="#信頼区間の重要性" id="toc-信頼区間の重要性" class="nav-link" data-scroll-target="#信頼区間の重要性"><span class="header-section-number">5.3.2</span> 信頼区間の重要性</a></li>
   </ul></li>
   <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">5.4</span> まとめ</a></li>
   <li><a href="#補論-統計モデルの推定" id="toc-補論-統計モデルの推定" class="nav-link" data-scroll-target="#補論-統計モデルの推定"><span class="header-section-number">5.5</span> 補論: 統計モデルの推定</a></li>
@@ -224,14 +226,18 @@ window.Quarto = {
 
 
 <p>本章では、変数 <span class="math inline">\(Y\)</span> と 別のある変数 <span class="math inline">\(D\)</span> の間の関係性を把握をゴールとする手法を紹介します。 このようなゴールにおいては、平均差の推定やOLSなど、経済学で伝統的に用いられてきた手法が有効であることを強調します。</p>
-<section id="実例" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="実例"><span class="header-section-number">5.1</span> 実例</h2>
-<ul>
-<li><p>１年前と比べた労働市場/社会の状況変化</p></li>
-<li><p>雇用形態間の所得格差</p></li>
-</ul>
-<section id="ols" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="ols"><span class="header-section-number">5.1.1</span> OLS</h3>
+<section id="推定対象" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="推定対象"><span class="header-section-number">5.1</span> 推定対象</h2>
+<p>膨大な議論が蓄積され、多くの統計ソフトで容易に実装可能な推定対象は、母平均の差である。 すなわち <span class="math display">\[D=1におけるYの母平均値 - D=0におけるYの母平均値\]</span> 。</p>
+</section>
+<section id="推定方法-平均差" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="推定方法-平均差"><span class="header-section-number">5.2</span> 推定方法: 平均差</h2>
+<p>最も単純な推定方法は、推定対象の母集団上での定義を、データ上で<strong>再現</strong>することである。 <span class="math inline">\(D=1\)</span> および <span class="math inline">\(D=0\)</span> それぞれについて、<span class="math inline">\(Y\)</span> のデータ上での平均値を計算し、その差を求める方法である。 すなわち <span class="math display">\[D=1におけるYのデータ上の平均値 - D=0におけるYのデータ上の平均値\]</span> を推定対象 (母平均差) の推定値とする。</p>
+<section id="推定方法-予測値の平均差" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="推定方法-予測値の平均差"><span class="header-section-number">5.2.1</span> 推定方法: 予測値の平均差</h3>
+</section>
+<section id="ols" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="ols"><span class="header-section-number">5.2.2</span> OLS</h3>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -311,8 +317,8 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="平均の比較" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="平均の比較"><span class="header-section-number">5.2</span> 平均の比較</h2>
+<section id="平均の比較" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="平均の比較"><span class="header-section-number">5.3</span> 平均の比較</h2>
 <ul>
 <li><p>２種類の方法が考えられる</p>
 <ul>
@@ -328,9 +334,8 @@ window.Quarto = {
 </ul></li>
 </ul></li>
 </ul>
-</section>
-<section id="信頼区間" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="信頼区間"><span class="header-section-number">5.3</span> 信頼区間</h2>
+<section id="信頼区間" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="信頼区間"><span class="header-section-number">5.3.1</span> 信頼区間</h3>
 <ul>
 <li><p>データ上の(単純)平均値であったとしても、データの偶然の偏り(Sampling Uncertainly)の影響を受ける</p>
 <ul>
@@ -342,8 +347,9 @@ window.Quarto = {
 <li><p><span class="math inline">\(Y\)</span> の予測値の平均値を用いる場合、計算方法が確立されていない</p></li>
 </ul></li>
 </ul>
-<section id="信頼区間の重要性" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="信頼区間の重要性"><span class="header-section-number">5.3.1</span> 信頼区間の重要性</h3>
+</section>
+<section id="信頼区間の重要性" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="信頼区間の重要性"><span class="header-section-number">5.3.2</span> 信頼区間の重要性</h3>
 <ul>
 <li><p>マクロな意思決定は、取り返しがつかない/幅広い層に影響を与えるものが多い</p></li>
 <li><p>判断材料となる情報にも、高い信頼性/透明性が求められる</p>
@@ -794,8 +800,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./prediction.html" class="pagination-link" aria-label="予測モデルの推定">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測モデルの推定</span></span>
+      <a href="./prediction.html" class="pagination-link" aria-label="予測を目的とする要約">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">予測を目的とする要約</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
