@@ -199,7 +199,11 @@ window.Quarto = {
   <li><a href="#ols" id="toc-ols" class="nav-link" data-scroll-target="#ols"><span class="header-section-number">4.2.3</span> OLS</a></li>
   <li><a href="#lasso" id="toc-lasso" class="nav-link" data-scroll-target="#lasso"><span class="header-section-number">4.2.4</span> LASSO</a></li>
   </ul></li>
-  <li><a href="#事例数の拡大" id="toc-事例数の拡大" class="nav-link" data-scroll-target="#事例数の拡大"><span class="header-section-number">4.3</span> 事例数の拡大</a></li>
+  <li><a href="#推定値の性質" id="toc-推定値の性質" class="nav-link" data-scroll-target="#推定値の性質"><span class="header-section-number">4.3</span> 推定値の性質</a>
+  <ul class="collapse">
+  <li><a href="#事例数の拡大" id="toc-事例数の拡大" class="nav-link" data-scroll-target="#事例数の拡大"><span class="header-section-number">4.3.1</span> 事例数の拡大</a></li>
+  <li><a href="#予測性能の測定" id="toc-予測性能の測定" class="nav-link" data-scroll-target="#予測性能の測定"><span class="header-section-number">4.3.2</span> 予測性能の測定</a></li>
+  </ul></li>
   <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">4.4</span> まとめ</a></li>
   <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">4.5</span> Reference</a></li>
   </ul>
@@ -286,7 +290,7 @@ window.Quarto = {
 <p>単純平均と丸暗記ほうの中間的なモデルを推定する代表的な方法は、線型モデルを最小二乗法 (OLS) で推定する方法です。</p>
 <section id="ysim-size" class="level4" data-number="4.2.3.1">
 <h4 data-number="4.2.3.1" class="anchored" data-anchor-id="ysim-size"><span class="header-section-number">4.2.3.1</span> <span class="math inline">\(Y\sim Size\)</span></h4>
-<p>最もシンプルな線型モデルとして、例えば以下を推定してみます。 <span class="math display">\[予測値 = \beta_0 + \beta_1\times Size\]</span> <span class="math inline">\(\beta_0,\beta_1\)</span> は、以下のデータ上の平均二乗誤差を最小化するように推定します。<span class="math display">\[(Y - 予測値)^2 のデータ上の平均\]</span></p>
+<p>最もシンプルな線型モデルとして、例えば以下を推定してみます。 <span class="math display">\[予測値 = \beta_0 + \beta_1\times District\]</span> <span class="math inline">\(\beta_0,\beta_1\)</span> は、以下のデータ上の平均二乗誤差を最小化するように推定します。<span class="math display">\[(Y - 予測値)^2 のデータ上の平均\]</span></p>
 <p>推定結果を図示すると、以下となります。</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -297,8 +301,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>単純平均とは異なり、Sizeが大きいと、平均取引価格が高くなる傾向を捉えるモデルが推定されています。 丸暗記法と比べると、分析者間での予測値のばらつきが減少しています。 これは、丸暗記法と比べて、事例の要約が機能していることを表しています。</p>
-<p>しかしながら、予測モデルは母平均よりも以前単純すぎます。 特にDistrictに応じて、平均価格が異なるという性質を捉えきれていません。</p>
+<p>単純平均とは異なり、中心６区の物件は、平均取引価格が高くなる傾向を捉えるモデルが推定されています。 丸暗記法と比べると、分析者間での予測値のばらつきが減少しています。 これは、丸暗記法と比べて、事例の要約が機能していることを表しています。</p>
+<p>しかしながら母平均に比べると、以前単純すぎます。 特にSizeに応じて、平均価格が異なるという性質を捉えきれていません。 言い換えると単純平均に近すぎるモデルになっています。</p>
 </section>
 <section id="ysim-size-district" class="level4" data-number="4.2.3.2">
 <h4 data-number="4.2.3.2" class="anchored" data-anchor-id="ysim-size-district"><span class="header-section-number">4.2.3.2</span> <span class="math inline">\(Y\sim Size + District\)</span></h4>
@@ -317,7 +321,7 @@ window.Quarto = {
 </section>
 <section id="ysim-size-size2-..-size6-district" class="level4" data-number="4.2.3.3">
 <h4 data-number="4.2.3.3" class="anchored" data-anchor-id="ysim-size-size2-..-size6-district"><span class="header-section-number">4.2.3.3</span> <span class="math inline">\(Y\sim (Size + Size^2 + .. + Size^6) * District\)</span></h4>
-<p>母平均が持つ複雑な性質を捉えるために、さらに複雑なモデルを推定してみます。 <span class="math display">\[予測値 = \beta_0 + \beta_1 Size +..+\beta_6Size^6+\beta_7District\]</span> <span class="math display">\[+\beta_8 Size\times District +..+\beta_{14}Size^6\times District\]</span> このような複雑なモデルであったとしても、データへの適合度を最大化するように推定できます。 ただし、複雑すぎると母平均から乖離してしまいます。</p>
+<p>母平均が持つ複雑な性質を捉えるために、交差効果と高次項を導入し、さらに複雑なモデルを推定してみます。 <span class="math display">\[予測値 = \beta_0 + \beta_1 Size+\beta_7District + \underbrace{\beta_2Size^2 +..+\beta_6Size^6}_{高次項}\]</span> <span class="math display">\[+\underbrace{\beta_8 Size\times District +..+\beta_{14}Size^6\times District}_{交差効果}\]</span> このような複雑なモデルであったとしても、データへの適合度を最大化するように推定できます。 ただし、複雑すぎると母平均から乖離してしまいます。</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -328,10 +332,27 @@ window.Quarto = {
 </div>
 </div>
 <p>複雑なモデルを最小二乗法で推定すると、よりデータへの適合度を改善し、データ上の平均値に近づけることができます。 このことは、必ずしも望ましいとはいえません。 なぜならば、丸暗記法により推定されたモデルに近づくからです。 すなわち少数の事例しかない<span class="math inline">\(X\)</span>の組み合わせについては、丸暗記法と同様に母平均から乖離し、予測性能が悪化します。</p>
+<p>線型モデルを複雑にしすぎると丸暗記モデルになり、単純化しすぎると単純平均モデルとなります。 この中間的なモデルが予測性能が高いことが多いですが、分析者がそのようなモデルを適切に設定することは困難です。 機械学習では、この問題に対して、データに基づく解決策を提案しています。</p>
 </section>
 </section>
 <section id="lasso" class="level3" data-number="4.2.4">
 <h3 data-number="4.2.4" class="anchored" data-anchor-id="lasso"><span class="header-section-number">4.2.4</span> LASSO</h3>
+<p>適切な単純さをもつモデルを推定する方法として、LASSOを紹介します。 LASSOは、罰則付き回帰と呼ばれる枠組みの一つの手法です。 OLSと同様に線型予測モデルを推定しますが、データへの当てはまりだけでなく、モデルの複雑性も抑制することも目指します。</p>
+<p>例えば、以下のモデルを推定します。<span class="math display">\[予測値 = \beta_0 + \beta_1 Size+\beta_7District + \underbrace{\beta_2Size^2 +..+\beta_6Size^6}_{高次項}\]</span> <span class="math display">\[+\underbrace{\beta_8 Size\times District +..+\beta_{14}Size^6\times District}_{交差効果}\]</span> <span class="math inline">\(\beta\)</span> の値は、以下を最小化するように決定します。 <span class="math display">\[(Y - 予測値)^2 のデータ上の平均\]</span> <span class="math display">\[+ \underbrace{\lambda}_{Tunning\ Parameter} (\beta_1の絶対値 +..)\]</span> <span class="math inline">\(\lambda\)</span> は、データへの当てはまりではなく、モデルの予測性能を高めるように決定します。 具体的には、交差検証を用いる方法、情報基準などの理論的な評価指標を用いる方法があります。</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\lambda\)</span> は、<span class="math inline">\(\beta\)</span> と異なり、データへの当てはまりを最大化するように決定できません。 なぜでしょうか？</p>
+</div>
+</div>
+<p><span class="math inline">\(\lambda\)</span> に応じて、予測モデルがどのように変化するのか考えてみます。 <span class="math inline">\(\lambda\)</span> を変化させることで、予測モデルは、単純平均と丸暗記の間で変化することになります。 <span class="math inline">\(\lambda=0\)</span> であれば、OLSと全く同じモデルを推定します。 よって、複雑な線型モデルを推定した場合は丸暗記モデルに近いモデルとなります。 <span class="math inline">\(\lambda\)</span> を非常に大きい値を設定した場合、<span class="math inline">\(\beta_1=\beta_2=..= 0\)</span> となります。 この場合は<span class="math inline">\(\beta_0\)</span>をデータに当てはまるように推定することになり、単純平均と一致します。</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -341,10 +362,15 @@ window.Quarto = {
 </div>
 </div>
 </div>
+<p>分析者1と3については、DistrictとSizeについて、直線のモデルが推定されています。 分析者2,4については、District共通の予測値が推定されています。</p>
+<p>以上から全ての分析者について、モデルが単純化されていることが確認できます。 ただし単純化の方法は、かなり異なっており、データに強く依存していることが確認できます。 これは事例数の少なさ (100事例)が大きな影響を与えています。</p>
 </section>
 </section>
-<section id="事例数の拡大" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="事例数の拡大"><span class="header-section-number">4.3</span> 事例数の拡大</h2>
+<section id="推定値の性質" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="推定値の性質"><span class="header-section-number">4.3</span> 推定値の性質</h2>
+<section id="事例数の拡大" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="事例数の拡大"><span class="header-section-number">4.3.1</span> 事例数の拡大</h3>
+<p>推定結果は、一般に事例数に強く影響を受けます。 以下の数値例では、事例数を100事例から50000事例まで増やし、 <span class="math inline">\(Y\sim Size + District\)</span> をOLSで、<span class="math inline">\(Y\sim (Size + Size^2 + .. + Size^6) * District\)</span> をLASSOで推定しています。</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -354,6 +380,14 @@ window.Quarto = {
 </div>
 </div>
 </div>
+<p>上記結果は、事例数が拡大すると、分析者間での推定結果のばらつきが大きく減少していることが確認できます。 これは多くの推定方法で成り立つ性質であり、大規模な事例を集計すると、データの違いによる結果のばらつきが抑制されます。</p>
+<p>母平均の近似については、複雑なモデルにLASSOを適用した推定結果が、単純なモデルにOLSを適用した結果を大きく上回っています。 単純なモデルは、分析者が設定するモデルに推定結果が大きく制約されており、事例数増加の恩恵が十分に得られません。 対してLASSOは、データ主導でモデルの複雑性の調整が行われるので、事例数が増えると、それに応じて複雑なモデルが推定できます。</p>
+</section>
+<section id="予測性能の測定" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="予測性能の測定"><span class="header-section-number">4.3.2</span> 予測性能の測定</h3>
+<p>予測を目指す分析では、推定された予測モデルの性能を評価することが重要となります。 現状、幅広いデータや状況において、高い予測性能を生み出す方法は存在しません。 このため複数の予測モデルを”試作”し、その性能を比較することが分析工程に組み込まれています。</p>
+<p>最もシンプルな評価方法は、サンプル分割です。 データをランダムに訓練データとテストデータに分割し、訓練データのみでモデルを試作し、テストデータへの当てはまりを(平均二乗誤差などで)評価します。 訓練/テスト間での事例数の比率については、8:2や95:5が(経験則として)推奨されることが多いです。</p>
+</section>
 </section>
 <section id="まとめ" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">4.4</span> まとめ</h2>
