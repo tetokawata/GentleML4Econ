@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -168,13 +188,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simplecomparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">単純な比較分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 単純な比較</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./complexcomparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">複雑な比較分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">把握を目的とする要約: What if</span></span></a>
   </div>
 </li>
     </ul>
@@ -387,32 +407,514 @@ Note
 <h3 data-number="4.3.2" class="anchored" data-anchor-id="予測性能の測定"><span class="header-section-number">4.3.2</span> 予測性能の測定</h3>
 <p>予測を目指す分析では、推定された予測モデルの性能を評価することが重要となります。 現状、幅広いデータや状況において、高い予測性能を生み出す方法は存在しません。 このため複数の予測モデルを”試作”し、その性能を比較することが分析工程に組み込まれています。</p>
 <p>最もシンプルな評価方法は、サンプル分割です。 データをランダムに訓練データとテストデータに分割し、訓練データのみでモデルを試作し、テストデータへの当てはまりを(平均二乗誤差などで)評価します。 訓練/テスト間での事例数の比率については、8:2や95:5が(経験則として)推奨されることが多いです。</p>
+<p>実際の取引データに適用した結果は以下です。 6378事例のうち、ランダムに選んだ半分を訓練、残り半分をテストに用いました。 テストした推定方法は</p>
+<ul>
+<li><p><strong>OLS:</strong> 取引価格 ~ 部屋の広さ + 立地 + 取引年</p></li>
+<li><p><strong>OLS| 交差項 + 高次項:</strong> 取引価格 ~ 部屋の広さ + 立地 + 取引年 + 交差項 + 高次項(６次まで)</p></li>
+<li><p><strong>LASSO: 交差項 + 高次項:</strong> 取引価格 ~ 部屋の広さ + 立地 + 取引年 + 交差項 + 高次項(６次まで)</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div id="rnpzmapqgk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rnpzmapqgk table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#rnpzmapqgk thead, #rnpzmapqgk tbody, #rnpzmapqgk tfoot, #rnpzmapqgk tr, #rnpzmapqgk td, #rnpzmapqgk th {
+  border-style: none;
+}
+
+#rnpzmapqgk p {
+  margin: 0;
+  padding: 0;
+}
+
+#rnpzmapqgk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rnpzmapqgk .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#rnpzmapqgk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rnpzmapqgk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rnpzmapqgk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rnpzmapqgk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rnpzmapqgk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rnpzmapqgk .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rnpzmapqgk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rnpzmapqgk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rnpzmapqgk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rnpzmapqgk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rnpzmapqgk .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#rnpzmapqgk .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#rnpzmapqgk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rnpzmapqgk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rnpzmapqgk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rnpzmapqgk .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rnpzmapqgk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rnpzmapqgk .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#rnpzmapqgk .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#rnpzmapqgk .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#rnpzmapqgk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rnpzmapqgk .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#rnpzmapqgk .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#rnpzmapqgk .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rnpzmapqgk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rnpzmapqgk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rnpzmapqgk .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rnpzmapqgk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rnpzmapqgk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rnpzmapqgk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rnpzmapqgk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rnpzmapqgk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rnpzmapqgk .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rnpzmapqgk .gt_left {
+  text-align: left;
+}
+
+#rnpzmapqgk .gt_center {
+  text-align: center;
+}
+
+#rnpzmapqgk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rnpzmapqgk .gt_font_normal {
+  font-weight: normal;
+}
+
+#rnpzmapqgk .gt_font_bold {
+  font-weight: bold;
+}
+
+#rnpzmapqgk .gt_font_italic {
+  font-style: italic;
+}
+
+#rnpzmapqgk .gt_super {
+  font-size: 65%;
+}
+
+#rnpzmapqgk .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#rnpzmapqgk .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#rnpzmapqgk .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#rnpzmapqgk .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#rnpzmapqgk .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#rnpzmapqgk .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#rnpzmapqgk .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#rnpzmapqgk .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#rnpzmapqgk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="OLS" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">OLS</th>
+<th id="OLS| 交差項 + 高次項" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">OLS| 交差項 + 高次項</th>
+<th id="LASSO" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">LASSO</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="OLS">369</td>
+<td class="gt_row gt_right" headers="OLS| 交差項 + 高次項">316</td>
+<td class="gt_row gt_right" headers="LASSO">303</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>LASSOが最も予測性能が高く、単純なOLSと比較し、0.179 パーセントほど平均二乗誤差を削減しました。 対して、交差項と高次項を追加したOLSと比較した場合、0.041 パーセントほどの改善にとどまります。 これはモデルの複雑さに比べて、事例数が多く、LASSOによるモデル単純化の恩恵が限定的であることを示しています。</p>
 </section>
 </section>
 <section id="まとめ" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">4.4</span> まとめ</h2>
 <ul>
-<li><p>実際/理想/完璧な予測モデルの区別が重要</p></li>
-<li><p>理想の予測モデル: <span class="math inline">\(g(X)=E[Y|X]\)</span></p>
-<ul>
-<li>個人差があれば、完璧な予測 <span class="math inline">\(g(X)=Y\)</span> は不可能</li>
-</ul></li>
-<li><p>限られたデータから推定されたモデルは、理想の予測モデルとはならない <span class="math inline">\(g(X)\neq E[Y|X]\)</span></p>
-<ul>
-<li>機械学習を用いて、近づけることは可能</li>
-</ul></li>
-<li><p>予測に使う前に、テストデータを用いた性能調査が必須</p></li>
+<li><p>他の予測モデルの推定方法については、<a href="https://www.statlearning.com/"><span class="citation" data-cites="james2013introduction">James et al. (<span>2021</span>)</span></a> 参照</p></li>
+<li><p>予測誤差の他の測定方法については、<span class="citation" data-cites="angelopoulos2023conformal">Angelopoulos, Bates, et al. (<a href="#ref-angelopoulos2023conformal" role="doc-biblioref">2023</a>)</span> などを参照</p></li>
 </ul>
 </section>
 <section id="reference" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="reference"><span class="header-section-number">4.5</span> Reference</h2>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-angelopoulos2023conformal" class="csl-entry" role="listitem">
+Angelopoulos, Anastasios N, Stephen Bates, et al. 2023. <span>“Conformal Prediction: A Gentle Introduction.”</span> <em>Foundations and Trends<span></span> in Machine Learning</em> 16 (4): 494–591.
+</div>
+<div id="ref-james2013introduction" class="csl-entry" role="listitem">
+James, Gareth, Daniela Witten, Trevor Hastie, Robert Tibshirani, et al. 2021. <em>An Introduction to Statistical Learning</em>. Vol. 112. Springer.
+</div>
+<div id="ref-spiess2024double" class="csl-entry" role="listitem">
+Spiess, Jann, Amar Venugopal, et al. 2024. <span>“Double and Single Descent in Causal Inference with an Application to High-Dimensional Synthetic Control.”</span> <em>Advances in Neural Information Processing Systems</em> 36.
+</div>
+</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p><span class="citation" data-cites="spiess2024double">(<a href="#ref-spiess2024double" role="doc-biblioref"><strong>spiess2024double?</strong></a>)</span><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p><span class="citation" data-cites="spiess2024double">Spiess, Venugopal, et al. (<a href="#ref-spiess2024double" role="doc-biblioref">2024</a>)</span><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -833,8 +1335,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./simplecomparison.html" class="pagination-link" aria-label="単純な比較分析">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">単純な比較分析</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./simplecomparison.html" class="pagination-link" aria-label="把握を目的とする要約: 単純な比較">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 単純な比較</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

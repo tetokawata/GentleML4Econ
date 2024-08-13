@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>データ分析入門ノート - 6&nbsp; 複雑な比較分析</title>
+<title>データ分析入門ノート - 6&nbsp; 把握を目的とする要約: What if</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -87,6 +87,15 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -129,7 +138,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./complexcomparison.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">複雑な比較分析</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./complexcomparison.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">把握を目的とする要約: What if</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -187,13 +196,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simplecomparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">単純な比較分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 単純な比較</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./complexcomparison.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">複雑な比較分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">把握を目的とする要約: What if</span></span></a>
   </div>
 </li>
     </ul>
@@ -206,27 +215,33 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#アプローチ" id="toc-アプローチ" class="nav-link active" data-scroll-target="#アプローチ"><span class="header-section-number">6.1</span> アプローチ</a></li>
-  <li><a href="#変化の分解" id="toc-変化の分解" class="nav-link" data-scroll-target="#変化の分解"><span class="header-section-number">6.2</span> 変化の分解</a></li>
-  <li><a href="#例.-出生率" id="toc-例.-出生率" class="nav-link" data-scroll-target="#例.-出生率"><span class="header-section-number">6.3</span> 例. 出生率</a></li>
-  <li><a href="#例.-既存店ベースの比較" id="toc-例.-既存店ベースの比較" class="nav-link" data-scroll-target="#例.-既存店ベースの比較"><span class="header-section-number">6.4</span> 例. 既存店ベースの比較</a></li>
-  <li><a href="#例.-客層" id="toc-例.-客層" class="nav-link" data-scroll-target="#例.-客層"><span class="header-section-number">6.5</span> 例. 客層</a></li>
-  <li><a href="#例.-因果推論" id="toc-例.-因果推論" class="nav-link" data-scroll-target="#例.-因果推論"><span class="header-section-number">6.6</span> 例. 因果推論</a></li>
-  <li><a href="#理想的な推定方法" id="toc-理想的な推定方法" class="nav-link" data-scroll-target="#理想的な推定方法"><span class="header-section-number">6.7</span> 理想的な推定方法</a></li>
-  <li><a href="#residual-learner" id="toc-residual-learner" class="nav-link" data-scroll-target="#residual-learner"><span class="header-section-number">6.8</span> R(esidual)-learner</a></li>
-  <li><a href="#直感" id="toc-直感" class="nav-link" data-scroll-target="#直感"><span class="header-section-number">6.9</span> 直感</a></li>
-  <li><a href="#直感-1" id="toc-直感-1" class="nav-link" data-scroll-target="#直感-1"><span class="header-section-number">6.10</span> 直感</a></li>
-  <li><a href="#例-基本アイディア" id="toc-例-基本アイディア" class="nav-link" data-scroll-target="#例-基本アイディア"><span class="header-section-number">6.11</span> 例: 基本アイディア</a></li>
-  <li><a href="#直感-2" id="toc-直感-2" class="nav-link" data-scroll-target="#直感-2"><span class="header-section-number">6.12</span> 直感</a></li>
-  <li><a href="#直感-3" id="toc-直感-3" class="nav-link" data-scroll-target="#直感-3"><span class="header-section-number">6.13</span> 直感</a></li>
-  <li><a href="#直感-4" id="toc-直感-4" class="nav-link" data-scroll-target="#直感-4"><span class="header-section-number">6.14</span> 直感</a></li>
-  <li><a href="#double-debaised-machine-learning" id="toc-double-debaised-machine-learning" class="nav-link" data-scroll-target="#double-debaised-machine-learning"><span class="header-section-number">6.15</span> Double Debaised Machine Learning</a></li>
-  <li><a href="#推定値の性質" id="toc-推定値の性質" class="nav-link" data-scroll-target="#推定値の性質"><span class="header-section-number">6.16</span> 推定値の性質</a></li>
-  <li><a href="#補論-olsとの比較" id="toc-補論-olsとの比較" class="nav-link" data-scroll-target="#補論-olsとの比較"><span class="header-section-number">6.17</span> 補論: OLSとの比較</a></li>
-  <li><a href="#補論-olsとの比較-1" id="toc-補論-olsとの比較-1" class="nav-link" data-scroll-target="#補論-olsとの比較-1"><span class="header-section-number">6.18</span> 補論: OLSとの比較</a></li>
-  <li><a href="#補論-統計モデルとしての書き換え" id="toc-補論-統計モデルとしての書き換え" class="nav-link" data-scroll-target="#補論-統計モデルとしての書き換え"><span class="header-section-number">6.19</span> 補論: 統計モデルとしての書き換え</a></li>
-  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">6.20</span> まとめ</a></li>
-  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">6.21</span> Reference</a></li>
+  <li><a href="#推定対象" id="toc-推定対象" class="nav-link active" data-scroll-target="#推定対象"><span class="header-section-number">6.1</span> 推定対象</a></li>
+  <li><a href="#推定方法" id="toc-推定方法" class="nav-link" data-scroll-target="#推定方法"><span class="header-section-number">6.2</span> 推定方法</a>
+  <ul class="collapse">
+  <li><a href="#ols" id="toc-ols" class="nav-link" data-scroll-target="#ols"><span class="header-section-number">6.2.1</span> OLS</a></li>
+  <li><a href="#r-leaner" id="toc-r-leaner" class="nav-link" data-scroll-target="#r-leaner"><span class="header-section-number">6.2.2</span> R-leaner</a></li>
+  </ul></li>
+  <li><a href="#アプローチ" id="toc-アプローチ" class="nav-link" data-scroll-target="#アプローチ"><span class="header-section-number">6.3</span> アプローチ</a></li>
+  <li><a href="#変化の分解" id="toc-変化の分解" class="nav-link" data-scroll-target="#変化の分解"><span class="header-section-number">6.4</span> 変化の分解</a></li>
+  <li><a href="#例.-出生率" id="toc-例.-出生率" class="nav-link" data-scroll-target="#例.-出生率"><span class="header-section-number">6.5</span> 例. 出生率</a></li>
+  <li><a href="#例.-既存店ベースの比較" id="toc-例.-既存店ベースの比較" class="nav-link" data-scroll-target="#例.-既存店ベースの比較"><span class="header-section-number">6.6</span> 例. 既存店ベースの比較</a></li>
+  <li><a href="#例.-客層" id="toc-例.-客層" class="nav-link" data-scroll-target="#例.-客層"><span class="header-section-number">6.7</span> 例. 客層</a></li>
+  <li><a href="#例.-因果推論" id="toc-例.-因果推論" class="nav-link" data-scroll-target="#例.-因果推論"><span class="header-section-number">6.8</span> 例. 因果推論</a></li>
+  <li><a href="#理想的な推定方法" id="toc-理想的な推定方法" class="nav-link" data-scroll-target="#理想的な推定方法"><span class="header-section-number">6.9</span> 理想的な推定方法</a></li>
+  <li><a href="#residual-learner" id="toc-residual-learner" class="nav-link" data-scroll-target="#residual-learner"><span class="header-section-number">6.10</span> R(esidual)-learner</a></li>
+  <li><a href="#直感" id="toc-直感" class="nav-link" data-scroll-target="#直感"><span class="header-section-number">6.11</span> 直感</a></li>
+  <li><a href="#直感-1" id="toc-直感-1" class="nav-link" data-scroll-target="#直感-1"><span class="header-section-number">6.12</span> 直感</a></li>
+  <li><a href="#例-基本アイディア" id="toc-例-基本アイディア" class="nav-link" data-scroll-target="#例-基本アイディア"><span class="header-section-number">6.13</span> 例: 基本アイディア</a></li>
+  <li><a href="#直感-2" id="toc-直感-2" class="nav-link" data-scroll-target="#直感-2"><span class="header-section-number">6.14</span> 直感</a></li>
+  <li><a href="#直感-3" id="toc-直感-3" class="nav-link" data-scroll-target="#直感-3"><span class="header-section-number">6.15</span> 直感</a></li>
+  <li><a href="#直感-4" id="toc-直感-4" class="nav-link" data-scroll-target="#直感-4"><span class="header-section-number">6.16</span> 直感</a></li>
+  <li><a href="#double-debaised-machine-learning" id="toc-double-debaised-machine-learning" class="nav-link" data-scroll-target="#double-debaised-machine-learning"><span class="header-section-number">6.17</span> Double Debaised Machine Learning</a></li>
+  <li><a href="#推定値の性質" id="toc-推定値の性質" class="nav-link" data-scroll-target="#推定値の性質"><span class="header-section-number">6.18</span> 推定値の性質</a></li>
+  <li><a href="#補論-olsとの比較" id="toc-補論-olsとの比較" class="nav-link" data-scroll-target="#補論-olsとの比較"><span class="header-section-number">6.19</span> 補論: OLSとの比較</a></li>
+  <li><a href="#補論-olsとの比較-1" id="toc-補論-olsとの比較-1" class="nav-link" data-scroll-target="#補論-olsとの比較-1"><span class="header-section-number">6.20</span> 補論: OLSとの比較</a></li>
+  <li><a href="#補論-統計モデルとしての書き換え" id="toc-補論-統計モデルとしての書き換え" class="nav-link" data-scroll-target="#補論-統計モデルとしての書き換え"><span class="header-section-number">6.21</span> 補論: 統計モデルとしての書き換え</a></li>
+  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">6.22</span> まとめ</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">6.23</span> Reference</a></li>
   </ul>
 </nav>
     </div>
@@ -235,7 +250,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-ComplexComparison" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">複雑な比較分析</span></span></h1>
+<h1 class="title"><span id="sec-ComplexComparison" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">把握を目的とする要約: What if</span></span></h1>
 </div>
 
 
@@ -252,6 +267,51 @@ window.Quarto = {
 </header>
 
 
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="complexcomparison_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="complexcomparison_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="complexcomparison_files/figure-html/unnamed-chunk-1-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="complexcomparison_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ Z + X, data = Temp)
+
+Coefficients:
+(Intercept)            Z            X  
+  5.684e-15    1.000e+00    1.000e+00  </code></pre>
+</div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-7bf94cd961c11210a1ca" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-7bf94cd961c11210a1ca">{"x":{"visdat":{"4e3d470728a":["function () ","plotlyVisDat"]},"cur_data":"4e3d470728a","attrs":{"4e3d470728a":{"x":{},"y":{},"z":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"X"},"yaxis":{"title":"Z"},"zaxis":{"title":"Y"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[1.3275433157104999,1.8606194981839508,2.864266816759482,4.5410389499738812,1.008409655187279,4.4919484248384833,4.7233763430267572,3.3039889624342322,3.1455702194944024,0.30893135233782232,1.0298728744965047,0.88278376264497638,3.435114233288914,1.9205185910686851,3.8492070999927819,2.4884962104260921,3.5880925413221121,4.959530474152416,1.9001758971717209,3.8872261065989733,4.6735261555295438,1.0607126064132899,3.2583688304293901,0.6277754798065871,1.3361033436376601,1.930570462718606,0.066951665794476867,1.9119397853501141,4.3484542286023498,1.7017449834384024,2.4104005773551762,2.997829127125442,2.4677065352443606,0.93108800705522299,4.136866593034938,3.3423336909618229,3.9711993036326021,0.53971812943927944,3.61855473020114,2.0563721482176334,4.1047314705792814,3.2353009690996259,3.9146638114470989,2.7651815582066774,2.6485979009885341,3.9467811584472656,0.11665601166896522,2.3861503251828253,3.6615686933510005,3.4636577824130654,2.3880981106776744,4.3060473841615021,2.190485536120832,1.2239863851573318,0.35339523572474718,0.49733080086298287,1.5813585359137505,2.593171315966174,3.3100253820884973,2.0341509359423071,4.564379621297121,1.4680168638005853,2.2953286312986165,1.6619733709376305,3.2543523353524506,1.2900839035864919,2.3927262413781136,3.8315533532295376,0.42123457184061408,4.37660665018484,1.6953646892216057,4.1972017509397119,1.7334174457937479,1.6688746539875865,2.381756225368008,4.460991679225117,4.3216973531525582,1.9499477173667401,3.8866034941747785,4.803089986089617,2.1732974238693714,3.5625733935739845,1.9999718444887549,1.6267607593908906,3.7854357401374727,1.0134612757246941,3.5556061123497784,0.60845960513688624,1.2274425697978586,0.71652189712040126,1.1981470754835755,0.29467188636772335,3.2114412926603109,4.3813460634555668,3.8945733872242272,3.9865441294386983,2.2763722680974752,2.0504204102326185,4.0543512138538063,3.0246664513833821],"y":[26.188957123085856,14.127890877425671,10.8104058355093,39.707362446933985,25.339730577543378,8.5283254086971283,5.1748939231038094,19.124721372500062,36.962978793308139,23.950438685715199,39.046827796846628,29.271700475364923,14.26907648332417,17.258947622030973,5.9284624271094799,0.52310301922261715,28.622642643749714,4.1273694299161434,17.851373944431543,25.604041805490851,39.673544801771641,19.823743114247918,19.373980974778533,6.9376933947205544,30.192837780341506,18.155819568783045,20.446791350841522,8.301804531365633,9.1463257092982531,23.82847985252738,22.994887931272388,3.082575211301446,1.42162318341434,25.711819687858224,37.144607985392213,23.923696894198656,22.436029920354486,21.041108956560493,39.403808955103159,20.305672893300653,27.311523146927357,24.061648705974221,9.5547471102327108,10.32663706690073,29.17238493449986,18.10283325612545,7.0050707366317511,29.86793078482151,4.1995056159794331,34.581797961145639,24.585798867046833,22.286381553858519,13.151092762127519,18.125257818028331,20.017638904973865,7.2346544452011585,21.185224112123251,3.0110298283398151,11.110237305983901,8.5079807695001364,11.391619239002466,35.803764117881656,17.849412932991982,31.199395591393113,35.224761394783854,16.524968380108476,2.5523392204195261,13.419499667361379,28.949037864804268,13.50461333990097,25.21656489931047,33.624582160264254,34.245266588404775,15.654371241107583,15.219755424186587,35.817817039787769,25.772630516439676,29.643145948648453,24.212137861177325,36.123264459893107,11.749206203967333,7.6504043955355883,35.458037732169032,20.133579429239035,35.08230172097683,7.5677448976784945,30.324122095480561,28.979955706745386,37.748992731794715,21.905863480642438,28.46975470893085,15.556203993037343,4.0349250473082066,37.092083543539047,11.329300012439489,23.622926352545619,4.4144241977483034,33.620281284675002,12.718547377735376,31.314053479582071],"z":[27.516500438796356,15.988510375609621,13.674672652268782,44.248401396907866,26.348140232730657,13.020273833535612,9.8982702661305666,22.428710334934294,40.108549012802541,24.259370038053021,40.076700671343133,30.1544842380099,17.704190716613084,19.179466213099658,9.7776695271022618,3.0115992296487093,32.210735185071826,9.0868999040685594,19.751549841603264,29.491267912089825,44.347070957301185,20.884455720661208,22.632349805207923,7.5654688745271415,31.528941123979166,20.086390031501651,20.513743016635999,10.213744316715747,13.494779937900603,25.530224835965782,25.405288508627564,6.080404338426888,3.8893297186587006,26.642907694913447,41.281474578427151,27.266030585160479,26.407229223987088,21.580827085999772,43.022363685304299,22.362045041518286,31.416254617506638,27.296949675073847,13.46941092167981,13.091818625107408,31.820982835488394,22.049614414572716,7.1217267483007163,32.254081110004336,7.8610743093304336,38.045455743558705,26.973896977724507,26.592428938020021,15.341578298248351,19.349244203185663,20.371034140698612,7.7319852460641414,22.766582648037001,5.6042011443059891,14.420262688072398,10.542131705442443,15.955998860299587,37.271780981682241,20.144741564290598,32.861368962330744,38.479113730136305,17.815052283694968,4.9450654617976397,17.251053020590916,29.370272436644882,17.88121999008581,26.911929588532075,37.821783911203966,35.978684034198523,17.32324589509517,17.601511649554595,40.278808719012886,30.094327869592234,31.593093666015193,28.098741355352104,40.926354445982724,13.922503627836704,11.212977789109573,37.458009576657787,21.760340188629925,38.867737461114302,8.5812061734031886,33.87972820783034,29.588415311882272,38.976435301592574,22.622385377762839,29.667901784414425,15.850875879405066,7.2463663399685174,41.473429606994614,15.223873399663717,27.609470481984317,6.6907964658457786,35.670701694907621,16.772898591589183,34.338719930965453],"type":"scatter3d","mode":"markers","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
 <ul>
 <li><p>バランス後の比較</p></li>
 <li><p><span class="math inline">\(D\)</span> 間で <span class="math inline">\(X\)</span> についての偏りを均した上で、<span class="math inline">\(Y\)</span> についてどの程度差が存在するのか?</p>
@@ -260,8 +320,45 @@ window.Quarto = {
 </ul></li>
 <li><p>注: <span class="math inline">\(D,Y,X\)</span> は分析に先立って、分析者が政策的関心等に応じて設定する必要がある</p></li>
 </ul>
-<section id="アプローチ" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="アプローチ"><span class="header-section-number">6.1</span> アプローチ</h2>
+<section id="推定対象" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="推定対象"><span class="header-section-number">6.1</span> 推定対象</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="complexcomparison_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  term estimate std.error statistic       p.value conf.low conf.high    df
+1  CBD 24.16031 0.8517858   28.3643 2.934426e-174 22.49076  25.82986 25356
+  outcome
+1   Price</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  term estimate std.error statistic p.value conf.low conf.high    df outcome
+1  CBD 22.57652 0.5301507  42.58509       0 21.53739  23.61564 25353   Price</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  term estimate std.error statistic p.value conf.low conf.high    df outcome
+1  CBD 22.68893 0.5431694  41.77137       0 21.62429  23.75357 25350   Price</code></pre>
+</div>
+</div>
+</section>
+<section id="推定方法" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="推定方法"><span class="header-section-number">6.2</span> 推定方法</h2>
+<section id="ols" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="ols"><span class="header-section-number">6.2.1</span> OLS</h3>
+<p><span class="citation" data-cites="ben2021balancing">Ben-Michael et al. (<a href="#ref-ben2021balancing" role="doc-biblioref">2021</a>)</span></p>
+<p><span class="citation" data-cites="hainmueller2012entropy">Hainmueller (<a href="#ref-hainmueller2012entropy" role="doc-biblioref">2012</a>)</span></p>
+</section>
+<section id="r-leaner" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="r-leaner"><span class="header-section-number">6.2.2</span> R-leaner</h3>
+</section>
+</section>
+<section id="アプローチ" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="アプローチ"><span class="header-section-number">6.3</span> アプローチ</h2>
 <ul>
 <li><p>伝統的には、重回帰分析を用いた分析 <span class="math inline">\(Y\sim D + X_1+..\)</span> が行われてきた</p>
 <ul>
@@ -269,21 +366,21 @@ window.Quarto = {
 </ul></li>
 <li><p>機械学習とOLSの併用が有効</p>
 <ul>
-<li>Target/Debiased learning<span class="citation" data-cites="van2011targeted che2018double chernozhukov2022locally">(<a href="#ref-van2011targeted" role="doc-biblioref">Van der Laan, Rose, et al. 2011</a>; <a href="#ref-che2018double" role="doc-biblioref">Chernozhukov et al. 2018</a>, <a href="#ref-chernozhukov2022locally" role="doc-biblioref">2022</a>)</span></li>
+<li>Target/Debiased learning<span class="citation" data-cites="van2011targeted chernozhukov2018double chernozhukov2022locally">(<a href="#ref-van2011targeted" role="doc-biblioref">Van der Laan and Rose 2011</a>; <a href="#ref-chernozhukov2018double" role="doc-biblioref">Chernozhukov et al. 2018</a>, <a href="#ref-chernozhukov2022locally" role="doc-biblioref">2022</a>)</span></li>
 </ul></li>
 <li><p><a href="https://causalml-book.org/">CausalMLBook</a>の1,4,10章に相当</p></li>
 </ul>
 </section>
-<section id="変化の分解" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="変化の分解"><span class="header-section-number">6.2</span> 変化の分解</h2>
+<section id="変化の分解" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="変化の分解"><span class="header-section-number">6.4</span> 変化の分解</h2>
 <ul>
 <li><p><span class="math inline">\(E[Y|D=1] - E[Y|D=0] = Y\)</span> の平均値の差</p></li>
 <li><p>通常、 <span class="math inline">\(Y\)</span> 以外の変数 <span class="math inline">\(X\)</span> についても、<span class="math inline">\(D\)</span> 間で差が存在する</p></li>
 <li><p><span class="math inline">\(X\)</span> について差がなかった(バランスさせた)場合に、 <span class="math inline">\(Y\)</span> についてどの程度差が存在するのか <span class="math inline">\(?\)</span></p></li>
 </ul>
 </section>
-<section id="例.-出生率" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="例.-出生率"><span class="header-section-number">6.3</span> 例. 出生率</h2>
+<section id="例.-出生率" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="例.-出生率"><span class="header-section-number">6.5</span> 例. 出生率</h2>
 <ul>
 <li><p>出生の動向を把握する上で、新生児数を年次比較する</p>
 <ul>
@@ -299,8 +396,8 @@ window.Quarto = {
 <li><p>学歴や家族構成などもバランスさせることは可能か？</p></li>
 </ul>
 </section>
-<section id="例.-既存店ベースの比較" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="例.-既存店ベースの比較"><span class="header-section-number">6.4</span> 例. 既存店ベースの比較</h2>
+<section id="例.-既存店ベースの比較" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="例.-既存店ベースの比較"><span class="header-section-number">6.6</span> 例. 既存店ベースの比較</h2>
 <ul>
 <li><p>あるコンビニチェーンで、店舗あたりの平均売り上げが1000万円増大した <span class="math display">\[E[Y|D=1] - E[Y|D=0]= 1000万円\]</span></p></li>
 <li><p>去年から今年にかけて、新規出店が大きく増加した</p>
@@ -310,8 +407,8 @@ window.Quarto = {
 <li><p>既存店 (<span class="math inline">\(=X\)</span>) に絞って、比較する</p></li>
 </ul>
 </section>
-<section id="例.-客層" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="例.-客層"><span class="header-section-number">6.5</span> 例. 客層</h2>
+<section id="例.-客層" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="例.-客層"><span class="header-section-number">6.7</span> 例. 客層</h2>
 <ul>
 <li><p>あるコンビニチェーンで、大手町店と本郷三丁目店で、客単価が大きく異なる</p>
 <ul>
@@ -323,8 +420,8 @@ window.Quarto = {
 <li><p>来客の年齢や職業 (<span class="math inline">\(=X\)</span>) の分布を仮想的に揃えて、比較する</p></li>
 </ul>
 </section>
-<section id="例.-因果推論" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="例.-因果推論"><span class="header-section-number">6.6</span> 例. 因果推論</h2>
+<section id="例.-因果推論" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="例.-因果推論"><span class="header-section-number">6.8</span> 例. 因果推論</h2>
 <ul>
 <li><p>コンビニの改装が平均的にどの程度、平均売上を上昇させるのか</p>
 <ul>
@@ -337,8 +434,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="理想的な推定方法" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="理想的な推定方法"><span class="header-section-number">6.7</span> 理想的な推定方法</h2>
+<section id="理想的な推定方法" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="理想的な推定方法"><span class="header-section-number">6.9</span> 理想的な推定方法</h2>
 <ul>
 <li><p>全ての<span class="math inline">\(X\)</span>の組み合わせについて、平均差 <span class="math inline">\(E[Y|D=1,X] - E[Y|D=0,X]\)</span> を計算する</p>
 <ul>
@@ -350,8 +447,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="residual-learner" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="residual-learner"><span class="header-section-number">6.8</span> R(esidual)-learner</h2>
+<section id="residual-learner" class="level2" data-number="6.10">
+<h2 data-number="6.10" class="anchored" data-anchor-id="residual-learner"><span class="header-section-number">6.10</span> R(esidual)-learner</h2>
 <ul>
 <li><span class="math inline">\(X\)</span> を <span class="math inline">\(D\)</span> 間でバランスさせた元での比較を行うために、以下の手順を実行する</li>
 </ul>
@@ -364,8 +461,8 @@ window.Quarto = {
 <li>後日、より効率的なサンプル分割方法(交差推定)を紹介</li>
 </ul>
 </section>
-<section id="直感" class="level2" data-number="6.9">
-<h2 data-number="6.9" class="anchored" data-anchor-id="直感"><span class="header-section-number">6.9</span> 直感</h2>
+<section id="直感" class="level2" data-number="6.11">
+<h2 data-number="6.11" class="anchored" data-anchor-id="直感"><span class="header-section-number">6.11</span> 直感</h2>
 <ul>
 <li><span class="math inline">\(X\)</span> の偏りを排除したい</li>
 </ul>
@@ -464,8 +561,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="直感-1" class="level2" data-number="6.10">
-<h2 data-number="6.10" class="anchored" data-anchor-id="直感-1"><span class="header-section-number">6.10</span> 直感</h2>
+<section id="直感-1" class="level2" data-number="6.12">
+<h2 data-number="6.12" class="anchored" data-anchor-id="直感-1"><span class="header-section-number">6.12</span> 直感</h2>
 <ul>
 <li>予測モデルにより、<span class="math inline">\(X\)</span> の偏りの影響を評価する</li>
 </ul>
@@ -582,8 +679,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="例-基本アイディア" class="level2" data-number="6.11">
-<h2 data-number="6.11" class="anchored" data-anchor-id="例-基本アイディア"><span class="header-section-number">6.11</span> 例: 基本アイディア</h2>
+<section id="例-基本アイディア" class="level2" data-number="6.13">
+<h2 data-number="6.13" class="anchored" data-anchor-id="例-基本アイディア"><span class="header-section-number">6.13</span> 例: 基本アイディア</h2>
 <ul>
 <li><p>事例1と４の間で、<span class="math inline">\(700\)</span> 万円近くの 以上の価格格差</p></li>
 <li><p><span class="math inline">\(X\)</span> が大きく異なる</p>
@@ -593,15 +690,15 @@ window.Quarto = {
 <li><p>実際の格差から、(<span class="math inline">\(X\)</span>の影響を捉える) 予測値の差を引くと ほとんど格差はない</p></li>
 </ul>
 </section>
-<section id="直感-2" class="level2" data-number="6.12">
-<h2 data-number="6.12" class="anchored" data-anchor-id="直感-2"><span class="header-section-number">6.12</span> 直感</h2>
+<section id="直感-2" class="level2" data-number="6.14">
+<h2 data-number="6.14" class="anchored" data-anchor-id="直感-2"><span class="header-section-number">6.14</span> 直感</h2>
 <ul>
 <li><p>価格 <span class="math inline">\(=\)</span> 取引年 <span class="math inline">\(+\)</span> <span class="math inline">\(X\)</span> の影響 <span class="math inline">\(+\)</span> その他</p></li>
 <li><p>予測モデルが<span class="math inline">\(X\)</span> の影響を完全に捉え、その他の影響がなければ、 <span class="math display">\[\underbrace{Y_1 - Y_2}_{事例1と2の賃金格差}-\underbrace{g_Y(X_1) - g_Y(X_2)}_{予測格差}\]</span> <span class="math display">\[=\underbrace{Y_1 - g_Y(X_1)}_{1についての予測誤差} - \underbrace{(Y_2 - g_Y(X_2))}_{2についての予測誤差}\]</span> は、バランス後の賃金格差を捉える</p></li>
 </ul>
 </section>
-<section id="直感-3" class="level2" data-number="6.13">
-<h2 data-number="6.13" class="anchored" data-anchor-id="直感-3"><span class="header-section-number">6.13</span> 直感</h2>
+<section id="直感-3" class="level2" data-number="6.15">
+<h2 data-number="6.15" class="anchored" data-anchor-id="直感-3"><span class="header-section-number">6.15</span> 直感</h2>
 <ul>
 <li><p>その他の影響は、当然存在する</p></li>
 <li><p>個別事例について、影響を排除することは困難</p></li>
@@ -609,8 +706,8 @@ window.Quarto = {
 <li><p><span class="math inline">\(g_Y(X)=E[Y|X]\)</span> であれば、バランス後の平均格差の優れた推定値</p></li>
 </ul>
 </section>
-<section id="直感-4" class="level2" data-number="6.14">
-<h2 data-number="6.14" class="anchored" data-anchor-id="直感-4"><span class="header-section-number">6.14</span> 直感</h2>
+<section id="直感-4" class="level2" data-number="6.16">
+<h2 data-number="6.16" class="anchored" data-anchor-id="直感-4"><span class="header-section-number">6.16</span> 直感</h2>
 <ul>
 <li><p>限られた事例から推定された予測モデルは、理想的なものと乖離する: <span class="math inline">\(g_Y(X)\neq E[Y|X]\)</span></p>
 <ul>
@@ -623,8 +720,8 @@ window.Quarto = {
 <li><p><span class="math inline">\(Y\)</span> の予測誤差 <span class="math inline">\(Y-g_Y(X)\)</span> を <span class="math inline">\(D\)</span> の予測誤差 <span class="math inline">\(D-g_D(X)\)</span> で回帰する</p></li>
 </ul>
 </section>
-<section id="double-debaised-machine-learning" class="level2" data-number="6.15">
-<h2 data-number="6.15" class="anchored" data-anchor-id="double-debaised-machine-learning"><span class="header-section-number">6.15</span> Double Debaised Machine Learning</h2>
+<section id="double-debaised-machine-learning" class="level2" data-number="6.17">
+<h2 data-number="6.17" class="anchored" data-anchor-id="double-debaised-machine-learning"><span class="header-section-number">6.17</span> Double Debaised Machine Learning</h2>
 <ul>
 <li><p>R learnerは、Double/Debiased Machine Learningと呼ばれる手法の一つ</p></li>
 <li><p>最終的にはOLSや平均値などで推定する</p>
@@ -634,8 +731,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="推定値の性質" class="level2" data-number="6.16">
-<h2 data-number="6.16" class="anchored" data-anchor-id="推定値の性質"><span class="header-section-number">6.16</span> 推定値の性質</h2>
+<section id="推定値の性質" class="level2" data-number="6.18">
+<h2 data-number="6.18" class="anchored" data-anchor-id="推定値の性質"><span class="header-section-number">6.18</span> 推定値の性質</h2>
 <ul>
 <li><p><span class="math inline">\(g_Y(X),g_D(X)\)</span> が <span class="math inline">\(E[Y|X],E[D|X]\)</span> をある程度近似できるのであれば (後述)、近似的な信頼区間を計算可能</p>
 <ul>
@@ -648,15 +745,15 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="補論-olsとの比較" class="level2" data-number="6.17">
-<h2 data-number="6.17" class="anchored" data-anchor-id="補論-olsとの比較"><span class="header-section-number">6.17</span> 補論: OLSとの比較</h2>
+<section id="補論-olsとの比較" class="level2" data-number="6.19">
+<h2 data-number="6.19" class="anchored" data-anchor-id="補論-olsとの比較"><span class="header-section-number">6.19</span> 補論: OLSとの比較</h2>
 <ul>
 <li><p>「<span class="math inline">\(X\)</span> の分布を均した後の比較」を行う伝統的方法は、以下のモデルを重回帰する <span class="math display">\[E[Y|D,X]=\beta_0 + \beta_D D + \beta_1X_1+...\]</span></p></li>
 <li><p>FWL定理 (<a href="https://en.wikipedia.org/wiki/Frisch%E2%80%93Waugh%E2%80%93Lovell_theorem">wiki</a>)より、R-leanerの特殊ケースと見做せる</p></li>
 </ul>
 </section>
-<section id="補論-olsとの比較-1" class="level2" data-number="6.18">
-<h2 data-number="6.18" class="anchored" data-anchor-id="補論-olsとの比較-1"><span class="header-section-number">6.18</span> 補論: OLSとの比較</h2>
+<section id="補論-olsとの比較-1" class="level2" data-number="6.20">
+<h2 data-number="6.20" class="anchored" data-anchor-id="補論-olsとの比較-1"><span class="header-section-number">6.20</span> 補論: OLSとの比較</h2>
 <ul>
 <li>FWL定理より、OLSの推定結果 <span class="math inline">\(\beta_D\)</span> は、以下の手順により得られる推定結果と一致</li>
 </ul>
@@ -668,8 +765,8 @@ window.Quarto = {
 <li>予測モデルの定式化が正しく、かつ事例数に比べて十分に単純 (<span class="math inline">\(\beta\)</span> の数が少ない)のであれば、優れた推定方法だが、そうではない応用例も多い</li>
 </ul>
 </section>
-<section id="補論-統計モデルとしての書き換え" class="level2" data-number="6.19">
-<h2 data-number="6.19" class="anchored" data-anchor-id="補論-統計モデルとしての書き換え"><span class="header-section-number">6.19</span> 補論: 統計モデルとしての書き換え</h2>
+<section id="補論-統計モデルとしての書き換え" class="level2" data-number="6.21">
+<h2 data-number="6.21" class="anchored" data-anchor-id="補論-統計モデルとしての書き換え"><span class="header-section-number">6.21</span> 補論: 統計モデルとしての書き換え</h2>
 <ul>
 <li><p>R-learnerの推定結果は、以下のモデルを推定した場合の結果と一致 <span class="citation" data-cites="robinson1988root">(<a href="#ref-robinson1988root" role="doc-biblioref">Robinson 1988</a>)</span> <span class="math display">\[Y=\tau D + \underbrace{f(X)}_{何らかの(blackboxな)関数} + \underbrace{u}_{E[u|D,X]=0}\]</span></p>
 <ul>
@@ -677,8 +774,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="まとめ" class="level2" data-number="6.20">
-<h2 data-number="6.20" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">6.20</span> まとめ</h2>
+<section id="まとめ" class="level2" data-number="6.22">
+<h2 data-number="6.22" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">6.22</span> まとめ</h2>
 <ul>
 <li><p>シンプルな比較分析であれば、伝統的な推定方法が有効</p></li>
 <li><p>複雑な比較分析、ここでは <span class="math inline">\(X\)</span> をバランスさせた後での比較、においては機械学習も併用することで、分析の信頼性を改善できる</p>
@@ -687,22 +784,28 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="reference" class="level2" data-number="6.21">
-<h2 data-number="6.21" class="anchored" data-anchor-id="reference"><span class="header-section-number">6.21</span> Reference</h2>
+<section id="reference" class="level2" data-number="6.23">
+<h2 data-number="6.23" class="anchored" data-anchor-id="reference"><span class="header-section-number">6.23</span> Reference</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-che2018double" class="csl-entry" role="listitem">
-Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. 2018. <span>“<span class="nocase">Double/debiased machine learning for treatment and structural parameters</span>.”</span> <em>The Econometrics Journal</em> 21 (1): C1–68. <a href="https://doi.org/10.1111/ectj.12097">https://doi.org/10.1111/ectj.12097</a>.
+<div id="ref-ben2021balancing" class="csl-entry" role="listitem">
+Ben-Michael, Eli, Avi Feller, David A Hirshberg, and José R Zubizarreta. 2021. <span>“The Balancing Act in Causal Inference.”</span> <em>arXiv Preprint arXiv:2110.14831</em>.
+</div>
+<div id="ref-chernozhukov2018double" class="csl-entry" role="listitem">
+Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. 2018. <span>“Double/Debiased Machine Learning for Treatment and Structural Parameters.”</span> Oxford University Press Oxford, UK.
 </div>
 <div id="ref-chernozhukov2022locally" class="csl-entry" role="listitem">
 Chernozhukov, Victor, Juan Carlos Escanciano, Hidehiko Ichimura, Whitney K Newey, and James M Robins. 2022. <span>“Locally Robust Semiparametric Estimation.”</span> <em>Econometrica</em> 90 (4): 1501–35.
 </div>
+<div id="ref-hainmueller2012entropy" class="csl-entry" role="listitem">
+Hainmueller, Jens. 2012. <span>“Entropy Balancing for Causal Effects: A Multivariate Reweighting Method to Produce Balanced Samples in Observational Studies.”</span> <em>Political Analysis</em> 20 (1): 25–46.
+</div>
 <div id="ref-robinson1988root" class="csl-entry" role="listitem">
-Robinson, Peter M. 1988. <span>“Root-n-Consistent Semiparametric Regression.”</span> <em>Econometrica: Journal of the Econometric Society</em>, 931–54.
+Robinson, Peter M. 1988. <span>“Root-n-Consistent Semiparametric Regression.”</span> <em>Econometrica</em>, 931–54.
 </div>
 <div id="ref-van2011targeted" class="csl-entry" role="listitem">
-Van der Laan, Mark J, Sherri Rose, et al. 2011. <em>Targeted Learning: Causal Inference for Observational and Experimental Data</em>. Vol. 4. Springer.
+Van der Laan, Mark J, and Sherri Rose. 2011. <em>Targeted Learning</em>. Vol. 1. 3. Springer.
 </div>
 </div>
 </section>
@@ -1119,8 +1222,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./simplecomparison.html" class="pagination-link" aria-label="単純な比較分析">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">単純な比較分析</span></span>
+      <a href="./simplecomparison.html" class="pagination-link" aria-label="把握を目的とする要約: 単純な比較">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 単純な比較</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
