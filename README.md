@@ -20,7 +20,7 @@
     
         - [A first course in causal inference](https://arxiv.org/abs/2305.18793) (無料)
 
-    - OLSや最尤法のデータ非依存の解釈
+    - OLSや最尤法のモデル非依存の解釈
 
         - [Foundations of Agnostic Statistics](https://www.cambridge.org/core/books/foundations-of-agnostic-statistics/684756357E7E9B3DFF0A8157FB2DCECA)
 
