@@ -28,7 +28,7 @@
         
     - 和書
         
-         [データ駆動型回帰分析](https://www.nippyo.co.jp/shop/book/9267.html)
+        - [データ駆動型回帰分析](https://www.nippyo.co.jp/shop/book/9267.html)
 
     - R
 
@@ -37,3 +37,5 @@
         - [R for Data Science](https://r4ds.had.co.nz/)　(無料)
     
         - [私たちのR](https://www.jaysong.net/RBook/)　(無料)
+
+
