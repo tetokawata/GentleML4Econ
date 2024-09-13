@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>データ分析入門ノート - 6&nbsp; 把握を目的とする要約: What if</title>
+<title>データ分析入門ノート - 6&nbsp; 把握を目的とする要約: バランス後の比較</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -50,6 +30,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./whatif_moment.html" rel="next">
 <link href="./simplecomparison.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -87,15 +68,6 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
-<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
-<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
-<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
-<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
-<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
-<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -138,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./complexcomparison.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">把握を目的とする要約: What if</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./complexcomparison.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">把握を目的とする要約: バランス後の比較</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -202,7 +174,19 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./complexcomparison.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">把握を目的とする要約: What if</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">把握を目的とする要約: バランス後の比較</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./whatif_moment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">把握を目的とする要約: モーメントバランス</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./whatif_ps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 傾向スコア</span></span></a>
   </div>
 </li>
     </ul>
@@ -215,33 +199,16 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#推定対象" id="toc-推定対象" class="nav-link active" data-scroll-target="#推定対象"><span class="header-section-number">6.1</span> 推定対象</a></li>
-  <li><a href="#推定方法" id="toc-推定方法" class="nav-link" data-scroll-target="#推定方法"><span class="header-section-number">6.2</span> 推定方法</a>
+  <li><a href="#実例" id="toc-実例" class="nav-link active" data-scroll-target="#実例"><span class="header-section-number">6.1</span> 実例</a>
   <ul class="collapse">
-  <li><a href="#ols" id="toc-ols" class="nav-link" data-scroll-target="#ols"><span class="header-section-number">6.2.1</span> OLS</a></li>
-  <li><a href="#r-leaner" id="toc-r-leaner" class="nav-link" data-scroll-target="#r-leaner"><span class="header-section-number">6.2.2</span> R-leaner</a></li>
+  <li><a href="#合計特殊出生率" id="toc-合計特殊出生率" class="nav-link" data-scroll-target="#合計特殊出生率"><span class="header-section-number">6.1.1</span> 合計特殊出生率</a></li>
+  <li><a href="#既存店ベースの比較" id="toc-既存店ベースの比較" class="nav-link" data-scroll-target="#既存店ベースの比較"><span class="header-section-number">6.1.2</span> 既存店ベースの比較</a></li>
   </ul></li>
-  <li><a href="#アプローチ" id="toc-アプローチ" class="nav-link" data-scroll-target="#アプローチ"><span class="header-section-number">6.3</span> アプローチ</a></li>
-  <li><a href="#変化の分解" id="toc-変化の分解" class="nav-link" data-scroll-target="#変化の分解"><span class="header-section-number">6.4</span> 変化の分解</a></li>
-  <li><a href="#例.-出生率" id="toc-例.-出生率" class="nav-link" data-scroll-target="#例.-出生率"><span class="header-section-number">6.5</span> 例. 出生率</a></li>
-  <li><a href="#例.-既存店ベースの比較" id="toc-例.-既存店ベースの比較" class="nav-link" data-scroll-target="#例.-既存店ベースの比較"><span class="header-section-number">6.6</span> 例. 既存店ベースの比較</a></li>
-  <li><a href="#例.-客層" id="toc-例.-客層" class="nav-link" data-scroll-target="#例.-客層"><span class="header-section-number">6.7</span> 例. 客層</a></li>
-  <li><a href="#例.-因果推論" id="toc-例.-因果推論" class="nav-link" data-scroll-target="#例.-因果推論"><span class="header-section-number">6.8</span> 例. 因果推論</a></li>
-  <li><a href="#理想的な推定方法" id="toc-理想的な推定方法" class="nav-link" data-scroll-target="#理想的な推定方法"><span class="header-section-number">6.9</span> 理想的な推定方法</a></li>
-  <li><a href="#residual-learner" id="toc-residual-learner" class="nav-link" data-scroll-target="#residual-learner"><span class="header-section-number">6.10</span> R(esidual)-learner</a></li>
-  <li><a href="#直感" id="toc-直感" class="nav-link" data-scroll-target="#直感"><span class="header-section-number">6.11</span> 直感</a></li>
-  <li><a href="#直感-1" id="toc-直感-1" class="nav-link" data-scroll-target="#直感-1"><span class="header-section-number">6.12</span> 直感</a></li>
-  <li><a href="#例-基本アイディア" id="toc-例-基本アイディア" class="nav-link" data-scroll-target="#例-基本アイディア"><span class="header-section-number">6.13</span> 例: 基本アイディア</a></li>
-  <li><a href="#直感-2" id="toc-直感-2" class="nav-link" data-scroll-target="#直感-2"><span class="header-section-number">6.14</span> 直感</a></li>
-  <li><a href="#直感-3" id="toc-直感-3" class="nav-link" data-scroll-target="#直感-3"><span class="header-section-number">6.15</span> 直感</a></li>
-  <li><a href="#直感-4" id="toc-直感-4" class="nav-link" data-scroll-target="#直感-4"><span class="header-section-number">6.16</span> 直感</a></li>
-  <li><a href="#double-debaised-machine-learning" id="toc-double-debaised-machine-learning" class="nav-link" data-scroll-target="#double-debaised-machine-learning"><span class="header-section-number">6.17</span> Double Debaised Machine Learning</a></li>
-  <li><a href="#推定値の性質" id="toc-推定値の性質" class="nav-link" data-scroll-target="#推定値の性質"><span class="header-section-number">6.18</span> 推定値の性質</a></li>
-  <li><a href="#補論-olsとの比較" id="toc-補論-olsとの比較" class="nav-link" data-scroll-target="#補論-olsとの比較"><span class="header-section-number">6.19</span> 補論: OLSとの比較</a></li>
-  <li><a href="#補論-olsとの比較-1" id="toc-補論-olsとの比較-1" class="nav-link" data-scroll-target="#補論-olsとの比較-1"><span class="header-section-number">6.20</span> 補論: OLSとの比較</a></li>
-  <li><a href="#補論-統計モデルとしての書き換え" id="toc-補論-統計モデルとしての書き換え" class="nav-link" data-scroll-target="#補論-統計モデルとしての書き換え"><span class="header-section-number">6.21</span> 補論: 統計モデルとしての書き換え</a></li>
-  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">6.22</span> まとめ</a></li>
-  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">6.23</span> Reference</a></li>
+  <li><a href="#推定対象" id="toc-推定対象" class="nav-link" data-scroll-target="#推定対象"><span class="header-section-number">6.2</span> 推定対象</a>
+  <ul class="collapse">
+  <li><a href="#balancing-weight" id="toc-balancing-weight" class="nav-link" data-scroll-target="#balancing-weight"><span class="header-section-number">6.2.1</span> Balancing Weight</a></li>
+  <li><a href="#理想的な推定方法" id="toc-理想的な推定方法" class="nav-link" data-scroll-target="#理想的な推定方法"><span class="header-section-number">6.2.2</span> 理想的な推定方法</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -250,7 +217,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-ComplexComparison" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">把握を目的とする要約: What if</span></span></h1>
+<h1 class="title"><span id="sec-ComplexComparison" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">把握を目的とする要約: バランス後の比較</span></span></h1>
 </div>
 
 
@@ -267,29 +234,8 @@ window.Quarto = {
 </header>
 
 
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="complexcomparison_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="complexcomparison_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="complexcomparison_files/figure-html/unnamed-chunk-1-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
+<p>バランス後の比較では、<span class="math inline">\(X\)</span>内での<span class="math inline">\(Y\)</span>についての差の推定を目指します。 このような比較は、因果効果や格差の推定の肝となります。</p>
+<p>例えば、2022年と2021年の東京２３区の中古マンション市場における、取引価格と立地(中心6区かそれ以外か)について平均的な差は以下の通りです。</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -298,516 +244,1039 @@ window.Quarto = {
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = Y ~ Z + X, data = Temp)
-
-Coefficients:
-(Intercept)            Z            X  
-  5.684e-15    1.000e+00    1.000e+00  </code></pre>
 </div>
-<div class="cell-output-display">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-7bf94cd961c11210a1ca" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-7bf94cd961c11210a1ca">{"x":{"visdat":{"4e3d470728a":["function () ","plotlyVisDat"]},"cur_data":"4e3d470728a","attrs":{"4e3d470728a":{"x":{},"y":{},"z":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"X"},"yaxis":{"title":"Z"},"zaxis":{"title":"Y"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[1.3275433157104999,1.8606194981839508,2.864266816759482,4.5410389499738812,1.008409655187279,4.4919484248384833,4.7233763430267572,3.3039889624342322,3.1455702194944024,0.30893135233782232,1.0298728744965047,0.88278376264497638,3.435114233288914,1.9205185910686851,3.8492070999927819,2.4884962104260921,3.5880925413221121,4.959530474152416,1.9001758971717209,3.8872261065989733,4.6735261555295438,1.0607126064132899,3.2583688304293901,0.6277754798065871,1.3361033436376601,1.930570462718606,0.066951665794476867,1.9119397853501141,4.3484542286023498,1.7017449834384024,2.4104005773551762,2.997829127125442,2.4677065352443606,0.93108800705522299,4.136866593034938,3.3423336909618229,3.9711993036326021,0.53971812943927944,3.61855473020114,2.0563721482176334,4.1047314705792814,3.2353009690996259,3.9146638114470989,2.7651815582066774,2.6485979009885341,3.9467811584472656,0.11665601166896522,2.3861503251828253,3.6615686933510005,3.4636577824130654,2.3880981106776744,4.3060473841615021,2.190485536120832,1.2239863851573318,0.35339523572474718,0.49733080086298287,1.5813585359137505,2.593171315966174,3.3100253820884973,2.0341509359423071,4.564379621297121,1.4680168638005853,2.2953286312986165,1.6619733709376305,3.2543523353524506,1.2900839035864919,2.3927262413781136,3.8315533532295376,0.42123457184061408,4.37660665018484,1.6953646892216057,4.1972017509397119,1.7334174457937479,1.6688746539875865,2.381756225368008,4.460991679225117,4.3216973531525582,1.9499477173667401,3.8866034941747785,4.803089986089617,2.1732974238693714,3.5625733935739845,1.9999718444887549,1.6267607593908906,3.7854357401374727,1.0134612757246941,3.5556061123497784,0.60845960513688624,1.2274425697978586,0.71652189712040126,1.1981470754835755,0.29467188636772335,3.2114412926603109,4.3813460634555668,3.8945733872242272,3.9865441294386983,2.2763722680974752,2.0504204102326185,4.0543512138538063,3.0246664513833821],"y":[26.188957123085856,14.127890877425671,10.8104058355093,39.707362446933985,25.339730577543378,8.5283254086971283,5.1748939231038094,19.124721372500062,36.962978793308139,23.950438685715199,39.046827796846628,29.271700475364923,14.26907648332417,17.258947622030973,5.9284624271094799,0.52310301922261715,28.622642643749714,4.1273694299161434,17.851373944431543,25.604041805490851,39.673544801771641,19.823743114247918,19.373980974778533,6.9376933947205544,30.192837780341506,18.155819568783045,20.446791350841522,8.301804531365633,9.1463257092982531,23.82847985252738,22.994887931272388,3.082575211301446,1.42162318341434,25.711819687858224,37.144607985392213,23.923696894198656,22.436029920354486,21.041108956560493,39.403808955103159,20.305672893300653,27.311523146927357,24.061648705974221,9.5547471102327108,10.32663706690073,29.17238493449986,18.10283325612545,7.0050707366317511,29.86793078482151,4.1995056159794331,34.581797961145639,24.585798867046833,22.286381553858519,13.151092762127519,18.125257818028331,20.017638904973865,7.2346544452011585,21.185224112123251,3.0110298283398151,11.110237305983901,8.5079807695001364,11.391619239002466,35.803764117881656,17.849412932991982,31.199395591393113,35.224761394783854,16.524968380108476,2.5523392204195261,13.419499667361379,28.949037864804268,13.50461333990097,25.21656489931047,33.624582160264254,34.245266588404775,15.654371241107583,15.219755424186587,35.817817039787769,25.772630516439676,29.643145948648453,24.212137861177325,36.123264459893107,11.749206203967333,7.6504043955355883,35.458037732169032,20.133579429239035,35.08230172097683,7.5677448976784945,30.324122095480561,28.979955706745386,37.748992731794715,21.905863480642438,28.46975470893085,15.556203993037343,4.0349250473082066,37.092083543539047,11.329300012439489,23.622926352545619,4.4144241977483034,33.620281284675002,12.718547377735376,31.314053479582071],"z":[27.516500438796356,15.988510375609621,13.674672652268782,44.248401396907866,26.348140232730657,13.020273833535612,9.8982702661305666,22.428710334934294,40.108549012802541,24.259370038053021,40.076700671343133,30.1544842380099,17.704190716613084,19.179466213099658,9.7776695271022618,3.0115992296487093,32.210735185071826,9.0868999040685594,19.751549841603264,29.491267912089825,44.347070957301185,20.884455720661208,22.632349805207923,7.5654688745271415,31.528941123979166,20.086390031501651,20.513743016635999,10.213744316715747,13.494779937900603,25.530224835965782,25.405288508627564,6.080404338426888,3.8893297186587006,26.642907694913447,41.281474578427151,27.266030585160479,26.407229223987088,21.580827085999772,43.022363685304299,22.362045041518286,31.416254617506638,27.296949675073847,13.46941092167981,13.091818625107408,31.820982835488394,22.049614414572716,7.1217267483007163,32.254081110004336,7.8610743093304336,38.045455743558705,26.973896977724507,26.592428938020021,15.341578298248351,19.349244203185663,20.371034140698612,7.7319852460641414,22.766582648037001,5.6042011443059891,14.420262688072398,10.542131705442443,15.955998860299587,37.271780981682241,20.144741564290598,32.861368962330744,38.479113730136305,17.815052283694968,4.9450654617976397,17.251053020590916,29.370272436644882,17.88121999008581,26.911929588532075,37.821783911203966,35.978684034198523,17.32324589509517,17.601511649554595,40.278808719012886,30.094327869592234,31.593093666015193,28.098741355352104,40.926354445982724,13.922503627836704,11.212977789109573,37.458009576657787,21.760340188629925,38.867737461114302,8.5812061734031886,33.87972820783034,29.588415311882272,38.976435301592574,22.622385377762839,29.667901784414425,15.850875879405066,7.2463663399685174,41.473429606994614,15.223873399663717,27.609470481984317,6.6907964658457786,35.670701694907621,16.772898591589183,34.338719930965453],"type":"scatter3d","mode":"markers","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
+<p>2022年においては、平均取引価格が2021年に比べて上昇していますが、同時に中心６区の物件割合も増加しています。 一般に中心６区の物件の方が取引価格が高い傾向が予想されるので、その分取引価格の上昇が”底上げ”されている可能性があります。 <strong>もし</strong>中心6区の物件割合が不変であった場合、平均取引価格にどのような差が残るでしょうか？</p>
+<section id="実例" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="実例"><span class="header-section-number">6.1</span> 実例</h2>
+<section id="合計特殊出生率" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="合計特殊出生率"><span class="header-section-number">6.1.1</span> 合計特殊出生率</h3>
+<p>合計特殊出生率の国家間/時代間比較は、バランス後の比較の代表例です。 出生数の動向を把握する上で、新生児数を年次や国家間比較は、有益だとみなされてきました。 <a href="https://ja.wikipedia.org/wiki/%E5%90%88%E8%A8%88%E7%89%B9%E6%AE%8A%E5%87%BA%E7%94%9F%E7%8E%87#:~:text=%E5%90%88%E8%A8%88%E7%89%B9%E6%AE%8A%E5%87%BA%E7%94%9F%E7%8E%87%EF%BC%88%E3%81%94%E3%81%86%E3%81%91%E3%81%84,%E4%BA%BA%E5%8F%A3%E3%81%8C%E8%87%AA%E7%84%B6%E6%B8%9B%E3%81%99%E3%82%8B%E3%80%82">合計特殊出生率</a> は、成人の年齢構造の違いをバランスさせるために利用されている指標です。 単純な出生率（一年間に生まれた子供の数/女性の数）は、成人の年齢構造の影響を強く受ける可能性があります。 比較的高齢の成人の比率が高まれば、出生率は低下することが予想されるからです。 対して合計特殊出生率は、「仮に年齢構造が同じであった場合」の出生率を、以下の方法で推定しています <span class="math display">\[\frac{15歳の女性が産んだ子供の数}{15歳の女性の数} +..+ \frac{49歳の女性が産んだ子供の数}{49歳の女性の数}\]</span></p>
+<p>シンプルな枠組みであり、大規模なデータが活用可能な状況では、有効だと考えられます。 一方で、年齢以外の属性(教育歴、居住地等々)もバランスさせる場合、同じ属性を持つ事例数が少なくなり、適用が難しくなります。</p>
+</section>
+<section id="既存店ベースの比較" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="既存店ベースの比較"><span class="header-section-number">6.1.2</span> 既存店ベースの比較</h3>
+<p>バランス後の比較は、企業の経営戦略を考える上でも用いられます。 小売や飲食/宿泊業などでは、しばしば既存店に絞った上での、売上比較がなされます。 例えば、あるコンビニチェーンで、店舗あたりの平均売り上げが1000万円増大したとします。 同時に去年から今年にかけて、新規出店も大きく増加したとします。 新規店の方が売上が高くなる傾向がある場合、新規店割合の違いが、平均売上の上昇をもたらした可能性があります。</p>
+<p>既存店割合をバランスさせるシンプルな方法として、既存店のみに絞った平均売上を比較がよく行われます。 合計特殊出生率と同様に、新規店比率のみをバランスさせるのであれば、非常に実践的な方法です。 しかしながら他の属性、例えば客層の変化など、もバランスさせたい場合は、事例数が不足する可能性が高くなります。</p>
+</section>
+</section>
+<section id="推定対象" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="推定対象"><span class="header-section-number">6.2</span> 推定対象</h2>
+<p>以上の推定対象は、一般に以下のように定義できます。</p>
+<p>グループ <span class="math inline">\(d=\{0,1\}\)</span> における <span class="math inline">\(Y\)</span> の平均値は、一般に以下のように書き換えることができます。 <span class="math display">\[(D=d)におけるYの平均値\]</span> <span class="math display">\[=\Biggr\{(X=x\ \&amp;\ D=d)におけるYの平均値\times (D=d)における(X=x)の割合\Biggr\}\]</span> <span class="math display">\[のxについての総和\]</span></p>
+<p><span class="math inline">\(D=\{0,1\}\)</span> 間での平均差を生み出す要因は、以下に分解できます。</p>
 <ul>
-<li><p>バランス後の比較</p></li>
-<li><p><span class="math inline">\(D\)</span> 間で <span class="math inline">\(X\)</span> についての偏りを均した上で、<span class="math inline">\(Y\)</span> についてどの程度差が存在するのか?</p>
-<ul>
-<li>因果効果、格差分析のキモ</li>
-</ul></li>
-<li><p>注: <span class="math inline">\(D,Y,X\)</span> は分析に先立って、分析者が政策的関心等に応じて設定する必要がある</p></li>
+<li><p><span class="math inline">\(D=\{0,1\}\)</span> の間での<span class="math inline">\(Y\)</span>の平均値の違い</p></li>
+<li><p><span class="math inline">\(D=\{0,1\}\)</span> の間での<span class="math inline">\(X\)</span> の分布の違い</p></li>
 </ul>
-<section id="推定対象" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="推定対象"><span class="header-section-number">6.1</span> 推定対象</h2>
+<p>バランス後の比較における推定対象は、<span class="math inline">\(X\)</span> の分布の違いを排除したバランス後の平均値の差として定義します。 <span class="math inline">\(D=d\)</span>のバランス後の平均値は、<span class="math display">\[(D=d)におけるYのバランス後平均値\]</span> <span class="math display">\[=\Biggr\{(X=x\ \&amp;\ D=d)におけるYの平均値\times (X=x)へのウェイト\Biggr\}\]</span> <span class="math display">\[のxについての総和\]</span></p>
+<p><span class="math inline">\((X=x)へのウェイト\)</span>は、原理的には研究者が設定できます。 最も代表的なウェイトは、データや母集団全体での<span class="math inline">\(X=x\)</span>の割合です。</p>
+<p>バランス後の平均値の差は、<span class="math inline">\(X\)</span> 内での平均差の<span class="math inline">\((X=x)へのウェイト\)</span>を用いた集計値として書き換えることができます:</p>
+<p><span class="math display">\[\Biggr\{\Bigr[(X=x\ \&amp;\ D=1)におけるYの平均値-(X=x\ \&amp;\ D=0)におけるYの平均値\Bigr]\]</span> <span class="math display">\[\times  (X=x)へのウェイト\Biggr\}のxについての総和\]</span></p>
+<p>例えば、立地と取引年ごとの平均取引価格は以下です。</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="complexcomparison_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div id="zmorikwlhl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zmorikwlhl table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#zmorikwlhl thead, #zmorikwlhl tbody, #zmorikwlhl tfoot, #zmorikwlhl tr, #zmorikwlhl td, #zmorikwlhl th {
+  border-style: none;
+}
+
+#zmorikwlhl p {
+  margin: 0;
+  padding: 0;
+}
+
+#zmorikwlhl .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#zmorikwlhl .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#zmorikwlhl .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#zmorikwlhl .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#zmorikwlhl .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zmorikwlhl .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zmorikwlhl .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zmorikwlhl .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#zmorikwlhl .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#zmorikwlhl .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#zmorikwlhl .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#zmorikwlhl .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#zmorikwlhl .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#zmorikwlhl .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#zmorikwlhl .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#zmorikwlhl .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#zmorikwlhl .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#zmorikwlhl .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#zmorikwlhl .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zmorikwlhl .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#zmorikwlhl .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#zmorikwlhl .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#zmorikwlhl .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zmorikwlhl .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#zmorikwlhl .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#zmorikwlhl .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zmorikwlhl .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zmorikwlhl .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#zmorikwlhl .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zmorikwlhl .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#zmorikwlhl .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zmorikwlhl .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zmorikwlhl .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zmorikwlhl .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zmorikwlhl .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zmorikwlhl .gt_left {
+  text-align: left;
+}
+
+#zmorikwlhl .gt_center {
+  text-align: center;
+}
+
+#zmorikwlhl .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#zmorikwlhl .gt_font_normal {
+  font-weight: normal;
+}
+
+#zmorikwlhl .gt_font_bold {
+  font-weight: bold;
+}
+
+#zmorikwlhl .gt_font_italic {
+  font-style: italic;
+}
+
+#zmorikwlhl .gt_super {
+  font-size: 65%;
+}
+
+#zmorikwlhl .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#zmorikwlhl .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#zmorikwlhl .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#zmorikwlhl .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#zmorikwlhl .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#zmorikwlhl .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#zmorikwlhl .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#zmorikwlhl .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#zmorikwlhl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="平均価格" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">平均価格</th>
+<th id="CBD" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">CBD</th>
+<th id="TradeYear" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">TradeYear</th>
+<th id="事例割合" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">事例割合</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="平均価格">64.8</td>
+<td class="gt_row gt_right" headers="CBD">1</td>
+<td class="gt_row gt_right" headers="TradeYear">2022</td>
+<td class="gt_row gt_right" headers="事例割合">0.11</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="平均価格">60.5</td>
+<td class="gt_row gt_right" headers="CBD">1</td>
+<td class="gt_row gt_right" headers="TradeYear">2021</td>
+<td class="gt_row gt_right" headers="事例割合">0.11</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="平均価格">39.2</td>
+<td class="gt_row gt_right" headers="CBD">0</td>
+<td class="gt_row gt_right" headers="TradeYear">2022</td>
+<td class="gt_row gt_right" headers="事例割合">0.37</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="平均価格">37.7</td>
+<td class="gt_row gt_right" headers="CBD">0</td>
+<td class="gt_row gt_right" headers="TradeYear">2021</td>
+<td class="gt_row gt_right" headers="事例割合">0.41</td>
+</tr>
+</tbody>
+</table>
+
 </div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  term estimate std.error statistic       p.value conf.low conf.high    df
-1  CBD 24.16031 0.8517858   28.3643 2.934426e-174 22.49076  25.82986 25356
-  outcome
-1   Price</code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  term estimate std.error statistic p.value conf.low conf.high    df outcome
-1  CBD 22.57652 0.5301507  42.58509       0 21.53739  23.61564 25353   Price</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  term estimate std.error statistic p.value conf.low conf.high    df outcome
-1  CBD 22.68893 0.5431694  41.77137       0 21.62429  23.75357 25350   Price</code></pre>
-</div>
-</div>
-</section>
-<section id="推定方法" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="推定方法"><span class="header-section-number">6.2</span> 推定方法</h2>
-<section id="ols" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="ols"><span class="header-section-number">6.2.1</span> OLS</h3>
-<p><span class="citation" data-cites="ben2021balancing">Ben-Michael et al. (<a href="#ref-ben2021balancing" role="doc-biblioref">2021</a>)</span></p>
-<p><span class="citation" data-cites="hainmueller2012entropy">Hainmueller (<a href="#ref-hainmueller2012entropy" role="doc-biblioref">2012</a>)</span></p>
-</section>
-<section id="r-leaner" class="level3" data-number="6.2.2">
-<h3 data-number="6.2.2" class="anchored" data-anchor-id="r-leaner"><span class="header-section-number">6.2.2</span> R-leaner</h3>
-</section>
-</section>
-<section id="アプローチ" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="アプローチ"><span class="header-section-number">6.3</span> アプローチ</h2>
-<ul>
-<li><p>伝統的には、重回帰分析を用いた分析 <span class="math inline">\(Y\sim D + X_1+..\)</span> が行われてきた</p>
-<ul>
-<li>今でも有効だが、モデルの定式化に結果が依存してしまう問題がある</li>
-</ul></li>
-<li><p>機械学習とOLSの併用が有効</p>
-<ul>
-<li>Target/Debiased learning<span class="citation" data-cites="van2011targeted chernozhukov2018double chernozhukov2022locally">(<a href="#ref-van2011targeted" role="doc-biblioref">Van der Laan and Rose 2011</a>; <a href="#ref-chernozhukov2018double" role="doc-biblioref">Chernozhukov et al. 2018</a>, <a href="#ref-chernozhukov2022locally" role="doc-biblioref">2022</a>)</span></li>
-</ul></li>
-<li><p><a href="https://causalml-book.org/">CausalMLBook</a>の1,4,10章に相当</p></li>
-</ul>
-</section>
-<section id="変化の分解" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="変化の分解"><span class="header-section-number">6.4</span> 変化の分解</h2>
-<ul>
-<li><p><span class="math inline">\(E[Y|D=1] - E[Y|D=0] = Y\)</span> の平均値の差</p></li>
-<li><p>通常、 <span class="math inline">\(Y\)</span> 以外の変数 <span class="math inline">\(X\)</span> についても、<span class="math inline">\(D\)</span> 間で差が存在する</p></li>
-<li><p><span class="math inline">\(X\)</span> について差がなかった(バランスさせた)場合に、 <span class="math inline">\(Y\)</span> についてどの程度差が存在するのか <span class="math inline">\(?\)</span></p></li>
-</ul>
-</section>
-<section id="例.-出生率" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="例.-出生率"><span class="header-section-number">6.5</span> 例. 出生率</h2>
-<ul>
-<li><p>出生の動向を把握する上で、新生児数を年次比較する</p>
-<ul>
-<li><p>成人の年齢構造の変化を無視している</p>
-<ul>
-<li>50年前よりも、高齢者の比率が高い</li>
-</ul></li>
-</ul></li>
-<li><p><a href="https://ja.wikipedia.org/wiki/%E5%90%88%E8%A8%88%E7%89%B9%E6%AE%8A%E5%87%BA%E7%94%9F%E7%8E%87#:~:text=%E5%90%88%E8%A8%88%E7%89%B9%E6%AE%8A%E5%87%BA%E7%94%9F%E7%8E%87%EF%BC%88%E3%81%94%E3%81%86%E3%81%91%E3%81%84,%E4%BA%BA%E5%8F%A3%E3%81%8C%E8%87%AA%E7%84%B6%E6%B8%9B%E3%81%99%E3%82%8B%E3%80%82">合計特殊出生率</a></p>
-<ul>
-<li>「年齢構造が同じであった場合の」出生率はどのように変化を議論できる</li>
-</ul></li>
-<li><p>学歴や家族構成などもバランスさせることは可能か？</p></li>
-</ul>
-</section>
-<section id="例.-既存店ベースの比較" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="例.-既存店ベースの比較"><span class="header-section-number">6.6</span> 例. 既存店ベースの比較</h2>
-<ul>
-<li><p>あるコンビニチェーンで、店舗あたりの平均売り上げが1000万円増大した <span class="math display">\[E[Y|D=1] - E[Y|D=0]= 1000万円\]</span></p></li>
-<li><p>去年から今年にかけて、新規出店が大きく増加した</p>
-<ul>
-<li>売り上げが大きくなる傾向のある新規店の割合が大きく、結果、平均売り上げが増大したのではないか?</li>
-</ul></li>
-<li><p>既存店 (<span class="math inline">\(=X\)</span>) に絞って、比較する</p></li>
-</ul>
-</section>
-<section id="例.-客層" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="例.-客層"><span class="header-section-number">6.7</span> 例. 客層</h2>
-<ul>
-<li><p>あるコンビニチェーンで、大手町店と本郷三丁目店で、客単価が大きく異なる</p>
-<ul>
-<li><p>客層の違いに起因しているのではないか?</p>
-<ul>
-<li>本郷三丁目の方が、大学生が多い等</li>
-</ul></li>
-</ul></li>
-<li><p>来客の年齢や職業 (<span class="math inline">\(=X\)</span>) の分布を仮想的に揃えて、比較する</p></li>
-</ul>
-</section>
-<section id="例.-因果推論" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="例.-因果推論"><span class="header-section-number">6.8</span> 例. 因果推論</h2>
-<ul>
-<li><p>コンビニの改装が平均的にどの程度、平均売上を上昇させるのか</p>
-<ul>
-<li><p>「改装するかどうかの意思決定、および価格に影響を与える変数」(Confounders)が<span class="math inline">\(D\)</span>間で偏る</p></li>
-<li><p>データから観察できる Confoundersについては、分布を揃える必要がある</p></li>
-<li><p>(発展) 観察できないConfoundersへの対処は?</p>
-<ul>
-<li>統計的因果推論にて多くの議論が蓄積</li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-<section id="理想的な推定方法" class="level2" data-number="6.9">
-<h2 data-number="6.9" class="anchored" data-anchor-id="理想的な推定方法"><span class="header-section-number">6.9</span> 理想的な推定方法</h2>
-<ul>
-<li><p>全ての<span class="math inline">\(X\)</span>の組み合わせについて、平均差 <span class="math inline">\(E[Y|D=1,X] - E[Y|D=0,X]\)</span> を計算する</p>
-<ul>
-<li><span class="math inline">\(X\)</span> の値が一致している事例内で比較</li>
-</ul></li>
-<li><p>問題点: <span class="math inline">\(X\)</span> の組み合わせが増えると、サブグループ内での事例数が極端に小さくなり、実行不可能</p>
-<ul>
-<li>多くの応用で非現実的</li>
-</ul></li>
-</ul>
-</section>
-<section id="residual-learner" class="level2" data-number="6.10">
-<h2 data-number="6.10" class="anchored" data-anchor-id="residual-learner"><span class="header-section-number">6.10</span> R(esidual)-learner</h2>
-<ul>
-<li><span class="math inline">\(X\)</span> を <span class="math inline">\(D\)</span> 間でバランスさせた元での比較を行うために、以下の手順を実行する</li>
-</ul>
-<ol type="1">
-<li><p>データを2分割する (訓練/テスト)</p></li>
-<li><p>訓練データを用いて、<span class="math inline">\(X\)</span> から <span class="math inline">\(Y/D\)</span> を予測するモデル <span class="math inline">\(g_Y(X)/g_D(X)\)</span> を推定する</p></li>
-<li><p>テストデータを用いて、<span class="math inline">\(Y/D\)</span>の予測誤差をOLSで回帰し係数 <span class="math inline">\(\beta_D\)</span> を推定値とする <span class="math display">\[Y-g_Y(X)\sim D - g_D(X)\]</span></p></li>
-</ol>
-<ul>
-<li>後日、より効率的なサンプル分割方法(交差推定)を紹介</li>
-</ul>
-</section>
-<section id="直感" class="level2" data-number="6.11">
-<h2 data-number="6.11" class="anchored" data-anchor-id="直感"><span class="header-section-number">6.11</span> 直感</h2>
-<ul>
-<li><span class="math inline">\(X\)</span> の偏りを排除したい</li>
-</ul>
-<div class="cell" data-layout-align="default">
+<p>2022/2021年の平均取引価格差は、データ全体では2.2 ですが、<span class="math inline">\(CBD=1\)</span> では 4.3、<span class="math inline">\(CBD=0\)</span> では 1.4 となります。 よって立地をバランスさせた後の平均差は4.3 と 1.4 の”平均値”となります。 例えばデータ上での立地の割合、 CBD=1が0.22、CBD=0が0.78、をウェイトとして用いるのであれば 2 がバランス後の平均差となります。</p>
+<section id="balancing-weight" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="balancing-weight"><span class="header-section-number">6.2.1</span> Balancing Weight</h3>
+<p>バランス後の平均値は、<strong>Balancing weight <span class="math inline">\(\omega(x)\)</span></strong>を用いた加重平均としても計算できます。 バランス後の平均値を以下のように書き換えられることで、Balancing weightは定義できます。 <span class="math display">\[(D=d)におけるYのバランス後平均値\]</span> <span class="math display">\[=\Biggr\{(X=x\ \&amp;\ D=d)におけるYの平均値\]</span> <span class="math display">\[\times \underbrace{\frac{(X=x)へのウェイト}{(D=d)における(X=x)の割合}}_{\equiv\omega(d,x)}\]</span> <span class="math display">\[\times (D=d)における(X=x)の割合\Biggr\}\]</span> <span class="math display">\[のxについての総和\]</span></p>
+<p>バランス後の平均値は、<span class="math inline">\(D_i=d\)</span>を満たす事例についての加重平均として定義されます:</p>
+<p><span class="math display">\[\frac{\omega(d,X_1)Y_1+..+\omega(d,X_N)Y_{N}}{\underbrace{N}_{D=dの事例数}}\]</span> ただし <span class="math inline">\(\omega\)</span>は以下を満たします。</p>
+<p><span class="math display">\[(X=x)へのウェイト=\frac{\omega_1I_1(x)+..+\omega_NI_N(x)}{D=dの事例数}\]</span></p>
+<p>例えば、<span class="math inline">\((X=x)へのウェイト\)</span>としてCBD=1が0.22、CBD=0が0.78を用いるのであれば、Balancing Weightは以下のように算出できます。</p>
+<div class="cell">
 <div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<svg width="672" height="480" viewbox="0.00 0.00 152.00 152.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 148)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-148 148,-148 148,4 -4,4"></polygon>
-<!-- Y -->
-<g id="node1" class="node">
-<title>Y</title>
-<text text-anchor="middle" x="27" y="-123" font-family="Times,serif" font-size="10.00">Y</text>
-</g>
-<!-- D -->
-<g id="node2" class="node">
-<title>D</title>
-<text text-anchor="middle" x="27" y="-15" font-family="Times,serif" font-size="10.00">D</text>
-</g>
-<!-- Y&#45;&gt;D -->
-<g id="edge9" class="edge">
-<title>Y-&gt;D</title>
-<path fill="none" stroke="black" stroke-dasharray="5,2" d="M27,-104.67C27,-81.83 27,-58.98 27,-36.14"></path>
-<polygon fill="black" stroke="black" points="25.95,-104.75 27,-107.75 28.05,-104.75 25.95,-104.75"></polygon>
-</g>
-<!-- f_Y -->
-<g id="node4" class="node">
-<title>f_Y</title>
-<text text-anchor="middle" x="117" y="-123" font-family="Times,serif" font-size="10.00">blackbox</text>
-</g>
-<!-- Y&#45;&gt;f_Y -->
-<g id="edge1" class="edge">
-<title>Y-&gt;f_Y</title>
-<path fill="none" stroke="black" d="M54.4,-119.75C64.59,-119.14 76.28,-119.09 86.72,-119.6"></path>
-<polygon fill="black" stroke="black" points="86.87,-120.66 89.92,-119.77 86.98,-118.56 86.87,-120.66"></polygon>
-</g>
-<!-- Y&#45;&gt;f_Y -->
-<g id="edge3" class="edge">
-<title>Y-&gt;f_Y</title>
-<path fill="none" stroke="black" d="M57.61,-132.42C68.08,-132.92 79.77,-132.85 89.92,-132.23"></path>
-<polygon fill="black" stroke="black" points="57.46,-131.36 54.4,-132.25 57.34,-133.46 57.46,-131.36"></polygon>
-</g>
-<!-- X -->
-<g id="node3" class="node">
-<title>X</title>
-<text text-anchor="middle" x="117" y="-69" font-family="Times,serif" font-size="10.00">X</text>
-</g>
-<!-- f_D -->
-<g id="node5" class="node">
-<title>f_D</title>
-<text text-anchor="middle" x="117" y="-15" font-family="Times,serif" font-size="10.00">blackbox</text>
-</g>
-<!-- X&#45;&gt;f_D -->
-<g id="edge6" class="edge">
-<title>X-&gt;f_D</title>
-<path fill="none" stroke="black" d="M135.1,-53.79C137.48,-48.92 137.88,-44.05 136.31,-39.17"></path>
-<polygon fill="black" stroke="black" points="137.18,-38.52 135.07,-36.14 135.23,-39.32 137.18,-38.52"></polygon>
-</g>
-<!-- X&#45;&gt;f_D -->
-<g id="edge8" class="edge">
-<title>X-&gt;f_D</title>
-<path fill="none" stroke="black" d="M97.67,-50.76C96.11,-45.88 96.53,-41.01 98.93,-36.14"></path>
-<polygon fill="black" stroke="black" points="96.8,-51.4 98.9,-53.79 98.75,-50.62 96.8,-51.4"></polygon>
-</g>
-<!-- f_Y&#45;&gt;X -->
-<g id="edge2" class="edge">
-<title>f_Y-&gt;X</title>
-<path fill="none" stroke="black" d="M135.1,-107.79C137.48,-102.92 137.88,-98.05 136.31,-93.17"></path>
-<polygon fill="black" stroke="black" points="137.18,-92.52 135.07,-90.14 135.23,-93.32 137.18,-92.52"></polygon>
-</g>
-<!-- f_Y&#45;&gt;X -->
-<g id="edge4" class="edge">
-<title>f_Y-&gt;X</title>
-<path fill="none" stroke="black" d="M97.67,-104.76C96.11,-99.88 96.53,-95.01 98.93,-90.14"></path>
-<polygon fill="black" stroke="black" points="96.8,-105.4 98.9,-107.79 98.75,-104.62 96.8,-105.4"></polygon>
-</g>
-<!-- f_D&#45;&gt;D -->
-<g id="edge5" class="edge">
-<title>f_D-&gt;D</title>
-<path fill="none" stroke="black" d="M89.92,-11.77C79.77,-11.15 68.08,-11.08 57.61,-11.58"></path>
-<polygon fill="black" stroke="black" points="57.34,-10.54 54.4,-11.75 57.46,-12.64 57.34,-10.54"></polygon>
-</g>
-<!-- f_D&#45;&gt;D -->
-<g id="edge7" class="edge">
-<title>f_D-&gt;D</title>
-<path fill="none" stroke="black" d="M86.72,-24.4C76.28,-24.91 64.59,-24.86 54.4,-24.25"></path>
-<polygon fill="black" stroke="black" points="86.98,-25.44 89.92,-24.23 86.87,-23.34 86.98,-25.44"></polygon>
-</g>
-</g>
-</svg>
+<div id="vxjvmhlpep" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vxjvmhlpep table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#vxjvmhlpep thead, #vxjvmhlpep tbody, #vxjvmhlpep tfoot, #vxjvmhlpep tr, #vxjvmhlpep td, #vxjvmhlpep th {
+  border-style: none;
+}
+
+#vxjvmhlpep p {
+  margin: 0;
+  padding: 0;
+}
+
+#vxjvmhlpep .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vxjvmhlpep .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#vxjvmhlpep .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vxjvmhlpep .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vxjvmhlpep .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vxjvmhlpep .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vxjvmhlpep .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vxjvmhlpep .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vxjvmhlpep .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vxjvmhlpep .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vxjvmhlpep .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vxjvmhlpep .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vxjvmhlpep .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#vxjvmhlpep .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#vxjvmhlpep .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vxjvmhlpep .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vxjvmhlpep .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vxjvmhlpep .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vxjvmhlpep .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vxjvmhlpep .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#vxjvmhlpep .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#vxjvmhlpep .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#vxjvmhlpep .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vxjvmhlpep .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#vxjvmhlpep .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#vxjvmhlpep .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vxjvmhlpep .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vxjvmhlpep .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vxjvmhlpep .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vxjvmhlpep .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vxjvmhlpep .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vxjvmhlpep .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vxjvmhlpep .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vxjvmhlpep .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vxjvmhlpep .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vxjvmhlpep .gt_left {
+  text-align: left;
+}
+
+#vxjvmhlpep .gt_center {
+  text-align: center;
+}
+
+#vxjvmhlpep .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vxjvmhlpep .gt_font_normal {
+  font-weight: normal;
+}
+
+#vxjvmhlpep .gt_font_bold {
+  font-weight: bold;
+}
+
+#vxjvmhlpep .gt_font_italic {
+  font-style: italic;
+}
+
+#vxjvmhlpep .gt_super {
+  font-size: 65%;
+}
+
+#vxjvmhlpep .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#vxjvmhlpep .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#vxjvmhlpep .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#vxjvmhlpep .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#vxjvmhlpep .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vxjvmhlpep .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vxjvmhlpep .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#vxjvmhlpep .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#vxjvmhlpep div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="平均価格" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">平均価格</th>
+<th id="CBD" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">CBD</th>
+<th id="TradeYear" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">TradeYear</th>
+<th id="事例割合" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">事例割合</th>
+<th id="Balancing Weight" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Balancing Weight</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="平均価格">64.8</td>
+<td class="gt_row gt_right" headers="CBD">1</td>
+<td class="gt_row gt_right" headers="TradeYear">2022</td>
+<td class="gt_row gt_right" headers="事例割合">0.11</td>
+<td class="gt_row gt_right" headers="Balancing Weight">2.00</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="平均価格">60.5</td>
+<td class="gt_row gt_right" headers="CBD">1</td>
+<td class="gt_row gt_right" headers="TradeYear">2021</td>
+<td class="gt_row gt_right" headers="事例割合">0.11</td>
+<td class="gt_row gt_right" headers="Balancing Weight">2.00</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="平均価格">39.2</td>
+<td class="gt_row gt_right" headers="CBD">0</td>
+<td class="gt_row gt_right" headers="TradeYear">2022</td>
+<td class="gt_row gt_right" headers="事例割合">0.37</td>
+<td class="gt_row gt_right" headers="Balancing Weight">2.11</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="平均価格">37.7</td>
+<td class="gt_row gt_right" headers="CBD">0</td>
+<td class="gt_row gt_right" headers="TradeYear">2021</td>
+<td class="gt_row gt_right" headers="事例割合">0.41</td>
+<td class="gt_row gt_right" headers="Balancing Weight">1.90</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="直感-1" class="level2" data-number="6.12">
-<h2 data-number="6.12" class="anchored" data-anchor-id="直感-1"><span class="header-section-number">6.12</span> 直感</h2>
-<ul>
-<li>予測モデルにより、<span class="math inline">\(X\)</span> の偏りの影響を評価する</li>
-</ul>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<svg width="672" height="480" viewbox="0.00 0.00 273.00 188.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 184)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-184 269,-184 269,4 -4,4"></polygon>
-<!-- Y -->
-<g id="node1" class="node">
-<title>Y</title>
-<text text-anchor="middle" x="27" y="-159" font-family="Times,serif" font-size="10.00">Y</text>
-</g>
-<!-- f_Y -->
-<g id="node4" class="node">
-<title>f_Y</title>
-<text text-anchor="middle" x="118" y="-159" font-family="Times,serif" font-size="10.00">blackbox</text>
-</g>
-<!-- Y&#45;&gt;f_Y -->
-<g id="edge1" class="edge">
-<title>Y-&gt;f_Y</title>
-<path fill="none" stroke="black" d="M54.22,-155.78C64.81,-155.13 77.08,-155.08 87.94,-155.62"></path>
-<polygon fill="black" stroke="black" points="87.91,-156.67 90.97,-155.8 88.03,-154.58 87.91,-156.67"></polygon>
-</g>
-<!-- Y&#45;&gt;f_Y -->
-<g id="edge3" class="edge">
-<title>Y-&gt;f_Y</title>
-<path fill="none" stroke="black" d="M57.25,-168.38C68.13,-168.93 80.39,-168.87 90.97,-168.2"></path>
-<polygon fill="black" stroke="black" points="57.28,-167.33 54.22,-168.22 57.16,-169.43 57.28,-167.33"></polygon>
-</g>
-<!-- D -->
-<g id="node2" class="node">
-<title>D</title>
-<text text-anchor="middle" x="27" y="-15" font-family="Times,serif" font-size="10.00">D</text>
-</g>
-<!-- X -->
-<g id="node3" class="node">
-<title>X</title>
-<text text-anchor="middle" x="118" y="-87" font-family="Times,serif" font-size="10.00">X</text>
-</g>
-<!-- f_D -->
-<g id="node5" class="node">
-<title>f_D</title>
-<text text-anchor="middle" x="118" y="-15" font-family="Times,serif" font-size="10.00">blackbox</text>
-</g>
-<!-- X&#45;&gt;f_D -->
-<g id="edge6" class="edge">
-<title>X-&gt;f_D</title>
-<path fill="none" stroke="black" d="M133.21,-71.95C139.36,-60.99 139.88,-50.03 134.77,-39.07"></path>
-<polygon fill="black" stroke="black" points="135.64,-38.48 133.34,-36.28 133.77,-39.43 135.64,-38.48"></polygon>
-</g>
-<!-- X&#45;&gt;f_D -->
-<g id="edge8" class="edge">
-<title>X-&gt;f_D</title>
-<path fill="none" stroke="black" d="M101.34,-69.17C96.15,-58.21 96.59,-47.24 102.66,-36.28"></path>
-<polygon fill="black" stroke="black" points="100.48,-69.77 102.79,-71.95 102.34,-68.81 100.48,-69.77"></polygon>
-</g>
-<!-- f_Y&#45;&gt;X -->
-<g id="edge2" class="edge">
-<title>f_Y-&gt;X</title>
-<path fill="none" stroke="black" d="M133.21,-143.95C139.36,-132.99 139.88,-122.03 134.77,-111.07"></path>
-<polygon fill="black" stroke="black" points="135.64,-110.48 133.34,-108.28 133.77,-111.43 135.64,-110.48"></polygon>
-</g>
-<!-- f_Y&#45;&gt;X -->
-<g id="edge4" class="edge">
-<title>f_Y-&gt;X</title>
-<path fill="none" stroke="black" d="M101.34,-141.17C96.15,-130.21 96.59,-119.24 102.66,-108.28"></path>
-<polygon fill="black" stroke="black" points="100.48,-141.77 102.79,-143.95 102.34,-140.81 100.48,-141.77"></polygon>
-</g>
-<!-- g_Y -->
-<g id="node6" class="node">
-<title>g_Y</title>
-<text text-anchor="middle" x="238" y="-159" font-family="Times,serif" font-size="10.00">g_Y(X)</text>
-</g>
-<!-- f_Y&#45;&gt;g_Y -->
-<g id="edge9" class="edge">
-<title>f_Y-&gt;g_Y</title>
-<path fill="none" stroke="black" d="M148.46,-162C167.63,-162 192.42,-162 210.89,-162"></path>
-<polygon fill="black" stroke="black" points="148.19,-160.95 145.19,-162 148.19,-163.05 148.19,-160.95"></polygon>
-<text text-anchor="middle" x="178" y="-165" font-family="Times,serif" font-size="10.00">置き換え</text>
-</g>
-<!-- f_D&#45;&gt;D -->
-<g id="edge5" class="edge">
-<title>f_D-&gt;D</title>
-<path fill="none" stroke="black" d="M90.97,-11.8C80.39,-11.13 68.13,-11.07 57.25,-11.62"></path>
-<polygon fill="black" stroke="black" points="57.16,-10.57 54.22,-11.78 57.28,-12.67 57.16,-10.57"></polygon>
-</g>
-<!-- f_D&#45;&gt;D -->
-<g id="edge7" class="edge">
-<title>f_D-&gt;D</title>
-<path fill="none" stroke="black" d="M87.94,-24.38C77.08,-24.92 64.81,-24.87 54.22,-24.22"></path>
-<polygon fill="black" stroke="black" points="88.03,-25.42 90.97,-24.2 87.91,-23.33 88.03,-25.42"></polygon>
-</g>
-<!-- g_D -->
-<g id="node7" class="node">
-<title>g_D</title>
-<text text-anchor="middle" x="238" y="-15" font-family="Times,serif" font-size="10.00">g_D(X)</text>
-</g>
-<!-- f_D&#45;&gt;g_D -->
-<g id="edge10" class="edge">
-<title>f_D-&gt;g_D</title>
-<path fill="none" stroke="black" d="M148.46,-18C167.63,-18 192.42,-18 210.89,-18"></path>
-<polygon fill="black" stroke="black" points="148.19,-16.95 145.19,-18 148.19,-19.05 148.19,-16.95"></polygon>
-<text text-anchor="middle" x="178" y="-21" font-family="Times,serif" font-size="10.00">置き換え</text>
-</g>
-</g>
-</svg>
-</div>
-<p></p></figure><p></p>
-</div>
 </div>
 </div>
 </section>
-<section id="例-基本アイディア" class="level2" data-number="6.13">
-<h2 data-number="6.13" class="anchored" data-anchor-id="例-基本アイディア"><span class="header-section-number">6.13</span> 例: 基本アイディア</h2>
-<ul>
-<li><p>事例1と４の間で、<span class="math inline">\(700\)</span> 万円近くの 以上の価格格差</p></li>
-<li><p><span class="math inline">\(X\)</span> が大きく異なる</p>
-<ul>
-<li>(<span class="math inline">\(X\)</span> からの)予測値についても、同程度の格差</li>
-</ul></li>
-<li><p>実際の格差から、(<span class="math inline">\(X\)</span>の影響を捉える) 予測値の差を引くと ほとんど格差はない</p></li>
-</ul>
-</section>
-<section id="直感-2" class="level2" data-number="6.14">
-<h2 data-number="6.14" class="anchored" data-anchor-id="直感-2"><span class="header-section-number">6.14</span> 直感</h2>
-<ul>
-<li><p>価格 <span class="math inline">\(=\)</span> 取引年 <span class="math inline">\(+\)</span> <span class="math inline">\(X\)</span> の影響 <span class="math inline">\(+\)</span> その他</p></li>
-<li><p>予測モデルが<span class="math inline">\(X\)</span> の影響を完全に捉え、その他の影響がなければ、 <span class="math display">\[\underbrace{Y_1 - Y_2}_{事例1と2の賃金格差}-\underbrace{g_Y(X_1) - g_Y(X_2)}_{予測格差}\]</span> <span class="math display">\[=\underbrace{Y_1 - g_Y(X_1)}_{1についての予測誤差} - \underbrace{(Y_2 - g_Y(X_2))}_{2についての予測誤差}\]</span> は、バランス後の賃金格差を捉える</p></li>
-</ul>
-</section>
-<section id="直感-3" class="level2" data-number="6.15">
-<h2 data-number="6.15" class="anchored" data-anchor-id="直感-3"><span class="header-section-number">6.15</span> 直感</h2>
-<ul>
-<li><p>その他の影響は、当然存在する</p></li>
-<li><p>個別事例について、影響を排除することは困難</p></li>
-<li><p>大量の事例の平均をとることで、平均格差を明らかにする <span class="math display">\[\underbrace{E[Y - g_Y(X)|D=1]}_{D=1についての平均予測誤差} - \underbrace{E[Y - g_Y(X)|D=0]}_{D=0についての平均予測誤差}\]</span></p></li>
-<li><p><span class="math inline">\(g_Y(X)=E[Y|X]\)</span> であれば、バランス後の平均格差の優れた推定値</p></li>
-</ul>
-</section>
-<section id="直感-4" class="level2" data-number="6.16">
-<h2 data-number="6.16" class="anchored" data-anchor-id="直感-4"><span class="header-section-number">6.16</span> 直感</h2>
-<ul>
-<li><p>限られた事例から推定された予測モデルは、理想的なものと乖離する: <span class="math inline">\(g_Y(X)\neq E[Y|X]\)</span></p>
-<ul>
-<li>格差の推定値に、予測困難な悪影響を与える</li>
-</ul></li>
-<li><p><span class="math inline">\(D\)</span> の予測モデル <span class="math inline">\(g_D(X)\)</span> も併用する</p>
-<ul>
-<li><span class="math inline">\(X\)</span> が <span class="math inline">\(D\)</span> に与える影響も極力排除する</li>
-</ul></li>
-<li><p><span class="math inline">\(Y\)</span> の予測誤差 <span class="math inline">\(Y-g_Y(X)\)</span> を <span class="math inline">\(D\)</span> の予測誤差 <span class="math inline">\(D-g_D(X)\)</span> で回帰する</p></li>
-</ul>
-</section>
-<section id="double-debaised-machine-learning" class="level2" data-number="6.17">
-<h2 data-number="6.17" class="anchored" data-anchor-id="double-debaised-machine-learning"><span class="header-section-number">6.17</span> Double Debaised Machine Learning</h2>
-<ul>
-<li><p>R learnerは、Double/Debiased Machine Learningと呼ばれる手法の一つ</p></li>
-<li><p>最終的にはOLSや平均値などで推定する</p>
-<ul>
-<li><p>予測モデルの不完全性 (AIのミス) の悪影響を、複数の予測モデルを組み合わせることで減らす</p></li>
-<li><p>予測モデルが<strong>同時に</strong>母平均から大きく乖離しなければOK (“AIによるDouble Check”)</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="推定値の性質" class="level2" data-number="6.18">
-<h2 data-number="6.18" class="anchored" data-anchor-id="推定値の性質"><span class="header-section-number">6.18</span> 推定値の性質</h2>
-<ul>
-<li><p><span class="math inline">\(g_Y(X),g_D(X)\)</span> が <span class="math inline">\(E[Y|X],E[D|X]\)</span> をある程度近似できるのであれば (後述)、近似的な信頼区間を計算可能</p>
-<ul>
-<li><p>十分な事例数 (私見では500事例以上)</p></li>
-<li><p>適した推定方法の採用 (後日議論)</p></li>
-</ul></li>
-<li><p>注: <span class="math inline">\(Y,D\)</span> を高い精度で予測する必要はない</p>
-<ul>
-<li>個人差が大きく予測しにくい現象であったとしても、比較分析への活用においては、予測モデルは有益</li>
-</ul></li>
-</ul>
-</section>
-<section id="補論-olsとの比較" class="level2" data-number="6.19">
-<h2 data-number="6.19" class="anchored" data-anchor-id="補論-olsとの比較"><span class="header-section-number">6.19</span> 補論: OLSとの比較</h2>
-<ul>
-<li><p>「<span class="math inline">\(X\)</span> の分布を均した後の比較」を行う伝統的方法は、以下のモデルを重回帰する <span class="math display">\[E[Y|D,X]=\beta_0 + \beta_D D + \beta_1X_1+...\]</span></p></li>
-<li><p>FWL定理 (<a href="https://en.wikipedia.org/wiki/Frisch%E2%80%93Waugh%E2%80%93Lovell_theorem">wiki</a>)より、R-leanerの特殊ケースと見做せる</p></li>
-</ul>
-</section>
-<section id="補論-olsとの比較-1" class="level2" data-number="6.20">
-<h2 data-number="6.20" class="anchored" data-anchor-id="補論-olsとの比較-1"><span class="header-section-number">6.20</span> 補論: OLSとの比較</h2>
-<ul>
-<li>FWL定理より、OLSの推定結果 <span class="math inline">\(\beta_D\)</span> は、以下の手順により得られる推定結果と一致</li>
-</ul>
-<ol type="1">
-<li><p><strong>全データ</strong> を用いて、 <strong>OLS</strong> で予測モデル <span class="math inline">\(g_Y(X)=\beta_0 + \beta_1X_1+..., g_D(X)=\alpha_0+\alpha_1X_1+..\)</span> を推定</p></li>
-<li><p>以下はR-learnerと同じ手順</p></li>
-</ol>
-<ul>
-<li>予測モデルの定式化が正しく、かつ事例数に比べて十分に単純 (<span class="math inline">\(\beta\)</span> の数が少ない)のであれば、優れた推定方法だが、そうではない応用例も多い</li>
-</ul>
-</section>
-<section id="補論-統計モデルとしての書き換え" class="level2" data-number="6.21">
-<h2 data-number="6.21" class="anchored" data-anchor-id="補論-統計モデルとしての書き換え"><span class="header-section-number">6.21</span> 補論: 統計モデルとしての書き換え</h2>
-<ul>
-<li><p>R-learnerの推定結果は、以下のモデルを推定した場合の結果と一致 <span class="citation" data-cites="robinson1988root">(<a href="#ref-robinson1988root" role="doc-biblioref">Robinson 1988</a>)</span> <span class="math display">\[Y=\tau D + \underbrace{f(X)}_{何らかの(blackboxな)関数} + \underbrace{u}_{E[u|D,X]=0}\]</span></p>
-<ul>
-<li>教科書的な線形モデル: 「<span class="math inline">\(f(X)=\beta_0 + \beta_1X_1 +..\)</span> と特定化しても <span class="math inline">\(E[u|D,X]=0\)</span> が成り立つ」という仮定を<strong>追加</strong></li>
-</ul></li>
-</ul>
-</section>
-<section id="まとめ" class="level2" data-number="6.22">
-<h2 data-number="6.22" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">6.22</span> まとめ</h2>
-<ul>
-<li><p>シンプルな比較分析であれば、伝統的な推定方法が有効</p></li>
-<li><p>複雑な比較分析、ここでは <span class="math inline">\(X\)</span> をバランスさせた後での比較、においては機械学習も併用することで、分析の信頼性を改善できる</p>
-<ul>
-<li>OLSなどと比べて、推定結果が大きく変わらなかったとしても、分析の頑強性の確認ができる</li>
-</ul></li>
-</ul>
-</section>
-<section id="reference" class="level2" data-number="6.23">
-<h2 data-number="6.23" class="anchored" data-anchor-id="reference"><span class="header-section-number">6.23</span> Reference</h2>
+<section id="理想的な推定方法" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="理想的な推定方法"><span class="header-section-number">6.2.2</span> 理想的な推定方法</h3>
+<p>全ての<span class="math inline">\(X\)</span>の組み合わせについて、十分な事例数が存在するのであれば、<span class="math inline">\(x\)</span>内での平均差を直接計算し、平均値を計算することで、バランス後の平均差を計算できます。 しかしながら <span class="math inline">\(X\)</span> の組み合わせが増えると、サブグループ内での事例数が極端に小さくなり、実行不可能です。 この問題を解決するために、OLSや傾向スコアの逆数などの利用が重要です。</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-ben2021balancing" class="csl-entry" role="listitem">
-Ben-Michael, Eli, Avi Feller, David A Hirshberg, and José R Zubizarreta. 2021. <span>“The Balancing Act in Causal Inference.”</span> <em>arXiv Preprint arXiv:2110.14831</em>.
-</div>
-<div id="ref-chernozhukov2018double" class="csl-entry" role="listitem">
-Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. 2018. <span>“Double/Debiased Machine Learning for Treatment and Structural Parameters.”</span> Oxford University Press Oxford, UK.
-</div>
-<div id="ref-chernozhukov2022locally" class="csl-entry" role="listitem">
-Chernozhukov, Victor, Juan Carlos Escanciano, Hidehiko Ichimura, Whitney K Newey, and James M Robins. 2022. <span>“Locally Robust Semiparametric Estimation.”</span> <em>Econometrica</em> 90 (4): 1501–35.
-</div>
-<div id="ref-hainmueller2012entropy" class="csl-entry" role="listitem">
-Hainmueller, Jens. 2012. <span>“Entropy Balancing for Causal Effects: A Multivariate Reweighting Method to Produce Balanced Samples in Observational Studies.”</span> <em>Political Analysis</em> 20 (1): 25–46.
-</div>
-<div id="ref-robinson1988root" class="csl-entry" role="listitem">
-Robinson, Peter M. 1988. <span>“Root-n-Consistent Semiparametric Regression.”</span> <em>Econometrica</em>, 931–54.
-</div>
-<div id="ref-van2011targeted" class="csl-entry" role="listitem">
-Van der Laan, Mark J, and Sherri Rose. 2011. <em>Targeted Learning</em>. Vol. 1. 3. Springer.
-</div>
-</div>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1227,6 +1696,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./whatif_moment.html" class="pagination-link" aria-label="把握を目的とする要約: モーメントバランス">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">把握を目的とする要約: モーメントバランス</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="川田恵介">
-<meta name="dcterms.date" content="2024-08-02">
 
-<title>データ分析入門ノート</title>
+<title>データ分析入門ノート - 7&nbsp; 把握を目的とする要約: モーメントバランス</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -52,7 +50,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./stracture.html" rel="next">
+<link href="./whatif_ps.html" rel="next">
+<link href="./complexcomparison.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -131,7 +130,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./whatif_moment.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">把握を目的とする要約: モーメントバランス</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -158,7 +157,7 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -200,7 +199,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./whatif_moment.html" class="sidebar-item-text sidebar-link">
+  <a href="./whatif_moment.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">把握を目的とする要約: モーメントバランス</span></span></a>
   </div>
 </li>
@@ -220,13 +219,13 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
+  <li><a href="#ols-as-balancing-weight" id="toc-ols-as-balancing-weight" class="nav-link active" data-scroll-target="#ols-as-balancing-weight"><span class="header-section-number">7.1</span> OLS as Balancing weight</a>
   <ul class="collapse">
-  <li><a href="#本ノートの狙い" id="toc-本ノートの狙い" class="nav-link" data-scroll-target="#本ノートの狙い">本ノートの狙い</a></li>
-  <li><a href="#ノートの背景" id="toc-ノートの背景" class="nav-link" data-scroll-target="#ノートの背景">ノートの背景</a></li>
-  <li><a href="#章立て" id="toc-章立て" class="nav-link" data-scroll-target="#章立て">章立て</a></li>
-  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  <li><a href="#例" id="toc-例" class="nav-link" data-scroll-target="#例"><span class="header-section-number">7.1.1</span> 例</a></li>
+  <li><a href="#問題点" id="toc-問題点" class="nav-link" data-scroll-target="#問題点"><span class="header-section-number">7.1.2</span> 問題点</a></li>
   </ul></li>
+  <li><a href="#明示的なアルゴリズム" id="toc-明示的なアルゴリズム" class="nav-link" data-scroll-target="#明示的なアルゴリズム"><span class="header-section-number">7.2</span> 明示的なアルゴリズム</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">7.3</span> Reference</a></li>
   </ul>
 </nav>
     </div>
@@ -235,27 +234,14 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">データ分析入門ノート</h1>
-<p class="subtitle lead">欠損情報の個別予測と社会把握への活用</p>
+<h1 class="title"><span id="sec-WhatIfMoment" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">把握を目的とする要約: モーメントバランス</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>川田恵介 </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">August 2, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -265,68 +251,71 @@ window.Quarto = {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<section id="本ノートの狙い" class="level2">
-<h2 class="anchored" data-anchor-id="本ノートの狙い">本ノートの狙い</h2>
-<p>初学者に対して、データ分析法、具体的な分析工程に埋め込みながら紹介します。 特に分析法の急速な多様化に対応するため、分析のゴールに応じた整理し、実践への活用における混乱を減らすことに重点を置きます。 具体的には、以下の点に注意して、本ノートは作成されています。</p>
 <ul>
-<li><p>２種類の分析のゴール、「新しい事例について欠損情報の予測を行う予測」と 「事例の集団についてその特徴を把握するための分析法」、を紹介します。 把握のための分析の具体例としては、比較分析を主に扱います。例えば男女間賃金格差や前年と比較した場合の不動産価格変化など、集団間で見られる違いを把握する方法を紹介します。</p></li>
-<li><p>平均値の推定やOLSといった計量経済学の入門書で紹介される伝統的な手法だけでなく、決定木やRandomForestといった教師付き学習(機械学習の一分野)の手法も議論します。 分析のゴールが予測モデルの推定であるならば機械学習に比較優位があり、集団の特徴を把握することが目標であるならば、伝統的な手法に比較優位があることを、その理由とともに強調します。 さらに発展的な比較をゴールとする場合、教師付き学習と伝統的な手法のハイブリット的な手法が有効であることも論じます。</p></li>
-<li><p>予測と把握という分析のゴールの使い分け方を、具体的な意思決定を想定しながら整理します。 データ分析の目的を、意思決定に役立つ情報提供にあると位置付け、意思決定の種類に応じた分析のゴールを論じます。特に限られた事例にのみ影響を与える意思決定 (ミクロな意思決定)と大量の事例に影響を与える意思決定 (マクロな意思決定)を区別します。 教師付き学習がもたらす事例ごとの予測は、ミクロな意思決定においては非常に有効であったとしても、マクロな意思決定においては<strong>そのまま</strong>では活用が難しいことを強調します。これは大量の事例について提供される大量の予測値を、意思決定者が活用することが難しいためです。 マクロな意思決定においては、大量の事例群の特徴を把握が必要になり、このためには伝統的な手法が比較優位を持ちます。 ただし複雑な特徴を把握する上では、伝統的な手法と教師付き学習のハイブリット的な手法が有効になることを強調します。</p></li>
+<li>Optimaization: <span class="citation" data-cites="hainmueller2012entropy">Hainmueller (<a href="#ref-hainmueller2012entropy" role="doc-biblioref">2012</a>)</span>, <span class="citation" data-cites="zubizarreta2015stable">Zubizarreta (<a href="#ref-zubizarreta2015stable" role="doc-biblioref">2015</a>)</span></li>
 </ul>
-</section>
-<section id="ノートの背景" class="level2">
-<h2 class="anchored" data-anchor-id="ノートの背景">ノートの背景</h2>
-<p>本ノート作成の背景には、データ分析法の多様化とそれに伴う混乱があります。 データを用いた社会分析は、長い伝統を持ちます。 例えば経済学においては、古くからデータ分析が活用され、計量経済学と呼ばれる方法論開発を行う研究分野には多くの研究者が参入し、活発な議論が行われてきました。 また実際にデータを用いて行う実証研究も数多く行われ、伝統的にはOLSなどのモーメント法や最尤法などを用いたデータ分析が行われてきました。 さらに機械学習と類似する議論 (Nonparametric推定) やハイブリット的な手法の基礎となる議論 (Semi-parametric推定)も発展してきました。 しかしながらこのような発展的な議論は、入門書ではあまり紹介されてきませんでした。</p>
-<p>近年、コンピュータの計算能力増大などを背景に、伝統的な分析手法のみならず、機械学習と総称される分析手法の活用が急速に進んでいます。 特に教師付き学習と呼ばれる分野は、経済学における伝統的な推定手法と近い手法や問題意識を有しつつ、データの柔軟な活用方法を提供しています。 例えば、教師付き学習の教科書では、ほぼ例外なくLogitやOLSは紹介され、母分布を用いた論点整理がなされています。 他方で計量経済学の入門書ではあまり紹介されてこなかった、Data adaptive modellingの手法が数多く提案されています。 伝統的な推定手法が、「<strong>人間によって</strong>シンプルな 推定モデルの設定を行い、その限られたパラメタをデータにより推定する」という手続きを踏むのに対して、決定木やLASSOは、「大量のパラメタを、データによる適切に推定する」方法です。</p>
-<p>このような分析方法の多様化は、同時に応用研究における混乱ももたらしえます。例えば <span class="citation" data-cites="breiman2001statistical">Breiman (<a href="#ref-breiman2001statistical" role="doc-biblioref">2001</a>)</span> は、「機械学習は、伝統的な統計学の <span class="math inline">\(95 \%\)</span> と異なる”文化”を持っている」と主張し、多くの議論 <span class="citation" data-cites="shmueli2010explain efron2020prediction hofman2021integrating">(<a href="#ref-shmueli2010explain" role="doc-biblioref">Shmueli 2010</a>; <a href="#ref-efron2020prediction" role="doc-biblioref">Efron 2020</a>; <a href="#ref-hofman2021integrating" role="doc-biblioref">Hofman et al. 2021</a>)</span> を想起しました。 このような議論の中で、分析のゴールをしっかり意識することの重要性が指摘され、ゴールによっては伝統的な手法と機械学習のハイブリット的な方法の有効性が指摘されています<span class="citation" data-cites="van2011targeted chernozhukov2018double chernozhukov2022locally">(<a href="#ref-van2011targeted" role="doc-biblioref">Van der Laan and Rose 2011</a>; <a href="#ref-chernozhukov2018double" role="doc-biblioref">Chernozhukov et al. 2018</a>, <a href="#ref-chernozhukov2022locally" role="doc-biblioref">2022</a>)</span>。</p>
-<p>このような研究の成果は、上級レベルの計量経済学のテキストでは紹介され、また<a href="https://causalml-book.org/"><span class="citation" data-cites="chernozhukov2024applied">Chernozhukov et al. (<span>2024</span>)</span></a>などで集中的にまとめられています。 しかしながら、現状入門的な日本語の教材は見当たりません。 本ノートは、この空白を埋めることを目的としています。</p>
-</section>
-<section id="章立て" class="level2">
-<h2 class="anchored" data-anchor-id="章立て">章立て</h2>
+<section id="ols-as-balancing-weight" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="ols-as-balancing-weight"><span class="header-section-number">7.1</span> OLS as Balancing weight</h2>
+<p>線型モデルのOLS推定は、Moment Balanceを達成する代表的な方法です <span class="citation" data-cites="imbens2015matching">Chattopadhyay and Zubizarreta (<a href="#ref-chattopadhyay2023implied" role="doc-biblioref">2023</a>)</span>。 <span class="citation" data-cites="chattopadhyay2023implied">Chattopadhyay and Zubizarreta (<a href="#ref-chattopadhyay2023implied" role="doc-biblioref">2023</a>)</span> は、以下が全く同じ推定結果 <span class="math inline">\(\beta_D\)</span> をもたらすことを証明しました。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li><p><a href="stracture.html" class="quarto-xref">Section&nbsp;<span>1&nbsp; 分析工程</span></a></p></li>
-<li><p><a href="decision.html" class="quarto-xref">Section&nbsp;<span>2&nbsp; 意思決定問題</span></a></p></li>
-<li><p><a href="model.html" class="quarto-xref">Section&nbsp;<span>3&nbsp; 要約の基本コンセプト</span></a></p></li>
-<li><p><a href="prediction.html" class="quarto-xref">Section&nbsp;<span>4&nbsp; 予測を目的とする要約</span></a></p></li>
-<li><p><a href="simplecomparison.html" class="quarto-xref">Section&nbsp;<span>5&nbsp; 把握を目的とする要約: 単純な比較</span></a></p></li>
-<li><p><a href="complexcomparison.html" class="quarto-xref">Section&nbsp;<span>6&nbsp; 把握を目的とする要約: バランス後の比較</span></a></p></li>
-<li><p><a href="whatif_moment.html" class="quarto-xref">Section&nbsp;<span>7&nbsp; 把握を目的とする要約: モーメントバランス</span></a></p></li>
-<li><p><a href="whatif_ps.html" class="quarto-xref">Section&nbsp;<span>8&nbsp; 把握を目的とする要約: 傾向スコア</span></a></p></li>
+<li>統計モデル <span class="math display">\[Y\sim\beta_0 + \beta_DD+\beta_1X_1+..\beta_LX_L\]</span> をOLS推定した得られる <span class="math inline">\(\beta_D\)</span> は一般に以下と一致します。</li>
 </ul>
+<ol type="1">
+<li><p>全ての<span class="math inline">\(X=[X_1,..,X_L]\)</span> について、<span class="math display">\[\frac{\omega_1X_{l,1}+..+\omega_{N_{1}}X_{l,N_{1}}}{\underbrace{N_{1}}_{D=1の事例数}}\]</span> <span id="eq-balance"><span class="math display">\[= \frac{\omega_{N_{1}+1}X_{l,N_{1}+1}+..+\omega_{N_{1}+N_0}X_{l,N_{1}+N_0}}{\underbrace{N_0}_{D=0の事例数}} \tag{7.1}\]</span></span> <span id="eq-normal"><span class="math display">\[\sum_{i:D_i=1}W_i=\sum_{i:D_i=0}W_i=1 \tag{7.2}\]</span></span> を満たす <span class="math inline">\(W\)</span> から、分散が最も小さいものを選ぶ</p></li>
+<li><p><span id="eq-difference"><span class="math display">\[\frac{\omega_1Y_1+..+\omega_{N_{1}}Y_{N_{1}}}{\underbrace{N_{1}}_{D=1の事例数}} - \frac{\omega_{N_{1}+1}Y_{N_{1}+1}+..+\omega_{N_{1}+N_0}Y_{N_{1}+N_0}}{\underbrace{N_0}_{D=0の事例数}} \tag{7.3}\]</span></span></p></li>
+</ol>
+</div>
+</div>
+<p><a href="#eq-balance" class="quarto-xref">Equation&nbsp;<span>7.1</span></a> は、<span class="math inline">\(X\)</span> の平均値を <span class="math inline">\(D=\{0,1\}\)</span> 間で均質化していることを意味しています。 <a href="#eq-normal" class="quarto-xref">Equation&nbsp;<span>7.2</span></a> は、ウェイトとして総和を1に基準化しています。 すなわちStep 1において、平均値をバランスさせるウェイトの中から、最も分散が小さいものを選んでいることを意味しています。 Step 2において、このウェイトを用いた平均差を計算しています。</p>
+<p>ウェイトの分散は、最終的な推定結果の推定誤差に影響を与えます。 一般に、ウェイトの分散が小さいと、推定誤差が削減される傾向があります。</p>
+<section id="例" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="例"><span class="header-section-number">7.1.1</span> 例</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="whatif_moment_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="reference" class="level2">
-<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<section id="問題点" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="問題点"><span class="header-section-number">7.1.2</span> 問題点</h3>
+</section>
+</section>
+<section id="明示的なアルゴリズム" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="明示的なアルゴリズム"><span class="header-section-number">7.2</span> 明示的なアルゴリズム</h2>
+<p><span class="citation" data-cites="hainmueller2012entropy">Hainmueller (<a href="#ref-hainmueller2012entropy" role="doc-biblioref">2012</a>)</span>, <span class="citation" data-cites="zubizarreta2015stable">Zubizarreta (<a href="#ref-zubizarreta2015stable" role="doc-biblioref">2015</a>)</span></p>
+</section>
+<section id="reference" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="reference"><span class="header-section-number">7.3</span> Reference</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-breiman2001statistical" class="csl-entry" role="listitem">
-Breiman, Leo. 2001. <span>“Statistical Modeling: The Two Cultures.”</span> <em>Statistical Science</em> 16 (3): 199–231.
+<div id="ref-chattopadhyay2023implied" class="csl-entry" role="listitem">
+Chattopadhyay, Ambarish, and José R Zubizarreta. 2023. <span>“On the Implied Weights of Linear Regression for Causal Inference.”</span> <em>Biometrika</em> 110 (3): 615–29.
 </div>
-<div id="ref-chernozhukov2018double" class="csl-entry" role="listitem">
-Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. 2018. <span>“Double/Debiased Machine Learning for Treatment and Structural Parameters.”</span> Oxford University Press Oxford, UK.
+<div id="ref-hainmueller2012entropy" class="csl-entry" role="listitem">
+Hainmueller, Jens. 2012. <span>“Entropy Balancing for Causal Effects: A Multivariate Reweighting Method to Produce Balanced Samples in Observational Studies.”</span> <em>Political Analysis</em> 20 (1): 25–46.
 </div>
-<div id="ref-chernozhukov2022locally" class="csl-entry" role="listitem">
-Chernozhukov, Victor, Juan Carlos Escanciano, Hidehiko Ichimura, Whitney K Newey, and James M Robins. 2022. <span>“Locally Robust Semiparametric Estimation.”</span> <em>Econometrica</em> 90 (4): 1501–35.
+<div id="ref-imbens2015matching" class="csl-entry" role="listitem">
+Imbens, Guido W. 2015. <span>“Matching Methods in Practice: Three Examples.”</span> <em>Journal of Human Resources</em> 50 (2): 373–419.
 </div>
-<div id="ref-chernozhukov2024applied" class="csl-entry" role="listitem">
-Chernozhukov, Victor, Christian Hansen, Nathan Kallus, Martin Spindler, and Vasilis Syrgkanis. 2024. <span>“Applied Causal Inference Powered by ML and AI.”</span> <em>arXiv Preprint arXiv:2403.02467</em>.
-</div>
-<div id="ref-efron2020prediction" class="csl-entry" role="listitem">
-Efron, Bradley. 2020. <span>“Prediction, Estimation, and Attribution.”</span> <em>International Statistical Review</em> 88: S28–59.
-</div>
-<div id="ref-hofman2021integrating" class="csl-entry" role="listitem">
-Hofman, Jake M, Duncan J Watts, Susan Athey, Filiz Garip, Thomas L Griffiths, Jon Kleinberg, Helen Margetts, et al. 2021. <span>“Integrating Explanation and Prediction in Computational Social Science.”</span> <em>Nature</em> 595 (7866): 181–88.
-</div>
-<div id="ref-shmueli2010explain" class="csl-entry" role="listitem">
-Shmueli, Galit. 2010. <span>“To Explain or to Predict?”</span> <em>Statistical Science</em> 25 (3): 289–310.
-</div>
-<div id="ref-van2011targeted" class="csl-entry" role="listitem">
-Van der Laan, Mark J, and Sherri Rose. 2011. <em>Targeted Learning</em>. Vol. 1. 3. Springer.
+<div id="ref-zubizarreta2015stable" class="csl-entry" role="listitem">
+Zubizarreta, José R. 2015. <span>“Stable Weights That Balance Covariates for Estimation with Incomplete Outcome Data.”</span> <em>Journal of the American Statistical Association</em> 110 (511): 910–22.
 </div>
 </div>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -741,10 +730,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./complexcomparison.html" class="pagination-link" aria-label="把握を目的とする要約: バランス後の比較">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">把握を目的とする要約: バランス後の比較</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./stracture.html" class="pagination-link" aria-label="分析工程">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">分析工程</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./whatif_ps.html" class="pagination-link" aria-label="把握を目的とする要約: 傾向スコア">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 傾向スコア</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -194,7 +194,19 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./complexcomparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">把握を目的とする要約: What if</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">把握を目的とする要約: バランス後の比較</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./whatif_moment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">把握を目的とする要約: モーメントバランス</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./whatif_ps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 傾向スコア</span></span></a>
   </div>
 </li>
     </ul>
@@ -219,7 +231,7 @@ window.Quarto = {
   <li><a href="#ols" id="toc-ols" class="nav-link" data-scroll-target="#ols"><span class="header-section-number">4.2.3</span> OLS</a></li>
   <li><a href="#lasso" id="toc-lasso" class="nav-link" data-scroll-target="#lasso"><span class="header-section-number">4.2.4</span> LASSO</a></li>
   </ul></li>
-  <li><a href="#推定値の性質" id="toc-推定値の性質" class="nav-link" data-scroll-target="#推定値の性質"><span class="header-section-number">4.3</span> 推定値の性質</a>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">4.3</span> </a>
   <ul class="collapse">
   <li><a href="#事例数の拡大" id="toc-事例数の拡大" class="nav-link" data-scroll-target="#事例数の拡大"><span class="header-section-number">4.3.1</span> 事例数の拡大</a></li>
   <li><a href="#予測性能の測定" id="toc-予測性能の測定" class="nav-link" data-scroll-target="#予測性能の測定"><span class="header-section-number">4.3.2</span> 予測性能の測定</a></li>
@@ -263,7 +275,7 @@ window.Quarto = {
 <p>本ノートでは、データと同じ母集団から<strong>新たに</strong>抽出された事例を、予測するモデルの推定を目指します。 予測能力は、平均事情誤差で測定します <span class="math display">\[母集団における平均二乗誤差 = (Y - 予測値)^2 の母集団における平均\]</span>。 注意が必要なのは、母集団における平均二乗誤差は、母集団上の値であり、直接観察することは不可能です。 ただし以下では、推定することは可能であることを論じます。</p>
 <section id="完璧な予測モデル" class="level3" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="完璧な予測モデル"><span class="header-section-number">4.1.1</span> 完璧な予測モデル</h3>
-<p>予測研究において、究極的な目標の一つは、 <span class="math inline">\(Y\)</span> を完璧に予測するモデルの推定でしょう。 しかしながら多くの応用で、この目標には到達することができません。 予測モデルは、ある<span class="math inline">\(X\)</span>の組み合わせについて、一つの予測値のみを出力します。 このため<strong>母集団</strong>において、同じ<span class="math inline">\(X\)</span> 内で<span class="math inline">\(Y\)</span> の値にばらつきがあれば、予測が外れる事例は必ず存在します。 この問題を解決するためには、<span class="math inline">\(Y\)</span>の全ての決定要因を<span class="math inline">\(X\)</span>として観察し、<span class="math inline">\(X\)</span>内での個人差をなくす必要があります。 特に人間行動や社会的な事象などについては、無数の<span class="math inline">\(X\)</span>が存在し、その多くは観察が難しいと考えられます。 結果、完璧な予測は不可能と言っていいと思います。</p>
+<p>予測研究において、究極的な目標の一つは、 <span class="math inline">\(Y\)</span> を完璧に予測するモデルの推定です。 しかしながら多くの応用で、この目標には到達することができません。 予測モデルは、ある<span class="math inline">\(X\)</span>の組み合わせについて、一つの予測値のみを出力します。 このため<strong>母集団</strong>において、同じ<span class="math inline">\(X\)</span> 内で<span class="math inline">\(Y\)</span> の値にばらつきがあれば、予測が外れる事例は必ず存在します。 この問題を解決するためには、<span class="math inline">\(Y\)</span>の全ての決定要因を<span class="math inline">\(X\)</span>として観察し、<span class="math inline">\(X\)</span>内での個人差をなくす必要があります。 特に人間行動や社会的な事象などについては、無数の<span class="math inline">\(X\)</span>が存在し、その多くは観察が難しいと考えられます。 結果、完璧な予測は不可能と言っていいと思います。</p>
 </section>
 <section id="理想の予測モデル" class="level3" data-number="4.1.2">
 <h3 data-number="4.1.2" class="anchored" data-anchor-id="理想の予測モデル"><span class="header-section-number">4.1.2</span> 理想の予測モデル</h3>
@@ -386,8 +398,8 @@ Note
 <p>以上から全ての分析者について、モデルが単純化されていることが確認できます。 ただし単純化の方法は、かなり異なっており、データに強く依存していることが確認できます。 これは事例数の少なさ (100事例)が大きな影響を与えています。</p>
 </section>
 </section>
-<section id="推定値の性質" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="推定値の性質"><span class="header-section-number">4.3</span> 推定値の性質</h2>
+<section id="section" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="section"><span class="header-section-number">4.3</span> </h2>
 <section id="事例数の拡大" class="level3" data-number="4.3.1">
 <h3 data-number="4.3.1" class="anchored" data-anchor-id="事例数の拡大"><span class="header-section-number">4.3.1</span> 事例数の拡大</h3>
 <p>推定結果は、一般に事例数に強く影響を受けます。 以下の数値例では、事例数を100事例から50000事例まで増やし、 <span class="math inline">\(Y\sim Size + District\)</span> をOLSで、<span class="math inline">\(Y\sim (Size + Size^2 + .. + Size^6) * District\)</span> をLASSOで推定しています。</p>

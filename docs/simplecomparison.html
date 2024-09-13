@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -174,7 +194,19 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./complexcomparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">把握を目的とする要約: What if</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">把握を目的とする要約: バランス後の比較</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./whatif_moment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">把握を目的とする要約: モーメントバランス</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./whatif_ps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 傾向スコア</span></span></a>
   </div>
 </li>
     </ul>
@@ -190,7 +222,7 @@ window.Quarto = {
   <li><a href="#推定対象" id="toc-推定対象" class="nav-link active" data-scroll-target="#推定対象"><span class="header-section-number">5.1</span> 推定対象</a>
   <ul class="collapse">
   <li><a href="#平均差" id="toc-平均差" class="nav-link" data-scroll-target="#平均差"><span class="header-section-number">5.1.1</span> 平均差</a></li>
-  <li><a href="#best-linear-projection" id="toc-best-linear-projection" class="nav-link" data-scroll-target="#best-linear-projection"><span class="header-section-number">5.1.2</span> <strong>B</strong>est <strong>L</strong>inear <strong>P</strong>rojection</a></li>
+  <li><a href="#補助線分析" id="toc-補助線分析" class="nav-link" data-scroll-target="#補助線分析"><span class="header-section-number">5.1.2</span> 補助線分析</a></li>
   <li><a href="#平均の母集団上でのモデル化" id="toc-平均の母集団上でのモデル化" class="nav-link" data-scroll-target="#平均の母集団上でのモデル化"><span class="header-section-number">5.1.3</span> 平均の<strong>母集団上での</strong>モデル化</a></li>
   </ul></li>
   <li><a href="#推定方法" id="toc-推定方法" class="nav-link" data-scroll-target="#推定方法"><span class="header-section-number">5.2</span> 推定方法</a>
@@ -199,6 +231,7 @@ window.Quarto = {
   <li><a href="#予測値の集計-非推奨" id="toc-予測値の集計-非推奨" class="nav-link" data-scroll-target="#予測値の集計-非推奨"><span class="header-section-number">5.2.2</span> 予測値の集計 (非推奨)</a></li>
   </ul></li>
   <li><a href="#推定誤差の測定の重要性" id="toc-推定誤差の測定の重要性" class="nav-link" data-scroll-target="#推定誤差の測定の重要性"><span class="header-section-number">5.3</span> 推定誤差の測定の重要性</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">5.4</span> Reference</a></li>
   </ul>
 </nav>
     </div>
@@ -231,14 +264,14 @@ window.Quarto = {
 <h3 data-number="5.1.1" class="anchored" data-anchor-id="平均差"><span class="header-section-number">5.1.1</span> 平均差</h3>
 <p>もし<span class="math inline">\(D\)</span> が少数のカテゴリー (中心6区 VS その他)を表すのであれば、 <span class="math inline">\(D\)</span> と <span class="math inline">\(Y\)</span> の関係性を要約する代表的な指標は、<span class="math inline">\(Y\)</span> の平均差です <span class="math display">\[D=1におけるYの平均 - D=0におけるYの平均\]</span></p>
 </section>
-<section id="best-linear-projection" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="best-linear-projection"><span class="header-section-number">5.1.2</span> <strong>B</strong>est <strong>L</strong>inear <strong>P</strong>rojection</h3>
-<p><span class="math inline">\(D\)</span> が整数や実数 (部屋の広さ)を表す場合であったとしても、原理的には母平均の差を定義することは可能ですが、推定することは困難です。 これは全く同じ<span class="math inline">\(D\)</span>の値をとる事例数が少なすぎるためです。 この問題への対処としては、母平均を線型モデルで近似することです。 <span class="math display">\[Yの平均値のモデル= \underbrace{\beta_0+\beta_1\times d}_{線型モデル}\]</span> <span class="math inline">\(\beta_0,\beta_1\)</span> は、以下を最小化する値として定義します <span class="math display">\[(D=dにおけるYの平均-Yの平均値のモデル)^2の平均値\]</span> このようなモデルは、<strong>母集団上で</strong>OLS推定を<strong>仮想的に</strong>行った結果得られるモデルと完全に一致します。 このためPopulation OLS (母集団上でのOLS)と呼ばれることもあります。</p>
+<section id="補助線分析" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="補助線分析"><span class="header-section-number">5.1.2</span> 補助線分析</h3>
+<p><span class="math inline">\(D\)</span> が整数や実数 (部屋の広さ)を表す場合であったとしても、原理的には母平均の差を定義することは可能ですが、推定することは困難です。 これは全く同じ<span class="math inline">\(D\)</span>の値をとる事例数が少なすぎるためです。 この問題への対処としては、母平均そのものではなく、その補助線(Best Linear Projection)を推定することが有力です。 <span class="math display">\[Yの平均値のモデル= \underbrace{\beta_0+\beta_1\times d}_{Best Linear Projection}\]</span> <span class="math inline">\(\beta_0,\beta_1\)</span> は、以下を最小化する値として定義します <span class="math display">\[(D=dにおけるYの平均-Best\ Linear\ Projection)^2の平均値\]</span> このようなモデルは、<strong>母集団上で</strong>OLS推定を<strong>仮想的に</strong>行った結果得られるモデルと完全に一致します。 このためPopulation OLS (母集団上でのOLS)と呼ばれることもあります。</p>
 <p>注意点は、母集団上で<strong>仮想的に</strong>定義されたモデルであるという点です。 分析者は、このモデルを直接観察できず、データから推定する必要があります(後述のように、このような線型モデルは容易に推定できます。)。 言い換えると、分析課題に適した推定対象を定義するために導入されたモデルです。</p>
 </section>
 <section id="平均の母集団上でのモデル化" class="level3" data-number="5.1.3">
 <h3 data-number="5.1.3" class="anchored" data-anchor-id="平均の母集団上でのモデル化"><span class="header-section-number">5.1.3</span> 平均の<strong>母集団上での</strong>モデル化</h3>
-<p>A<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>実際の数値例は、以下の通りとなります。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -267,7 +300,7 @@ window.Quarto = {
 <p>このような推定方法は、モーメント法と呼ばれます。<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>。</p>
 <section id="信頼区間" class="level4" data-number="5.2.1.1">
 <h4 data-number="5.2.1.1" class="anchored" data-anchor-id="信頼区間"><span class="header-section-number">5.2.1.1</span> 信頼区間</h4>
-<p>モーメント法が持つ大きな利点は、ある程度の事例数を持つランダムサンプリングデータであれば、推定値とEstimandの関係性について、近似的な性質が成り立つ点です。</p>
+<p>モーメント法が持つ大きな利点は、ある程度の事例数を持つランダムサンプリングデータであれば、推定値とEstimandの関係性について、近似的な性質が成り立つ点です<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>。</p>
 <p>データ上の単純平均値やOLSの結果であったとしても、データの偶然の偏りの影響は受けます。 このため、一般にデータから得た推定値は母平均と一致しません。 言い換えるならば、「推定値を母平均である」と強弁すると、ほぼ100<span class="math inline">\(\%\)</span>間違いを犯していることになります。</p>
 <p>多くの学術研究では、より信頼できる分析結果として、推定の精度を表す指標を合わせて報告します。 本ノートでは、代表的な指標である信頼区間を紹介します。 信頼区間を端的に定義すると、 一定の確率(多くの初期設定で 95 <span class="math inline">\(\%\)</span>) でEstimandを含む区間です。</p>
 <p>より正確なイメージを持つために、仮想的な研究者を再度イメージしてください。 以下の数値例では、合計36名の研究者を想像し、それぞれが独立してデータを収集し、<span class="math inline">\(95\%\)</span>信頼区間を計算しています。 Estimand (母平均) は0.5、一様分布からそれぞれ500事例収集しています。</p>
@@ -292,16 +325,25 @@ window.Quarto = {
 <section id="推定誤差の測定の重要性" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="推定誤差の測定の重要性"><span class="header-section-number">5.3</span> 推定誤差の測定の重要性</h2>
 <p>把握のための分析が特に求められるのは、企業戦略や政策決定などの、マクロな意思決定です。 これらの意思決定は、幅広い層に不可逆的な影響を与えることが多いです。 このため判断材料となる情報にも、高い信頼性/透明性が求められます。</p>
-<p>観察できない事例と変数の存在により、推定結果そのものは<span class="math inline">\(100\%\)</span>間違えており、こ推定誤差は常に考慮する必要があります。 この点において、モーメント法は大きな利点を有します<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>。</p>
+<p>観察できない事例と変数の存在により、推定結果そのものは<span class="math inline">\(100\%\)</span>間違えており、こ推定誤差は常に考慮する必要があります。 この点において、モーメント法は大きな利点を有します<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>。</p>
+</section>
+<section id="reference" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="reference"><span class="header-section-number">5.4</span> Reference</h2>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Lin2024To" class="csl-entry" role="listitem">
+Lin, Hanti. 2024. <span>“To <span>Be</span> a <span>Frequentist</span> or <span>Bayesian</span>? <span>Five</span> <span>Positions</span> in a <span>Spectrum</span>.”</span> <em>Harvard Data Science Review</em> 6 (3).
+</div>
+</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn1"><p>平均差による母平均の差の推定結果は、以下の母平均のモデルをOLSで推定した結果と一致とします。 <span class="math display">\[Y=\beta_0 + \underbrace{\beta_1}_{=E[Y|D=1] - E[Y|D=0]}D + \underbrace{u}_{E[u|D=1]=E[u|D=0]=0}\]</span> <span class="math inline">\(\beta_1=\)</span> Parameter of interest 「母集団の信頼できる統計モデルのパラメタを推定する」方法として、教科書では紹介されてきた 研究関心が複雑になると信頼できるモデルを構築するのが難しくなる<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>他の推定方法として、最尤法やベイズ法があります。これらの手法は、モーメント法よりも強い仮定を要求しますが、その仮定が正しいのであれば、推定精度が高くなります。<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>事例数が少ないケースにおいては、モーメント法の有用性は大きく低下します。このような場合は、ベイズ法などが有力な選択肢となります。<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>本ノートでは、頻度論と呼ばれる枠組みを用いて、推定誤差の測定を論じます。頻度論以外にはベイズ方と呼ばれる枠組みもあります。<a href="https://hdsr.mitpress.mit.edu/pub/axvcupj4/release/1?readingCollection=7df11831"><span class="citation" data-cites="Lin2024To">Lin (<span>2024</span>)</span></a>などを参照ください。<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>事例数が少ないケースにおいては、モーメント法の有用性は大きく低下します。このような場合は、ベイズ法などが有力な選択肢となります。<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -722,8 +764,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./complexcomparison.html" class="pagination-link" aria-label="把握を目的とする要約: What if">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">把握を目的とする要約: What if</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./complexcomparison.html" class="pagination-link" aria-label="把握を目的とする要約: バランス後の比較">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">把握を目的とする要約: バランス後の比較</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

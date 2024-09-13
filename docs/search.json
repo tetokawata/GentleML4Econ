@@ -34,7 +34,7 @@
     "href": "index.html#章立て",
     "title": "データ分析入門ノート",
     "section": "章立て",
-    "text": "章立て\n\nSection 1  分析工程\nSection 2  意思決定問題\nSection 3  要約の基本コンセプト\nSection 4  予測を目的とする要約\nSection 5  把握を目的とする要約: 単純な比較\nSection 6  把握を目的とする要約: What if",
+    "text": "章立て\n\nSection 1  分析工程\nSection 2  意思決定問題\nSection 3  要約の基本コンセプト\nSection 4  予測を目的とする要約\nSection 5  把握を目的とする要約: 単純な比較\nSection 6  把握を目的とする要約: バランス後の比較\nSection 7  把握を目的とする要約: モーメントバランス\nSection 8  把握を目的とする要約: 傾向スコア",
     "crumbs": [
       "Preface"
     ]
@@ -194,7 +194,7 @@
     "href": "prediction.html#推定目標",
     "title": "4  予測を目的とする要約",
     "section": "",
-    "text": "4.1.1 完璧な予測モデル\n予測研究において、究極的な目標の一つは、 \\(Y\\) を完璧に予測するモデルの推定でしょう。 しかしながら多くの応用で、この目標には到達することができません。 予測モデルは、ある\\(X\\)の組み合わせについて、一つの予測値のみを出力します。 このため母集団において、同じ\\(X\\) 内で\\(Y\\) の値にばらつきがあれば、予測が外れる事例は必ず存在します。 この問題を解決するためには、\\(Y\\)の全ての決定要因を\\(X\\)として観察し、\\(X\\)内での個人差をなくす必要があります。 特に人間行動や社会的な事象などについては、無数の\\(X\\)が存在し、その多くは観察が難しいと考えられます。 結果、完璧な予測は不可能と言っていいと思います。\n\n\n4.1.2 理想の予測モデル\n最も高い予測性能 (母集団における平均二乗誤差が最小化)を達成する予測モデルは、母平均であることが証明できます \\[理想の予測モデル = X内でのYの母平均\\]。\n予測研究においては、データから推定した予測モデルを理想の予想モデルである母平均に極力近づけることが、実質的な目標となります。 具体的には以下の推定誤差を極力削減することを目指します \\[(\\underbrace{X内でのYの母平均}_{理想の予測モデル}-予測モデル)^2の母平均\\]",
+    "text": "4.1.1 完璧な予測モデル\n予測研究において、究極的な目標の一つは、 \\(Y\\) を完璧に予測するモデルの推定です。 しかしながら多くの応用で、この目標には到達することができません。 予測モデルは、ある\\(X\\)の組み合わせについて、一つの予測値のみを出力します。 このため母集団において、同じ\\(X\\) 内で\\(Y\\) の値にばらつきがあれば、予測が外れる事例は必ず存在します。 この問題を解決するためには、\\(Y\\)の全ての決定要因を\\(X\\)として観察し、\\(X\\)内での個人差をなくす必要があります。 特に人間行動や社会的な事象などについては、無数の\\(X\\)が存在し、その多くは観察が難しいと考えられます。 結果、完璧な予測は不可能と言っていいと思います。\n\n\n4.1.2 理想の予測モデル\n最も高い予測性能 (母集団における平均二乗誤差が最小化)を達成する予測モデルは、母平均であることが証明できます \\[理想の予測モデル = X内でのYの母平均\\]。\n予測研究においては、データから推定した予測モデルを理想の予想モデルである母平均に極力近づけることが、実質的な目標となります。 具体的には以下の推定誤差を極力削減することを目指します \\[(\\underbrace{X内でのYの母平均}_{理想の予測モデル}-予測モデル)^2の母平均\\]",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>予測を目的とする要約</span>"
     ]
@@ -210,11 +210,11 @@
     ]
   },
   {
-    "objectID": "prediction.html#推定値の性質",
-    "href": "prediction.html#推定値の性質",
+    "objectID": "prediction.html#section",
+    "href": "prediction.html#section",
     "title": "4  予測を目的とする要約",
-    "section": "4.3 推定値の性質",
-    "text": "4.3 推定値の性質\n\n4.3.1 事例数の拡大\n推定結果は、一般に事例数に強く影響を受けます。 以下の数値例では、事例数を100事例から50000事例まで増やし、 \\(Y\\sim Size + District\\) をOLSで、\\(Y\\sim (Size + Size^2 + .. + Size^6) * District\\) をLASSOで推定しています。\n\n\n\n\n\n\n\n\n\n上記結果は、事例数が拡大すると、分析者間での推定結果のばらつきが大きく減少していることが確認できます。 これは多くの推定方法で成り立つ性質であり、大規模な事例を集計すると、データの違いによる結果のばらつきが抑制されます。\n母平均の近似については、複雑なモデルにLASSOを適用した推定結果が、単純なモデルにOLSを適用した結果を大きく上回っています。 単純なモデルは、分析者が設定するモデルに推定結果が大きく制約されており、事例数増加の恩恵が十分に得られません。 対してLASSOは、データ主導でモデルの複雑性の調整が行われるので、事例数が増えると、それに応じて複雑なモデルが推定できます。\n\n\n4.3.2 予測性能の測定\n予測を目指す分析では、推定された予測モデルの性能を評価することが重要となります。 現状、幅広いデータや状況において、高い予測性能を生み出す方法は存在しません。 このため複数の予測モデルを”試作”し、その性能を比較することが分析工程に組み込まれています。\n最もシンプルな評価方法は、サンプル分割です。 データをランダムに訓練データとテストデータに分割し、訓練データのみでモデルを試作し、テストデータへの当てはまりを(平均二乗誤差などで)評価します。 訓練/テスト間での事例数の比率については、8:2や95:5が(経験則として)推奨されることが多いです。\n実際の取引データに適用した結果は以下です。 6378事例のうち、ランダムに選んだ半分を訓練、残り半分をテストに用いました。 テストした推定方法は\n\nOLS: 取引価格 ~ 部屋の広さ + 立地 + 取引年\nOLS| 交差項 + 高次項: 取引価格 ~ 部屋の広さ + 立地 + 取引年 + 交差項 + 高次項(６次まで)\nLASSO: 交差項 + 高次項: 取引価格 ~ 部屋の広さ + 立地 + 取引年 + 交差項 + 高次項(６次まで)\n\n\n\n\n\n\n\n\n\nOLS\nOLS| 交差項 + 高次項\nLASSO\n\n\n\n\n369\n316\n303\n\n\n\n\n\n\n\nLASSOが最も予測性能が高く、単純なOLSと比較し、0.179 パーセントほど平均二乗誤差を削減しました。 対して、交差項と高次項を追加したOLSと比較した場合、0.041 パーセントほどの改善にとどまります。 これはモデルの複雑さに比べて、事例数が多く、LASSOによるモデル単純化の恩恵が限定的であることを示しています。",
+    "section": "4.3 ",
+    "text": "4.3 \n\n4.3.1 事例数の拡大\n推定結果は、一般に事例数に強く影響を受けます。 以下の数値例では、事例数を100事例から50000事例まで増やし、 \\(Y\\sim Size + District\\) をOLSで、\\(Y\\sim (Size + Size^2 + .. + Size^6) * District\\) をLASSOで推定しています。\n\n\n\n\n\n\n\n\n\n上記結果は、事例数が拡大すると、分析者間での推定結果のばらつきが大きく減少していることが確認できます。 これは多くの推定方法で成り立つ性質であり、大規模な事例を集計すると、データの違いによる結果のばらつきが抑制されます。\n母平均の近似については、複雑なモデルにLASSOを適用した推定結果が、単純なモデルにOLSを適用した結果を大きく上回っています。 単純なモデルは、分析者が設定するモデルに推定結果が大きく制約されており、事例数増加の恩恵が十分に得られません。 対してLASSOは、データ主導でモデルの複雑性の調整が行われるので、事例数が増えると、それに応じて複雑なモデルが推定できます。\n\n\n4.3.2 予測性能の測定\n予測を目指す分析では、推定された予測モデルの性能を評価することが重要となります。 現状、幅広いデータや状況において、高い予測性能を生み出す方法は存在しません。 このため複数の予測モデルを”試作”し、その性能を比較することが分析工程に組み込まれています。\n最もシンプルな評価方法は、サンプル分割です。 データをランダムに訓練データとテストデータに分割し、訓練データのみでモデルを試作し、テストデータへの当てはまりを(平均二乗誤差などで)評価します。 訓練/テスト間での事例数の比率については、8:2や95:5が(経験則として)推奨されることが多いです。\n実際の取引データに適用した結果は以下です。 6378事例のうち、ランダムに選んだ半分を訓練、残り半分をテストに用いました。 テストした推定方法は\n\nOLS: 取引価格 ~ 部屋の広さ + 立地 + 取引年\nOLS| 交差項 + 高次項: 取引価格 ~ 部屋の広さ + 立地 + 取引年 + 交差項 + 高次項(６次まで)\nLASSO: 交差項 + 高次項: 取引価格 ~ 部屋の広さ + 立地 + 取引年 + 交差項 + 高次項(６次まで)\n\n\n\n\n\n\n\n\n\nOLS\nOLS| 交差項 + 高次項\nLASSO\n\n\n\n\n369\n316\n303\n\n\n\n\n\n\n\nLASSOが最も予測性能が高く、単純なOLSと比較し、0.179 パーセントほど平均二乗誤差を削減しました。 対して、交差項と高次項を追加したOLSと比較した場合、0.041 パーセントほどの改善にとどまります。 これはモデルの複雑さに比べて、事例数が多く、LASSOによるモデル単純化の恩恵が限定的であることを示しています。",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>予測を目的とする要約</span>"
     ]
@@ -264,7 +264,7 @@
     "href": "simplecomparison.html#推定対象",
     "title": "5  把握を目的とする要約: 単純な比較",
     "section": "",
-    "text": "5.1.1 平均差\nもし\\(D\\) が少数のカテゴリー (中心6区 VS その他)を表すのであれば、 \\(D\\) と \\(Y\\) の関係性を要約する代表的な指標は、\\(Y\\) の平均差です \\[D=1におけるYの平均 - D=0におけるYの平均\\]\n\n\n5.1.2 Best Linear Projection\n\\(D\\) が整数や実数 (部屋の広さ)を表す場合であったとしても、原理的には母平均の差を定義することは可能ですが、推定することは困難です。 これは全く同じ\\(D\\)の値をとる事例数が少なすぎるためです。 この問題への対処としては、母平均を線型モデルで近似することです。 \\[Yの平均値のモデル= \\underbrace{\\beta_0+\\beta_1\\times d}_{線型モデル}\\] \\(\\beta_0,\\beta_1\\) は、以下を最小化する値として定義します \\[(D=dにおけるYの平均-Yの平均値のモデル)^2の平均値\\] このようなモデルは、母集団上でOLS推定を仮想的に行った結果得られるモデルと完全に一致します。 このためPopulation OLS (母集団上でのOLS)と呼ばれることもあります。\n注意点は、母集団上で仮想的に定義されたモデルであるという点です。 分析者は、このモデルを直接観察できず、データから推定する必要があります(後述のように、このような線型モデルは容易に推定できます。)。 言い換えると、分析課題に適した推定対象を定義するために導入されたモデルです。\n\n\n5.1.3 平均の母集団上でのモデル化\nA1",
+    "text": "5.1.1 平均差\nもし\\(D\\) が少数のカテゴリー (中心6区 VS その他)を表すのであれば、 \\(D\\) と \\(Y\\) の関係性を要約する代表的な指標は、\\(Y\\) の平均差です \\[D=1におけるYの平均 - D=0におけるYの平均\\]\n\n\n5.1.2 補助線分析\n\\(D\\) が整数や実数 (部屋の広さ)を表す場合であったとしても、原理的には母平均の差を定義することは可能ですが、推定することは困難です。 これは全く同じ\\(D\\)の値をとる事例数が少なすぎるためです。 この問題への対処としては、母平均そのものではなく、その補助線(Best Linear Projection)を推定することが有力です。 \\[Yの平均値のモデル= \\underbrace{\\beta_0+\\beta_1\\times d}_{Best Linear Projection}\\] \\(\\beta_0,\\beta_1\\) は、以下を最小化する値として定義します \\[(D=dにおけるYの平均-Best\\ Linear\\ Projection)^2の平均値\\] このようなモデルは、母集団上でOLS推定を仮想的に行った結果得られるモデルと完全に一致します。 このためPopulation OLS (母集団上でのOLS)と呼ばれることもあります。\n注意点は、母集団上で仮想的に定義されたモデルであるという点です。 分析者は、このモデルを直接観察できず、データから推定する必要があります(後述のように、このような線型モデルは容易に推定できます。)。 言い換えると、分析課題に適した推定対象を定義するために導入されたモデルです。\n\n\n5.1.3 平均の母集団上でのモデル化\n実際の数値例は、以下の通りとなります。1",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>把握を目的とする要約: 単純な比較</span>"
     ]
@@ -274,7 +274,7 @@
     "href": "simplecomparison.html#推定方法",
     "title": "5  把握を目的とする要約: 単純な比較",
     "section": "5.2 推定方法",
-    "text": "5.2 推定方法\n\n5.2.1 モーメント法\n平均差やBLPの最も単純かつ優れた推定方法は、推定対象の母集団上での定義を、データに適用することです。 例えば、平均差については、\\(D=1\\) および \\(D=0\\) それぞれについて、\\(Y\\) のデータ上での平均値を計算し、その差を求めます。 BLPについても、データ上で、\\(Y\\)を\\(D\\)でOLS推定した結果を推定値として用いることができます。\nこのような推定方法は、モーメント法と呼ばれます。2。\n\n5.2.1.1 信頼区間\nモーメント法が持つ大きな利点は、ある程度の事例数を持つランダムサンプリングデータであれば、推定値とEstimandの関係性について、近似的な性質が成り立つ点です。\nデータ上の単純平均値やOLSの結果であったとしても、データの偶然の偏りの影響は受けます。 このため、一般にデータから得た推定値は母平均と一致しません。 言い換えるならば、「推定値を母平均である」と強弁すると、ほぼ100\\(\\%\\)間違いを犯していることになります。\n多くの学術研究では、より信頼できる分析結果として、推定の精度を表す指標を合わせて報告します。 本ノートでは、代表的な指標である信頼区間を紹介します。 信頼区間を端的に定義すると、 一定の確率(多くの初期設定で 95 \\(\\%\\)) でEstimandを含む区間です。\nより正確なイメージを持つために、仮想的な研究者を再度イメージしてください。 以下の数値例では、合計36名の研究者を想像し、それぞれが独立してデータを収集し、\\(95\\%\\)信頼区間を計算しています。 Estimand (母平均) は0.5、一様分布からそれぞれ500事例収集しています。\n\n\n\n\n\n\n\n\n\n期待値通り２名の 分析者(22と35)について、信頼区間がEstimandを明確に含まない結果となりました。\n\n\n\n5.2.2 予測値の集計 (非推奨)\nモーメント法の代替となる推定方法として、機械学習で推定した予測値を用いる方法があります。 例えば全ての事例について、予測値を算出し、その予測値の平均値を\\(D=0\\) と \\(1\\) それぞれについて算出し、差を計算します。\n信頼区間などの推定ごさを導出したい場合、この方法は、一般に推奨されません。 なぜならば、機械学習を用いた推定方法では、データと推定結果の関係性が複雑であり、一般的な関係性が不透明なためです。",
+    "text": "5.2 推定方法\n\n5.2.1 モーメント法\n平均差やBLPの最も単純かつ優れた推定方法は、推定対象の母集団上での定義を、データに適用することです。 例えば、平均差については、\\(D=1\\) および \\(D=0\\) それぞれについて、\\(Y\\) のデータ上での平均値を計算し、その差を求めます。 BLPについても、データ上で、\\(Y\\)を\\(D\\)でOLS推定した結果を推定値として用いることができます。\nこのような推定方法は、モーメント法と呼ばれます。2。\n\n5.2.1.1 信頼区間\nモーメント法が持つ大きな利点は、ある程度の事例数を持つランダムサンプリングデータであれば、推定値とEstimandの関係性について、近似的な性質が成り立つ点です3。\nデータ上の単純平均値やOLSの結果であったとしても、データの偶然の偏りの影響は受けます。 このため、一般にデータから得た推定値は母平均と一致しません。 言い換えるならば、「推定値を母平均である」と強弁すると、ほぼ100\\(\\%\\)間違いを犯していることになります。\n多くの学術研究では、より信頼できる分析結果として、推定の精度を表す指標を合わせて報告します。 本ノートでは、代表的な指標である信頼区間を紹介します。 信頼区間を端的に定義すると、 一定の確率(多くの初期設定で 95 \\(\\%\\)) でEstimandを含む区間です。\nより正確なイメージを持つために、仮想的な研究者を再度イメージしてください。 以下の数値例では、合計36名の研究者を想像し、それぞれが独立してデータを収集し、\\(95\\%\\)信頼区間を計算しています。 Estimand (母平均) は0.5、一様分布からそれぞれ500事例収集しています。\n\n\n\n\n\n\n\n\n\n期待値通り２名の 分析者(22と35)について、信頼区間がEstimandを明確に含まない結果となりました。\n\n\n\n5.2.2 予測値の集計 (非推奨)\nモーメント法の代替となる推定方法として、機械学習で推定した予測値を用いる方法があります。 例えば全ての事例について、予測値を算出し、その予測値の平均値を\\(D=0\\) と \\(1\\) それぞれについて算出し、差を計算します。\n信頼区間などの推定ごさを導出したい場合、この方法は、一般に推奨されません。 なぜならば、機械学習を用いた推定方法では、データと推定結果の関係性が複雑であり、一般的な関係性が不透明なためです。",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>把握を目的とする要約: 単純な比較</span>"
     ]
@@ -284,7 +284,17 @@
     "href": "simplecomparison.html#推定誤差の測定の重要性",
     "title": "5  把握を目的とする要約: 単純な比較",
     "section": "5.3 推定誤差の測定の重要性",
-    "text": "5.3 推定誤差の測定の重要性\n把握のための分析が特に求められるのは、企業戦略や政策決定などの、マクロな意思決定です。 これらの意思決定は、幅広い層に不可逆的な影響を与えることが多いです。 このため判断材料となる情報にも、高い信頼性/透明性が求められます。\n観察できない事例と変数の存在により、推定結果そのものは\\(100\\%\\)間違えており、こ推定誤差は常に考慮する必要があります。 この点において、モーメント法は大きな利点を有します3。",
+    "text": "5.3 推定誤差の測定の重要性\n把握のための分析が特に求められるのは、企業戦略や政策決定などの、マクロな意思決定です。 これらの意思決定は、幅広い層に不可逆的な影響を与えることが多いです。 このため判断材料となる情報にも、高い信頼性/透明性が求められます。\n観察できない事例と変数の存在により、推定結果そのものは\\(100\\%\\)間違えており、こ推定誤差は常に考慮する必要があります。 この点において、モーメント法は大きな利点を有します4。",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>把握を目的とする要約: 単純な比較</span>"
+    ]
+  },
+  {
+    "objectID": "simplecomparison.html#reference",
+    "href": "simplecomparison.html#reference",
+    "title": "5  把握を目的とする要約: 単純な比較",
+    "section": "5.4 Reference",
+    "text": "5.4 Reference\n\n\n\n\nLin, Hanti. 2024. “To Be a Frequentist or Bayesian? Five Positions in a Spectrum.” Harvard Data Science Review 6 (3).",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>把握を目的とする要約: 単純な比較</span>"
     ]
@@ -294,7 +304,7 @@
     "href": "simplecomparison.html#footnotes",
     "title": "5  把握を目的とする要約: 単純な比較",
     "section": "",
-    "text": "平均差による母平均の差の推定結果は、以下の母平均のモデルをOLSで推定した結果と一致とします。 \\[Y=\\beta_0 + \\underbrace{\\beta_1}_{=E[Y|D=1] - E[Y|D=0]}D + \\underbrace{u}_{E[u|D=1]=E[u|D=0]=0}\\] \\(\\beta_1=\\) Parameter of interest 「母集団の信頼できる統計モデルのパラメタを推定する」方法として、教科書では紹介されてきた 研究関心が複雑になると信頼できるモデルを構築するのが難しくなる↩︎\n他の推定方法として、最尤法やベイズ法があります。これらの手法は、モーメント法よりも強い仮定を要求しますが、その仮定が正しいのであれば、推定精度が高くなります。↩︎\n事例数が少ないケースにおいては、モーメント法の有用性は大きく低下します。このような場合は、ベイズ法などが有力な選択肢となります。↩︎",
+    "text": "平均差による母平均の差の推定結果は、以下の母平均のモデルをOLSで推定した結果と一致とします。 \\[Y=\\beta_0 + \\underbrace{\\beta_1}_{=E[Y|D=1] - E[Y|D=0]}D + \\underbrace{u}_{E[u|D=1]=E[u|D=0]=0}\\] \\(\\beta_1=\\) Parameter of interest 「母集団の信頼できる統計モデルのパラメタを推定する」方法として、教科書では紹介されてきた 研究関心が複雑になると信頼できるモデルを構築するのが難しくなる↩︎\n他の推定方法として、最尤法やベイズ法があります。これらの手法は、モーメント法よりも強い仮定を要求しますが、その仮定が正しいのであれば、推定精度が高くなります。↩︎\n本ノートでは、頻度論と呼ばれる枠組みを用いて、推定誤差の測定を論じます。頻度論以外にはベイズ方と呼ばれる枠組みもあります。Lin (2024)などを参照ください。↩︎\n事例数が少ないケースにおいては、モーメント法の有用性は大きく低下します。このような場合は、ベイズ法などが有力な選択肢となります。↩︎",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>把握を目的とする要約: 単純な比較</span>"
     ]
@@ -302,231 +312,111 @@
   {
     "objectID": "complexcomparison.html",
     "href": "complexcomparison.html",
-    "title": "6  把握を目的とする要約: What if",
+    "title": "6  把握を目的とする要約: バランス後の比較",
     "section": "",
-    "text": "6.1 推定対象\nterm estimate std.error statistic       p.value conf.low conf.high    df\n1  CBD 24.16031 0.8517858   28.3643 2.934426e-174 22.49076  25.82986 25356\n  outcome\n1   Price\n\n\n  term estimate std.error statistic p.value conf.low conf.high    df outcome\n1  CBD 22.57652 0.5301507  42.58509       0 21.53739  23.61564 25353   Price\n\n\n  term estimate std.error statistic p.value conf.low conf.high    df outcome\n1  CBD 22.68893 0.5431694  41.77137       0 21.62429  23.75357 25350   Price",
+    "text": "6.1 実例",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: バランス後の比較</span>"
     ]
   },
   {
-    "objectID": "complexcomparison.html#推定方法",
-    "href": "complexcomparison.html#推定方法",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.2 推定方法",
-    "text": "6.2 推定方法\n\n6.2.1 OLS\nBen-Michael et al. (2021)\nHainmueller (2012)\n\n\n6.2.2 R-leaner",
+    "objectID": "complexcomparison.html#実例",
+    "href": "complexcomparison.html#実例",
+    "title": "6  把握を目的とする要約: バランス後の比較",
+    "section": "",
+    "text": "6.1.1 合計特殊出生率\n合計特殊出生率の国家間/時代間比較は、バランス後の比較の代表例です。 出生数の動向を把握する上で、新生児数を年次や国家間比較は、有益だとみなされてきました。 合計特殊出生率 は、成人の年齢構造の違いをバランスさせるために利用されている指標です。 単純な出生率（一年間に生まれた子供の数/女性の数）は、成人の年齢構造の影響を強く受ける可能性があります。 比較的高齢の成人の比率が高まれば、出生率は低下することが予想されるからです。 対して合計特殊出生率は、「仮に年齢構造が同じであった場合」の出生率を、以下の方法で推定しています \\[\\frac{15歳の女性が産んだ子供の数}{15歳の女性の数} +..+ \\frac{49歳の女性が産んだ子供の数}{49歳の女性の数}\\]\nシンプルな枠組みであり、大規模なデータが活用可能な状況では、有効だと考えられます。 一方で、年齢以外の属性(教育歴、居住地等々)もバランスさせる場合、同じ属性を持つ事例数が少なくなり、適用が難しくなります。\n\n\n6.1.2 既存店ベースの比較\nバランス後の比較は、企業の経営戦略を考える上でも用いられます。 小売や飲食/宿泊業などでは、しばしば既存店に絞った上での、売上比較がなされます。 例えば、あるコンビニチェーンで、店舗あたりの平均売り上げが1000万円増大したとします。 同時に去年から今年にかけて、新規出店も大きく増加したとします。 新規店の方が売上が高くなる傾向がある場合、新規店割合の違いが、平均売上の上昇をもたらした可能性があります。\n既存店割合をバランスさせるシンプルな方法として、既存店のみに絞った平均売上を比較がよく行われます。 合計特殊出生率と同様に、新規店比率のみをバランスさせるのであれば、非常に実践的な方法です。 しかしながら他の属性、例えば客層の変化など、もバランスさせたい場合は、事例数が不足する可能性が高くなります。",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: バランス後の比較</span>"
     ]
   },
   {
-    "objectID": "complexcomparison.html#アプローチ",
-    "href": "complexcomparison.html#アプローチ",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.3 アプローチ",
-    "text": "6.3 アプローチ\n\n伝統的には、重回帰分析を用いた分析 \\(Y\\sim D + X_1+..\\) が行われてきた\n\n今でも有効だが、モデルの定式化に結果が依存してしまう問題がある\n\n機械学習とOLSの併用が有効\n\nTarget/Debiased learning(Van der Laan and Rose 2011; Chernozhukov et al. 2018, 2022)\n\nCausalMLBookの1,4,10章に相当",
+    "objectID": "complexcomparison.html#推定対象",
+    "href": "complexcomparison.html#推定対象",
+    "title": "6  把握を目的とする要約: バランス後の比較",
+    "section": "6.2 推定対象",
+    "text": "6.2 推定対象\n以上の推定対象は、一般に以下のように定義できます。\nグループ \\(d=\\{0,1\\}\\) における \\(Y\\) の平均値は、一般に以下のように書き換えることができます。 \\[(D=d)におけるYの平均値\\] \\[=\\Biggr\\{(X=x\\ \\&\\ D=d)におけるYの平均値\\times (D=d)における(X=x)の割合\\Biggr\\}\\] \\[のxについての総和\\]\n\\(D=\\{0,1\\}\\) 間での平均差を生み出す要因は、以下に分解できます。\n\n\\(D=\\{0,1\\}\\) の間での\\(Y\\)の平均値の違い\n\\(D=\\{0,1\\}\\) の間での\\(X\\) の分布の違い\n\nバランス後の比較における推定対象は、\\(X\\) の分布の違いを排除したバランス後の平均値の差として定義します。 \\(D=d\\)のバランス後の平均値は、\\[(D=d)におけるYのバランス後平均値\\] \\[=\\Biggr\\{(X=x\\ \\&\\ D=d)におけるYの平均値\\times (X=x)へのウェイト\\Biggr\\}\\] \\[のxについての総和\\]\n\\((X=x)へのウェイト\\)は、原理的には研究者が設定できます。 最も代表的なウェイトは、データや母集団全体での\\(X=x\\)の割合です。\nバランス後の平均値の差は、\\(X\\) 内での平均差の\\((X=x)へのウェイト\\)を用いた集計値として書き換えることができます:\n\\[\\Biggr\\{\\Bigr[(X=x\\ \\&\\ D=1)におけるYの平均値-(X=x\\ \\&\\ D=0)におけるYの平均値\\Bigr]\\] \\[\\times  (X=x)へのウェイト\\Biggr\\}のxについての総和\\]\n例えば、立地と取引年ごとの平均取引価格は以下です。\n\n\n\n\n\n\n\n\n平均価格\nCBD\nTradeYear\n事例割合\n\n\n\n\n64.8\n1\n2022\n0.11\n\n\n60.5\n1\n2021\n0.11\n\n\n39.2\n0\n2022\n0.37\n\n\n37.7\n0\n2021\n0.41\n\n\n\n\n\n\n\n2022/2021年の平均取引価格差は、データ全体では2.2 ですが、\\(CBD=1\\) では 4.3、\\(CBD=0\\) では 1.4 となります。 よって立地をバランスさせた後の平均差は4.3 と 1.4 の”平均値”となります。 例えばデータ上での立地の割合、 CBD=1が0.22、CBD=0が0.78、をウェイトとして用いるのであれば 2 がバランス後の平均差となります。\n\n6.2.1 Balancing Weight\nバランス後の平均値は、Balancing weight \\(\\omega(x)\\)を用いた加重平均としても計算できます。 バランス後の平均値を以下のように書き換えられることで、Balancing weightは定義できます。 \\[(D=d)におけるYのバランス後平均値\\] \\[=\\Biggr\\{(X=x\\ \\&\\ D=d)におけるYの平均値\\] \\[\\times \\underbrace{\\frac{(X=x)へのウェイト}{(D=d)における(X=x)の割合}}_{\\equiv\\omega(d,x)}\\] \\[\\times (D=d)における(X=x)の割合\\Biggr\\}\\] \\[のxについての総和\\]\nバランス後の平均値は、\\(D_i=d\\)を満たす事例についての加重平均として定義されます:\n\\[\\frac{\\omega(d,X_1)Y_1+..+\\omega(d,X_N)Y_{N}}{\\underbrace{N}_{D=dの事例数}}\\] ただし \\(\\omega\\)は以下を満たします。\n\\[(X=x)へのウェイト=\\frac{\\omega_1I_1(x)+..+\\omega_NI_N(x)}{D=dの事例数}\\]\n例えば、\\((X=x)へのウェイト\\)としてCBD=1が0.22、CBD=0が0.78を用いるのであれば、Balancing Weightは以下のように算出できます。\n\n\n\n\n\n\n\n\n平均価格\nCBD\nTradeYear\n事例割合\nBalancing Weight\n\n\n\n\n64.8\n1\n2022\n0.11\n2.00\n\n\n60.5\n1\n2021\n0.11\n2.00\n\n\n39.2\n0\n2022\n0.37\n2.11\n\n\n37.7\n0\n2021\n0.41\n1.90\n\n\n\n\n\n\n\n\n\n6.2.2 理想的な推定方法\n全ての\\(X\\)の組み合わせについて、十分な事例数が存在するのであれば、\\(x\\)内での平均差を直接計算し、平均値を計算することで、バランス後の平均差を計算できます。 しかしながら \\(X\\) の組み合わせが増えると、サブグループ内での事例数が極端に小さくなり、実行不可能です。 この問題を解決するために、OLSや傾向スコアの逆数などの利用が重要です。",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: バランス後の比較</span>"
     ]
   },
   {
-    "objectID": "complexcomparison.html#変化の分解",
-    "href": "complexcomparison.html#変化の分解",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.4 変化の分解",
-    "text": "6.4 変化の分解\n\n\\(E[Y|D=1] - E[Y|D=0] = Y\\) の平均値の差\n通常、 \\(Y\\) 以外の変数 \\(X\\) についても、\\(D\\) 間で差が存在する\n\\(X\\) について差がなかった(バランスさせた)場合に、 \\(Y\\) についてどの程度差が存在するのか \\(?\\)",
+    "objectID": "whatif_moment.html",
+    "href": "whatif_moment.html",
+    "title": "7  把握を目的とする要約: モーメントバランス",
+    "section": "",
+    "text": "7.1 OLS as Balancing weight\n線型モデルのOLS推定は、Moment Balanceを達成する代表的な方法です Chattopadhyay and Zubizarreta (2023)。 Chattopadhyay and Zubizarreta (2023) は、以下が全く同じ推定結果 \\(\\beta_D\\) をもたらすことを証明しました。\nEquation 7.1 は、\\(X\\) の平均値を \\(D=\\{0,1\\}\\) 間で均質化していることを意味しています。 Equation 7.2 は、ウェイトとして総和を1に基準化しています。 すなわちStep 1において、平均値をバランスさせるウェイトの中から、最も分散が小さいものを選んでいることを意味しています。 Step 2において、このウェイトを用いた平均差を計算しています。\nウェイトの分散は、最終的な推定結果の推定誤差に影響を与えます。 一般に、ウェイトの分散が小さいと、推定誤差が削減される傾向があります。",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>把握を目的とする要約: モーメントバランス</span>"
     ]
   },
   {
-    "objectID": "complexcomparison.html#例.-出生率",
-    "href": "complexcomparison.html#例.-出生率",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.5 例. 出生率",
-    "text": "6.5 例. 出生率\n\n出生の動向を把握する上で、新生児数を年次比較する\n\n成人の年齢構造の変化を無視している\n\n50年前よりも、高齢者の比率が高い\n\n\n合計特殊出生率\n\n「年齢構造が同じであった場合の」出生率はどのように変化を議論できる\n\n学歴や家族構成などもバランスさせることは可能か？",
+    "objectID": "whatif_moment.html#ols-as-balancing-weight",
+    "href": "whatif_moment.html#ols-as-balancing-weight",
+    "title": "7  把握を目的とする要約: モーメントバランス",
+    "section": "",
+    "text": "Important\n\n\n\n\n統計モデル \\[Y\\sim\\beta_0 + \\beta_DD+\\beta_1X_1+..\\beta_LX_L\\] をOLS推定した得られる \\(\\beta_D\\) は一般に以下と一致します。\n\n\n全ての\\(X=[X_1,..,X_L]\\) について、\\[\\frac{\\omega_1X_{l,1}+..+\\omega_{N_{1}}X_{l,N_{1}}}{\\underbrace{N_{1}}_{D=1の事例数}}\\] \\[= \\frac{\\omega_{N_{1}+1}X_{l,N_{1}+1}+..+\\omega_{N_{1}+N_0}X_{l,N_{1}+N_0}}{\\underbrace{N_0}_{D=0の事例数}} \\tag{7.1}\\] \\[\\sum_{i:D_i=1}W_i=\\sum_{i:D_i=0}W_i=1 \\tag{7.2}\\] を満たす \\(W\\) から、分散が最も小さいものを選ぶ\n\\[\\frac{\\omega_1Y_1+..+\\omega_{N_{1}}Y_{N_{1}}}{\\underbrace{N_{1}}_{D=1の事例数}} - \\frac{\\omega_{N_{1}+1}Y_{N_{1}+1}+..+\\omega_{N_{1}+N_0}Y_{N_{1}+N_0}}{\\underbrace{N_0}_{D=0の事例数}} \\tag{7.3}\\]\n\n\n\n\n\n\n7.1.1 例\n\n\n\n\n\n\n\n\n\n\n\n7.1.2 問題点",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>把握を目的とする要約: モーメントバランス</span>"
     ]
   },
   {
-    "objectID": "complexcomparison.html#例.-既存店ベースの比較",
-    "href": "complexcomparison.html#例.-既存店ベースの比較",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.6 例. 既存店ベースの比較",
-    "text": "6.6 例. 既存店ベースの比較\n\nあるコンビニチェーンで、店舗あたりの平均売り上げが1000万円増大した \\[E[Y|D=1] - E[Y|D=0]= 1000万円\\]\n去年から今年にかけて、新規出店が大きく増加した\n\n売り上げが大きくなる傾向のある新規店の割合が大きく、結果、平均売り上げが増大したのではないか?\n\n既存店 (\\(=X\\)) に絞って、比較する",
+    "objectID": "whatif_moment.html#明示的なアルゴリズム",
+    "href": "whatif_moment.html#明示的なアルゴリズム",
+    "title": "7  把握を目的とする要約: モーメントバランス",
+    "section": "7.2 明示的なアルゴリズム",
+    "text": "7.2 明示的なアルゴリズム\nHainmueller (2012), Zubizarreta (2015)",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>把握を目的とする要約: モーメントバランス</span>"
     ]
   },
   {
-    "objectID": "complexcomparison.html#例.-客層",
-    "href": "complexcomparison.html#例.-客層",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.7 例. 客層",
-    "text": "6.7 例. 客層\n\nあるコンビニチェーンで、大手町店と本郷三丁目店で、客単価が大きく異なる\n\n客層の違いに起因しているのではないか?\n\n本郷三丁目の方が、大学生が多い等\n\n\n来客の年齢や職業 (\\(=X\\)) の分布を仮想的に揃えて、比較する",
+    "objectID": "whatif_moment.html#reference",
+    "href": "whatif_moment.html#reference",
+    "title": "7  把握を目的とする要約: モーメントバランス",
+    "section": "7.3 Reference",
+    "text": "7.3 Reference\n\n\n\n\nChattopadhyay, Ambarish, and José R Zubizarreta. 2023. “On the Implied Weights of Linear Regression for Causal Inference.” Biometrika 110 (3): 615–29.\n\n\nHainmueller, Jens. 2012. “Entropy Balancing for Causal Effects: A Multivariate Reweighting Method to Produce Balanced Samples in Observational Studies.” Political Analysis 20 (1): 25–46.\n\n\nImbens, Guido W. 2015. “Matching Methods in Practice: Three Examples.” Journal of Human Resources 50 (2): 373–419.\n\n\nZubizarreta, José R. 2015. “Stable Weights That Balance Covariates for Estimation with Incomplete Outcome Data.” Journal of the American Statistical Association 110 (511): 910–22.",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>把握を目的とする要約: モーメントバランス</span>"
     ]
   },
   {
-    "objectID": "complexcomparison.html#例.-因果推論",
-    "href": "complexcomparison.html#例.-因果推論",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.8 例. 因果推論",
-    "text": "6.8 例. 因果推論\n\nコンビニの改装が平均的にどの程度、平均売上を上昇させるのか\n\n「改装するかどうかの意思決定、および価格に影響を与える変数」(Confounders)が\\(D\\)間で偏る\nデータから観察できる Confoundersについては、分布を揃える必要がある\n(発展) 観察できないConfoundersへの対処は?\n\n統計的因果推論にて多くの議論が蓄積",
+    "objectID": "whatif_ps.html",
+    "href": "whatif_ps.html",
+    "title": "8  把握を目的とする要約: 傾向スコア",
+    "section": "",
+    "text": "8.0.1 Partial least square\nChernozhukov et al. (2018); Chernozhukov et al. (2022); Van Der Laan and Rubin (2006)\nCausalMLBookの1,4,10章に相当1",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>把握を目的とする要約: 傾向スコア</span>"
     ]
   },
   {
-    "objectID": "complexcomparison.html#理想的な推定方法",
-    "href": "complexcomparison.html#理想的な推定方法",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.9 理想的な推定方法",
-    "text": "6.9 理想的な推定方法\n\n全ての\\(X\\)の組み合わせについて、平均差 \\(E[Y|D=1,X] - E[Y|D=0,X]\\) を計算する\n\n\\(X\\) の値が一致している事例内で比較\n\n問題点: \\(X\\) の組み合わせが増えると、サブグループ内での事例数が極端に小さくなり、実行不可能\n\n多くの応用で非現実的",
+    "objectID": "whatif_ps.html#olsとの比較",
+    "href": "whatif_ps.html#olsとの比較",
+    "title": "8  把握を目的とする要約: 傾向スコア",
+    "section": "8.1 OLSとの比較",
+    "text": "8.1 OLSとの比較\n\n「\\(X\\) の分布を均した後の比較」を行う伝統的方法は、以下のモデルを重回帰する \\[E[Y|D,X]=\\beta_0 + \\beta_D D + \\beta_1X_1+...\\]\nFWL定理 (wiki)より、R-leanerの特殊ケースと見做せる\n\n\n8.1.1 補論: OLSとの比較\n\nFWL定理より、OLSの推定結果 \\(\\beta_D\\) は、以下の手順により得られる推定結果と一致\n\n\n全データ を用いて、 OLS で予測モデル \\(g_Y(X)=\\beta_0 + \\beta_1X_1+..., g_D(X)=\\alpha_0+\\alpha_1X_1+..\\) を推定\n以下はR-learnerと同じ手順\n\n\n予測モデルの定式化が正しく、かつ事例数に比べて十分に単純 (\\(\\beta\\) の数が少ない)のであれば、優れた推定方法だが、そうではない応用例も多い\n\n\n\n8.1.2 補論: 統計モデルとしての書き換え\n\nR-learnerの推定結果は、以下のモデルを推定した場合の結果と一致 (Robinson 1988) \\[Y=\\tau D + \\underbrace{f(X)}_{何らかの(blackboxな)関数} + \\underbrace{u}_{E[u|D,X]=0}\\]\n\n教科書的な線形モデル: 「\\(f(X)=\\beta_0 + \\beta_1X_1 +..\\) と特定化しても \\(E[u|D,X]=0\\) が成り立つ」という仮定を追加",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>把握を目的とする要約: 傾向スコア</span>"
     ]
   },
   {
-    "objectID": "complexcomparison.html#residual-learner",
-    "href": "complexcomparison.html#residual-learner",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.10 R(esidual)-learner",
-    "text": "6.10 R(esidual)-learner\n\n\\(X\\) を \\(D\\) 間でバランスさせた元での比較を行うために、以下の手順を実行する\n\n\nデータを2分割する (訓練/テスト)\n訓練データを用いて、\\(X\\) から \\(Y/D\\) を予測するモデル \\(g_Y(X)/g_D(X)\\) を推定する\nテストデータを用いて、\\(Y/D\\)の予測誤差をOLSで回帰し係数 \\(\\beta_D\\) を推定値とする \\[Y-g_Y(X)\\sim D - g_D(X)\\]\n\n\n後日、より効率的なサンプル分割方法(交差推定)を紹介",
+    "objectID": "whatif_ps.html#reference",
+    "href": "whatif_ps.html#reference",
+    "title": "8  把握を目的とする要約: 傾向スコア",
+    "section": "8.2 Reference",
+    "text": "8.2 Reference\n\n\n\n\nChernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. 2018. “Double/Debiased Machine Learning for Treatment and Structural Parameters.” Oxford University Press Oxford, UK.\n\n\nChernozhukov, Victor, Juan Carlos Escanciano, Hidehiko Ichimura, Whitney K Newey, and James M Robins. 2022. “Locally Robust Semiparametric Estimation.” Econometrica 90 (4): 1501–35.\n\n\nRobinson, Peter M. 1988. “Root-n-Consistent Semiparametric Regression.” Econometrica, 931–54.\n\n\nVan Der Laan, Mark J, and Daniel Rubin. 2006. “Targeted Maximum Likelihood Learning.” The International Journal of Biostatistics 2 (1).",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>把握を目的とする要約: 傾向スコア</span>"
     ]
   },
   {
-    "objectID": "complexcomparison.html#直感",
-    "href": "complexcomparison.html#直感",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.11 直感",
-    "text": "6.11 直感\n\n\\(X\\) の偏りを排除したい\n\n\n\n\n\n\n\n\n\n\n\nY\nY\n\n\n\nD\nD\n\n\n\nY-&gt;D\n\n\n\n\n\nf_Y\nblackbox\n\n\n\nY-&gt;f_Y\n\n\n\n\n\nY-&gt;f_Y\n\n\n\n\n\nX\nX\n\n\n\nf_D\nblackbox\n\n\n\nX-&gt;f_D\n\n\n\n\n\nX-&gt;f_D\n\n\n\n\n\nf_Y-&gt;X\n\n\n\n\n\nf_Y-&gt;X\n\n\n\n\n\nf_D-&gt;D\n\n\n\n\n\nf_D-&gt;D",
+    "objectID": "whatif_ps.html#footnotes",
+    "href": "whatif_ps.html#footnotes",
+    "title": "8  把握を目的とする要約: 傾向スコア",
+    "section": "",
+    "text": "R learnerは、Double/Debiased Machine Learningと呼ばれる手法の一つです。↩︎",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
-    ]
-  },
-  {
-    "objectID": "complexcomparison.html#直感-1",
-    "href": "complexcomparison.html#直感-1",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.12 直感",
-    "text": "6.12 直感\n\n予測モデルにより、\\(X\\) の偏りの影響を評価する\n\n\n\n\n\n\n\n\n\n\n\nY\nY\n\n\n\nf_Y\nblackbox\n\n\n\nY-&gt;f_Y\n\n\n\n\n\nY-&gt;f_Y\n\n\n\n\n\nD\nD\n\n\n\nX\nX\n\n\n\nf_D\nblackbox\n\n\n\nX-&gt;f_D\n\n\n\n\n\nX-&gt;f_D\n\n\n\n\n\nf_Y-&gt;X\n\n\n\n\n\nf_Y-&gt;X\n\n\n\n\n\ng_Y\ng_Y(X)\n\n\n\nf_Y-&gt;g_Y\n\n\n置き換え\n\n\n\nf_D-&gt;D\n\n\n\n\n\nf_D-&gt;D\n\n\n\n\n\ng_D\ng_D(X)\n\n\n\nf_D-&gt;g_D\n\n\n置き換え",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
-    ]
-  },
-  {
-    "objectID": "complexcomparison.html#例-基本アイディア",
-    "href": "complexcomparison.html#例-基本アイディア",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.13 例: 基本アイディア",
-    "text": "6.13 例: 基本アイディア\n\n事例1と４の間で、\\(700\\) 万円近くの 以上の価格格差\n\\(X\\) が大きく異なる\n\n(\\(X\\) からの)予測値についても、同程度の格差\n\n実際の格差から、(\\(X\\)の影響を捉える) 予測値の差を引くと ほとんど格差はない",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
-    ]
-  },
-  {
-    "objectID": "complexcomparison.html#直感-2",
-    "href": "complexcomparison.html#直感-2",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.14 直感",
-    "text": "6.14 直感\n\n価格 \\(=\\) 取引年 \\(+\\) \\(X\\) の影響 \\(+\\) その他\n予測モデルが\\(X\\) の影響を完全に捉え、その他の影響がなければ、 \\[\\underbrace{Y_1 - Y_2}_{事例1と2の賃金格差}-\\underbrace{g_Y(X_1) - g_Y(X_2)}_{予測格差}\\] \\[=\\underbrace{Y_1 - g_Y(X_1)}_{1についての予測誤差} - \\underbrace{(Y_2 - g_Y(X_2))}_{2についての予測誤差}\\] は、バランス後の賃金格差を捉える",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
-    ]
-  },
-  {
-    "objectID": "complexcomparison.html#直感-3",
-    "href": "complexcomparison.html#直感-3",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.15 直感",
-    "text": "6.15 直感\n\nその他の影響は、当然存在する\n個別事例について、影響を排除することは困難\n大量の事例の平均をとることで、平均格差を明らかにする \\[\\underbrace{E[Y - g_Y(X)|D=1]}_{D=1についての平均予測誤差} - \\underbrace{E[Y - g_Y(X)|D=0]}_{D=0についての平均予測誤差}\\]\n\\(g_Y(X)=E[Y|X]\\) であれば、バランス後の平均格差の優れた推定値",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
-    ]
-  },
-  {
-    "objectID": "complexcomparison.html#直感-4",
-    "href": "complexcomparison.html#直感-4",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.16 直感",
-    "text": "6.16 直感\n\n限られた事例から推定された予測モデルは、理想的なものと乖離する: \\(g_Y(X)\\neq E[Y|X]\\)\n\n格差の推定値に、予測困難な悪影響を与える\n\n\\(D\\) の予測モデル \\(g_D(X)\\) も併用する\n\n\\(X\\) が \\(D\\) に与える影響も極力排除する\n\n\\(Y\\) の予測誤差 \\(Y-g_Y(X)\\) を \\(D\\) の予測誤差 \\(D-g_D(X)\\) で回帰する",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
-    ]
-  },
-  {
-    "objectID": "complexcomparison.html#double-debaised-machine-learning",
-    "href": "complexcomparison.html#double-debaised-machine-learning",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.17 Double Debaised Machine Learning",
-    "text": "6.17 Double Debaised Machine Learning\n\nR learnerは、Double/Debiased Machine Learningと呼ばれる手法の一つ\n最終的にはOLSや平均値などで推定する\n\n予測モデルの不完全性 (AIのミス) の悪影響を、複数の予測モデルを組み合わせることで減らす\n予測モデルが同時に母平均から大きく乖離しなければOK (“AIによるDouble Check”)",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
-    ]
-  },
-  {
-    "objectID": "complexcomparison.html#推定値の性質",
-    "href": "complexcomparison.html#推定値の性質",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.18 推定値の性質",
-    "text": "6.18 推定値の性質\n\n\\(g_Y(X),g_D(X)\\) が \\(E[Y|X],E[D|X]\\) をある程度近似できるのであれば (後述)、近似的な信頼区間を計算可能\n\n十分な事例数 (私見では500事例以上)\n適した推定方法の採用 (後日議論)\n\n注: \\(Y,D\\) を高い精度で予測する必要はない\n\n個人差が大きく予測しにくい現象であったとしても、比較分析への活用においては、予測モデルは有益",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
-    ]
-  },
-  {
-    "objectID": "complexcomparison.html#補論-olsとの比較",
-    "href": "complexcomparison.html#補論-olsとの比較",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.19 補論: OLSとの比較",
-    "text": "6.19 補論: OLSとの比較\n\n「\\(X\\) の分布を均した後の比較」を行う伝統的方法は、以下のモデルを重回帰する \\[E[Y|D,X]=\\beta_0 + \\beta_D D + \\beta_1X_1+...\\]\nFWL定理 (wiki)より、R-leanerの特殊ケースと見做せる",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
-    ]
-  },
-  {
-    "objectID": "complexcomparison.html#補論-olsとの比較-1",
-    "href": "complexcomparison.html#補論-olsとの比較-1",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.20 補論: OLSとの比較",
-    "text": "6.20 補論: OLSとの比較\n\nFWL定理より、OLSの推定結果 \\(\\beta_D\\) は、以下の手順により得られる推定結果と一致\n\n\n全データ を用いて、 OLS で予測モデル \\(g_Y(X)=\\beta_0 + \\beta_1X_1+..., g_D(X)=\\alpha_0+\\alpha_1X_1+..\\) を推定\n以下はR-learnerと同じ手順\n\n\n予測モデルの定式化が正しく、かつ事例数に比べて十分に単純 (\\(\\beta\\) の数が少ない)のであれば、優れた推定方法だが、そうではない応用例も多い",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
-    ]
-  },
-  {
-    "objectID": "complexcomparison.html#補論-統計モデルとしての書き換え",
-    "href": "complexcomparison.html#補論-統計モデルとしての書き換え",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.21 補論: 統計モデルとしての書き換え",
-    "text": "6.21 補論: 統計モデルとしての書き換え\n\nR-learnerの推定結果は、以下のモデルを推定した場合の結果と一致 (Robinson 1988) \\[Y=\\tau D + \\underbrace{f(X)}_{何らかの(blackboxな)関数} + \\underbrace{u}_{E[u|D,X]=0}\\]\n\n教科書的な線形モデル: 「\\(f(X)=\\beta_0 + \\beta_1X_1 +..\\) と特定化しても \\(E[u|D,X]=0\\) が成り立つ」という仮定を追加",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
-    ]
-  },
-  {
-    "objectID": "complexcomparison.html#まとめ",
-    "href": "complexcomparison.html#まとめ",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.22 まとめ",
-    "text": "6.22 まとめ\n\nシンプルな比較分析であれば、伝統的な推定方法が有効\n複雑な比較分析、ここでは \\(X\\) をバランスさせた後での比較、においては機械学習も併用することで、分析の信頼性を改善できる\n\nOLSなどと比べて、推定結果が大きく変わらなかったとしても、分析の頑強性の確認ができる",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
-    ]
-  },
-  {
-    "objectID": "complexcomparison.html#reference",
-    "href": "complexcomparison.html#reference",
-    "title": "6  把握を目的とする要約: What if",
-    "section": "6.23 Reference",
-    "text": "6.23 Reference\n\n\n\n\nBen-Michael, Eli, Avi Feller, David A Hirshberg, and José R Zubizarreta. 2021. “The Balancing Act in Causal Inference.” arXiv Preprint arXiv:2110.14831.\n\n\nChernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. 2018. “Double/Debiased Machine Learning for Treatment and Structural Parameters.” Oxford University Press Oxford, UK.\n\n\nChernozhukov, Victor, Juan Carlos Escanciano, Hidehiko Ichimura, Whitney K Newey, and James M Robins. 2022. “Locally Robust Semiparametric Estimation.” Econometrica 90 (4): 1501–35.\n\n\nHainmueller, Jens. 2012. “Entropy Balancing for Causal Effects: A Multivariate Reweighting Method to Produce Balanced Samples in Observational Studies.” Political Analysis 20 (1): 25–46.\n\n\nRobinson, Peter M. 1988. “Root-n-Consistent Semiparametric Regression.” Econometrica, 931–54.\n\n\nVan der Laan, Mark J, and Sherri Rose. 2011. Targeted Learning. Vol. 1. 3. Springer.",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>把握を目的とする要約: What if</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>把握を目的とする要約: 傾向スコア</span>"
     ]
   }
 ]

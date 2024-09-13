@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="川田恵介">
-<meta name="dcterms.date" content="2024-08-02">
 
-<title>データ分析入門ノート</title>
+<title>データ分析入門ノート - 8&nbsp; 把握を目的とする要約: 傾向スコア</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -52,7 +50,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./stracture.html" rel="next">
+<link href="./whatif_moment.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -131,7 +129,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./whatif_ps.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 傾向スコア</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -158,7 +156,7 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -206,7 +204,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./whatif_ps.html" class="sidebar-item-text sidebar-link">
+  <a href="./whatif_ps.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 傾向スコア</span></span></a>
   </div>
 </li>
@@ -220,13 +218,20 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
+  <li><a href="#partial-least-square" id="toc-partial-least-square" class="nav-link active" data-scroll-target="#partial-least-square"><span class="header-section-number">8.0.1</span> Partial least square</a></li>
+  <li><a href="#直感" id="toc-直感" class="nav-link" data-scroll-target="#直感"><span class="header-section-number">8.0.2</span> 直感</a></li>
+  <li><a href="#直感-1" id="toc-直感-1" class="nav-link" data-scroll-target="#直感-1"><span class="header-section-number">8.0.3</span> 直感</a></li>
+  <li><a href="#例-基本アイディア" id="toc-例-基本アイディア" class="nav-link" data-scroll-target="#例-基本アイディア"><span class="header-section-number">8.0.4</span> 例: 基本アイディア</a></li>
+  <li><a href="#直感-2" id="toc-直感-2" class="nav-link" data-scroll-target="#直感-2"><span class="header-section-number">8.0.5</span> 直感</a></li>
+  <li><a href="#直感-3" id="toc-直感-3" class="nav-link" data-scroll-target="#直感-3"><span class="header-section-number">8.0.6</span> 直感</a></li>
+  <li><a href="#直感-4" id="toc-直感-4" class="nav-link" data-scroll-target="#直感-4"><span class="header-section-number">8.0.7</span> 直感</a></li>
+  <li><a href="#推定値の性質" id="toc-推定値の性質" class="nav-link" data-scroll-target="#推定値の性質"><span class="header-section-number">8.0.8</span> 推定値の性質</a></li>
+  <li><a href="#olsとの比較" id="toc-olsとの比較" class="nav-link" data-scroll-target="#olsとの比較"><span class="header-section-number">8.1</span> OLSとの比較</a>
   <ul class="collapse">
-  <li><a href="#本ノートの狙い" id="toc-本ノートの狙い" class="nav-link" data-scroll-target="#本ノートの狙い">本ノートの狙い</a></li>
-  <li><a href="#ノートの背景" id="toc-ノートの背景" class="nav-link" data-scroll-target="#ノートの背景">ノートの背景</a></li>
-  <li><a href="#章立て" id="toc-章立て" class="nav-link" data-scroll-target="#章立て">章立て</a></li>
-  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  <li><a href="#補論-olsとの比較" id="toc-補論-olsとの比較" class="nav-link" data-scroll-target="#補論-olsとの比較"><span class="header-section-number">8.1.1</span> 補論: OLSとの比較</a></li>
+  <li><a href="#補論-統計モデルとしての書き換え" id="toc-補論-統計モデルとしての書き換え" class="nav-link" data-scroll-target="#補論-統計モデルとしての書き換え"><span class="header-section-number">8.1.2</span> 補論: 統計モデルとしての書き換え</a></li>
   </ul></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">8.2</span> Reference</a></li>
   </ul>
 </nav>
     </div>
@@ -235,27 +240,14 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">データ分析入門ノート</h1>
-<p class="subtitle lead">欠損情報の個別予測と社会把握への活用</p>
+<h1 class="title"><span id="sec-WhatIfPF" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 傾向スコア</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>川田恵介 </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">August 2, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -265,68 +257,357 @@ window.Quarto = {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<section id="本ノートの狙い" class="level2">
-<h2 class="anchored" data-anchor-id="本ノートの狙い">本ノートの狙い</h2>
-<p>初学者に対して、データ分析法、具体的な分析工程に埋め込みながら紹介します。 特に分析法の急速な多様化に対応するため、分析のゴールに応じた整理し、実践への活用における混乱を減らすことに重点を置きます。 具体的には、以下の点に注意して、本ノートは作成されています。</p>
+<section id="partial-least-square" class="level3" data-number="8.0.1">
+<h3 data-number="8.0.1" class="anchored" data-anchor-id="partial-least-square"><span class="header-section-number">8.0.1</span> Partial least square</h3>
+<p><span class="citation" data-cites="chernozhukov2018double">Chernozhukov et al. (<a href="#ref-chernozhukov2018double" role="doc-biblioref">2018</a>)</span>; <span class="citation" data-cites="chernozhukov2022locally">Chernozhukov et al. (<a href="#ref-chernozhukov2022locally" role="doc-biblioref">2022</a>)</span>; <span class="citation" data-cites="van2006targeted">Van Der Laan and Rubin (<a href="#ref-van2006targeted" role="doc-biblioref">2006</a>)</span></p>
+<p><a href="https://causalml-book.org/">CausalMLBook</a>の1,4,10章に相当<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+R learner
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li><p>２種類の分析のゴール、「新しい事例について欠損情報の予測を行う予測」と 「事例の集団についてその特徴を把握するための分析法」、を紹介します。 把握のための分析の具体例としては、比較分析を主に扱います。例えば男女間賃金格差や前年と比較した場合の不動産価格変化など、集団間で見られる違いを把握する方法を紹介します。</p></li>
-<li><p>平均値の推定やOLSといった計量経済学の入門書で紹介される伝統的な手法だけでなく、決定木やRandomForestといった教師付き学習(機械学習の一分野)の手法も議論します。 分析のゴールが予測モデルの推定であるならば機械学習に比較優位があり、集団の特徴を把握することが目標であるならば、伝統的な手法に比較優位があることを、その理由とともに強調します。 さらに発展的な比較をゴールとする場合、教師付き学習と伝統的な手法のハイブリット的な手法が有効であることも論じます。</p></li>
-<li><p>予測と把握という分析のゴールの使い分け方を、具体的な意思決定を想定しながら整理します。 データ分析の目的を、意思決定に役立つ情報提供にあると位置付け、意思決定の種類に応じた分析のゴールを論じます。特に限られた事例にのみ影響を与える意思決定 (ミクロな意思決定)と大量の事例に影響を与える意思決定 (マクロな意思決定)を区別します。 教師付き学習がもたらす事例ごとの予測は、ミクロな意思決定においては非常に有効であったとしても、マクロな意思決定においては<strong>そのまま</strong>では活用が難しいことを強調します。これは大量の事例について提供される大量の予測値を、意思決定者が活用することが難しいためです。 マクロな意思決定においては、大量の事例群の特徴を把握が必要になり、このためには伝統的な手法が比較優位を持ちます。 ただし複雑な特徴を把握する上では、伝統的な手法と教師付き学習のハイブリット的な手法が有効になることを強調します。</p></li>
+<li><span class="math inline">\(X\)</span> を <span class="math inline">\(D\)</span> 間でバランスさせた元での比較を行うために、以下の手順を実行する</li>
+</ul>
+<ol type="1">
+<li><p>データを2分割する (訓練/テスト)</p></li>
+<li><p>訓練データを用いて、<span class="math inline">\(X\)</span> から <span class="math inline">\(Y/D\)</span> を予測するモデル <span class="math inline">\(g_Y(X)/g_D(X)\)</span> を推定する</p></li>
+<li><p>テストデータを用いて、<span class="math inline">\(Y/D\)</span>の予測誤差をOLSで回帰し係数 <span class="math inline">\(\beta_D\)</span> を推定値とする <span class="math display">\[Y-g_Y(X)\sim D - g_D(X)\]</span></p></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="直感" class="level3" data-number="8.0.2">
+<h3 data-number="8.0.2" class="anchored" data-anchor-id="直感"><span class="header-section-number">8.0.2</span> 直感</h3>
+<ul>
+<li><span class="math inline">\(X\)</span> の偏りを排除したい</li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 152.00 152.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 148)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-148 148,-148 148,4 -4,4"></polygon>
+<!-- Y -->
+<g id="node1" class="node">
+<title>Y</title>
+<text text-anchor="middle" x="27" y="-123" font-family="Times,serif" font-size="10.00">Y</text>
+</g>
+<!-- D -->
+<g id="node2" class="node">
+<title>D</title>
+<text text-anchor="middle" x="27" y="-15" font-family="Times,serif" font-size="10.00">D</text>
+</g>
+<!-- Y&#45;&gt;D -->
+<g id="edge9" class="edge">
+<title>Y-&gt;D</title>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M27,-104.67C27,-81.83 27,-58.98 27,-36.14"></path>
+<polygon fill="black" stroke="black" points="25.95,-104.75 27,-107.75 28.05,-104.75 25.95,-104.75"></polygon>
+</g>
+<!-- f_Y -->
+<g id="node4" class="node">
+<title>f_Y</title>
+<text text-anchor="middle" x="117" y="-123" font-family="Times,serif" font-size="10.00">blackbox</text>
+</g>
+<!-- Y&#45;&gt;f_Y -->
+<g id="edge1" class="edge">
+<title>Y-&gt;f_Y</title>
+<path fill="none" stroke="black" d="M54.4,-119.75C64.59,-119.14 76.28,-119.09 86.72,-119.6"></path>
+<polygon fill="black" stroke="black" points="86.87,-120.66 89.92,-119.77 86.98,-118.56 86.87,-120.66"></polygon>
+</g>
+<!-- Y&#45;&gt;f_Y -->
+<g id="edge3" class="edge">
+<title>Y-&gt;f_Y</title>
+<path fill="none" stroke="black" d="M57.61,-132.42C68.08,-132.92 79.77,-132.85 89.92,-132.23"></path>
+<polygon fill="black" stroke="black" points="57.46,-131.36 54.4,-132.25 57.34,-133.46 57.46,-131.36"></polygon>
+</g>
+<!-- X -->
+<g id="node3" class="node">
+<title>X</title>
+<text text-anchor="middle" x="117" y="-69" font-family="Times,serif" font-size="10.00">X</text>
+</g>
+<!-- f_D -->
+<g id="node5" class="node">
+<title>f_D</title>
+<text text-anchor="middle" x="117" y="-15" font-family="Times,serif" font-size="10.00">blackbox</text>
+</g>
+<!-- X&#45;&gt;f_D -->
+<g id="edge6" class="edge">
+<title>X-&gt;f_D</title>
+<path fill="none" stroke="black" d="M135.1,-53.79C137.48,-48.92 137.88,-44.05 136.31,-39.17"></path>
+<polygon fill="black" stroke="black" points="137.18,-38.52 135.07,-36.14 135.23,-39.32 137.18,-38.52"></polygon>
+</g>
+<!-- X&#45;&gt;f_D -->
+<g id="edge8" class="edge">
+<title>X-&gt;f_D</title>
+<path fill="none" stroke="black" d="M97.67,-50.76C96.11,-45.88 96.53,-41.01 98.93,-36.14"></path>
+<polygon fill="black" stroke="black" points="96.8,-51.4 98.9,-53.79 98.75,-50.62 96.8,-51.4"></polygon>
+</g>
+<!-- f_Y&#45;&gt;X -->
+<g id="edge2" class="edge">
+<title>f_Y-&gt;X</title>
+<path fill="none" stroke="black" d="M135.1,-107.79C137.48,-102.92 137.88,-98.05 136.31,-93.17"></path>
+<polygon fill="black" stroke="black" points="137.18,-92.52 135.07,-90.14 135.23,-93.32 137.18,-92.52"></polygon>
+</g>
+<!-- f_Y&#45;&gt;X -->
+<g id="edge4" class="edge">
+<title>f_Y-&gt;X</title>
+<path fill="none" stroke="black" d="M97.67,-104.76C96.11,-99.88 96.53,-95.01 98.93,-90.14"></path>
+<polygon fill="black" stroke="black" points="96.8,-105.4 98.9,-107.79 98.75,-104.62 96.8,-105.4"></polygon>
+</g>
+<!-- f_D&#45;&gt;D -->
+<g id="edge5" class="edge">
+<title>f_D-&gt;D</title>
+<path fill="none" stroke="black" d="M89.92,-11.77C79.77,-11.15 68.08,-11.08 57.61,-11.58"></path>
+<polygon fill="black" stroke="black" points="57.34,-10.54 54.4,-11.75 57.46,-12.64 57.34,-10.54"></polygon>
+</g>
+<!-- f_D&#45;&gt;D -->
+<g id="edge7" class="edge">
+<title>f_D-&gt;D</title>
+<path fill="none" stroke="black" d="M86.72,-24.4C76.28,-24.91 64.59,-24.86 54.4,-24.25"></path>
+<polygon fill="black" stroke="black" points="86.98,-25.44 89.92,-24.23 86.87,-23.34 86.98,-25.44"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="直感-1" class="level3" data-number="8.0.3">
+<h3 data-number="8.0.3" class="anchored" data-anchor-id="直感-1"><span class="header-section-number">8.0.3</span> 直感</h3>
+<ul>
+<li>予測モデルにより、<span class="math inline">\(X\)</span> の偏りの影響を評価する</li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 273.00 188.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 184)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-184 269,-184 269,4 -4,4"></polygon>
+<!-- Y -->
+<g id="node1" class="node">
+<title>Y</title>
+<text text-anchor="middle" x="27" y="-159" font-family="Times,serif" font-size="10.00">Y</text>
+</g>
+<!-- f_Y -->
+<g id="node4" class="node">
+<title>f_Y</title>
+<text text-anchor="middle" x="118" y="-159" font-family="Times,serif" font-size="10.00">blackbox</text>
+</g>
+<!-- Y&#45;&gt;f_Y -->
+<g id="edge1" class="edge">
+<title>Y-&gt;f_Y</title>
+<path fill="none" stroke="black" d="M54.22,-155.78C64.81,-155.13 77.08,-155.08 87.94,-155.62"></path>
+<polygon fill="black" stroke="black" points="87.91,-156.67 90.97,-155.8 88.03,-154.58 87.91,-156.67"></polygon>
+</g>
+<!-- Y&#45;&gt;f_Y -->
+<g id="edge3" class="edge">
+<title>Y-&gt;f_Y</title>
+<path fill="none" stroke="black" d="M57.25,-168.38C68.13,-168.93 80.39,-168.87 90.97,-168.2"></path>
+<polygon fill="black" stroke="black" points="57.28,-167.33 54.22,-168.22 57.16,-169.43 57.28,-167.33"></polygon>
+</g>
+<!-- D -->
+<g id="node2" class="node">
+<title>D</title>
+<text text-anchor="middle" x="27" y="-15" font-family="Times,serif" font-size="10.00">D</text>
+</g>
+<!-- X -->
+<g id="node3" class="node">
+<title>X</title>
+<text text-anchor="middle" x="118" y="-87" font-family="Times,serif" font-size="10.00">X</text>
+</g>
+<!-- f_D -->
+<g id="node5" class="node">
+<title>f_D</title>
+<text text-anchor="middle" x="118" y="-15" font-family="Times,serif" font-size="10.00">blackbox</text>
+</g>
+<!-- X&#45;&gt;f_D -->
+<g id="edge6" class="edge">
+<title>X-&gt;f_D</title>
+<path fill="none" stroke="black" d="M133.21,-71.95C139.36,-60.99 139.88,-50.03 134.77,-39.07"></path>
+<polygon fill="black" stroke="black" points="135.64,-38.48 133.34,-36.28 133.77,-39.43 135.64,-38.48"></polygon>
+</g>
+<!-- X&#45;&gt;f_D -->
+<g id="edge8" class="edge">
+<title>X-&gt;f_D</title>
+<path fill="none" stroke="black" d="M101.34,-69.17C96.15,-58.21 96.59,-47.24 102.66,-36.28"></path>
+<polygon fill="black" stroke="black" points="100.48,-69.77 102.79,-71.95 102.34,-68.81 100.48,-69.77"></polygon>
+</g>
+<!-- f_Y&#45;&gt;X -->
+<g id="edge2" class="edge">
+<title>f_Y-&gt;X</title>
+<path fill="none" stroke="black" d="M133.21,-143.95C139.36,-132.99 139.88,-122.03 134.77,-111.07"></path>
+<polygon fill="black" stroke="black" points="135.64,-110.48 133.34,-108.28 133.77,-111.43 135.64,-110.48"></polygon>
+</g>
+<!-- f_Y&#45;&gt;X -->
+<g id="edge4" class="edge">
+<title>f_Y-&gt;X</title>
+<path fill="none" stroke="black" d="M101.34,-141.17C96.15,-130.21 96.59,-119.24 102.66,-108.28"></path>
+<polygon fill="black" stroke="black" points="100.48,-141.77 102.79,-143.95 102.34,-140.81 100.48,-141.77"></polygon>
+</g>
+<!-- g_Y -->
+<g id="node6" class="node">
+<title>g_Y</title>
+<text text-anchor="middle" x="238" y="-159" font-family="Times,serif" font-size="10.00">g_Y(X)</text>
+</g>
+<!-- f_Y&#45;&gt;g_Y -->
+<g id="edge9" class="edge">
+<title>f_Y-&gt;g_Y</title>
+<path fill="none" stroke="black" d="M148.46,-162C167.63,-162 192.42,-162 210.89,-162"></path>
+<polygon fill="black" stroke="black" points="148.19,-160.95 145.19,-162 148.19,-163.05 148.19,-160.95"></polygon>
+<text text-anchor="middle" x="178" y="-165" font-family="Times,serif" font-size="10.00">置き換え</text>
+</g>
+<!-- f_D&#45;&gt;D -->
+<g id="edge5" class="edge">
+<title>f_D-&gt;D</title>
+<path fill="none" stroke="black" d="M90.97,-11.8C80.39,-11.13 68.13,-11.07 57.25,-11.62"></path>
+<polygon fill="black" stroke="black" points="57.16,-10.57 54.22,-11.78 57.28,-12.67 57.16,-10.57"></polygon>
+</g>
+<!-- f_D&#45;&gt;D -->
+<g id="edge7" class="edge">
+<title>f_D-&gt;D</title>
+<path fill="none" stroke="black" d="M87.94,-24.38C77.08,-24.92 64.81,-24.87 54.22,-24.22"></path>
+<polygon fill="black" stroke="black" points="88.03,-25.42 90.97,-24.2 87.91,-23.33 88.03,-25.42"></polygon>
+</g>
+<!-- g_D -->
+<g id="node7" class="node">
+<title>g_D</title>
+<text text-anchor="middle" x="238" y="-15" font-family="Times,serif" font-size="10.00">g_D(X)</text>
+</g>
+<!-- f_D&#45;&gt;g_D -->
+<g id="edge10" class="edge">
+<title>f_D-&gt;g_D</title>
+<path fill="none" stroke="black" d="M148.46,-18C167.63,-18 192.42,-18 210.89,-18"></path>
+<polygon fill="black" stroke="black" points="148.19,-16.95 145.19,-18 148.19,-19.05 148.19,-16.95"></polygon>
+<text text-anchor="middle" x="178" y="-21" font-family="Times,serif" font-size="10.00">置き換え</text>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="例-基本アイディア" class="level3" data-number="8.0.4">
+<h3 data-number="8.0.4" class="anchored" data-anchor-id="例-基本アイディア"><span class="header-section-number">8.0.4</span> 例: 基本アイディア</h3>
+<ul>
+<li><p>事例1と４の間で、<span class="math inline">\(700\)</span> 万円近くの 以上の価格格差</p></li>
+<li><p><span class="math inline">\(X\)</span> が大きく異なる</p>
+<ul>
+<li>(<span class="math inline">\(X\)</span> からの)予測値についても、同程度の格差</li>
+</ul></li>
+<li><p>実際の格差から、(<span class="math inline">\(X\)</span>の影響を捉える) 予測値の差を引くと ほとんど格差はない</p></li>
 </ul>
 </section>
-<section id="ノートの背景" class="level2">
-<h2 class="anchored" data-anchor-id="ノートの背景">ノートの背景</h2>
-<p>本ノート作成の背景には、データ分析法の多様化とそれに伴う混乱があります。 データを用いた社会分析は、長い伝統を持ちます。 例えば経済学においては、古くからデータ分析が活用され、計量経済学と呼ばれる方法論開発を行う研究分野には多くの研究者が参入し、活発な議論が行われてきました。 また実際にデータを用いて行う実証研究も数多く行われ、伝統的にはOLSなどのモーメント法や最尤法などを用いたデータ分析が行われてきました。 さらに機械学習と類似する議論 (Nonparametric推定) やハイブリット的な手法の基礎となる議論 (Semi-parametric推定)も発展してきました。 しかしながらこのような発展的な議論は、入門書ではあまり紹介されてきませんでした。</p>
-<p>近年、コンピュータの計算能力増大などを背景に、伝統的な分析手法のみならず、機械学習と総称される分析手法の活用が急速に進んでいます。 特に教師付き学習と呼ばれる分野は、経済学における伝統的な推定手法と近い手法や問題意識を有しつつ、データの柔軟な活用方法を提供しています。 例えば、教師付き学習の教科書では、ほぼ例外なくLogitやOLSは紹介され、母分布を用いた論点整理がなされています。 他方で計量経済学の入門書ではあまり紹介されてこなかった、Data adaptive modellingの手法が数多く提案されています。 伝統的な推定手法が、「<strong>人間によって</strong>シンプルな 推定モデルの設定を行い、その限られたパラメタをデータにより推定する」という手続きを踏むのに対して、決定木やLASSOは、「大量のパラメタを、データによる適切に推定する」方法です。</p>
-<p>このような分析方法の多様化は、同時に応用研究における混乱ももたらしえます。例えば <span class="citation" data-cites="breiman2001statistical">Breiman (<a href="#ref-breiman2001statistical" role="doc-biblioref">2001</a>)</span> は、「機械学習は、伝統的な統計学の <span class="math inline">\(95 \%\)</span> と異なる”文化”を持っている」と主張し、多くの議論 <span class="citation" data-cites="shmueli2010explain efron2020prediction hofman2021integrating">(<a href="#ref-shmueli2010explain" role="doc-biblioref">Shmueli 2010</a>; <a href="#ref-efron2020prediction" role="doc-biblioref">Efron 2020</a>; <a href="#ref-hofman2021integrating" role="doc-biblioref">Hofman et al. 2021</a>)</span> を想起しました。 このような議論の中で、分析のゴールをしっかり意識することの重要性が指摘され、ゴールによっては伝統的な手法と機械学習のハイブリット的な方法の有効性が指摘されています<span class="citation" data-cites="van2011targeted chernozhukov2018double chernozhukov2022locally">(<a href="#ref-van2011targeted" role="doc-biblioref">Van der Laan and Rose 2011</a>; <a href="#ref-chernozhukov2018double" role="doc-biblioref">Chernozhukov et al. 2018</a>, <a href="#ref-chernozhukov2022locally" role="doc-biblioref">2022</a>)</span>。</p>
-<p>このような研究の成果は、上級レベルの計量経済学のテキストでは紹介され、また<a href="https://causalml-book.org/"><span class="citation" data-cites="chernozhukov2024applied">Chernozhukov et al. (<span>2024</span>)</span></a>などで集中的にまとめられています。 しかしながら、現状入門的な日本語の教材は見当たりません。 本ノートは、この空白を埋めることを目的としています。</p>
-</section>
-<section id="章立て" class="level2">
-<h2 class="anchored" data-anchor-id="章立て">章立て</h2>
+<section id="直感-2" class="level3" data-number="8.0.5">
+<h3 data-number="8.0.5" class="anchored" data-anchor-id="直感-2"><span class="header-section-number">8.0.5</span> 直感</h3>
 <ul>
-<li><p><a href="stracture.html" class="quarto-xref">Section&nbsp;<span>1&nbsp; 分析工程</span></a></p></li>
-<li><p><a href="decision.html" class="quarto-xref">Section&nbsp;<span>2&nbsp; 意思決定問題</span></a></p></li>
-<li><p><a href="model.html" class="quarto-xref">Section&nbsp;<span>3&nbsp; 要約の基本コンセプト</span></a></p></li>
-<li><p><a href="prediction.html" class="quarto-xref">Section&nbsp;<span>4&nbsp; 予測を目的とする要約</span></a></p></li>
-<li><p><a href="simplecomparison.html" class="quarto-xref">Section&nbsp;<span>5&nbsp; 把握を目的とする要約: 単純な比較</span></a></p></li>
-<li><p><a href="complexcomparison.html" class="quarto-xref">Section&nbsp;<span>6&nbsp; 把握を目的とする要約: バランス後の比較</span></a></p></li>
-<li><p><a href="whatif_moment.html" class="quarto-xref">Section&nbsp;<span>7&nbsp; 把握を目的とする要約: モーメントバランス</span></a></p></li>
-<li><p><a href="whatif_ps.html" class="quarto-xref">Section&nbsp;<span>8&nbsp; 把握を目的とする要約: 傾向スコア</span></a></p></li>
+<li><p>価格 <span class="math inline">\(=\)</span> 取引年 <span class="math inline">\(+\)</span> <span class="math inline">\(X\)</span> の影響 <span class="math inline">\(+\)</span> その他</p></li>
+<li><p>予測モデルが<span class="math inline">\(X\)</span> の影響を完全に捉え、その他の影響がなければ、 <span class="math display">\[\underbrace{Y_1 - Y_2}_{事例1と2の賃金格差}-\underbrace{g_Y(X_1) - g_Y(X_2)}_{予測格差}\]</span> <span class="math display">\[=\underbrace{Y_1 - g_Y(X_1)}_{1についての予測誤差} - \underbrace{(Y_2 - g_Y(X_2))}_{2についての予測誤差}\]</span> は、バランス後の賃金格差を捉える</p></li>
 </ul>
 </section>
-<section id="reference" class="level2">
-<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<section id="直感-3" class="level3" data-number="8.0.6">
+<h3 data-number="8.0.6" class="anchored" data-anchor-id="直感-3"><span class="header-section-number">8.0.6</span> 直感</h3>
+<ul>
+<li><p>その他の影響は、当然存在する</p></li>
+<li><p>個別事例について、影響を排除することは困難</p></li>
+<li><p>大量の事例の平均をとることで、平均格差を明らかにする <span class="math display">\[\underbrace{E[Y - g_Y(X)|D=1]}_{D=1についての平均予測誤差} - \underbrace{E[Y - g_Y(X)|D=0]}_{D=0についての平均予測誤差}\]</span></p></li>
+<li><p><span class="math inline">\(g_Y(X)=E[Y|X]\)</span> であれば、バランス後の平均格差の優れた推定値</p></li>
+</ul>
+</section>
+<section id="直感-4" class="level3" data-number="8.0.7">
+<h3 data-number="8.0.7" class="anchored" data-anchor-id="直感-4"><span class="header-section-number">8.0.7</span> 直感</h3>
+<ul>
+<li><p>限られた事例から推定された予測モデルは、理想的なものと乖離する: <span class="math inline">\(g_Y(X)\neq E[Y|X]\)</span></p>
+<ul>
+<li>格差の推定値に、予測困難な悪影響を与える</li>
+</ul></li>
+<li><p><span class="math inline">\(D\)</span> の予測モデル <span class="math inline">\(g_D(X)\)</span> も併用する</p>
+<ul>
+<li><span class="math inline">\(X\)</span> が <span class="math inline">\(D\)</span> に与える影響も極力排除する</li>
+</ul></li>
+<li><p><span class="math inline">\(Y\)</span> の予測誤差 <span class="math inline">\(Y-g_Y(X)\)</span> を <span class="math inline">\(D\)</span> の予測誤差 <span class="math inline">\(D-g_D(X)\)</span> で回帰する</p></li>
+</ul>
+</section>
+<section id="推定値の性質" class="level3" data-number="8.0.8">
+<h3 data-number="8.0.8" class="anchored" data-anchor-id="推定値の性質"><span class="header-section-number">8.0.8</span> 推定値の性質</h3>
+<ul>
+<li><p><span class="math inline">\(g_Y(X),g_D(X)\)</span> が <span class="math inline">\(E[Y|X],E[D|X]\)</span> をある程度近似できるのであれば (後述)、近似的な信頼区間を計算可能</p>
+<ul>
+<li><p>十分な事例数 (私見では500事例以上)</p></li>
+<li><p>適した推定方法の採用 (後日議論)</p></li>
+</ul></li>
+<li><p>注: <span class="math inline">\(Y,D\)</span> を高い精度で予測する必要はない</p>
+<ul>
+<li>個人差が大きく予測しにくい現象であったとしても、比較分析への活用においては、予測モデルは有益</li>
+</ul></li>
+</ul>
+</section>
+<section id="olsとの比較" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="olsとの比較"><span class="header-section-number">8.1</span> OLSとの比較</h2>
+<ul>
+<li><p>「<span class="math inline">\(X\)</span> の分布を均した後の比較」を行う伝統的方法は、以下のモデルを重回帰する <span class="math display">\[E[Y|D,X]=\beta_0 + \beta_D D + \beta_1X_1+...\]</span></p></li>
+<li><p>FWL定理 (<a href="https://en.wikipedia.org/wiki/Frisch%E2%80%93Waugh%E2%80%93Lovell_theorem">wiki</a>)より、R-leanerの特殊ケースと見做せる</p></li>
+</ul>
+<section id="補論-olsとの比較" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="補論-olsとの比較"><span class="header-section-number">8.1.1</span> 補論: OLSとの比較</h3>
+<ul>
+<li>FWL定理より、OLSの推定結果 <span class="math inline">\(\beta_D\)</span> は、以下の手順により得られる推定結果と一致</li>
+</ul>
+<ol type="1">
+<li><p><strong>全データ</strong> を用いて、 <strong>OLS</strong> で予測モデル <span class="math inline">\(g_Y(X)=\beta_0 + \beta_1X_1+..., g_D(X)=\alpha_0+\alpha_1X_1+..\)</span> を推定</p></li>
+<li><p>以下はR-learnerと同じ手順</p></li>
+</ol>
+<ul>
+<li>予測モデルの定式化が正しく、かつ事例数に比べて十分に単純 (<span class="math inline">\(\beta\)</span> の数が少ない)のであれば、優れた推定方法だが、そうではない応用例も多い</li>
+</ul>
+</section>
+<section id="補論-統計モデルとしての書き換え" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="補論-統計モデルとしての書き換え"><span class="header-section-number">8.1.2</span> 補論: 統計モデルとしての書き換え</h3>
+<ul>
+<li><p>R-learnerの推定結果は、以下のモデルを推定した場合の結果と一致 <span class="citation" data-cites="robinson1988root">(<a href="#ref-robinson1988root" role="doc-biblioref">Robinson 1988</a>)</span> <span class="math display">\[Y=\tau D + \underbrace{f(X)}_{何らかの(blackboxな)関数} + \underbrace{u}_{E[u|D,X]=0}\]</span></p>
+<ul>
+<li>教科書的な線形モデル: 「<span class="math inline">\(f(X)=\beta_0 + \beta_1X_1 +..\)</span> と特定化しても <span class="math inline">\(E[u|D,X]=0\)</span> が成り立つ」という仮定を<strong>追加</strong></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="reference" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="reference"><span class="header-section-number">8.2</span> Reference</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-breiman2001statistical" class="csl-entry" role="listitem">
-Breiman, Leo. 2001. <span>“Statistical Modeling: The Two Cultures.”</span> <em>Statistical Science</em> 16 (3): 199–231.
-</div>
 <div id="ref-chernozhukov2018double" class="csl-entry" role="listitem">
 Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. 2018. <span>“Double/Debiased Machine Learning for Treatment and Structural Parameters.”</span> Oxford University Press Oxford, UK.
 </div>
 <div id="ref-chernozhukov2022locally" class="csl-entry" role="listitem">
 Chernozhukov, Victor, Juan Carlos Escanciano, Hidehiko Ichimura, Whitney K Newey, and James M Robins. 2022. <span>“Locally Robust Semiparametric Estimation.”</span> <em>Econometrica</em> 90 (4): 1501–35.
 </div>
-<div id="ref-chernozhukov2024applied" class="csl-entry" role="listitem">
-Chernozhukov, Victor, Christian Hansen, Nathan Kallus, Martin Spindler, and Vasilis Syrgkanis. 2024. <span>“Applied Causal Inference Powered by ML and AI.”</span> <em>arXiv Preprint arXiv:2403.02467</em>.
+<div id="ref-robinson1988root" class="csl-entry" role="listitem">
+Robinson, Peter M. 1988. <span>“Root-n-Consistent Semiparametric Regression.”</span> <em>Econometrica</em>, 931–54.
 </div>
-<div id="ref-efron2020prediction" class="csl-entry" role="listitem">
-Efron, Bradley. 2020. <span>“Prediction, Estimation, and Attribution.”</span> <em>International Statistical Review</em> 88: S28–59.
-</div>
-<div id="ref-hofman2021integrating" class="csl-entry" role="listitem">
-Hofman, Jake M, Duncan J Watts, Susan Athey, Filiz Garip, Thomas L Griffiths, Jon Kleinberg, Helen Margetts, et al. 2021. <span>“Integrating Explanation and Prediction in Computational Social Science.”</span> <em>Nature</em> 595 (7866): 181–88.
-</div>
-<div id="ref-shmueli2010explain" class="csl-entry" role="listitem">
-Shmueli, Galit. 2010. <span>“To Explain or to Predict?”</span> <em>Statistical Science</em> 25 (3): 289–310.
-</div>
-<div id="ref-van2011targeted" class="csl-entry" role="listitem">
-Van der Laan, Mark J, and Sherri Rose. 2011. <em>Targeted Learning</em>. Vol. 1. 3. Springer.
+<div id="ref-van2006targeted" class="csl-entry" role="listitem">
+Van Der Laan, Mark J, and Daniel Rubin. 2006. <span>“Targeted Maximum Likelihood Learning.”</span> <em>The International Journal of Biostatistics</em> 2 (1).
 </div>
 </div>
 </section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>R learnerは、Double/Debiased Machine Learningと呼ばれる手法の一つです。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -741,11 +1022,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./whatif_moment.html" class="pagination-link" aria-label="把握を目的とする要約: モーメントバランス">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">把握を目的とする要約: モーメントバランス</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./stracture.html" class="pagination-link" aria-label="分析工程">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">分析工程</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
