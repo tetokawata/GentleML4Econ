@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -50,6 +30,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./whatif_argumentation.html" rel="next">
 <link href="./whatif_moment.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -208,6 +189,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 傾向スコア</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./whatif_argumentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 補強</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -218,20 +205,11 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#partial-least-square" id="toc-partial-least-square" class="nav-link active" data-scroll-target="#partial-least-square"><span class="header-section-number">8.0.1</span> Partial least square</a></li>
-  <li><a href="#直感" id="toc-直感" class="nav-link" data-scroll-target="#直感"><span class="header-section-number">8.0.2</span> 直感</a></li>
-  <li><a href="#直感-1" id="toc-直感-1" class="nav-link" data-scroll-target="#直感-1"><span class="header-section-number">8.0.3</span> 直感</a></li>
-  <li><a href="#例-基本アイディア" id="toc-例-基本アイディア" class="nav-link" data-scroll-target="#例-基本アイディア"><span class="header-section-number">8.0.4</span> 例: 基本アイディア</a></li>
-  <li><a href="#直感-2" id="toc-直感-2" class="nav-link" data-scroll-target="#直感-2"><span class="header-section-number">8.0.5</span> 直感</a></li>
-  <li><a href="#直感-3" id="toc-直感-3" class="nav-link" data-scroll-target="#直感-3"><span class="header-section-number">8.0.6</span> 直感</a></li>
-  <li><a href="#直感-4" id="toc-直感-4" class="nav-link" data-scroll-target="#直感-4"><span class="header-section-number">8.0.7</span> 直感</a></li>
-  <li><a href="#推定値の性質" id="toc-推定値の性質" class="nav-link" data-scroll-target="#推定値の性質"><span class="header-section-number">8.0.8</span> 推定値の性質</a></li>
-  <li><a href="#olsとの比較" id="toc-olsとの比較" class="nav-link" data-scroll-target="#olsとの比較"><span class="header-section-number">8.1</span> OLSとの比較</a>
-  <ul class="collapse">
-  <li><a href="#補論-olsとの比較" id="toc-補論-olsとの比較" class="nav-link" data-scroll-target="#補論-olsとの比較"><span class="header-section-number">8.1.1</span> 補論: OLSとの比較</a></li>
-  <li><a href="#補論-統計モデルとしての書き換え" id="toc-補論-統計モデルとしての書き換え" class="nav-link" data-scroll-target="#補論-統計モデルとしての書き換え"><span class="header-section-number">8.1.2</span> 補論: 統計モデルとしての書き換え</a></li>
-  </ul></li>
-  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">8.2</span> Reference</a></li>
+  <li><a href="#inverse-propensity-score-weighting" id="toc-inverse-propensity-score-weighting" class="nav-link active" data-scroll-target="#inverse-propensity-score-weighting"><span class="header-section-number">8.1</span> Inverse propensity score weighting</a></li>
+  <li><a href="#傾向スコアの推定方法" id="toc-傾向スコアの推定方法" class="nav-link" data-scroll-target="#傾向スコアの推定方法"><span class="header-section-number">8.2</span> 傾向スコアの推定方法</a></li>
+  <li><a href="#問題点" id="toc-問題点" class="nav-link" data-scroll-target="#問題点"><span class="header-section-number">8.3</span> 問題点</a></li>
+  <li><a href="#例" id="toc-例" class="nav-link" data-scroll-target="#例"><span class="header-section-number">8.4</span> 例</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">8.5</span> Reference</a></li>
   </ul>
 </nav>
     </div>
@@ -257,356 +235,63 @@ window.Quarto = {
 </header>
 
 
-<section id="partial-least-square" class="level3" data-number="8.0.1">
-<h3 data-number="8.0.1" class="anchored" data-anchor-id="partial-least-square"><span class="header-section-number">8.0.1</span> Partial least square</h3>
-<p><span class="citation" data-cites="chernozhukov2018double">Chernozhukov et al. (<a href="#ref-chernozhukov2018double" role="doc-biblioref">2018</a>)</span>; <span class="citation" data-cites="chernozhukov2022locally">Chernozhukov et al. (<a href="#ref-chernozhukov2022locally" role="doc-biblioref">2022</a>)</span>; <span class="citation" data-cites="van2006targeted">Van Der Laan and Rubin (<a href="#ref-van2006targeted" role="doc-biblioref">2006</a>)</span></p>
-<p><a href="https://causalml-book.org/">CausalMLBook</a>の1,4,10章に相当<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-R learner
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><span class="math inline">\(X\)</span> を <span class="math inline">\(D\)</span> 間でバランスさせた元での比較を行うために、以下の手順を実行する</li>
-</ul>
-<ol type="1">
-<li><p>データを2分割する (訓練/テスト)</p></li>
-<li><p>訓練データを用いて、<span class="math inline">\(X\)</span> から <span class="math inline">\(Y/D\)</span> を予測するモデル <span class="math inline">\(g_Y(X)/g_D(X)\)</span> を推定する</p></li>
-<li><p>テストデータを用いて、<span class="math inline">\(Y/D\)</span>の予測誤差をOLSで回帰し係数 <span class="math inline">\(\beta_D\)</span> を推定値とする <span class="math display">\[Y-g_Y(X)\sim D - g_D(X)\]</span></p></li>
-</ol>
-</div>
-</div>
+<p>Balancing weightsを計算する別のアプローチとして、傾向スコア (Propensity score) の活用が挙げられます。 傾向スコアは、<span class="math inline">\(X\)</span> 内で <span class="math inline">\(D=d\)</span> である事例の母集団における割合 <span class="math inline">\(p_d(X)\)</span> として定義されます。</p>
+<section id="inverse-propensity-score-weighting" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="inverse-propensity-score-weighting"><span class="header-section-number">8.1</span> Inverse propensity score weighting</h2>
+<p><span class="math inline">\((X=x)\)</span>へのウェイトとして、<span class="math inline">\(X\)</span> の母分布をターゲットとするのであれば、一般に以下の関係性が成り立ちます。 <span class="math display">\[Balancing\ weights:\ \omega(X) = \frac{D=dの割合}{p_d(X)}\]</span> よってバランス後の平均値は以下のように計算できます。 <span class="math display">\[\frac{\omega(X_1)Y_1 + ...+\omega(X_{D=dの事例数})Y_{D=dの事例数}}{D=dの事例数}\]</span> 以下のように書き換えることができます。 <span class="math display">\[\frac{\omega(X_1)Y_1 + ...+\omega(X_{D=dの事例数})Y_{D=dの事例数}}{D=dの割合\times 事例数}\]</span> <span class="math display">\[=\frac{I(D_1=d)\times(1/p_d(X_N))\times Y_1 + ...+I(D_N=d)\times(1/p_d(X_N))\times Y_{N}}{事例数}\]</span> <span class="math inline">\(I(D_i=d)\)</span> は事例<span class="math inline">\(i\)</span>の<span class="math inline">\(D\)</span>が<span class="math inline">\(d\)</span>であれば1、そうでなければ0を取る変数です。 よって、傾向スコアが推定できれば、その逆数<span class="math inline">\((1/p_d(X))\)</span> を掛ることでバランス後の平均値が推定できます。</p>
 </section>
-<section id="直感" class="level3" data-number="8.0.2">
-<h3 data-number="8.0.2" class="anchored" data-anchor-id="直感"><span class="header-section-number">8.0.2</span> 直感</h3>
-<ul>
-<li><span class="math inline">\(X\)</span> の偏りを排除したい</li>
-</ul>
-<div class="cell" data-layout-align="default">
+<section id="傾向スコアの推定方法" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="傾向スコアの推定方法"><span class="header-section-number">8.2</span> 傾向スコアの推定方法</h2>
+<p>傾向スコアの推定方法については、予測を目的とする要約 (<a href="prediction.html" class="quarto-xref">Section&nbsp;<span>4</span></a>) の手法を応用することができます。 例えば以下のモデルを、シンプルにOLSを用いて推定することも可能です。 <span class="math display">\[D\sim\beta_0+\beta_1X_1+..\]</span> ただ多くの応用で、LogitやProbitなど、予測値が<span class="math inline">\([0,1]\)</span> の範囲に収まることが保証される方法を用いることが多くなっています。</p>
+<p>近年では、より柔軟な推定手法 (LASSOやRandomForest, Boostingなどの機械学習の手法)を用いることが増えています。 既存の機械学習の手法が容易に応用できる点は、傾向スコアを用いることの大きな利点となります。</p>
+</section>
+<section id="問題点" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="問題点"><span class="header-section-number">8.3</span> 問題点</h2>
+<p>Inverse propensity score weightingを用いたバランス後の平均値推定は、傾向スコアの推定精度に決定的に依存しています。 シンプルなモデルをLogitなどで推定した場合、モデル定式化の誤りが深刻となりえます。 機械学習等のより柔軟な推定手法を用いれば、モデル定式化の誤りは減少しますが、依然として推定精度は不十分な場合が多いです<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>。</p>
+<p>以上の問題を克服するために、次節では <span class="math inline">\(Y\)</span> の予測モデルも併用する推定方法 (Augmented inverse probability weighting) を紹介します。</p>
+</section>
+<section id="例" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="例"><span class="header-section-number">8.4</span> 例</h2>
+<div class="cell">
 <div class="cell-output-display">
 <div>
-<p></p><figure class="figure"><p></p>
-<div>
-<svg width="672" height="480" viewbox="0.00 0.00 152.00 152.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 148)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-148 148,-148 148,4 -4,4"></polygon>
-<!-- Y -->
-<g id="node1" class="node">
-<title>Y</title>
-<text text-anchor="middle" x="27" y="-123" font-family="Times,serif" font-size="10.00">Y</text>
-</g>
-<!-- D -->
-<g id="node2" class="node">
-<title>D</title>
-<text text-anchor="middle" x="27" y="-15" font-family="Times,serif" font-size="10.00">D</text>
-</g>
-<!-- Y&#45;&gt;D -->
-<g id="edge9" class="edge">
-<title>Y-&gt;D</title>
-<path fill="none" stroke="black" stroke-dasharray="5,2" d="M27,-104.67C27,-81.83 27,-58.98 27,-36.14"></path>
-<polygon fill="black" stroke="black" points="25.95,-104.75 27,-107.75 28.05,-104.75 25.95,-104.75"></polygon>
-</g>
-<!-- f_Y -->
-<g id="node4" class="node">
-<title>f_Y</title>
-<text text-anchor="middle" x="117" y="-123" font-family="Times,serif" font-size="10.00">blackbox</text>
-</g>
-<!-- Y&#45;&gt;f_Y -->
-<g id="edge1" class="edge">
-<title>Y-&gt;f_Y</title>
-<path fill="none" stroke="black" d="M54.4,-119.75C64.59,-119.14 76.28,-119.09 86.72,-119.6"></path>
-<polygon fill="black" stroke="black" points="86.87,-120.66 89.92,-119.77 86.98,-118.56 86.87,-120.66"></polygon>
-</g>
-<!-- Y&#45;&gt;f_Y -->
-<g id="edge3" class="edge">
-<title>Y-&gt;f_Y</title>
-<path fill="none" stroke="black" d="M57.61,-132.42C68.08,-132.92 79.77,-132.85 89.92,-132.23"></path>
-<polygon fill="black" stroke="black" points="57.46,-131.36 54.4,-132.25 57.34,-133.46 57.46,-131.36"></polygon>
-</g>
-<!-- X -->
-<g id="node3" class="node">
-<title>X</title>
-<text text-anchor="middle" x="117" y="-69" font-family="Times,serif" font-size="10.00">X</text>
-</g>
-<!-- f_D -->
-<g id="node5" class="node">
-<title>f_D</title>
-<text text-anchor="middle" x="117" y="-15" font-family="Times,serif" font-size="10.00">blackbox</text>
-</g>
-<!-- X&#45;&gt;f_D -->
-<g id="edge6" class="edge">
-<title>X-&gt;f_D</title>
-<path fill="none" stroke="black" d="M135.1,-53.79C137.48,-48.92 137.88,-44.05 136.31,-39.17"></path>
-<polygon fill="black" stroke="black" points="137.18,-38.52 135.07,-36.14 135.23,-39.32 137.18,-38.52"></polygon>
-</g>
-<!-- X&#45;&gt;f_D -->
-<g id="edge8" class="edge">
-<title>X-&gt;f_D</title>
-<path fill="none" stroke="black" d="M97.67,-50.76C96.11,-45.88 96.53,-41.01 98.93,-36.14"></path>
-<polygon fill="black" stroke="black" points="96.8,-51.4 98.9,-53.79 98.75,-50.62 96.8,-51.4"></polygon>
-</g>
-<!-- f_Y&#45;&gt;X -->
-<g id="edge2" class="edge">
-<title>f_Y-&gt;X</title>
-<path fill="none" stroke="black" d="M135.1,-107.79C137.48,-102.92 137.88,-98.05 136.31,-93.17"></path>
-<polygon fill="black" stroke="black" points="137.18,-92.52 135.07,-90.14 135.23,-93.32 137.18,-92.52"></polygon>
-</g>
-<!-- f_Y&#45;&gt;X -->
-<g id="edge4" class="edge">
-<title>f_Y-&gt;X</title>
-<path fill="none" stroke="black" d="M97.67,-104.76C96.11,-99.88 96.53,-95.01 98.93,-90.14"></path>
-<polygon fill="black" stroke="black" points="96.8,-105.4 98.9,-107.79 98.75,-104.62 96.8,-105.4"></polygon>
-</g>
-<!-- f_D&#45;&gt;D -->
-<g id="edge5" class="edge">
-<title>f_D-&gt;D</title>
-<path fill="none" stroke="black" d="M89.92,-11.77C79.77,-11.15 68.08,-11.08 57.61,-11.58"></path>
-<polygon fill="black" stroke="black" points="57.34,-10.54 54.4,-11.75 57.46,-12.64 57.34,-10.54"></polygon>
-</g>
-<!-- f_D&#45;&gt;D -->
-<g id="edge7" class="edge">
-<title>f_D-&gt;D</title>
-<path fill="none" stroke="black" d="M86.72,-24.4C76.28,-24.91 64.59,-24.86 54.4,-24.25"></path>
-<polygon fill="black" stroke="black" points="86.98,-25.44 89.92,-24.23 86.87,-23.34 86.98,-25.44"></polygon>
-</g>
-</g>
-</svg>
-</div>
-<p></p></figure><p></p>
+<figure class="figure">
+<p><img src="whatif_ps_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-</div>
-</section>
-<section id="直感-1" class="level3" data-number="8.0.3">
-<h3 data-number="8.0.3" class="anchored" data-anchor-id="直感-1"><span class="header-section-number">8.0.3</span> 直感</h3>
-<ul>
-<li>予測モデルにより、<span class="math inline">\(X\)</span> の偏りの影響を評価する</li>
-</ul>
-<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
-<p></p><figure class="figure"><p></p>
+<figure class="figure">
+<p><img src="whatif_ps_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
 <div>
-<svg width="672" height="480" viewbox="0.00 0.00 273.00 188.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 184)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-184 269,-184 269,4 -4,4"></polygon>
-<!-- Y -->
-<g id="node1" class="node">
-<title>Y</title>
-<text text-anchor="middle" x="27" y="-159" font-family="Times,serif" font-size="10.00">Y</text>
-</g>
-<!-- f_Y -->
-<g id="node4" class="node">
-<title>f_Y</title>
-<text text-anchor="middle" x="118" y="-159" font-family="Times,serif" font-size="10.00">blackbox</text>
-</g>
-<!-- Y&#45;&gt;f_Y -->
-<g id="edge1" class="edge">
-<title>Y-&gt;f_Y</title>
-<path fill="none" stroke="black" d="M54.22,-155.78C64.81,-155.13 77.08,-155.08 87.94,-155.62"></path>
-<polygon fill="black" stroke="black" points="87.91,-156.67 90.97,-155.8 88.03,-154.58 87.91,-156.67"></polygon>
-</g>
-<!-- Y&#45;&gt;f_Y -->
-<g id="edge3" class="edge">
-<title>Y-&gt;f_Y</title>
-<path fill="none" stroke="black" d="M57.25,-168.38C68.13,-168.93 80.39,-168.87 90.97,-168.2"></path>
-<polygon fill="black" stroke="black" points="57.28,-167.33 54.22,-168.22 57.16,-169.43 57.28,-167.33"></polygon>
-</g>
-<!-- D -->
-<g id="node2" class="node">
-<title>D</title>
-<text text-anchor="middle" x="27" y="-15" font-family="Times,serif" font-size="10.00">D</text>
-</g>
-<!-- X -->
-<g id="node3" class="node">
-<title>X</title>
-<text text-anchor="middle" x="118" y="-87" font-family="Times,serif" font-size="10.00">X</text>
-</g>
-<!-- f_D -->
-<g id="node5" class="node">
-<title>f_D</title>
-<text text-anchor="middle" x="118" y="-15" font-family="Times,serif" font-size="10.00">blackbox</text>
-</g>
-<!-- X&#45;&gt;f_D -->
-<g id="edge6" class="edge">
-<title>X-&gt;f_D</title>
-<path fill="none" stroke="black" d="M133.21,-71.95C139.36,-60.99 139.88,-50.03 134.77,-39.07"></path>
-<polygon fill="black" stroke="black" points="135.64,-38.48 133.34,-36.28 133.77,-39.43 135.64,-38.48"></polygon>
-</g>
-<!-- X&#45;&gt;f_D -->
-<g id="edge8" class="edge">
-<title>X-&gt;f_D</title>
-<path fill="none" stroke="black" d="M101.34,-69.17C96.15,-58.21 96.59,-47.24 102.66,-36.28"></path>
-<polygon fill="black" stroke="black" points="100.48,-69.77 102.79,-71.95 102.34,-68.81 100.48,-69.77"></polygon>
-</g>
-<!-- f_Y&#45;&gt;X -->
-<g id="edge2" class="edge">
-<title>f_Y-&gt;X</title>
-<path fill="none" stroke="black" d="M133.21,-143.95C139.36,-132.99 139.88,-122.03 134.77,-111.07"></path>
-<polygon fill="black" stroke="black" points="135.64,-110.48 133.34,-108.28 133.77,-111.43 135.64,-110.48"></polygon>
-</g>
-<!-- f_Y&#45;&gt;X -->
-<g id="edge4" class="edge">
-<title>f_Y-&gt;X</title>
-<path fill="none" stroke="black" d="M101.34,-141.17C96.15,-130.21 96.59,-119.24 102.66,-108.28"></path>
-<polygon fill="black" stroke="black" points="100.48,-141.77 102.79,-143.95 102.34,-140.81 100.48,-141.77"></polygon>
-</g>
-<!-- g_Y -->
-<g id="node6" class="node">
-<title>g_Y</title>
-<text text-anchor="middle" x="238" y="-159" font-family="Times,serif" font-size="10.00">g_Y(X)</text>
-</g>
-<!-- f_Y&#45;&gt;g_Y -->
-<g id="edge9" class="edge">
-<title>f_Y-&gt;g_Y</title>
-<path fill="none" stroke="black" d="M148.46,-162C167.63,-162 192.42,-162 210.89,-162"></path>
-<polygon fill="black" stroke="black" points="148.19,-160.95 145.19,-162 148.19,-163.05 148.19,-160.95"></polygon>
-<text text-anchor="middle" x="178" y="-165" font-family="Times,serif" font-size="10.00">置き換え</text>
-</g>
-<!-- f_D&#45;&gt;D -->
-<g id="edge5" class="edge">
-<title>f_D-&gt;D</title>
-<path fill="none" stroke="black" d="M90.97,-11.8C80.39,-11.13 68.13,-11.07 57.25,-11.62"></path>
-<polygon fill="black" stroke="black" points="57.16,-10.57 54.22,-11.78 57.28,-12.67 57.16,-10.57"></polygon>
-</g>
-<!-- f_D&#45;&gt;D -->
-<g id="edge7" class="edge">
-<title>f_D-&gt;D</title>
-<path fill="none" stroke="black" d="M87.94,-24.38C77.08,-24.92 64.81,-24.87 54.22,-24.22"></path>
-<polygon fill="black" stroke="black" points="88.03,-25.42 90.97,-24.2 87.91,-23.33 88.03,-25.42"></polygon>
-</g>
-<!-- g_D -->
-<g id="node7" class="node">
-<title>g_D</title>
-<text text-anchor="middle" x="238" y="-15" font-family="Times,serif" font-size="10.00">g_D(X)</text>
-</g>
-<!-- f_D&#45;&gt;g_D -->
-<g id="edge10" class="edge">
-<title>f_D-&gt;g_D</title>
-<path fill="none" stroke="black" d="M148.46,-18C167.63,-18 192.42,-18 210.89,-18"></path>
-<polygon fill="black" stroke="black" points="148.19,-16.95 145.19,-18 148.19,-19.05 148.19,-16.95"></polygon>
-<text text-anchor="middle" x="178" y="-21" font-family="Times,serif" font-size="10.00">置き換え</text>
-</g>
-</g>
-</svg>
+<figure class="figure">
+<p><img src="whatif_ps_files/figure-html/unnamed-chunk-1-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-<p></p></figure><p></p>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="whatif_ps_files/figure-html/unnamed-chunk-1-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
 </div>
 </section>
-<section id="例-基本アイディア" class="level3" data-number="8.0.4">
-<h3 data-number="8.0.4" class="anchored" data-anchor-id="例-基本アイディア"><span class="header-section-number">8.0.4</span> 例: 基本アイディア</h3>
-<ul>
-<li><p>事例1と４の間で、<span class="math inline">\(700\)</span> 万円近くの 以上の価格格差</p></li>
-<li><p><span class="math inline">\(X\)</span> が大きく異なる</p>
-<ul>
-<li>(<span class="math inline">\(X\)</span> からの)予測値についても、同程度の格差</li>
-</ul></li>
-<li><p>実際の格差から、(<span class="math inline">\(X\)</span>の影響を捉える) 予測値の差を引くと ほとんど格差はない</p></li>
-</ul>
-</section>
-<section id="直感-2" class="level3" data-number="8.0.5">
-<h3 data-number="8.0.5" class="anchored" data-anchor-id="直感-2"><span class="header-section-number">8.0.5</span> 直感</h3>
-<ul>
-<li><p>価格 <span class="math inline">\(=\)</span> 取引年 <span class="math inline">\(+\)</span> <span class="math inline">\(X\)</span> の影響 <span class="math inline">\(+\)</span> その他</p></li>
-<li><p>予測モデルが<span class="math inline">\(X\)</span> の影響を完全に捉え、その他の影響がなければ、 <span class="math display">\[\underbrace{Y_1 - Y_2}_{事例1と2の賃金格差}-\underbrace{g_Y(X_1) - g_Y(X_2)}_{予測格差}\]</span> <span class="math display">\[=\underbrace{Y_1 - g_Y(X_1)}_{1についての予測誤差} - \underbrace{(Y_2 - g_Y(X_2))}_{2についての予測誤差}\]</span> は、バランス後の賃金格差を捉える</p></li>
-</ul>
-</section>
-<section id="直感-3" class="level3" data-number="8.0.6">
-<h3 data-number="8.0.6" class="anchored" data-anchor-id="直感-3"><span class="header-section-number">8.0.6</span> 直感</h3>
-<ul>
-<li><p>その他の影響は、当然存在する</p></li>
-<li><p>個別事例について、影響を排除することは困難</p></li>
-<li><p>大量の事例の平均をとることで、平均格差を明らかにする <span class="math display">\[\underbrace{E[Y - g_Y(X)|D=1]}_{D=1についての平均予測誤差} - \underbrace{E[Y - g_Y(X)|D=0]}_{D=0についての平均予測誤差}\]</span></p></li>
-<li><p><span class="math inline">\(g_Y(X)=E[Y|X]\)</span> であれば、バランス後の平均格差の優れた推定値</p></li>
-</ul>
-</section>
-<section id="直感-4" class="level3" data-number="8.0.7">
-<h3 data-number="8.0.7" class="anchored" data-anchor-id="直感-4"><span class="header-section-number">8.0.7</span> 直感</h3>
-<ul>
-<li><p>限られた事例から推定された予測モデルは、理想的なものと乖離する: <span class="math inline">\(g_Y(X)\neq E[Y|X]\)</span></p>
-<ul>
-<li>格差の推定値に、予測困難な悪影響を与える</li>
-</ul></li>
-<li><p><span class="math inline">\(D\)</span> の予測モデル <span class="math inline">\(g_D(X)\)</span> も併用する</p>
-<ul>
-<li><span class="math inline">\(X\)</span> が <span class="math inline">\(D\)</span> に与える影響も極力排除する</li>
-</ul></li>
-<li><p><span class="math inline">\(Y\)</span> の予測誤差 <span class="math inline">\(Y-g_Y(X)\)</span> を <span class="math inline">\(D\)</span> の予測誤差 <span class="math inline">\(D-g_D(X)\)</span> で回帰する</p></li>
-</ul>
-</section>
-<section id="推定値の性質" class="level3" data-number="8.0.8">
-<h3 data-number="8.0.8" class="anchored" data-anchor-id="推定値の性質"><span class="header-section-number">8.0.8</span> 推定値の性質</h3>
-<ul>
-<li><p><span class="math inline">\(g_Y(X),g_D(X)\)</span> が <span class="math inline">\(E[Y|X],E[D|X]\)</span> をある程度近似できるのであれば (後述)、近似的な信頼区間を計算可能</p>
-<ul>
-<li><p>十分な事例数 (私見では500事例以上)</p></li>
-<li><p>適した推定方法の採用 (後日議論)</p></li>
-</ul></li>
-<li><p>注: <span class="math inline">\(Y,D\)</span> を高い精度で予測する必要はない</p>
-<ul>
-<li>個人差が大きく予測しにくい現象であったとしても、比較分析への活用においては、予測モデルは有益</li>
-</ul></li>
-</ul>
-</section>
-<section id="olsとの比較" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="olsとの比較"><span class="header-section-number">8.1</span> OLSとの比較</h2>
-<ul>
-<li><p>「<span class="math inline">\(X\)</span> の分布を均した後の比較」を行う伝統的方法は、以下のモデルを重回帰する <span class="math display">\[E[Y|D,X]=\beta_0 + \beta_D D + \beta_1X_1+...\]</span></p></li>
-<li><p>FWL定理 (<a href="https://en.wikipedia.org/wiki/Frisch%E2%80%93Waugh%E2%80%93Lovell_theorem">wiki</a>)より、R-leanerの特殊ケースと見做せる</p></li>
-</ul>
-<section id="補論-olsとの比較" class="level3" data-number="8.1.1">
-<h3 data-number="8.1.1" class="anchored" data-anchor-id="補論-olsとの比較"><span class="header-section-number">8.1.1</span> 補論: OLSとの比較</h3>
-<ul>
-<li>FWL定理より、OLSの推定結果 <span class="math inline">\(\beta_D\)</span> は、以下の手順により得られる推定結果と一致</li>
-</ul>
-<ol type="1">
-<li><p><strong>全データ</strong> を用いて、 <strong>OLS</strong> で予測モデル <span class="math inline">\(g_Y(X)=\beta_0 + \beta_1X_1+..., g_D(X)=\alpha_0+\alpha_1X_1+..\)</span> を推定</p></li>
-<li><p>以下はR-learnerと同じ手順</p></li>
-</ol>
-<ul>
-<li>予測モデルの定式化が正しく、かつ事例数に比べて十分に単純 (<span class="math inline">\(\beta\)</span> の数が少ない)のであれば、優れた推定方法だが、そうではない応用例も多い</li>
-</ul>
-</section>
-<section id="補論-統計モデルとしての書き換え" class="level3" data-number="8.1.2">
-<h3 data-number="8.1.2" class="anchored" data-anchor-id="補論-統計モデルとしての書き換え"><span class="header-section-number">8.1.2</span> 補論: 統計モデルとしての書き換え</h3>
-<ul>
-<li><p>R-learnerの推定結果は、以下のモデルを推定した場合の結果と一致 <span class="citation" data-cites="robinson1988root">(<a href="#ref-robinson1988root" role="doc-biblioref">Robinson 1988</a>)</span> <span class="math display">\[Y=\tau D + \underbrace{f(X)}_{何らかの(blackboxな)関数} + \underbrace{u}_{E[u|D,X]=0}\]</span></p>
-<ul>
-<li>教科書的な線形モデル: 「<span class="math inline">\(f(X)=\beta_0 + \beta_1X_1 +..\)</span> と特定化しても <span class="math inline">\(E[u|D,X]=0\)</span> が成り立つ」という仮定を<strong>追加</strong></li>
-</ul></li>
-</ul>
-</section>
-</section>
-<section id="reference" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="reference"><span class="header-section-number">8.2</span> Reference</h2>
+<section id="reference" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="reference"><span class="header-section-number">8.5</span> Reference</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-chernozhukov2018double" class="csl-entry" role="listitem">
-Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. 2018. <span>“Double/Debiased Machine Learning for Treatment and Structural Parameters.”</span> Oxford University Press Oxford, UK.
-</div>
-<div id="ref-chernozhukov2022locally" class="csl-entry" role="listitem">
-Chernozhukov, Victor, Juan Carlos Escanciano, Hidehiko Ichimura, Whitney K Newey, and James M Robins. 2022. <span>“Locally Robust Semiparametric Estimation.”</span> <em>Econometrica</em> 90 (4): 1501–35.
-</div>
-<div id="ref-robinson1988root" class="csl-entry" role="listitem">
-Robinson, Peter M. 1988. <span>“Root-n-Consistent Semiparametric Regression.”</span> <em>Econometrica</em>, 931–54.
-</div>
-<div id="ref-van2006targeted" class="csl-entry" role="listitem">
-Van Der Laan, Mark J, and Daniel Rubin. 2006. <span>“Targeted Maximum Likelihood Learning.”</span> <em>The International Journal of Biostatistics</em> 2 (1).
-</div>
-</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>R learnerは、Double/Debiased Machine Learningと呼ばれる手法の一つです。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>この問題は収束の遅さとして知られています<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -1027,6 +712,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./whatif_argumentation.html" class="pagination-link" aria-label="把握を目的とする要約: 補強">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 補強</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

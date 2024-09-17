@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -209,6 +243,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 傾向スコア</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./whatif_argumentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 補強</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -219,12 +259,17 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#ols-as-balancing-weight" id="toc-ols-as-balancing-weight" class="nav-link active" data-scroll-target="#ols-as-balancing-weight"><span class="header-section-number">7.1</span> OLS as Balancing weight</a>
+  <li><a href="#ols" id="toc-ols" class="nav-link active" data-scroll-target="#ols"><span class="header-section-number">7.1</span> OLS</a>
   <ul class="collapse">
   <li><a href="#例" id="toc-例" class="nav-link" data-scroll-target="#例"><span class="header-section-number">7.1.1</span> 例</a></li>
-  <li><a href="#問題点" id="toc-問題点" class="nav-link" data-scroll-target="#問題点"><span class="header-section-number">7.1.2</span> 問題点</a></li>
+  <li><a href="#post-selection" id="toc-post-selection" class="nav-link" data-scroll-target="#post-selection"><span class="header-section-number">7.1.2</span> Post selection</a></li>
   </ul></li>
-  <li><a href="#明示的なアルゴリズム" id="toc-明示的なアルゴリズム" class="nav-link" data-scroll-target="#明示的なアルゴリズム"><span class="header-section-number">7.2</span> 明示的なアルゴリズム</a></li>
+  <li><a href="#olsの問題点と解決策" id="toc-olsの問題点と解決策" class="nav-link" data-scroll-target="#olsの問題点と解決策"><span class="header-section-number">7.2</span> OLSの問題点と解決策</a>
+  <ul class="collapse">
+  <li><a href="#解釈困難なウェイト" id="toc-解釈困難なウェイト" class="nav-link" data-scroll-target="#解釈困難なウェイト"><span class="header-section-number">7.2.1</span> 解釈困難なウェイト</a></li>
+  <li><a href="#負の荷重" id="toc-負の荷重" class="nav-link" data-scroll-target="#負の荷重"><span class="header-section-number">7.2.2</span> 負の荷重</a></li>
+  <li><a href="#解決策" id="toc-解決策" class="nav-link" data-scroll-target="#解決策"><span class="header-section-number">7.2.3</span> 解決策</a></li>
+  </ul></li>
   <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">7.3</span> Reference</a></li>
   </ul>
 </nav>
@@ -251,12 +296,10 @@ window.Quarto = {
 </header>
 
 
-<ul>
-<li>Optimaization: <span class="citation" data-cites="hainmueller2012entropy">Hainmueller (<a href="#ref-hainmueller2012entropy" role="doc-biblioref">2012</a>)</span>, <span class="citation" data-cites="zubizarreta2015stable">Zubizarreta (<a href="#ref-zubizarreta2015stable" role="doc-biblioref">2015</a>)</span></li>
-</ul>
-<section id="ols-as-balancing-weight" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="ols-as-balancing-weight"><span class="header-section-number">7.1</span> OLS as Balancing weight</h2>
-<p>線型モデルのOLS推定は、Moment Balanceを達成する代表的な方法です <span class="citation" data-cites="imbens2015matching">Chattopadhyay and Zubizarreta (<a href="#ref-chattopadhyay2023implied" role="doc-biblioref">2023</a>)</span>。 <span class="citation" data-cites="chattopadhyay2023implied">Chattopadhyay and Zubizarreta (<a href="#ref-chattopadhyay2023implied" role="doc-biblioref">2023</a>)</span> は、以下が全く同じ推定結果 <span class="math inline">\(\beta_D\)</span> をもたらすことを証明しました。</p>
+<p><span class="math inline">\(X\)</span> の種類が多く、Balancing weightsを計算することが困難な場合、<span class="math inline">\(X\)</span>の分布を近似的にバランスさせることが有力です。 例えば、分布を特徴づける代表的な値である平均値や分散(モーメント)のみをバランスさせるのであれば、大量の事例数がなかったとしても実用的です。</p>
+<section id="ols" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="ols"><span class="header-section-number">7.1</span> OLS</h2>
+<p>近年の研究により、線型モデルのOLS推定は、Moment Balanceを達成することが確認されています <span class="citation" data-cites="imbens2015matching chattopadhyay2023implied">(<a href="#ref-imbens2015matching" role="doc-biblioref">Imbens 2015</a>; <a href="#ref-chattopadhyay2023implied" role="doc-biblioref">Chattopadhyay and Zubizarreta 2023</a>)</span>。 <span class="citation" data-cites="chattopadhyay2023implied">Chattopadhyay and Zubizarreta (<a href="#ref-chattopadhyay2023implied" role="doc-biblioref">2023</a>)</span> は、以下を証明しました。</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -271,8 +314,8 @@ Important
 <li>統計モデル <span class="math display">\[Y\sim\beta_0 + \beta_DD+\beta_1X_1+..\beta_LX_L\]</span> をOLS推定した得られる <span class="math inline">\(\beta_D\)</span> は一般に以下と一致します。</li>
 </ul>
 <ol type="1">
-<li><p>全ての<span class="math inline">\(X=[X_1,..,X_L]\)</span> について、<span class="math display">\[\frac{\omega_1X_{l,1}+..+\omega_{N_{1}}X_{l,N_{1}}}{\underbrace{N_{1}}_{D=1の事例数}}\]</span> <span id="eq-balance"><span class="math display">\[= \frac{\omega_{N_{1}+1}X_{l,N_{1}+1}+..+\omega_{N_{1}+N_0}X_{l,N_{1}+N_0}}{\underbrace{N_0}_{D=0の事例数}} \tag{7.1}\]</span></span> <span id="eq-normal"><span class="math display">\[\sum_{i:D_i=1}W_i=\sum_{i:D_i=0}W_i=1 \tag{7.2}\]</span></span> を満たす <span class="math inline">\(W\)</span> から、分散が最も小さいものを選ぶ</p></li>
-<li><p><span id="eq-difference"><span class="math display">\[\frac{\omega_1Y_1+..+\omega_{N_{1}}Y_{N_{1}}}{\underbrace{N_{1}}_{D=1の事例数}} - \frac{\omega_{N_{1}+1}Y_{N_{1}+1}+..+\omega_{N_{1}+N_0}Y_{N_{1}+N_0}}{\underbrace{N_0}_{D=0の事例数}} \tag{7.3}\]</span></span></p></li>
+<li><p>事例 <span class="math inline">\(1,..,N_{1}\)</span> が<span class="math inline">\(D_i=1\)</span>, <span class="math inline">\(N_{1}+1,..,N\)</span> が<span class="math inline">\(D_i=0\)</span> だとします。全ての<span class="math inline">\(X=[X_1,..,X_L]\)</span> について、<span class="math display">\[\frac{\omega_1X_{l,1}+..+\omega_{N_{1}}X_{l,N_{1}}}{D=1の事例数}\]</span> <span id="eq-balance"><span class="math display">\[= \frac{\omega_{N_{1}+1}X_{l,N_{1}+1}+..+\omega_{N}X_{l,N}}{D=0の事例数} \tag{7.1}\]</span></span> <span id="eq-normal"><span class="math display">\[\frac{\omega_1+..+\omega_{N_1}}{D=1の事例数}=\frac{\omega_{N_1+1}+..+\omega_{N}}{D=0の事例数}=1 \tag{7.2}\]</span></span> を満たす <span class="math inline">\(W\)</span> から、分散が最も小さいものを選ぶ</p></li>
+<li><p><span class="math display">\[\beta_D=\frac{\omega_1Y_1+..+\omega_{N_{1}}Y_{N_{1}}}{D=1の事例数} - \frac{\omega_{N_{1}+1}Y_{N_{1}+1}+..+\omega_{N}Y_{N}}{D=0の事例数}\]</span></p></li>
 </ol>
 </div>
 </div>
@@ -280,6 +323,7 @@ Important
 <p>ウェイトの分散は、最終的な推定結果の推定誤差に影響を与えます。 一般に、ウェイトの分散が小さいと、推定誤差が削減される傾向があります。</p>
 <section id="例" class="level3" data-number="7.1.1">
 <h3 data-number="7.1.1" class="anchored" data-anchor-id="例"><span class="header-section-number">7.1.1</span> 例</h3>
+<p>部屋の広さ (Size) と 築年数 (Tenure) をバランスさせた後に、2022/2021年の平均取引価格差を推定します。 <span class="math inline">\(Price\sim D + Size + Tenure\)</span> をOLS回帰すると、以下のようなバランスが達成されます。</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -289,22 +333,112 @@ Important
 </div>
 </div>
 </div>
+<p>赤点 (Unadjusted) は、バランス前の単純平均差を表します。 価格が大きく上昇していますが、取引物件の部屋の広さは狭くなり、築年数は古くなっています。 青点 (Adjusted)は、OLSによる暗黙のバランス後の差を示しています。 結果、SizeやTenureの平均値は完全にバランスしており、結果平均取引価格差も上昇しています。 Tenure2やSize2は、築年数や部屋の広さの二乗項(分散)、Tenure_Sizeは交差項(共分散)を示しており、これらについてはOLSを行ったとしてもバランスしていません。</p>
+<p>分散や共分散もバランスさせるためには、二乗項や交差項もモデルに導入したモデル <span class="math inline">\(Price\sim D + Size + Tenure + Size2 + Tenure2 + Tenure_Size\)</span> をOLS推定します。 結果、以下の図の通り、分散や共分散もBalanceします。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="whatif_moment_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="問題点" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="問題点"><span class="header-section-number">7.1.2</span> 問題点</h3>
+<section id="post-selection" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="post-selection"><span class="header-section-number">7.1.2</span> Post selection</h3>
+<p>モーメントバランスにおいては、分布の特徴をどこまでバランスさせるのかが問題となっています。 事例数が十分あれば、3乗項などの高次項もバランスさせることは可能ですが、変数の数が爆発的に増えてしまいます。</p>
+<p>このような問題に対して、OLS推定を行う前に重要な変数のみを選択することが必要となります。 変数選択を行う方法としては、<span class="citation" data-cites="chernozhukov2015valid">Chernozhukov, Hansen, and Spindler (<a href="#ref-chernozhukov2015valid" role="doc-biblioref">2015</a>)</span> がPost Double Selectionという手法を提案しており、幅広く応用されています。 当該手法は<a href="https://cran.r-project.org/web/packages/hdm/index.html">hdm package</a>を用いて実装できます。 <span class="citation" data-cites="angrist2022machine">Angrist and Frandsen (<a href="#ref-angrist2022machine" role="doc-biblioref">2022</a>)</span> は、手法の入門と包括的な評価を行っています。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">=</span> Data<span class="sc">$</span>Price <span class="co"># Outcome</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>D <span class="ot">=</span> Data<span class="sc">$</span>D <span class="co"># Treatment</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">=</span> <span class="fu">select</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  Data,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  Size,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  Size2,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  Tenure,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  Tenure2,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  Tenure_Size) <span class="co"># Control</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>Fit <span class="ot">=</span> hdm<span class="sc">::</span><span class="fu">rlassoEffect</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">as.matrix</span>(X),</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> D,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> Y</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>) <span class="co"># Fit post double selection</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Fit) <span class="co"># Show results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Estimates and significance testing of the effect of target variables"
+   Estimate. Std. Error t value Pr(&gt;|t|)    
+d1    3.8506     0.3304   11.65   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>選択された変数は、以下のように表示できます。 部屋の広さと築年数の平均値のみが、選択されたことが確認できます。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Fit<span class="sc">$</span>selection.index <span class="co"># Show selected X</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Size       Size2      Tenure     Tenure2 Tenure_Size 
+       TRUE       FALSE        TRUE       FALSE       FALSE </code></pre>
+</div>
+</div>
 </section>
 </section>
-<section id="明示的なアルゴリズム" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="明示的なアルゴリズム"><span class="header-section-number">7.2</span> 明示的なアルゴリズム</h2>
-<p><span class="citation" data-cites="hainmueller2012entropy">Hainmueller (<a href="#ref-hainmueller2012entropy" role="doc-biblioref">2012</a>)</span>, <span class="citation" data-cites="zubizarreta2015stable">Zubizarreta (<a href="#ref-zubizarreta2015stable" role="doc-biblioref">2015</a>)</span></p>
+<section id="olsの問題点と解決策" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="olsの問題点と解決策"><span class="header-section-number">7.2</span> OLSの問題点と解決策</h2>
+<p>OLSにより暗黙のうちに計算されるWeightは、平均値をバランスします <a href="#eq-balance" class="quarto-xref">Equation&nbsp;<span>7.1</span></a> 。 しかしながら、Balancing weightsに求められる他の性質は必ずしも満たされません。</p>
+<section id="解釈困難なウェイト" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="解釈困難なウェイト"><span class="header-section-number">7.2.1</span> 解釈困難なウェイト</h3>
+<p>バランス後の、<span class="math inline">\(X\)</span> の平均値がどのような水準になるのか、一般に不透明です。 結果を解釈するためには、<span class="math inline">\(X\)</span> の平均値は明確な水準、例えばデータ全体での平均値と一致させることが望ましいです。 しかしながら、OLSはそのような水準との一致を保証しません。</p>
+<p>OLSによるバランス後の<span class="math inline">\(X\)</span>の平均値について、<a href="https://cran.r-project.org/web/packages/lmw/index.html">lmw package</a>により診断できます。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="whatif_moment_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>黒丸はOLSによるバランス後、ばつ印はバランス前の平均値を示しています。 Control groupは、<span class="math inline">\(D=0\)</span> (2021年)、Treatment groupは、<span class="math inline">\(D=1\)</span> (2022年)の値です。 0線は、サンプル平均を示しています。</p>
+<p>同図からバランス前は、2022年についてはSizeがサンプル平均よりも小さく、Tenureは長いことが確認できます。 黒丸を見ると、OLSによるバランス後はどちらも2022年と2021年の間で平均差がなくなることが確認できます。 ただし　０線からは乖離しており、サンプル平均とは一致していないことが確認できます。</p>
+</section>
+<section id="負の荷重" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="負の荷重"><span class="header-section-number">7.2.2</span> 負の荷重</h3>
+<p>Balancing weightsは、正の値を取ることが望まれます。 しかしながらOLSが生成するWeightは、負の値を取る可能性があり、ミスリーデイングな推定結果をもたらす可能性があります。</p>
+<p>lmw packageは、OLSが生成するweightsの値を計算します。 例えばhist関数により、ヒストグラムとして可視化できます。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="whatif_moment_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="解決策" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="解決策"><span class="header-section-number">7.2.3</span> 解決策</h3>
+<p>Entropy weights <span class="citation" data-cites="hainmueller2012entropy">(<a href="#ref-hainmueller2012entropy" role="doc-biblioref">Hainmueller 2012</a>)</span> や Stable weights <span class="citation" data-cites="zubizarreta2015stable">(<a href="#ref-zubizarreta2015stable" role="doc-biblioref">Zubizarreta 2015</a>)</span> は、サンプル平均との一致や正の値を取ることを条件として課した上で、weightを計算します。 このためOLSが持つ問題点の多くを克服しており、より信頼できるバランス後の比較分析が可能です。 これらの手法は <a href="https://ngreifer.github.io/WeightIt/">WeightIt package</a> <span class="citation" data-cites="greifer2024weightit">(<a href="#ref-greifer2024weightit" role="doc-biblioref">Greifer 2024</a>)</span> で容易に実装できます。</p>
+</section>
 </section>
 <section id="reference" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="reference"><span class="header-section-number">7.3</span> Reference</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-angrist2022machine" class="csl-entry" role="listitem">
+Angrist, Joshua D, and Brigham Frandsen. 2022. <span>“Machine Labor.”</span> <em>Journal of Labor Economics</em> 40 (S1): S97–140.
+</div>
 <div id="ref-chattopadhyay2023implied" class="csl-entry" role="listitem">
 Chattopadhyay, Ambarish, and José R Zubizarreta. 2023. <span>“On the Implied Weights of Linear Regression for Causal Inference.”</span> <em>Biometrika</em> 110 (3): 615–29.
+</div>
+<div id="ref-chernozhukov2015valid" class="csl-entry" role="listitem">
+Chernozhukov, Victor, Christian Hansen, and Martin Spindler. 2015. <span>“Valid Post-Selection and Post-Regularization Inference: An Elementary, General Approach.”</span> <em>Annu. Rev. Econ.</em> 7 (1): 649–88.
+</div>
+<div id="ref-greifer2024weightit" class="csl-entry" role="listitem">
+Greifer, Noah. 2024. <em>WeightIt: Weighting for Covariate Balance in Observational Studies</em>. <a href="https://ngreifer.github.io/WeightIt/">https://ngreifer.github.io/WeightIt/</a>.
 </div>
 <div id="ref-hainmueller2012entropy" class="csl-entry" role="listitem">
 Hainmueller, Jens. 2012. <span>“Entropy Balancing for Causal Effects: A Multivariate Reweighting Method to Produce Balanced Samples in Observational Studies.”</span> <em>Political Analysis</em> 20 (1): 25–46.

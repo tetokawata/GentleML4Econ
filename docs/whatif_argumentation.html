@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>データ分析入門ノート - 1&nbsp; 分析工程</title>
+<title>データ分析入門ノート - 9&nbsp; 把握を目的とする要約: 補強</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,8 +50,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./decision.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./whatif_ps.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -69,35 +88,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -110,7 +100,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./stracture.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">分析工程</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./whatif_argumentation.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 補強</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -143,7 +133,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./stracture.html" class="sidebar-item-text sidebar-link active">
+  <a href="./stracture.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">分析工程</span></span></a>
   </div>
 </li>
@@ -191,7 +181,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./whatif_argumentation.html" class="sidebar-item-text sidebar-link">
+  <a href="./whatif_argumentation.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 補強</span></span></a>
   </div>
 </li>
@@ -205,13 +195,7 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#分析例" id="toc-分析例" class="nav-link active" data-scroll-target="#分析例"><span class="header-section-number">1.1</span> 分析例</a>
-  <ul class="collapse">
-  <li><a href="#データ" id="toc-データ" class="nav-link" data-scroll-target="#データ"><span class="header-section-number">1.1.1</span> データ</a></li>
-  <li><a href="#中古マンション取引価格の予測" id="toc-中古マンション取引価格の予測" class="nav-link" data-scroll-target="#中古マンション取引価格の予測"><span class="header-section-number">1.1.2</span> 中古マンション取引価格の予測</a></li>
-  <li><a href="#中古マンション市場の動向" id="toc-中古マンション市場の動向" class="nav-link" data-scroll-target="#中古マンション市場の動向"><span class="header-section-number">1.1.3</span> 中古マンション市場の動向</a></li>
-  </ul></li>
-  <li><a href="#詳細な工程" id="toc-詳細な工程" class="nav-link" data-scroll-target="#詳細な工程"><span class="header-section-number">1.2</span> 詳細な工程</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link active" data-scroll-target="#reference"><span class="header-section-number">9.1</span> Reference</a></li>
   </ul>
 </nav>
     </div>
@@ -220,7 +204,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-Structure" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">分析工程</span></span></h1>
+<h1 class="title"><span id="sec-WhatIfArgument" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 補強</span></span></h1>
 </div>
 
 
@@ -237,172 +221,21 @@ window.Quarto = {
 </header>
 
 
-<section id="分析例" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="分析例"><span class="header-section-number">1.1</span> 分析例</h2>
-<section id="データ" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="データ"><span class="header-section-number">1.1.1</span> データ</h3>
-<p>本ノートにおいてデータ分析法は、「事例から学ぶ方法」として位置付けます。 事例とは、過去の経験や出来事、歴史などであり、その蓄積をデータと呼びます。 例えば以下は、2021年と2022年の第二四半期の東京23区における中古マンション取引事例<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>をデータ化しています。</p>
-<div id="fig-data" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Figure/ExampleData.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.1: データ
-</figcaption>
-</figure>
-</div>
-<p>以上のような取引事例が 24645 個収録されています。 このようなデータを用いて、以下のような意思決定問題に役立つ情報提供のあり方を、ラフに論じます。</p>
-</section>
-<section id="中古マンション取引価格の予測" class="level3" data-number="1.1.2">
-<h3 data-number="1.1.2" class="anchored" data-anchor-id="中古マンション取引価格の予測"><span class="header-section-number">1.1.2</span> 中古マンション取引価格の予測</h3>
-<p>東京２３区内の中古マンションの取引価格を、<span class="math inline">\(\{\)</span>取引された物件の築年数 (Tenure)、 部屋の広さ (Size)、駅からの距離 (Distance to Station)、立地 (District) <span class="math inline">\(\}\)</span> から予測するモデルを推定し、予測値を算出しました。</p>
-<div id="fig-prediction" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-prediction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Figure/ExamplePredicition.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prediction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.2: 予測結果
-</figcaption>
-</figure>
-</div>
-</section>
-<section id="中古マンション市場の動向" class="level3" data-number="1.1.3">
-<h3 data-number="1.1.3" class="anchored" data-anchor-id="中古マンション市場の動向"><span class="header-section-number">1.1.3</span> 中古マンション市場の動向</h3>
-<p>2022年と2021年の東京23区内の中古マンション市場を比較しました。</p>
 <ul>
-<li><p>2022-2021年比較: <span class="math inline">\(\{\)</span> Tenure, Size, Distance to Station <span class="math inline">\(\}\)</span>の差を95<span class="math inline">\(\%\)</span> 信頼区間 (Bonferoni法による修正済み)を表示</p></li>
-<li><p>バランス前-後平均取引価格上昇率: 取引価格の対数値について、2022年と2021年の単純平均差 (Difference-in-means) および、「<span class="math inline">\(\{\)</span>取引された物件の築年数 (Tenure)、 部屋の広さ (Size)、駅からの距離 (Distance to Station) <span class="math inline">\(\}\)</span> の分布が変化しなかった」という仮想シナリオのもとでの取引価格の平均差 (What if 分析) を信頼区間とともに表示</p></li>
-<li><p>5区 (中心6区: <span class="math inline">\(\{\)</span>中央/千代田/港/新宿/渋谷/本郷<span class="math inline">\(\}\)</span>、 北部: <span class="math inline">\(\{\)</span>北/板橋/豊島<span class="math inline">\(\}\)</span> 、南部: <span class="math inline">\(\{\)</span>品川/目黒/大田 <span class="math inline">\(\}\)</span> 、西部: <span class="math inline">\(\{\)</span>世田谷/中野/杉並/練馬 <span class="math inline">\(\}\)</span> 、 東部: <span class="math inline">\(\{\)</span> 台東/墨田/江東/葛飾/江戸川 <span class="math inline">\(\}\)</span>)、 別の平均取引価格の上昇率 (物件の特徴はバランス済み)</p></li>
+<li><span class="citation" data-cites="robins1995">Robins and Rotnitzky (<a href="#ref-robins1995" role="doc-biblioref">1995</a>)</span>, <span class="citation" data-cites="chernozhukov2018double">Chernozhukov et al. (<a href="#ref-chernozhukov2018double" role="doc-biblioref">2018</a>)</span> を紹介</li>
 </ul>
-<div id="fig-description" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-description-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Figure/ExampleWhatIf.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-description-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.3: 記述結果
-</figcaption>
-</figure>
-</div>
-</section>
-</section>
-<section id="詳細な工程" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="詳細な工程"><span class="header-section-number">1.2</span> 詳細な工程</h2>
-<p>想定する具体的なデータ分析の工程は以下です。</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<svg width="672" height="480" viewbox="0.00 0.00 272.00 260.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 256)">
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-256 268,-256 268,4 -4,4"></polygon>
-<!-- Q -->
-<g id="node1" class="node">
-<title>Q</title>
-<text text-anchor="middle" x="140" y="-231.6" font-family="Times,serif" font-size="8.00">直面する意思決定問題</text>
-</g>
-<!-- Understand -->
-<g id="node2" class="node">
-<title>Understand</title>
-<text text-anchor="middle" x="93" y="-159.6" font-family="Times,serif" font-size="8.00">把握を目的とする要約</text>
-</g>
-<!-- Q&#45;&gt;Understand -->
-<g id="edge1" class="edge">
-<title>Q-&gt;Understand</title>
-<path fill="none" stroke="black" d="M128.38,-215.7C121.32,-205.19 112.33,-191.78 105.17,-181.13"></path>
-<polygon fill="black" stroke="black" points="105.33,-180.74 104.48,-180.1 104.75,-181.13 105.33,-180.74"></polygon>
-</g>
-<!-- Prediction -->
-<g id="node3" class="node">
-<title>Prediction</title>
-<text text-anchor="middle" x="187" y="-159.6" font-family="Times,serif" font-size="8.00">予測を目的とする要約</text>
-</g>
-<!-- Q&#45;&gt;Prediction -->
-<g id="edge2" class="edge">
-<title>Q-&gt;Prediction</title>
-<path fill="none" stroke="black" d="M151.62,-215.7C158.68,-205.19 167.67,-191.78 174.83,-181.13"></path>
-<polygon fill="black" stroke="black" points="175.25,-181.13 175.52,-180.1 174.67,-180.74 175.25,-181.13"></polygon>
-</g>
-<!-- Stat -->
-<g id="node5" class="node">
-<title>Stat</title>
-<text text-anchor="middle" x="93" y="-87.6" font-family="Times,serif" font-size="8.00">伝統的な手法</text>
-</g>
-<!-- Understand&#45;&gt;Stat -->
-<g id="edge5" class="edge">
-<title>Understand-&gt;Stat</title>
-<path fill="none" stroke="black" d="M93,-143.7C93,-133.19 93,-119.78 93,-109.13"></path>
-<polygon fill="black" stroke="black" points="93.35,-109.1 93,-108.1 92.65,-109.1 93.35,-109.1"></polygon>
-</g>
-<!-- ML -->
-<g id="node6" class="node">
-<title>ML</title>
-<text text-anchor="middle" x="187" y="-87.6" font-family="Times,serif" font-size="8.00">教師付き学習</text>
-</g>
-<!-- Prediction&#45;&gt;ML -->
-<g id="edge3" class="edge">
-<title>Prediction-&gt;ML</title>
-<path fill="none" stroke="black" d="M187,-143.7C187,-133.19 187,-119.78 187,-109.13"></path>
-<polygon fill="black" stroke="black" points="187.35,-109.1 187,-108.1 186.65,-109.1 187.35,-109.1"></polygon>
-</g>
-<!-- PredModel -->
-<g id="node4" class="node">
-<title>PredModel</title>
-<text text-anchor="middle" x="237" y="-15.6" font-family="Times,serif" font-size="8.00" fill="red">予測モデル</text>
-</g>
-<!-- Estimand -->
-<g id="node7" class="node">
-<title>Estimand</title>
-<text text-anchor="middle" x="35" y="-15.6" font-family="Times,serif" font-size="8.00" fill="red">シンプルな特徴把握</text>
-</g>
-<!-- Stat&#45;&gt;Estimand -->
-<g id="edge6" class="edge">
-<title>Stat-&gt;Estimand</title>
-<path fill="none" stroke="black" d="M78.66,-71.7C69.95,-61.19 58.85,-47.78 50.02,-37.13"></path>
-<polygon fill="black" stroke="black" points="50.08,-36.65 49.17,-36.1 49.54,-37.1 50.08,-36.65"></polygon>
-</g>
-<!-- DML -->
-<g id="node8" class="node">
-<title>DML</title>
-<text text-anchor="middle" x="140" y="-15.6" font-family="Times,serif" font-size="8.00" fill="red">複雑な特徴把握 (What if 分析)</text>
-</g>
-<!-- Stat&#45;&gt;DML -->
-<g id="edge7" class="edge">
-<title>Stat-&gt;DML</title>
-<path fill="none" stroke="black" d="M104.62,-71.7C111.68,-61.19 120.67,-47.78 127.83,-37.13"></path>
-<polygon fill="black" stroke="black" points="128.25,-37.13 128.52,-36.1 127.67,-36.74 128.25,-37.13"></polygon>
-</g>
-<!-- ML&#45;&gt;PredModel -->
-<g id="edge4" class="edge">
-<title>ML-&gt;PredModel</title>
-<path fill="none" stroke="black" d="M199.36,-71.7C206.87,-61.19 216.44,-47.78 224.05,-37.13"></path>
-<polygon fill="black" stroke="black" points="224.49,-37.12 224.78,-36.1 223.92,-36.71 224.49,-37.12"></polygon>
-</g>
-<!-- DML&#45;&gt;ML -->
-<g id="edge8" class="edge">
-<title>DML-&gt;ML</title>
-<path fill="none" stroke="black" d="M152.17,-37.13C159.33,-47.78 168.32,-61.19 175.38,-71.7"></path>
-<polygon fill="black" stroke="black" points="152.33,-36.74 151.48,-36.1 151.75,-37.13 152.33,-36.74"></polygon>
-</g>
-</g>
-</svg>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<p>まず現在必要とされている意思決定問題を明確化します。 次にその意思決定問題に有益な情報を明確にすることで、分析のゴールを設定します。 ここでは大きく予測を目的とする研究と集団の特徴把握を目標とする研究に大別し論じます。 次にそれぞれのゴールに適した手法を用いた推定を行い、分析結果を得ます。 ここでは予測を目標とする研究であれば教師付き学習の手法、把握を目標とするのであれば伝統的な手法、より複雑な特徴を把握したいのであればそのハイブリット的な方法に比較優位があることを論じます。</p>
+<section id="reference" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="reference"><span class="header-section-number">9.1</span> Reference</h2>
 
 
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>国土交通省のレポジトリ (https://www.reinfolib.mlit.go.jp/) からダウンロードできます。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-chernozhukov2018double" class="csl-entry" role="listitem">
+Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. 2018. <span>“Double/Debiased Machine Learning for Treatment and Structural Parameters.”</span> Oxford University Press Oxford, UK.
+</div>
+<div id="ref-robins1995" class="csl-entry" role="listitem">
+Robins, James M., and Andrea Rotnitzky. 1995. <span>“Semiparametric Efficiency in Multivariate Regression Models with Missing Data.”</span> <em>Journal of the American Statistical Association</em> 90 (429): 122129. <a href="https://doi.org/10.1080/01621459.1995.10476494">https://doi.org/10.1080/01621459.1995.10476494</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -817,14 +650,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Preface">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="./whatif_ps.html" class="pagination-link" aria-label="把握を目的とする要約: 傾向スコア">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 傾向スコア</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./decision.html" class="pagination-link" aria-label="意思決定問題">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">意思決定問題</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

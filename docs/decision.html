@@ -180,6 +180,12 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 傾向スコア</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./whatif_argumentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">把握を目的とする要約: 補強</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -216,16 +222,16 @@ div.csl-indent {
 </header>
 
 
-<p>データ分析を始めるための最初のステップは、分析結果をどのように活用するのか、明確なイメージを持つことです<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>。 活用方法に応じて、適した分析のゴール、ひいては分析方法も異なってきます。</p>
-<p>本ノートでは、何らかの意思決定問題の改善への活用を目指して行うデータ分析を想定します。 一般に意思決定において、多くの情報が必要となります。 そしてそのような情報の多くは、直接観察することはできず、過去の経験や事例から類推するしかありません。 具体例として、二つの意思決定問題を考え、これらの意思決定を支援するために、 <a href="stracture.html#fig-data" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> のデータの活用を目指すとします。 便宜上、一番目の意思決定をミクロな意思決定、二番目をマクロな意思決定と呼びます。</p>
+<p>本ノートでは、何らかの意思決定問題の改善への活用を目指して行うデータ分析を想定します。 データ分析を始めるための最初のステップは、分析結果をどのような意思決定問題に活用するのか、明確なイメージを持つことです<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>。 活用方法に応じて、適した分析のゴール、ひいては分析方法も異なってきます。</p>
+<p><span class="citation" data-cites="agrawal2018prediction">Agrawal, Gans, and Goldfarb (<a href="#ref-agrawal2018prediction" role="doc-biblioref">2018</a>)</span> は意思決定問題を、「予測と判断(Judgement)」に分解しています。 そして機械学習は予測の改善に役を立ち、人間により行われる判断を補完すると主張してます。 本ノートでは、機械学習や統計学、計量経済学の手法は、狭義の予測のみならず、広義の現状把握に役立つを強調します。 一般に意思決定において、社会や市場の状況について、包括的な状況把握が必要となります。 そして社会や市場の全てのを直接観察することはできず、過去の経験や事例から類推するしかありません。 具体例として、二つの意思決定問題を考え、これらの意思決定を支援するために、 <a href="stracture.html#fig-data" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> のデータの活用を目指すとします。 便宜上、一番目の意思決定をミクロな意思決定、二番目をマクロな意思決定と呼びます。</p>
 <ul>
 <li><p><strong>(ミクロな意思決定)</strong> 中古マンションの買取: 不動産業者が、ある中古マンションを適正価格で買取を行おうとしている。この際にこの物件の市場価格を参照したいが、分からない。</p></li>
 <li><p><strong>(マクロな意思決定)</strong> 支店網の見直し: 大規模な不動産会社が、都内の支店網の見直し計画を策定しようとしている。この際に、足元の不動産市場の状況を参照したいが、分からない。</p></li>
 </ul>
-<p>ミクロな意思決定については、予測値 <a href="stracture.html#fig-prediction" class="quarto-xref">Figure&nbsp;<span>1.2</span></a> は有益なものになるかもしれません。 予測性能が良ければ、買取査定において重要となる現状での市場価格を<strong>物件(事例)ごと</strong> に算出できます。</p>
-<p>対してマクロな意思決定については、予測値そのものの持つ意義は限定的です。 大量の予測値を一度に見せられても、人間が処理しきれず、判断に活用できないためです。 <strong>大量の取引物件(事例)の特徴</strong> を、人間が把握するためには、より情報を要約する必要があり、 <a href="stracture.html#fig-description" class="quarto-xref">Figure&nbsp;<span>1.3</span></a> のような把握を目的とした結果が比較優位を有するかもしれません。</p>
 <p>本ノートにおいて、ミクロな意思決定は限られた数の事例についてのみ影響を与えるような意思決定を指します。 例えば、ある物件の買取が、他の物件に与える直接的な影響は限定的かもしれません。 一般に機械学習を用いた予測モデルの優れた実践例は、ミクロな意思決定の支援、あるいは自動化が多いです。 例えば、迷惑メールの自動分類が古典的な例となります。 このように影響を与える事例数が限られており、事例に合わせた意思決定が要求される場合、事例ごとに予測値を算出することには、大きな意義があります。</p>
-<p>マクロな意思決定は、多くの事例に一度に影響を与えるような意思決定を指します。 政府による政策決定や企業の戦略決定、あるいは有権者による投票行動などが含まれます。 影響を与える事例数が膨大なものとなる場合、個々の事例把握は困難であり、事例群全体の特徴を把握する方が現実的です。 このような場合は、伝統的な推定方法、あるいは機械学習とのハイブリット的な方法が比較優位を持つと考えられます。</p>
+<p>ミクロな意思決定については、予測値 <a href="stracture.html#fig-prediction" class="quarto-xref">Figure&nbsp;<span>1.2</span></a> は有益なものになるかもしれません。 予測性能が良ければ、買取査定において重要となる現状での市場価格を<strong>物件(事例)ごと</strong> に算出できます。</p>
+<p>対してマクロな意思決定は、多くの事例に一度に影響を与えるような意思決定を指します。 政府による政策決定や企業の戦略決定、あるいは有権者による投票行動などが含まれます。 影響を与える事例数が膨大なものとなる場合、個々の事例把握は困難であり、事例群全体の特徴を把握する方が現実的です。 このような場合は、伝統的な推定方法、あるいは機械学習とのハイブリット的な方法が比較優位を持つと考えられます。</p>
+<p>マクロな意思決定については、予測値そのものの持つ意義は限定的です。 大量の予測値を一度に見せられても、人間が処理しきれず、判断に活用できないためです。 <strong>大量の取引物件(事例)の特徴</strong> を、人間が把握するためには、より情報を要約する必要があり、 <a href="stracture.html#fig-description" class="quarto-xref">Figure&nbsp;<span>1.3</span></a> のような把握を目的とした結果が比較優位を有するかもしれません。</p>
 <section id="reference" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="reference"><span class="header-section-number">2.1</span> Reference</h2>
 
