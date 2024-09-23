@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -205,11 +225,12 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#inverse-propensity-score-weighting" id="toc-inverse-propensity-score-weighting" class="nav-link active" data-scroll-target="#inverse-propensity-score-weighting"><span class="header-section-number">8.1</span> Inverse propensity score weighting</a></li>
+  <li><a href="#inverse-probability-weighting" id="toc-inverse-probability-weighting" class="nav-link active" data-scroll-target="#inverse-probability-weighting"><span class="header-section-number">8.1</span> Inverse probability weighting</a></li>
   <li><a href="#傾向スコアの推定方法" id="toc-傾向スコアの推定方法" class="nav-link" data-scroll-target="#傾向スコアの推定方法"><span class="header-section-number">8.2</span> 傾向スコアの推定方法</a></li>
   <li><a href="#問題点" id="toc-問題点" class="nav-link" data-scroll-target="#問題点"><span class="header-section-number">8.3</span> 問題点</a></li>
   <li><a href="#例" id="toc-例" class="nav-link" data-scroll-target="#例"><span class="header-section-number">8.4</span> 例</a></li>
-  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">8.5</span> Reference</a></li>
+  <li><a href="#他の方法" id="toc-他の方法" class="nav-link" data-scroll-target="#他の方法"><span class="header-section-number">8.5</span> 他の方法</a></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">8.6</span> Reference</a></li>
   </ul>
 </nav>
     </div>
@@ -235,10 +256,10 @@ window.Quarto = {
 </header>
 
 
-<p>Balancing weightsを計算する別のアプローチとして、傾向スコア (Propensity score) の活用が挙げられます。 傾向スコアは、<span class="math inline">\(X\)</span> 内で <span class="math inline">\(D=d\)</span> である事例の母集団における割合 <span class="math inline">\(p_d(X)\)</span> として定義されます。</p>
-<section id="inverse-propensity-score-weighting" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="inverse-propensity-score-weighting"><span class="header-section-number">8.1</span> Inverse propensity score weighting</h2>
-<p><span class="math inline">\((X=x)\)</span>へのウェイトとして、<span class="math inline">\(X\)</span> の母分布をターゲットとするのであれば、一般に以下の関係性が成り立ちます。 <span class="math display">\[Balancing\ weights:\ \omega(X) = \frac{D=dの割合}{p_d(X)}\]</span> よってバランス後の平均値は以下のように計算できます。 <span class="math display">\[\frac{\omega(X_1)Y_1 + ...+\omega(X_{D=dの事例数})Y_{D=dの事例数}}{D=dの事例数}\]</span> 以下のように書き換えることができます。 <span class="math display">\[\frac{\omega(X_1)Y_1 + ...+\omega(X_{D=dの事例数})Y_{D=dの事例数}}{D=dの割合\times 事例数}\]</span> <span class="math display">\[=\frac{I(D_1=d)\times(1/p_d(X_N))\times Y_1 + ...+I(D_N=d)\times(1/p_d(X_N))\times Y_{N}}{事例数}\]</span> <span class="math inline">\(I(D_i=d)\)</span> は事例<span class="math inline">\(i\)</span>の<span class="math inline">\(D\)</span>が<span class="math inline">\(d\)</span>であれば1、そうでなければ0を取る変数です。 よって、傾向スコアが推定できれば、その逆数<span class="math inline">\((1/p_d(X))\)</span> を掛ることでバランス後の平均値が推定できます。</p>
+<p>Balancing weightsを計算する別のアプローチとして、傾向スコア (Propensity score; <span class="citation" data-cites="rosenbaum1983central">Rosenbaum and Rubin (<a href="#ref-rosenbaum1983central" role="doc-biblioref">1983</a>)</span>) の活用が挙げられます。 傾向スコアは、<span class="math inline">\(X\)</span> 内で <span class="math inline">\(D=d\)</span> である事例の母集団における割合 <span class="math inline">\(p_d(X)\)</span> として定義されます。</p>
+<section id="inverse-probability-weighting" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="inverse-probability-weighting"><span class="header-section-number">8.1</span> Inverse probability weighting</h2>
+<p><span class="math inline">\((X=x)\)</span>へのウェイトとして、<span class="math inline">\(X\)</span> の母分布をターゲットとするのであれば、Balancing weight <span class="math inline">\(\omega(X)\)</span> と傾向スコア <span class="math inline">\(p_d(X)\)</span> の間に以下の関係性が成り立ちます。 <span class="math display">\[\omega(X) = \frac{D=dの割合}{p_d(X)}\]</span> よってバランス後の平均値は以下のように書き換えられます。 <span class="math display">\[\frac{D=dについて\omega(X)\times Yの総和}{D=dの事例数}\]</span> <span class="math display">\[=\frac{D=dについて(D=dの割合/p_d(X))\times Yの総和}{D=dの割合\times 事例数}\]</span> <span class="math display">\[=\frac{D=dについて(1/p_d(X))\times Yの総和}{事例数}\]</span> <span class="math inline">\(I(D_i=d)\)</span> は事例<span class="math inline">\(i\)</span>の<span class="math inline">\(D\)</span>が<span class="math inline">\(d\)</span>であれば1、そうでなければ0を取る変数です。 よって、傾向スコアが推定できれば、その逆数<span class="math inline">\((1/p_d(X))\)</span> を掛ることでバランス後の平均値が推定できます。</p>
 </section>
 <section id="傾向スコアの推定方法" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="傾向スコアの推定方法"><span class="header-section-number">8.2</span> 傾向スコアの推定方法</h2>
@@ -260,33 +281,30 @@ window.Quarto = {
 </figure>
 </div>
 </div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="whatif_ps_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="whatif_ps_files/figure-html/unnamed-chunk-1-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="whatif_ps_files/figure-html/unnamed-chunk-1-4.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
 </div>
 </section>
-<section id="reference" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="reference"><span class="header-section-number">8.5</span> Reference</h2>
+<section id="他の方法" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="他の方法"><span class="header-section-number">8.5</span> 他の方法</h2>
+<p>Balancing weightsを推定する様々な方法が提案されています。 <span class="citation" data-cites="imai2014covariate">Imai and Ratkovic (<a href="#ref-imai2014covariate" role="doc-biblioref">2014</a>)</span> は、<span class="math inline">\(X\)</span> のバランスと<span class="math inline">\(p_d(X)\)</span>を極力両立するように推定する方法を提案しています。 <span class="citation" data-cites="iacus2012causal">Iacus, King, and Porro (<a href="#ref-iacus2012causal" role="doc-biblioref">2012</a>)</span>, <span class="citation" data-cites="huling2024energy">Huling and Mak (<a href="#ref-huling2024energy" role="doc-biblioref">2024</a>)</span> では、<span class="math inline">\(X\)</span> の分布の距離(Energy distance)を最小化するようにweightを推定します。</p>
+</section>
+<section id="reference" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="reference"><span class="header-section-number">8.6</span> Reference</h2>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-huling2024energy" class="csl-entry" role="listitem">
+Huling, Jared D, and Simon Mak. 2024. <span>“Energy Balancing of Covariate Distributions.”</span> <em>Journal of Causal Inference</em> 12 (1): 20220029.
+</div>
+<div id="ref-iacus2012causal" class="csl-entry" role="listitem">
+Iacus, Stefano M, Gary King, and Giuseppe Porro. 2012. <span>“Causal Inference Without Balance Checking: Coarsened Exact Matching.”</span> <em>Political Analysis</em> 20 (1): 1–24.
+</div>
+<div id="ref-imai2014covariate" class="csl-entry" role="listitem">
+Imai, Kosuke, and Marc Ratkovic. 2014. <span>“Covariate Balancing Propensity Score.”</span> <em>Journal of the Royal Statistical Society Series B: Statistical Methodology</em> 76 (1): 243–63.
+</div>
+<div id="ref-rosenbaum1983central" class="csl-entry" role="listitem">
+Rosenbaum, Paul R, and Donald B Rubin. 1983. <span>“The Central Role of the Propensity Score in Observational Studies for Causal Effects.”</span> <em>Biometrika</em> 70 (1): 41–55.
+</div>
+</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>

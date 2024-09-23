@@ -239,6 +239,7 @@ window.Quarto = {
 
 <section id="分析例" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="分析例"><span class="header-section-number">1.1</span> 分析例</h2>
+<p>ここでは本ノートで紹介する推定法を用いた、推定結果の例を示します。</p>
 <section id="データ" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="データ"><span class="header-section-number">1.1.1</span> データ</h3>
 <p>本ノートにおいてデータ分析法は、「事例から学ぶ方法」として位置付けます。 事例とは、過去の経験や出来事、歴史などであり、その蓄積をデータと呼びます。 例えば以下は、2021年と2022年の第二四半期の東京23区における中古マンション取引事例<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>をデータ化しています。</p>
@@ -256,7 +257,7 @@ Figure&nbsp;1.1: データ
 </section>
 <section id="中古マンション取引価格の予測" class="level3" data-number="1.1.2">
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="中古マンション取引価格の予測"><span class="header-section-number">1.1.2</span> 中古マンション取引価格の予測</h3>
-<p>東京２３区内の中古マンションの取引価格を、<span class="math inline">\(\{\)</span>取引された物件の築年数 (Tenure)、 部屋の広さ (Size)、駅からの距離 (Distance to Station)、立地 (District) <span class="math inline">\(\}\)</span> から予測するモデルを推定し、予測値を算出しました。</p>
+<p>東京２３区内の中古マンションの取引価格を、<span class="math inline">\(X=\{\)</span>取引された物件の築年数 (Tenure)、 部屋の広さ (Size)、駅からの距離 (Distance to Station)、立地 (District) <span class="math inline">\(\}\)</span> から予測するモデルを推定し、予測値を算出しました。 予測モデルはLASSO/OLS/RandomForestのStacking法で推定しています。</p>
 <div id="fig-prediction" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-prediction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">

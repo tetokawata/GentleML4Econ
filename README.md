@@ -25,6 +25,8 @@
         - [Foundations of Agnostic Statistics](https://www.cambridge.org/core/books/foundations-of-agnostic-statistics/684756357E7E9B3DFF0A8157FB2DCECA)
 
         - [Causation, Comparison, and Regression](https://hdsr.mitpress.mit.edu/pub/1ybwbmlw/release/2) (無料)
+      
+        - [Causal Inference: What If](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/) (無料)
         
     - 和書
         
