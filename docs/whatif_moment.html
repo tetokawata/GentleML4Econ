@@ -266,11 +266,16 @@ window.Quarto = {
   </ul></li>
   <li><a href="#olsの問題点と解決策" id="toc-olsの問題点と解決策" class="nav-link" data-scroll-target="#olsの問題点と解決策"><span class="header-section-number">7.2</span> OLSの問題点と解決策</a>
   <ul class="collapse">
-  <li><a href="#解釈困難なウェイト" id="toc-解釈困難なウェイト" class="nav-link" data-scroll-target="#解釈困難なウェイト"><span class="header-section-number">7.2.1</span> 解釈困難なウェイト</a></li>
+  <li><a href="#解釈の難しさ" id="toc-解釈の難しさ" class="nav-link" data-scroll-target="#解釈の難しさ"><span class="header-section-number">7.2.1</span> 解釈の難しさ</a></li>
   <li><a href="#負の荷重" id="toc-負の荷重" class="nav-link" data-scroll-target="#負の荷重"><span class="header-section-number">7.2.2</span> 負の荷重</a></li>
   <li><a href="#解決策" id="toc-解決策" class="nav-link" data-scroll-target="#解決策"><span class="header-section-number">7.2.3</span> 解決策</a></li>
   </ul></li>
-  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">7.3</span> Reference</a></li>
+  <li><a href="#rによる実践例" id="toc-rによる実践例" class="nav-link" data-scroll-target="#rによる実践例"><span class="header-section-number">7.3</span> Rによる実践例</a>
+  <ul class="collapse">
+  <li><a href="#準備" id="toc-準備" class="nav-link" data-scroll-target="#準備"><span class="header-section-number">7.3.1</span> 準備</a></li>
+  <li><a href="#balanced-comparson-by-ols" id="toc-balanced-comparson-by-ols" class="nav-link" data-scroll-target="#balanced-comparson-by-ols"><span class="header-section-number">7.3.2</span> Balanced comparson by OLS</a></li>
+  </ul></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">7.4</span> Reference</a></li>
   </ul>
 </nav>
     </div>
@@ -390,8 +395,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="olsの問題点と解決策" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="olsの問題点と解決策"><span class="header-section-number">7.2</span> OLSの問題点と解決策</h2>
 <p>OLSにより暗黙のうちに計算されるWeightは、平均値をバランスします <a href="#eq-balance" class="quarto-xref">Equation&nbsp;<span>7.1</span></a> 。 しかしながら、Balancing weightsに求められる他の性質は必ずしも満たされません。</p>
-<section id="解釈困難なウェイト" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="解釈困難なウェイト"><span class="header-section-number">7.2.1</span> 解釈困難なウェイト</h3>
+<section id="解釈の難しさ" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="解釈の難しさ"><span class="header-section-number">7.2.1</span> 解釈の難しさ</h3>
 <p>バランス後の、<span class="math inline">\(X\)</span> の平均値がどのような水準になるのか、一般に不透明です。 結果を解釈するためには、<span class="math inline">\(X\)</span> の平均値は明確な水準、例えばデータ全体での平均値と一致させることが望ましいです。 しかしながら、OLSはそのような水準との一致を保証しません。</p>
 <p>OLSによるバランス後の<span class="math inline">\(X\)</span>の平均値について、<a href="https://cran.r-project.org/web/packages/lmw/index.html">lmw package</a>により診断できます。</p>
 <div class="cell">
@@ -423,11 +428,106 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </section>
 <section id="解決策" class="level3" data-number="7.2.3">
 <h3 data-number="7.2.3" class="anchored" data-anchor-id="解決策"><span class="header-section-number">7.2.3</span> 解決策</h3>
+<p>サンプル全体の<span class="math inline">\(X\)</span>の平均値とバランス後の平均値を一致させるのであれば、<span class="math inline">\(D\)</span>と<span class="math inline">\(X\)</span>の交差項を含めた以下のモデルを推定し、<span class="math inline">\(\beta_{D},..,\beta_{DL}\)</span>の平均値を計算すればOKです <span class="citation" data-cites="chattopadhyay2023implied">(<a href="#ref-chattopadhyay2023implied" role="doc-biblioref">Chattopadhyay and Zubizarreta 2023</a>)</span>。 <span class="math display">\[Y\sim D\times (\beta_D + \beta_{D1}X_1+..+\beta_{DLX_L}) + \beta_0 + \beta_1X_1+..+\beta_LX_L.\]</span> ただし負のweightは以前として生じる可能性があります。</p>
 <p>Entropy weights <span class="citation" data-cites="hainmueller2012entropy">(<a href="#ref-hainmueller2012entropy" role="doc-biblioref">Hainmueller 2012</a>)</span> や Stable weights <span class="citation" data-cites="zubizarreta2015stable">(<a href="#ref-zubizarreta2015stable" role="doc-biblioref">Zubizarreta 2015</a>)</span> は、サンプル平均との一致や正の値を取ることを条件として課した上で、weightを計算します。 このためOLSが持つ問題点の多くを克服しており、より信頼できるバランス後の比較分析が可能です。 これらの手法は <a href="https://ngreifer.github.io/WeightIt/">WeightIt package</a> <span class="citation" data-cites="greifer2024weightit">(<a href="#ref-greifer2024weightit" role="doc-biblioref">Greifer 2024</a>)</span> で容易に実装できます。</p>
 </section>
 </section>
-<section id="reference" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="reference"><span class="header-section-number">7.3</span> Reference</h2>
+<section id="rによる実践例" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="rによる実践例"><span class="header-section-number">7.3</span> Rによる実践例</h2>
+<ul>
+<li><p>以下のパッケージを使用</p>
+<ul>
+<li><p>readr (tidyverseに同梱): データの読み込み</p></li>
+<li><p>lmw: OLSが計算するbalance weightsを計算</p>
+<ul>
+<li><a href="https://github.com/ngreifer/lmw">Repository</a></li>
+</ul></li>
+<li><p>marginaleffects: 交差項を含めたモデルでの推定</p>
+<ul>
+<li><a href="https://marginaleffects.com/">Mannual</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<section id="準備" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="準備"><span class="header-section-number">7.3.1</span> 準備</h3>
+<p>データを取得します。 <span class="math inline">\(D\)</span> として、中心6区かそれ以外で、1/0となる変数を定義します。 シンプルな比較分析について信頼区間は、データ分割は不要です。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Data <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"Public.csv"</span>) <span class="co"># データ読み込み</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Data <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  Data,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">D =</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    LargeDistrict <span class="sc">==</span> <span class="st">"中心6区"</span>,<span class="dv">1</span>,<span class="dv">0</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="co"># 中心6区であれば1、それ以外であれば0</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="balanced-comparson-by-ols" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="balanced-comparson-by-ols"><span class="header-section-number">7.3.2</span> Balanced comparson by OLS</h3>
+<p>交差項を含むOLSによりBalance させた推定結果は以下で導出できます。 Size,Tenure,StationDistanceの平均値、分散、共分散を、中心6区とそれ以外で一致させています</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>OLS <span class="ot">=</span> <span class="fu">lm</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  Price <span class="sc">~</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    D<span class="sc">*</span>(<span class="fu">I</span>(Size<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(Tenure<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(StationDistance<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>         (Size <span class="sc">+</span> Tenure <span class="sc">+</span> StationDistance)<span class="sc">**</span><span class="dv">2</span>) <span class="sc">+</span> <span class="co"># DとXの交差項</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">I</span>(Size<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(Tenure<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(StationDistance<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>               (Size <span class="sc">+</span> Tenure <span class="sc">+</span> StationDistance)<span class="sc">**</span><span class="dv">2</span>, <span class="co"># X,</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  Data</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>marginaleffects<span class="sc">::</span><span class="fu">avg_comparisons</span>(</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  OLS, <span class="co"># 計算の元となるモデル</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">variables =</span> <span class="st">"D"</span>, <span class="co"># Dについて平均差を推定</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">vcov =</span> <span class="st">"HC4"</span>) <span class="co"># ロバストな信頼区間</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Estimate Std. Error    z Pr(&gt;|z|)     S 2.5 % 97.5 %
+     19.4      0.705 27.6   &lt;0.001 554.2  18.1   20.8
+
+Term: D
+Type:  response 
+Comparison: mean(1) - mean(0)
+Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted </code></pre>
+</div>
+</div>
+<p>バランスさせない平均差(以下)と比べると、平均差が少し減少しています。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>estimatr<span class="sc">::</span><span class="fu">lm_robust</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  Price <span class="sc">~</span> D,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  Data</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Estimate Std. Error  t value     Pr(&gt;|t|) CI Lower CI Upper   DF
+(Intercept) 38.03972  0.3182179 119.5399 0.000000e+00 37.41591 38.66354 6376
+D           20.94057  1.2529064  16.7136 2.084367e-61 18.48446 23.39669 6376</code></pre>
+</div>
+</div>
+<section id="balanced-weight" class="level4" data-number="7.3.2.1">
+<h4 data-number="7.3.2.1" class="anchored" data-anchor-id="balanced-weight"><span class="header-section-number">7.3.2.1</span> Balanced Weight</h4>
+<p>lmw パッケージのlmw関数を用いれば、OLSが算出しているBalance weightsを計算できます。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Match <span class="ot">=</span> lmw<span class="sc">::</span><span class="fu">lmw</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> D <span class="sc">+</span> <span class="fu">I</span>(Size<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(Tenure<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(StationDistance<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>               (Size <span class="sc">+</span> Tenure <span class="sc">+</span> StationDistance)<span class="sc">**</span><span class="dv">2</span>, <span class="co"># 平均、分散、共分散をバランス</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  Data,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"MRI"</span> <span class="co"># DとXの交差項を導入</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>) <span class="co"># Weightの算出</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Match<span class="sc">$</span>weights) <span class="co"># Weightのヒストグラムを算出</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="whatif_moment_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>少数ですが負のWeightが発生しています。</p>
+</section>
+</section>
+</section>
+<section id="reference" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="reference"><span class="header-section-number">7.4</span> Reference</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">

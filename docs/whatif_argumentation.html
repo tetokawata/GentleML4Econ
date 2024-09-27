@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -88,6 +122,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -195,7 +258,15 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#reference" id="toc-reference" class="nav-link active" data-scroll-target="#reference"><span class="header-section-number">9.1</span> Reference</a></li>
+  <li><a href="#動機" id="toc-動機" class="nav-link active" data-scroll-target="#動機"><span class="header-section-number">9.1</span> 動機</a></li>
+  <li><a href="#augmented-inverse-probability-weighting" id="toc-augmented-inverse-probability-weighting" class="nav-link" data-scroll-target="#augmented-inverse-probability-weighting"><span class="header-section-number">9.2</span> Augmented Inverse Probability Weighting</a></li>
+  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">9.3</span> まとめ</a></li>
+  <li><a href="#rによる実践例" id="toc-rによる実践例" class="nav-link" data-scroll-target="#rによる実践例"><span class="header-section-number">9.4</span> Rによる実践例</a>
+  <ul class="collapse">
+  <li><a href="#準備" id="toc-準備" class="nav-link" data-scroll-target="#準備"><span class="header-section-number">9.4.1</span> 準備</a></li>
+  <li><a href="#balanced-comparson-by-ols" id="toc-balanced-comparson-by-ols" class="nav-link" data-scroll-target="#balanced-comparson-by-ols"><span class="header-section-number">9.4.2</span> Balanced comparson by OLS</a></li>
+  </ul></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">9.5</span> Reference</a></li>
   </ul>
 </nav>
     </div>
@@ -221,19 +292,138 @@ div.csl-indent {
 </header>
 
 
+<section id="動機" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="動機"><span class="header-section-number">9.1</span> 動機</h2>
+<p>Balancing weightsを用いたバランス後の平均差の推定結果は、balancing weightsの推定精度に強く依存します。 傾向スコアの逆数 (<a href="whatif_ps.html" class="quarto-xref"><span>Chapter 8</span></a>) を用いた推定では、傾向スコア(<span class="math inline">\(D\)</span> の母平均)の高い精度での推定が必要ですが、実践は困難です。 例えば<span class="math inline">\(D\)</span>のモデルを、Logitなどの伝統的な方法で推定する場合、研究者が事前に設定するモデルの定式化に推定結果が強く依存します。 LASSOなどより柔軟な推定方法を用いれば、モデルへの依存度は低下させられますが、データへの依存度は上昇してしまいます。 このためより推定結果が不安定になりやすく、例えば信頼区間の計算 (<a href="simplecomparison.html" class="quarto-xref"><span>Chapter 5</span></a>) などが困難になります。</p>
+<p>Balancing scoreの推定結果への依存度を下げる方法として、<span class="math inline">\(Y\)</span> のモデルを用いた補強 (Argumentation) が提案されています。 このような手法は、特に機械学習を用いた推定との相性が良く、近年改めて注目されています<span class="citation" data-cites="chernozhukov2018double">(<a href="#ref-chernozhukov2018double" role="doc-biblioref">Chernozhukov et al. 2018</a>)</span>。 以下では補強を行なった推定値として、Augmented Inverse Probability Weight <span class="citation" data-cites="robins1995">(<a href="#ref-robins1995" role="doc-biblioref">Robins and Rotnitzky 1995</a>)</span> を紹介します。</p>
+</section>
+<section id="augmented-inverse-probability-weighting" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="augmented-inverse-probability-weighting"><span class="header-section-number">9.2</span> Augmented Inverse Probability Weighting</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li><span class="citation" data-cites="robins1995">Robins and Rotnitzky (<a href="#ref-robins1995" role="doc-biblioref">1995</a>)</span>, <span class="citation" data-cites="chernozhukov2018double">Chernozhukov et al. (<a href="#ref-chernozhukov2018double" role="doc-biblioref">2018</a>)</span> を紹介</li>
+<li>Augmented Inverse Probability Weightを用いたバランス後の平均値は、以下の通り推定できる <span class="math display">\[\underbrace{\frac{\biggr[\omega(X)\times Y\biggr] のD=dについての総和}{D=dの事例数}}_{Inverse\ probability\ weighting}\]</span> <span class="math display">\[+\underbrace{\frac{\biggr[(f_{D=d}(X) - D)\times f_Y(D=d,X)\biggr]の総和}{事例数}}_{補強}\]</span> ただし <span class="math inline">\(f_Y(D=d,X)\)</span> は <span class="math inline">\(Y\)</span> の予測値, <span class="math inline">\(f_{D=d}(X)\)</span> は <span class="math inline">\(D=d\)</span> なる確率の推定値(予想値)</li>
 </ul>
-<section id="reference" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="reference"><span class="header-section-number">9.1</span> Reference</h2>
+</div>
+</div>
+<p>Augmented inverse probability weighting はいくつかの利点を持ちます。 特に<span class="math inline">\(Y\)</span>や<span class="math inline">\(D\)</span>の予測モデル <span class="math inline">\((f_Y(D,X),f_D(X))\)</span> の推定に機械学習を利用できることは、実践上大きな利点です。 <span class="math inline">\(Y\)</span>や<span class="math inline">\(D\)</span> の予測値 <span class="math inline">\(f_Y(D,X)\)</span> や <span class="math inline">\(f_D(X)\)</span> は、母平均の<strong>一致推定量</strong>である必要があります。 一致推定量とは、無限大の事例数で推定できた場合、予測値と母平均が一致する推定値のことです。 この要求は、機械学習を活用することで比較的緩やかな仮定のもとで保証されます。</p>
+<p>また機械学習の弱点である、モデルがデータにより依存していまう、という問題についても、その弊害を軽減できます。 限られた事例数のもとで、<span class="math inline">\(f_Y(D,X)\)</span> や <span class="math inline">\(f_D(X)\)</span> が不安定であったとしても、それらを用いて推定されるバランス後の平均値は、より安定的に推定でき、信頼区間も計算できます。 これは<span class="math inline">\(Y\)</span>と<span class="math inline">\(D\)</span>の予測モデルの<strong>どちらか一方が予測を外したとしても</strong>、バランス後の平均値の推定結果が大きな影響を受けないようにデザインされているためです。</p>
+</section>
+<section id="まとめ" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">9.3</span> まとめ</h2>
+<ul>
+<li>平均差の補助線 <span class="citation" data-cites="semenova2021debiased">(<a href="#ref-semenova2021debiased" role="doc-biblioref">Semenova and Chernozhukov 2021</a>)</span></li>
+</ul>
+</section>
+<section id="rによる実践例" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="rによる実践例"><span class="header-section-number">9.4</span> Rによる実践例</h2>
+<ul>
+<li><p><span class="citation" data-cites="ahrens2024model">Ahrens et al. (<a href="#ref-ahrens2024model" role="doc-biblioref">2024</a>)</span> を実装</p></li>
+<li><p>以下のパッケージを使用</p>
+<ul>
+<li><p>readr (tidyverseに同梱): データの読み込み</p></li>
+<li><p>ddml: AIPWの実装</p></li>
+</ul></li>
+</ul>
+<section id="準備" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1" class="anchored" data-anchor-id="準備"><span class="header-section-number">9.4.1</span> 準備</h3>
+<p>データを取得します。 <span class="math inline">\(D\)</span> として、中心6区かそれ以外で、1/0となる変数を定義します。 シンプルな比較分析について信頼区間は、データ分割は不要です。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Data <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"Public.csv"</span>) <span class="co"># データ読み込み</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Data <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  Data,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">D =</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    LargeDistrict <span class="sc">==</span> <span class="st">"中心6区"</span>,<span class="dv">1</span>,<span class="dv">0</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="co"># 中心6区であれば1、それ以外であれば0</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>) <span class="co"># Dの定義</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">=</span> Data<span class="sc">$</span>Price</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>D <span class="ot">=</span> Data<span class="sc">$</span>D</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>X <span class="ot">=</span> <span class="fu">model.matrix</span>(</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> <span class="fu">poly</span>(Size,<span class="dv">2</span>) <span class="sc">+</span> <span class="fu">poly</span>(Tenure,<span class="dv">2</span>) <span class="sc">+</span> <span class="fu">poly</span>(StationDistance,<span class="dv">2</span>),</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  Data</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>X <span class="ot">=</span> <span class="fu">scale</span>(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="balanced-comparson-by-ols" class="level3" data-number="9.4.2">
+<h3 data-number="9.4.2" class="anchored" data-anchor-id="balanced-comparson-by-ols"><span class="header-section-number">9.4.2</span> Balanced comparson by OLS</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ATE <span class="ot">=</span> ddml<span class="sc">::</span><span class="fu">ddml_ate</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> Y,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">D =</span> D,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> X,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">learners =</span> <span class="fu">list</span>(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="at">fun =</span> ddml<span class="sc">::</span>mdl_glmnet)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">shortstack =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_folds =</span> <span class="dv">2</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">silent =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>ATE<span class="sc">$</span>oos_pred<span class="sc">$</span>ED_X <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      nnls        
+ Min.   :-0.0339  
+ 1st Qu.: 0.1540  
+ Median : 0.2277  
+ Mean   : 0.2220  
+ 3rd Qu.: 0.2911  
+ Max.   : 0.6000  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ATE <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ATE estimation results: 
+ 
+     Estimate Std. Error t value  Pr(&gt;|t|)
+nnls     20.6      0.829    24.8 5.92e-136</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>estimatr<span class="sc">::</span><span class="fu">lm_robust</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  ATE<span class="sc">$</span>psi_b <span class="sc">~</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale</span>(Data<span class="sc">$</span>Size) <span class="sc">+</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale</span>(Data<span class="sc">$</span>Tenure) <span class="sc">+</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale</span>(Data<span class="sc">$</span>StationDistance)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                             Estimate Std. Error    t value      Pr(&gt;|t|)
+(Intercept)                 20.580111  0.8075804 25.4836673 1.687766e-136
+scale(Data$Size)            14.916697  1.0558918 14.1271082  1.212939e-44
+scale(Data$Tenure)          -2.479857  0.7121595 -3.4821658  5.007126e-04
+scale(Data$StationDistance)  0.606862  1.5135551  0.4009514  6.884694e-01
+                             CI Lower  CI Upper   DF
+(Intercept)                 18.996981 22.163240 6374
+scale(Data$Size)            12.846794 16.986600 6374
+scale(Data$Tenure)          -3.875930 -1.083785 6374
+scale(Data$StationDistance) -2.360215  3.573939 6374</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="reference" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="reference"><span class="header-section-number">9.5</span> Reference</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-ahrens2024model" class="csl-entry" role="listitem">
+Ahrens, Achim, Christian B Hansen, Mark E Schaffer, and Thomas Wiemann. 2024. <span>“Model Averaging and Double Machine Learning.”</span> <em>arXiv Preprint arXiv:2401.01645</em>.
+</div>
 <div id="ref-chernozhukov2018double" class="csl-entry" role="listitem">
-Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. 2018. <span>“Double/Debiased Machine Learning for Treatment and Structural Parameters.”</span> Oxford University Press Oxford, UK.
+Chernozhukov, Victor, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. 2018. <span>“<span class="nocase">Double/debiased machine learning for treatment and structural parameters</span>.”</span> <em>The Econometrics Journal</em> 21 (1): C1–68. <a href="https://doi.org/10.1111/ectj.12097">https://doi.org/10.1111/ectj.12097</a>.
 </div>
 <div id="ref-robins1995" class="csl-entry" role="listitem">
 Robins, James M., and Andrea Rotnitzky. 1995. <span>“Semiparametric Efficiency in Multivariate Regression Models with Missing Data.”</span> <em>Journal of the American Statistical Association</em> 90 (429): 122129. <a href="https://doi.org/10.1080/01621459.1995.10476494">https://doi.org/10.1080/01621459.1995.10476494</a>.
+</div>
+<div id="ref-semenova2021debiased" class="csl-entry" role="listitem">
+Semenova, Vira, and Victor Chernozhukov. 2021. <span>“Debiased Machine Learning of Conditional Average Treatment Effects and Other Causal Functions.”</span> <em>The Econometrics Journal</em> 24 (2): 264–89.
 </div>
 </div>
 </section>

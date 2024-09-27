@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -236,7 +270,12 @@ window.Quarto = {
   <li><a href="#信頼区間" id="toc-信頼区間" class="nav-link" data-scroll-target="#信頼区間"><span class="header-section-number">5.2.2</span> 信頼区間</a></li>
   <li><a href="#予測値の集計の問題点" id="toc-予測値の集計の問題点" class="nav-link" data-scroll-target="#予測値の集計の問題点"><span class="header-section-number">5.2.3</span> 「予測値の集計」の問題点</a></li>
   </ul></li>
-  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">5.3</span> Reference</a></li>
+  <li><a href="#rによる実践例" id="toc-rによる実践例" class="nav-link" data-scroll-target="#rによる実践例"><span class="header-section-number">5.3</span> Rによる実践例</a>
+  <ul class="collapse">
+  <li><a href="#準備" id="toc-準備" class="nav-link" data-scroll-target="#準備"><span class="header-section-number">5.3.1</span> 準備</a></li>
+  <li><a href="#推定" id="toc-推定" class="nav-link" data-scroll-target="#推定"><span class="header-section-number">5.3.2</span> 推定</a></li>
+  </ul></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">5.4</span> Reference</a></li>
   </ul>
 </nav>
     </div>
@@ -306,8 +345,88 @@ window.Quarto = {
 <p>信頼区間など、母集団の特徴についての推定誤差を導出したい場合、この方法は、一般に推奨されません。 なぜならば、機械学習を用いた推定方法では、データと推定結果の関係性が複雑であり、一般的な関係性が不透明なためです。</p>
 </section>
 </section>
-<section id="reference" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="reference"><span class="header-section-number">5.3</span> Reference</h2>
+<section id="rによる実践例" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="rによる実践例"><span class="header-section-number">5.3</span> Rによる実践例</h2>
+<ul>
+<li><p>以下のパッケージを使用</p>
+<ul>
+<li><p>readr (tidyverseに同梱): データの読み込み</p></li>
+<li><p>estimatr: OLS + Robust confidence interval</p></li>
+</ul></li>
+</ul>
+<section id="準備" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="準備"><span class="header-section-number">5.3.1</span> 準備</h3>
+<p>データを取得します。 シンプルな比較分析について信頼区間は、データ分割を用いずに算出できます。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Data <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"Public.csv"</span>) <span class="co"># データ読み込み</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="推定" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="推定"><span class="header-section-number">5.3.2</span> 推定</h3>
+<p>estimatrパッケージ内のlm_robust関数を用いてOLS推定をします。 信頼区間も同時に計算できます。</p>
+<p>例えば立地別の平均取引価格とその信頼区間は、以下で計算できます。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>estimatr<span class="sc">::</span><span class="fu">lm_robust</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  Price <span class="sc">~</span> District,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  Data,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span> <span class="co"># 信頼水準</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   Estimate Std. Error    t value      Pr(&gt;|t|)    CI Lower
+(Intercept)       49.544882   1.350350  36.690388 1.745377e-267  46.8977395
+District中央区     7.091314   2.187476   3.241779  1.193986e-03   2.8031236
+District中野区    -9.856420   2.086807  -4.723206  2.371427e-06 -13.9472663
+District北区     -12.876540   1.816387  -7.089094  1.495990e-12 -16.4372719
+District千代田区   5.356645   4.530838   1.182264  2.371454e-01  -3.5253261
+District台東区   -11.194472   1.939907  -5.770622  8.270181e-09 -14.9973450
+District品川区    -5.324154   2.040205  -2.609616  9.085635e-03  -9.3236446
+District大田区   -19.161899   1.541545 -12.430320  4.562932e-35 -22.1838471
+District文京区    -6.367891   2.245219  -2.836201  4.579809e-03 -10.7692765
+District新宿区    -3.701065   1.974378  -1.874547  6.090085e-02  -7.5715111
+District杉並区   -11.398479   2.003932  -5.688056  1.342130e-08 -15.3268624
+District板橋区   -19.166705   1.544366 -12.410730  5.795223e-35 -22.1941827
+District江戸川区 -14.379365   1.700541  -8.455761  3.404197e-17 -17.7129980
+District江東区    -4.449929   1.693359  -2.627871  8.612771e-03  -7.7694837
+District渋谷区     8.621508   3.150562   2.736498  6.226950e-03   2.4453432
+District港区      27.616087   3.626363   7.615368  3.012509e-14  20.5071929
+District目黒区     4.924307   2.471150   1.992719  4.633491e-02   0.0800203
+District練馬区   -18.367485   1.669575 -11.001297  6.716948e-28 -21.6404139
+District荒川区   -14.102733   2.059536  -6.847529  8.218814e-12 -18.1401184
+District葛飾区   -20.518000   1.671244 -12.277082  2.932896e-34 -23.7942022
+District豊島区   -13.685211   2.125035  -6.439992  1.282187e-10 -17.8509972
+District足立区   -20.680762   1.542884 -13.403964  2.021371e-40 -23.7053355
+District墨田区   -13.869062   1.675184  -8.279127  1.498715e-16 -17.1529884
+                    CI Upper   DF
+(Intercept)       52.1920243 6355
+District中央区    11.3795053 6355
+District中野区    -5.7655744 6355
+District北区      -9.3158085 6355
+District千代田区  14.2386157 6355
+District台東区    -7.3915991 6355
+District品川区    -1.3246626 6355
+District大田区   -16.1399503 6355
+District文京区    -1.9665050 6355
+District新宿区     0.1693818 6355
+District杉並区    -7.4700956 6355
+District板橋区   -16.1392275 6355
+District江戸川区 -11.0457313 6355
+District江東区    -1.1303735 6355
+District渋谷区    14.7976731 6355
+District港区      34.7249806 6355
+District目黒区     9.7685943 6355
+District練馬区   -15.0945553 6355
+District荒川区   -10.0653478 6355
+District葛飾区   -17.2417981 6355
+District豊島区    -9.5194250 6355
+District足立区   -17.6561890 6355
+District墨田区   -10.5851361 6355</code></pre>
+</div>
+</div>
+<p>Estimateが推定値、CI lower/CI upperが信頼区間の下限/上限を表します。</p>
+</section>
+</section>
+<section id="reference" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="reference"><span class="header-section-number">5.4</span> Reference</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
